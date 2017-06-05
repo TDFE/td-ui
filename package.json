@@ -2,13 +2,34 @@
   "name": "td-ui",
   "version": "0.0.1",
   "repository": "https://github.com/TDFE/td-ui.git",
-  "author": "zhengfeng.yao",
+  "author": "TDFE",
   "license": "MIT",
+  "main": "lib/index.js",
+  "keywords": [
+    "td",
+    "react",
+    "component",
+    "components",
+    "ui",
+    "framework",
+    "frontend"
+  ],
+  "contributors": [
+    "TDFE"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/TDFE/td-ui.git"
+  },
+  "bugs": {
+    "url": "https://github.com/TDFE/td-ui/issues"
+  },
   "scripts": {
     "dist": "rm -rf dist && tdtool build",
     "compile": "babel-node tools/run compile",
     "component": "babel-node tools/run component",
-    "build": "npm run dist && npm run compile"
+    "build": "npm run dist && npm run compile",
+    "pub": "npm run build && npm publish"
   },
   "babel": {
     "presets": [
