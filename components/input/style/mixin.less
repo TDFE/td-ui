@@ -1,0 +1,138 @@
+@import "../../style/themes/default";
+
+.input-lg(){
+	padding:@input-padding-vertical-lg @input-padding-horizontal;
+	height: @input-height-lg;
+}
+.input-sm(){
+	padding:@input-padding-vertical-sm @input-padding-horizontal;
+	height: @input-height-sm;
+}
+.disabled(){
+	background-color: @input-disabled-bg;
+	opacity: 1;
+	cursor: not-allowed;
+	color: @disabled-color;
+	&:hover{
+		.hover(@input-border-color);
+	}
+}
+.active(@color: @outline-color) {
+  border-color: ~`colorPalette("@{color}", 5)`;
+  outline: 0;
+  box-shadow: 0 0 @outline-blur-size @outline-width fade(@color, 20%);
+}
+.disabled() {
+  background-color: @input-disabled-bg;
+  opacity: 1;
+  cursor: not-allowed;
+  color: @disabled-color;
+  &:hover {
+    .hover(@input-border-color);
+  }
+}
+.hover(@color: @input-hover-border-color) {
+	border-color: ~`colorPalette("@{color}", 5)`;
+}
+.input(){
+	position: relative;
+	display: inline-block;
+	padding:@input-padding-vertical-base @input-padding-horizontal;
+	width: 100%;
+	height: @input-height-base;
+	cursor: text;
+	font-size: @font-size-base;
+	line-height: @line-height-base;
+	color:@input-color;
+	background: @input-bg;
+	border:@border-width-base @border-style-base @input-border-color;
+	border-radius: @border-radius-base;	
+	transition: all .3s;
+
+	&:hover {
+		.hover();
+	}
+
+	&-lg{
+		.input-lg();
+	}
+	&-sm{
+		.input-sm();
+	}
+	&:hover {
+		.hover();
+	}
+
+	&[disabled] {
+		.disabled();
+	}
+}
+
+
+
+//label input
+.input-group(@inputClass){
+	position: relative;
+	display: flex;
+	border-collapse: separate;
+	border-spacing: 0;
+	width: 100%;
+	&-addon{
+		position: relative;
+		padding:@input-padding-vertical-base @input-padding-horizontal;
+		font-size: @font-size-base;
+		font-weight: normal;
+		line-height: 2;
+		color: @input-color;
+		text-align: center;
+		white-space: nowrap;
+		background-color: @input-addon-bg;
+		border:@border-width-base @border-style-base @input-border-color;
+		border-radius: @border-radius-base;
+		transition:all 0.3s;
+
+	}
+	.@{inputClass}{
+		float: left;
+		width: 100%;
+		margin-bottom: 0;
+	}
+
+	// Reset rounded corners
+	> .@{inputClass}:first-child,
+	&-addon:first-child {
+		border-bottom-right-radius: 0;
+		border-top-right-radius: 0;
+	}
+
+	> .@{inputClass}-affix-wrapper {
+		&:not(:first-child) .@{inputClass} {
+			border-bottom-left-radius: 0;
+			border-top-left-radius: 0;
+		}
+
+		&:not(:last-child) .@{inputClass} {
+			border-bottom-right-radius: 0;
+			border-top-right-radius: 0;
+		}
+	}
+	&-addon:first-child {
+		border-right: 0;
+	}
+	&-addon:last-child {
+		border-left: 0;
+	}
+	> .@{inputClass}:last-child,
+	&-addon:last-child {
+		border-bottom-left-radius: 0;
+		border-top-left-radius: 0;
+	}
+
+
+
+
+
+
+
+
+}

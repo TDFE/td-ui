@@ -1,0 +1,56 @@
+{
+  "name": "td-ui",
+  "version": "0.0.1",
+  "repository": "https://github.com/TDFE/td-ui.git",
+  "author": "zhengfeng.yao",
+  "license": "MIT",
+  "scripts": {
+    "dist": "rm -rf dist && tdtool build",
+    "compile": "babel-node tools/run compile",
+    "component": "babel-node tools/run component",
+    "build": "npm run dist && npm run compile"
+  },
+  "babel": {
+    "presets": [
+      "es2015",
+      "stage-2"
+    ]
+  },
+  "devDependencies": {
+    "autoprefixer": "^7.1.0",
+    "babel-cli": "^6.24.1",
+    "babel-plugin-lodash": "^3.2.11",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1",
+    "chalk": "^1.1.3",
+    "gulp": "^3.9.1",
+    "gulp-babel": "^6.1.2",
+    "gulp-filter": "^5.0.0",
+    "gulp-logger": "^0.0.2",
+    "gulp-watch": "^4.3.11",
+    "less": "^2.7.2",
+    "less-plugin-npm-import": "^2.1.0",
+    "merge2": "^1.0.3",
+    "object-assign": "^4.1.1",
+    "open": "^0.0.5",
+    "postcss": "^6.0.1",
+    "rc-input-number": "^3.6.0",
+    "rimraf": "^2.6.1",
+    "rucksack-css": "^0.9.1",
+    "shelljs": "^0.7.7",
+    "tdtool": "^0.0.9",
+    "tdtool-less": "^0.0.7",
+    "tdtool-react": "^0.0.10",
+    "through2": "^2.0.3",
+    "webpack": "^2.5.1",
+    "yargs": "^8.0.1"
+  },
+  "dependencies": {
+    "classnames": "^2.2.5",
+    "lodash": "^4.17.4",
+    "prop-types": "^15.5.10",
+    "react": "^15.5.4",
+    "react-dom": "^15.5.4",
+    "shallowequal": "^1.0.1"
+  }
+}

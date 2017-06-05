@@ -1,0 +1,37 @@
+@import "../../style/themes/default.less";
+
+
+@breadcrumb-prefix-cls : ~"@{td-prefix}-breadcrumb";
+:export {
+  breadcrumbPrefix: @breadcrumb-prefix-cls;
+}
+
+.@{breadcrumb-prefix-cls} {
+  color: @text-color;
+  font-size: @font-size-base;
+  a {
+    color: @text-color;
+    text-decoration: none;
+    transition: color .3s;
+    &:hover {
+      color: @primary-color;
+    }
+  }
+  & > span:last-child {
+    font-weight: 600;
+    color: @text-color;
+  }
+
+  & > span:last-child &-separator {
+    display: none;
+  }
+  &-separator {
+    margin: 0 8px;
+    color: rgba(0, 0, 0, 0.3);
+  }
+  &-item {
+    > .@{icon-prefix} + span {
+      margin-left: 4px;
+    }
+  }
+}

@@ -1,0 +1,140 @@
+@import "../color/colors.less";
+
+@td-prefix                    : td;
+@icon-prefix                  : ~"@{td-prefix}icon";
+@btn-prefix                   : ~"@{td-prefix}-btn";
+@input-prefix                 : ~"@{td-prefix}-input";
+@select-prefix                : ~"@{td-prefix}-select";
+@loading-prefix               : ~"@{td-prefix}-loading";
+@radio-prefix                 : ~"@{td-prefix}-radio";
+@input-number-prefix                 : ~"@{td-prefix}-input-number";
+
+:export {
+  prefix: @td-prefix;
+  btnPrefix: @btn-prefix;
+  inputPrefix: @input-prefix;
+  inputNumberPrefix: @input-number-prefix;
+  iconPrefix: @icon-prefix;
+  selectPrefix: @select-prefix;
+  loadingPrefix: @loading-prefix;
+  radioPrefix: @radio-prefix;
+}
+
+// Global
+@body-background              : #fff;
+@component-background         : #fff;
+@background-color-base        : #ededed;
+@font-family                  : "helvetica neue","Microsoft YaHei",arial,sans-serif;
+@font-size-base               : 14px;
+@font-size-lg                 : @font-size-base + 2px;
+@font-size-sm                 : @font-size-base - 2px;
+@line-height-base             : 1.5;
+
+@border-radius-base           : 4px;
+@border-radius-sm             : 2px;
+@border-width-base            : 1px;
+@border-color-base            : #ccc;
+@border-style-base            : solid;
+
+// Color
+@primary-color                : @blue-6;
+@success-color                : @green-6;
+@error-color                  : @red-6;
+@highlight-color              : @red-6;
+@warning-color                : @yellow-6;
+@disabled-color               : fade(#000, 25%);
+@shadow-color                 : rgba(0, 0, 0, .2);
+@text-color                   : fade(#000, 65%);
+@text-color-secondary   : fade(#000, 43%);
+
+//outline
+@outline-color          : @primary-color;
+@outline-blur-size      : 0;
+@outline-width          : 2px;
+
+//disabled states
+@disabled-bg            : @background-color-base;
+@disabled-color         : fade(#000, 25%);
+@disabled-color-dark    : fade(#fff, 35%);
+
+
+// Animation
+@ease-out                     : cubic-bezier(0.215, 0.61, 0.355, 1);
+@ease-in                      : cubic-bezier(0.55, 0.055, 0.675, 0.19);
+@ease-in-out                  : cubic-bezier(0.645, 0.045, 0.355, 1);
+@ease-out-back                : cubic-bezier(0.12, 0.4, 0.29, 1.46);
+@ease-in-back                 : cubic-bezier(0.71, -0.46, 0.88, 0.6);
+@ease-in-out-back             : cubic-bezier(0.71, -0.46, 0.29, 1.46);
+@ease-out-circ                : cubic-bezier(0.08, 0.82, 0.17, 1);
+@ease-in-circ                 : cubic-bezier(0.6, 0.04, 0.98, 0.34);
+@ease-in-out-circ             : cubic-bezier(0.78, 0.14, 0.15, 0.86);
+@ease-out-quint               : cubic-bezier(0.23, 1, 0.32, 1);
+@ease-in-quint                : cubic-bezier(0.755, 0.05, 0.855, 0.06);
+@ease-in-out-quint            : cubic-bezier(0.86, 0, 0.07, 1);
+
+@primary-1                    : color(~`colorPalette("@{primary-color}", 1)`);
+@primary-2                    : color(~`colorPalette("@{primary-color}", 2)`);
+@primary-                     : color(~`colorPalette("@{primary-color}", 3)`);
+@primary-4                    : color(~`colorPalette("@{primary-color}", 4)`);
+@primary-5                    : color(~`colorPalette("@{primary-color}", 5)`);
+@primary-                     : @primary-color;
+@primary-7                    : color(~`colorPalette("@{primary-color}", 7)`);
+@primary-8                    : color(~`colorPalette("@{primary-color}", 8)`);
+@primary-9                    : color(~`colorPalette("@{primary-color}", 9)`);
+@primary-10                   : color(~`colorPalette("@{primary-color}", 10)`);
+
+// Link
+@link-color                   : @primary-color;
+@link-hover-color             : @primary-5;
+@link-active-color            : @primary-7;
+@link-decoration              : none;
+@link-hover-decoration        : none;
+
+// Buttons
+@btn-width-base               : 80px;
+@btn-height-base              : 28px;
+@btn-font-weight              : 500;
+
+@btn-padding-base             : 4px 15px;
+@btn-padding-lg               : 4px 15px 5px 15px;
+@btn-padding-sm               : 1px 7px;
+@btn-font-size-base           : @font-size-base;
+@btn-font-size-lg             : @font-size-lg;
+@btn-font-size-sm             : @font-size-sm;
+
+@btn-border-radius-base       : @border-radius-base;
+@btn-border-width-base        : @border-width-base;
+
+@btn-disable-color            : @disabled-color;
+@btn-disable-bg               : @background-color-base;
+@btn-disable-border           : @border-color-base;
+
+@btn-primary-color                  : #fff;
+@btn-primary-bg                     : @primary-color;
+@btn-primary-border-color           : @primary-color;
+
+@btn-default-color                  : @text-color;
+@btn-default-bg                     : #fff;
+@btn-default-border                 : @border-color-base;
+
+// Radio bts
+@radio-button-bg            : @btn-default-bg;
+@radio-button-color         : @btn-default-color;
+
+// Input
+// ---
+@input-height-base           : 28px;
+@input-height-lg             : 32px;
+@input-height-sm             : 22px;
+@input-padding-horizontal    : 7px;
+@input-padding-vertical-base : 4px;
+@input-padding-vertical-sm   : 1px;
+@input-padding-vertical-lg   : 6px;
+@input-placeholder-color     : #ccc;
+@input-color                 : @text-color;
+@input-border-color          : @border-color-base;
+@input-bg                    : #fff;
+@input-addon-bg              : #eee;
+@input-hover-border-color    : @primary-color;
+@input-disabled-bg           : @disabled-bg;
+
