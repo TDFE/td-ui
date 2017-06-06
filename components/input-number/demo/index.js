@@ -25,7 +25,7 @@ let render = () => {
         <InputNumber min={1} max={10} defaultValue={3} onChange={onChange} />
         <InputNumber min={1} max={10} defaultValue={3} onChange={onChange} size="large"/>
         <InputNumber min={1} max={10} defaultValue={3} onChange={onChange} size="small"/>
-        <InputNumber min={1} max={10} defaultValue={3} onChange={onChange} size="small" disabled='disabled'/>
+        <InputNumber min={1} max={10} defaultValue={3} onChange={onChange} size="small" disabled={true}/>
       </div>
     );
   }

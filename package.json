@@ -34,7 +34,6 @@
     "object-assign": "^4.1.1",
     "open": "^0.0.5",
     "postcss": "^6.0.1",
-    "rc-input-number": "^3.6.0",
     "rimraf": "^2.6.1",
     "rucksack-css": "^0.9.1",
     "shelljs": "^0.7.7",
