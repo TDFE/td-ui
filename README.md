@@ -1,7 +1,7 @@
 # td-ui
 td-ui
 
-## 命令介绍
+# 命令介绍
 ```bash
 npm run dist   # 打包整个组件库
 npm run compile  # 分别编译每个组件，用于按需加载
