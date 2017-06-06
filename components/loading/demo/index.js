@@ -10,11 +10,16 @@ const MOUNT_NODE = document.getElementById('app');
 let render = () => {
     /* eslint-disable*/
     let Loading = require('../index').default;
-    ReactDOM.render(<Loading text="加载中...">
-        <div>
-            小鸣单车
-        </div>
-    </Loading>, MOUNT_NODE);
+    let bool= true;
+    setTimeout(()=>{
+        bool=false;
+    },1000);
+    ReactDOM.render(
+        <Loading text="加载中..." size="large" loading={bool}>
+            <div>
+                内容
+            </div>
+        </Loading>, MOUNT_NODE);
 };
 try {
     render();
