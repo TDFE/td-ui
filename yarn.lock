@@ -6323,9 +6323,9 @@ tdtool-less@^0.0.7:
     style-loader "^0.17.0"
     webpack "^2.4.1"
 
-tdtool-react@^0.0.10:
-  version "0.0.10"
-  resolved "https://registry.yarnpkg.com/tdtool-react/-/tdtool-react-0.0.10.tgz#6b20fb8af4237e50a940ea6d7cf19753ff373ec1"
+tdtool-react@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/tdtool-react/-/tdtool-react-0.1.0.tgz#a6716278ee68de53bb184f75edf855f4bcf3b7f0"
   dependencies:
     babel-eslint "^7.2.3"
     babel-loader "^7.0.0"

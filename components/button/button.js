@@ -11,7 +11,6 @@ import cn from 'classNames';
 import omit from 'lodash/omit';
 import s from './style';
 import is from '../util/is';
-/* eslint-disable no-unused-vars */
 import Icon from '../icon';
 
 const TWO_CN_REX = /^[\u4e00-\u9fa5]{2}$/;
