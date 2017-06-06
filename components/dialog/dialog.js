@@ -15,7 +15,9 @@ export default class Dialog extends React.Component {
     onCancel: noop,
     okText: '确定',
     cancelText: '取消',
-    maskClosable: true
+    maskClosable: true,
+    closable: true,
+    className: ''
   }
 
   static propTypes = {
@@ -35,8 +37,12 @@ export default class Dialog extends React.Component {
   }
 
   renderHeader = () => {
-    const { prefixCls, title } = this.props;
-    return <div className={`${prefixCls}-header`}>{title}</div>
+    const { prefixCls, title, header } = this.props;
+    if (header !== undefined && (header === null || header === '')) {
+      return ''
+    } else {
+      return <div className={`${prefixCls}-header`}>{header || title}</div>
+    }
   }
 
   renderFooter = () => {
@@ -65,13 +71,13 @@ export default class Dialog extends React.Component {
   }
 
   render() {
-    const { visible, prefixCls, children, width, maskClosable } = this.props;
+    const { visible, prefixCls, children, width, maskClosable, closable, className } = this.props;
     return (<div>
       <div className={cn(`${prefixCls}-mask`, { [`${prefixCls}-mask-hidden`]: !visible })}></div>
       <div className={cn(`${prefixCls}-wrap`, { [`${prefixCls}-wrap-hidden`]: !visible })} onClick={maskClosable ? this.maskClose : null}>
-        <div className={prefixCls} style={{ width }}>
+        <div className={`${prefixCls} ${className}`} style={{ width }}>
           <div className={`${prefixCls}-content`}>
-            <button className={`${prefixCls}-close`} onClick={() => this.props.onCancel()}>×</button>
+            {closable ? <button className={`${prefixCls}-close`} onClick={() => this.props.onCancel()}>×</button> : ''}
             {this.renderHeader()}
             <div className={`${prefixCls}-body`}>
               {children}

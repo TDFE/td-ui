@@ -21,22 +21,13 @@ export default class DialogWrap extends React.Component {
   }
 
   componentWillUnmount() {
-    if (this.props.visible) {
-      this.renderComponent(this, {
-        afterClose: this.removeContainer,
-        onClose() {
-        },
-        visible: false
-      });
-    } else {
-      this.removeContainer();
-    }
+    this.removeContainer();
   }
 
   renderComponent = (instance, componentArg, ready) => {
     if (instance._component || instance.props.visible) {
       if (!instance._container) {
-        instance._container = this.getContainer();
+        instance._container = this.getContainer(instance);
       }
       let component = instance.getComponent(componentArg);
       ReactDOM.unstable_renderSubtreeIntoContainer(instance, component, instance._container, function callback() {
@@ -66,10 +57,14 @@ export default class DialogWrap extends React.Component {
     )
   }
 
-  getContainer = () => {
+  getContainer = (instance) => {
     const container = document.createElement('div');
     document.body.appendChild(container);
     return container;
+  }
+
+  getElement = (part) => {
+    return this._component.getElement(part);
   }
 
   render () {
