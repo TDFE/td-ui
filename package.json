@@ -1,7 +1,10 @@
 {
   "name": "td-ui",
   "version": "0.0.1",
-  "repository": "https://github.com/TDFE/td-ui.git",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/TDFE/td-ui.git"
+  },
   "author": "TDFE",
   "license": "MIT",
   "main": "lib/index.js",
@@ -17,10 +20,6 @@
   "contributors": [
     "TDFE"
   ],
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/TDFE/td-ui.git"
-  },
   "bugs": {
     "url": "https://github.com/TDFE/td-ui/issues"
   },
@@ -61,7 +60,7 @@
     "shelljs": "^0.7.7",
     "tdtool": "^0.0.9",
     "tdtool-less": "^0.0.7",
-    "tdtool-react": "^0.0.10",
+    "tdtool-react": "^0.1.0",
     "through2": "^2.0.3",
     "webpack": "^2.5.1",
     "yargs": "^8.0.1"
