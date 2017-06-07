@@ -12,6 +12,7 @@ export default class Loading extends Component {
 
     render() {
         const {prefixLoad, text, graph, size, loading} = this.props;
+        console.log(loading);
         let classTmp = prefixLoad + "-container-graph";
         let classNameValue;
         switch (size) {
@@ -28,19 +29,20 @@ export default class Loading extends Component {
         return (
             <div>
                 {
-                    loading ? <div className={prefixLoad}>
-                        <div className={`${prefixLoad}-container`}>
-                            <div className={classNameValue}>
-                                <div className="loading-1"></div>
-                                <div className="loading-2"></div>
-                                <div className="loading-3"></div>
-                                <div className="loading-4"></div>
+                    loading ?
+                        <div className={prefixLoad}>
+                            <div className={`${prefixLoad}-container`}>
+                                <div className={classNameValue}>
+                                    <div className="loading-1"></div>
+                                    <div className="loading-2"></div>
+                                    <div className="loading-3"></div>
+                                    <div className="loading-4"></div>
+                                </div>
+                                <div className={`${prefixLoad}-container-text`}>
+                                    {text}
+                                </div>
                             </div>
-                            <div className={`${prefixLoad}-container-text`}>
-                                {text}
-                            </div>
-                        </div>
-                    </div> : ''
+                        </div> : ''
                 }
                 <div className="loading-children">
                     {

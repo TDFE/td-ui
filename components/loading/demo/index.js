@@ -10,12 +10,8 @@ const MOUNT_NODE = document.getElementById('app');
 let render = () => {
     /* eslint-disable*/
     let Loading = require('../index').default;
-    let bool= true;
-    setTimeout(()=>{
-        bool=false;
-    },1000);
     ReactDOM.render(
-        <Loading text="加载中..." size="large" loading={bool}>
+        <Loading text="加载中..." size="large" loading={true}>
             <div>
                 内容
             </div>
