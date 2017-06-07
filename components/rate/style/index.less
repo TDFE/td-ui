@@ -1,0 +1,43 @@
+@import '../../style/themes/default';
+
+@prefixCls: ~"@{rate-prefix}";
+
+.@{prefixCls} {
+  overflow: hidden;
+  font-size: 18px;
+  &-star {
+    float: left;
+    margin-right: 8px;
+    position: relative;
+    cursor: pointer;
+    transition: all .3s;
+    &:hover {
+      transform: scale(1.1);
+    }
+    &-all {
+      color: @rate-star-bg-color;
+    }
+    &-left {
+      color: @rate-star-light-color;
+      position:absolute;
+      left: 0;
+      top: 0;
+      width: 50%;
+      overflow:hidden;
+      opacity: 0;
+    }
+  }
+  &-star-full {
+    .@{prefixCls}-star-all {
+      color: @rate-star-light-color;
+    }
+  }
+  &-star-half {
+    .@{prefixCls}-star-left {
+      opacity: 1;
+    }
+  }
+  &-star-disabled {
+    cursor: not-allowed;
+  }
+}
