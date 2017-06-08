@@ -22,10 +22,7 @@ let render = () => {
     return (
       <div className="td">
       正常demo
-        <InputNumber min={1} max={10} defaultValue={3} onChange={onChange} />
-        <InputNumber min={1} max={10} defaultValue={3} onChange={onChange} size="large"/>
-        <InputNumber min={1} max={10} defaultValue={3} onChange={onChange} size="small"/>
-        <InputNumber min={1} max={10} defaultValue={3} onChange={onChange} size="small" disabled={true}/>
+        <InputNumber step={0.011} min={1} max={123} defaultValue={3} size="large" placeholder="dsds" />
       </div>
     );
   }
