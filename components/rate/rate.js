@@ -1,8 +1,10 @@
 /* eslint-disable no-unused-vars */
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import cn from 'classnames';
 import s from './style';
+import { getOffsetLeft } from './util';
 
 const prefixCls = s.ratePrefix;
 
@@ -50,7 +52,10 @@ class Rate extends Component {
   onClick = (event, index) => {
     const { allowHalf, onChange, disabled } = this.props;
     if (disabled) return;
-    const isHalf = /left/g.test(event.target.className);
+    const el = this.getDOMNode(index);
+    const left = event.pageX - getOffsetLeft(el);
+    const width = el.offsetWidth;
+    const isHalf = left < width / 2;
     const number = allowHalf && isHalf ? (index - 0.5) : index;
     if (!('value' in this.props)) {
       this.setState({value: number});
@@ -64,7 +69,10 @@ class Rate extends Component {
     const { allowHalf, onHoverChange, disabled } = this.props;
     if (disabled) return;
     const { value } = this.state;
-    const isHalf = /left/g.test(event.target.className);
+    const el = this.getDOMNode(index);
+    const left = event.pageX - getOffsetLeft(el);
+    const width = el.offsetWidth;
+    const isHalf = left < width / 2;
     const number = allowHalf && isHalf ? (index - 0.5) : index;
     this.setState({number});
     if (onHoverChange) {
@@ -94,6 +102,9 @@ class Rate extends Component {
       [`${prefixCls}-star-disabled`]: disabled
     })
   }
+  getDOMNode = (index) => {
+    return ReactDOM.findDOMNode(this.refs[`star-${index}`]);
+  }
   render() {
     const { className, style, disabled, count, character } = this.props;
     const classnames = cn(prefixCls, className, {
@@ -103,7 +114,7 @@ class Rate extends Component {
     const stars = [];
     for (let i = 1; i <= count; i++) {
       stars.push(
-        <div className={this.getClassName(i)} key={i} onClick={e => this.onClick(e, i)} onMouseOver={e => this.onMouseOver(e, i)} onMouseOut={this.onMouseOut}>
+        <div ref={`star-${i}`} className={this.getClassName(i)} key={i} onClick={e => this.onClick(e, i)} onMouseOver={e => this.onMouseOver(e, i)} onMouseOut={this.onMouseOut}>
           <div className={`${prefixCls}-star-left`}>{character}</div>
           <div className={`${prefixCls}-star-all`}>{character}</div>
         </div>

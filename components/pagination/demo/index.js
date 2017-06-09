@@ -1,20 +1,29 @@
+/**
+ * @Author: Zhengfeng.Yao <yzf>
+ * @Date:   2017-05-16 14:49:49
+ * @Last modified by:   yzf
+ * @Last modified time: 2017-05-16 18:33:09
+ */
+
 /* eslint-disable no-unused-vars */
 import React from 'react';
 import ReactDOM from 'react-dom';
-/* eslint-disable no-unused-vars */
-import Icon from '../../icon';
 
 const MOUNT_NODE = document.getElementById('app');
 
 let render = () => {
   /* eslint-disable no-unused-vars */
-  let Rate = require('../index').default;
+  let Pagination = require('../index').default;
 
   /* eslint-disable no-unused-vars */
   function Demo() {
     return (
-      <div className="td" style={{marginLeft: '200px', paddingLeft: '200px'}}>
-        <Rate allowHalf={true} style={{fontSize: '30px'}} character={<Icon type='right'/>} disabled={false} defaultValue={2}/>
+      <div className="td">
+        <Pagination showNum={5} showSizeChanger={true} total={99} showTotal={(total, range) => {
+          return `${range[0]}-${range[1]} of ${total} items`
+        }} onChange={(current, pageSize) => {
+          console.log(current);
+        }}/>
       </div>
     );
   }
