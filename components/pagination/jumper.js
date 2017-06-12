@@ -12,7 +12,7 @@ class QuickJumper extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: ''
+      value: props.current
     }
   }
   onChange = e => {

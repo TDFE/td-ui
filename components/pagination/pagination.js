@@ -18,11 +18,12 @@ class Pagination extends Component {
     defaultPageSize: 10,
     showSizeChanger: false,
     onChange: noop,
+    onShowSizeChange: noop,
     showNum: 5,
     size: '',
     showQuickJumper: false,
     simple: false,
-    pageSizeOptions: [10, 20, 30, 40]
+    pageSizeOptions: ['10', '20', '30', '40']
   }
   static PropTypes = {
     showNum: PropTypes.oneOf([3, 5, 7]),
@@ -37,7 +38,8 @@ class Pagination extends Component {
     pageSize: PropTypes.number,
     showQuickJumper: PropTypes.bool,
     simple: PropTypes.bool,
-    pageSizeOptions: PropTypes.arrayOf(PropTypes.number)
+    pageSizeOptions: PropTypes.arrayOf(PropTypes.string),
+    onShowSizeChange: PropTypes.func
   }
   constructor(props) {
     super(props);
@@ -138,7 +140,21 @@ class Pagination extends Component {
       return showTotal(total, range);
     }
   }
-
+  onShowSizeChange = pageSize => {
+    const { current } = this.state;
+    const { total, onShowSizeChange } = this.props;
+    const allPages = this._calcAllPages(pageSize);
+    const newCurrent = (current - 1) * pageSize > total ? allPages : current;
+    if (!('pageSize' in this.props)) {
+      this.setState({pageSize})
+    }
+    if (!('current' in this.props)) {
+      this.setState({
+        current: newCurrent
+      })
+    }
+    onShowSizeChange(newCurrent, pageSize);
+  }
   render() {
     const pageList = [];
     const { style, className, total, showSizeChanger, showNum, size, showTotal, showQuickJumper, simple, pageSizeOptions } = this.props;
@@ -234,11 +250,11 @@ class Pagination extends Component {
         }
         {pageList}
         {
-          showSizeChanger ? <Options prefixCls={`${prefixCls}-options`} pageSizeOptions={pageSizeOptions}/> : ''
+          showSizeChanger ? <Options prefixCls={`${prefixCls}-options`} pageSizeOptions={pageSizeOptions} pageSize={pageSize} onShowSizeChange={this.onShowSizeChange}/> : ''
         }
         {
           showQuickJumper ? <QuickJumper prefixCls={`${prefixCls}-quick-jumper`} current={current}
-          allPages={allPages} onChange={page => this.onClick(page)}/> : ''
+          allPages={allPages} onChange={page => this.onClick(page)} current={current}/> : ''
         }
 
       </div>

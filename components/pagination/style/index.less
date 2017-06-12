@@ -5,13 +5,12 @@
 .@{prefixCls} {
   overflow: hidden;
   user-select: none;
-  font-size: 12px;
+  font-size: @pagination-font-size;
   &-total-text {
     float: left;
     height: @pagination-item-height;
     line-height: @pagination-item-height;
     margin-right: 10px;
-    font-size: 12px;
   }
   &-item, &-prev, &-next {
     float:left;
@@ -29,7 +28,6 @@
     a {
       color: #666;
       text-decoration: none;
-      font-size: 12px;
       display: block;
     }
     &:hover {
@@ -57,7 +55,6 @@
       display: block;
       letter-spacing: 2px;
       color: #ccc;
-      font-size: 12px;
       width: @pagination-item-width;
       height: @pagination-item-height;
       text-align: center;
@@ -147,6 +144,7 @@
 }
 
 .@{prefixCls}-mini{
+  font-size: @pagination-font-size-sm;
   .@{prefixCls}-total-text{
     height: @pagination-item-mini-height;
     line-height: @pagination-item-mini-height;
