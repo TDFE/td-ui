@@ -11,17 +11,16 @@ let messageInstance;
 let prefixCls = s.messagePrefix;
 
 function notice(type, content, time) {
-  console.log(type, content, time)
-
   let iconType = ({
     info: 'search',
     warning: 'sort'
   })[type];
 
   messageInstance = messageInstance || Notice.newInstance({
-      prefixCls
+    prefixCls
   })
   messageInstance.notice({
+    duration: time,
     content: (
       <div className={`${prefixCls}-custom-content`}>
         <Icon type={iconType}/>

@@ -33,12 +33,13 @@ class Notice extends Component {
         }
       }
     })
+    const duration = notice.duration ? notice.duration : this.props.duration;
     const timer = `timer_${Date.now()}`;
     this[timer] = setTimeout(() => {
       this.removeNotice(key);
       clearTimeout(this[timer]);
       this[timer] = null;
-    }, this.props.duration * 1000);
+    }, duration * 1000);
   }
 
   removeNotice = key => {

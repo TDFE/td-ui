@@ -11,21 +11,13 @@ import message from '../index';
 
 const MOUNT_NODE = document.getElementById('app');
 
-function getInfoMessage(){
-  message.info('info message');
-}
-
-function getWarnMessage(){
-  message.warning('warning test message');
-}
-
 let render = () => {
   /* eslint-disable*/
   // let Notification = require('../index').default;
   ReactDOM.render(
     <div>
-      <button onClick={ getInfoMessage }>info show</button>
-      <button onClick={ getWarnMessage }>warn show</button>
+      <button onClick={ () => message.info('info message') }>info show</button>
+      <button onClick={ () => message.warning('warning message', 4) }>warn show</button>
     </div>
     , MOUNT_NODE);
 };
