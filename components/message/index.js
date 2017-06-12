@@ -1,6 +1,40 @@
 /**
- * @Author: Zhengfeng.Yao <yzf>
- * @Date:   2017-05-24 15:04:30
- * @Last modified by:   yzf
- * @Last modified time: 2017-05-24 15:04:33
+ * Created by wxy on 2017/6/7.
  */
+
+import React from 'react';
+import Notice from './notice';
+import Icon from '../icon';
+import s from './style/index';
+
+let messageInstance;
+let prefixCls = s.messagePrefix;
+
+function notice(type, content, time) {
+  let iconType = ({
+    info: 'search',
+    warning: 'sort'
+  })[type];
+
+  messageInstance = messageInstance || Notice.newInstance({
+    prefixCls
+  })
+  messageInstance.notice({
+    duration: time,
+    content: (
+      <div className={`${prefixCls}-custom-content`}>
+        <Icon type={iconType}/>
+        <span>{content}</span>
+      </div>
+    )
+  })
+}
+
+export default {
+  info(content, time) {
+    return notice('info', content, time);
+  },
+  warning(content, time) {
+    return notice('warning', content, time);
+  }
+}
