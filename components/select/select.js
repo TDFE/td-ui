@@ -4,13 +4,37 @@
 /* eslint-disable */
 import React, {Component} from 'react';
 
-export default class Select extends Component {
+class Option extends Component {
     render() {
-        let kids = React.Children.map(children, child =>addOption(child));
         return (
-            <select>
-                <option value="2">4</option>
-            </select>
+            <div>
+                我是Option
+            </div>
+        );
+    }
+
+}
+
+export default class Select extends Component {
+    static Option = Option;
+
+    render() {
+        return (
+            <div>
+                <div>
+                    <input type="text"/>
+                </div>
+                <span>^</span>
+                <div>
+                    <ul>
+                        {
+                            React.Children.map(this.props.children, (child) => {
+                                return (<li>{child}</li> );
+                            })
+                        }
+                    </ul>
+                </div>
+            </div>
         );
     }
 }
