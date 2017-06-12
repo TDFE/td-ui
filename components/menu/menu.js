@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import s from './style';
+import { getDomKeys } from './util';
 
 export default class Menu extends React.Component {
   static defaultProps = {
@@ -31,9 +32,11 @@ export default class Menu extends React.Component {
     if ('openKeys' in props) {
       openKeys = props.openKeys || [];
     }
+    const domKeys = getDomKeys(props.children);
     this.state = {
       openKeys,
-      selectedKeys
+      selectedKeys,
+      domKeys
     }
   }
 
