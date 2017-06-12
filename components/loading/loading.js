@@ -10,6 +10,7 @@ export default class Loading extends Component {
         prefixLoad: s.loadingPrefix
     };
 
+
     render() {
         const {prefixLoad, text, graph, size, loading} = this.props;
         console.log(loading);
