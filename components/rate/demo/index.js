@@ -14,7 +14,7 @@ let render = () => {
   function Demo() {
     return (
       <div className="td" style={{marginLeft: '200px', paddingLeft: '200px'}}>
-        <Rate allowHalf={true} style={{fontSize: '30px'}} character={<Icon type='right'/>} disabled={false} defaultValue={2}/>
+        <Rate />
       </div>
     );
   }
