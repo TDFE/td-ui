@@ -7,10 +7,14 @@
 @select-prefix                : ~"@{td-prefix}-select";
 @loading-prefix               : ~"@{td-prefix}-loading";
 @radio-prefix                 : ~"@{td-prefix}-radio";
+@message-prefix                 : ~"@{td-prefix}-message";
 @input-number-prefix          : ~"@{td-prefix}-input-number";
 @dialog-prefix                : ~"@{td-prefix}-dialog";
 @confirm-prefix                : ~"@{td-prefix}-confirm";
 @menu-prefix                : ~"@{td-prefix}-menu";
+@rate-prefix                  : ~"@{td-prefix}-rate";
+@pagination-prefix            : ~"@{td-prefix}-pagination";
+@tree-prefix                  : ~"@{td-prefix}-tree";
 
 :export {
   prefix: @td-prefix;
@@ -21,9 +25,13 @@
   selectPrefix: @select-prefix;
   loadingPrefix: @loading-prefix;
   radioPrefix: @radio-prefix;
+  messagePrefix: @message-prefix;
   dialogPrefix: @dialog-prefix;
   confirmPrefix: @confirm-prefix;
   menuPrefix: @menu-prefix;
+  ratePrefix: @rate-prefix;
+  paginationPrefix: @pagination-prefix;
+  treePrefix: @tree-prefix;
 }
 
 // Global
@@ -123,6 +131,8 @@
 @btn-default-bg                     : #fff;
 @btn-default-border                 : @border-color-base;
 
+@btn-group-border                   : @primary-color;
+
 // Radio bts
 @radio-button-bg            : @btn-default-bg;
 @radio-button-color         : @btn-default-color;
@@ -143,3 +153,23 @@
 @input-addon-bg              : #eee;
 @input-hover-border-color    : @primary-color;
 @input-disabled-bg           : @disabled-bg;
+
+//Rate
+@rate-reject-color              : #ff6c5c;
+@rate-accept-color              : #a7db65;
+@rate-review-color              : #f8d436;
+@rate-height                    : 30px;
+@rate-width                     : 100px;
+@rate-score-width               : 24px;
+@rate-score-height              : 24px;
+
+//Pagination
+@pagination-item-color            : #2db7f5;
+@pagination-item-width            : 28px;
+@pagination-item-height           : 28px;
+@pagination-item-mini-width       : 20px;
+@pagination-item-mini-height      : 20px;
+@pagination-font-size             : @font-size-base;
+@pagination-font-size-sm          : @font-size-sm;
+
+//Tree

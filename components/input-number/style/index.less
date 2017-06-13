@@ -26,6 +26,10 @@
 		position: relative;
 		display: block;
 		transition:all 0.1s linear;
+		border:0;
+		background-color:white;
+		border-radius: 0;
+		outline:none;
 		&:active{
 			background: #f4f4f4;
 		}
@@ -93,10 +97,7 @@
 	&-handler-down-disabled,
 	&-handler-up-disabled,
 	&-disabled{
-		.@{input-number-prefix}-handler-down-inner,
-	    .@{input-number-prefix}-handler-up-inner {
-	      .handler-disabled();
-	    }
+		.handler-disabled();
 	}
 	&:hover {
     .hover();

@@ -11,7 +11,8 @@ import run from 'tdtool/lib/util/run-command';
 import start from 'tdtool/lib/cmds/start';
 
 export default async function component() {
-  run(start.bind(undefined,{config:'./tools/tdtool.config.comp.js',port:8080}));
+  const argv = require('yargs').parse(process.argv.slice(3));
+  run(start.bind(undefined, { config: './tools/tdtool.config.comp.js', port: argv.port || 8080 }));
   // await runGulpTask('component');
-  await open('http://localhost:8080');
+  // await open('http://localhost:8080');
 }

@@ -12,6 +12,7 @@ import omit from 'lodash/omit';
 import s from './style';
 import is from '../util/is';
 import Icon from '../icon';
+import Group from './buttonGroup';
 
 const TWO_CN_REX = /^[\u4e00-\u9fa5]{2}$/;
 
@@ -34,6 +35,8 @@ function insertSpace(child, needInserted) {
 }
 
 export default class Button extends Component {
+  static Group = Group
+
   static defaultProps = {
     prefixCls: s.btnPrefix,
     loading: false,
