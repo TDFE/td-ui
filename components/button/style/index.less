@@ -7,6 +7,32 @@
 
   &-primary {
     .btn-primary;
+
+    .@{btn-prefix}-group &:not(:first-child):not(:last-child) {
+      border-right-color: @btn-group-border;
+      border-left-color: @btn-group-border;
+
+      &:disabled {
+        border-color: @btn-default-border;
+      }
+    }
+
+    .@{btn-prefix}-group &:first-child {
+      &:not(:last-child) {
+        border-right-color: @btn-group-border;
+        &[disabled] {
+          border-right-color: @btn-default-border;
+        }
+      }
+    }
+
+    .@{btn-prefix}-group &:last-child:not(:first-child),
+    .@{btn-prefix}-group & + & {
+      border-left-color: @btn-group-border;
+      &[disabled] {
+        border-left-color: @btn-default-border;
+      }
+    }
   }
 
   &-dashed {
@@ -15,6 +41,10 @@
 
   &-noborder {
     .btn-noborder;
+  }
+
+  &-group {
+    .btn-group(@btn-prefix);
   }
 
   &:before {
