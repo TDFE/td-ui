@@ -9,7 +9,11 @@ const MOUNT_NODE = document.getElementById('app');
 
 let render = () => {
     let Select = require('../index').default;
-    ReactDOM.render(<Select></Select>, MOUNT_NODE);
+    let Option = Select.Option;
+    ReactDOM.render(<Select>
+        <div>我是孩子</div>
+        <Option>00</Option>
+    </Select>, MOUNT_NODE);
 };
 
 try {
