@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import s from './style';
+import { checkSelected } from './util';
 
 export default class SubMenu extends React.Component {
   static defaultProps = {
@@ -51,23 +52,24 @@ export default class SubMenu extends React.Component {
   }
 
   renderItem = (child, index) => {
-    const { prefixCls, level, openKeys, selectedKeys, onSelect, onOpenChange, mode } = this.props;
+    const { prefixCls, level, openKeys, selectedKeys, domKeys, onSelect, onOpenChange, mode } = this.props;
     const eventKey = this.props.eventKey || '';
     let newChildProps = {
       prefixCls,
       openKeys,
       selectedKeys,
+      domKeys,
       onSelect,
       onOpenChange,
       level: level + 1,
-      eventKey: child.key || `${eventKey}-sub-${index}`,
+      eventKey: child.key || `${eventKey}-${index}`,
       mode
     }
     return React.cloneElement(child, newChildProps);
   }
 
   render() {
-    const { prefixCls, title, children, level, openKeys, eventKey, mode } = this.props;
+    const { prefixCls, title, children, level, openKeys, eventKey, mode, selectedKeys, domKeys } = this.props;
     let style = {};
     if (mode === 'inline') {
       style = {
@@ -75,7 +77,9 @@ export default class SubMenu extends React.Component {
       }
     }
     return <li
-      className={`${prefixCls}-submenu`}
+      className={classnames(`${prefixCls}-submenu`, {
+        [`${prefixCls}-submenu-child-selected`]: checkSelected(domKeys, selectedKeys, eventKey)
+      })}
       onMouseEnter={this.mouseEnter}
       onMouseLeave={this.mouseLeave}
     >

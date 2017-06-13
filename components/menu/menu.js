@@ -53,15 +53,16 @@ export default class Menu extends React.Component {
 
   renderItem = (child, index) => {
     const { prefixCls, level, mode } = this.props;
-    const { openKeys, selectedKeys } = this.state;
+    const { openKeys, selectedKeys, domKeys } = this.state;
     let newChildProps = {
       prefixCls,
       openKeys,
       selectedKeys,
+      domKeys,
       onSelect: this.onSelect,
       onOpenChange: this.onOpenChange,
       level: level ? (level + 1) : 1,
-      eventKey: child.key || `menu-${index}`,
+      eventKey: child.key || `root-${index}`,
       mode
     }
     return React.cloneElement(child, newChildProps);

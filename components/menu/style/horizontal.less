@@ -20,9 +20,14 @@
       &:hover:after{
         transform: scaleY(1);
       }
-      &-selected{
+      &-selected, &-child-selected{
         &:after{
           transform: scaleY(1);
+        }
+      }
+      &-child-selected{
+        &>.@{menu-prefix}-submenu-title{
+          color: @primary-color;
         }
       }
     }
