@@ -17,6 +17,7 @@
 @tree-prefix                  : ~"@{td-prefix}-tree";
 @row-prefix                   : ~"@{td-prefix}-row";
 @col-prefix                   : ~"@{td-prefix}-col";
+@layout-prefix                : ~"@{td-prefix}-layout";
 
 :export {
   prefix: @td-prefix;
@@ -36,6 +37,7 @@
   treePrefix: @tree-prefix;
   rowPrefix: @row-prefix;
   colPrefix: @col-prefix;
+  layoutPrefix: @layout-prefix;
 }
 
 // Global
@@ -104,6 +106,17 @@
 // grid
 @grid-columns                 : 24;
 @grid-gutter-width            : 0;
+
+// Layout
+@layout-body-background      : #ececec;
+@layout-header-background    : #404040;
+@layout-header-height        : 64px;
+@layout-header-padding       : 0 50px;
+@layout-footer-padding       : 24px 50px;
+@layout-sider-background     : @layout-header-background;
+@layout-trigger-height       : 48px;
+@layout-zero-trigger-width   : 36px;
+@layout-zero-trigger-height  : 42px;
 
 // Media queries breakpoints
 // Extra small screen / phone
