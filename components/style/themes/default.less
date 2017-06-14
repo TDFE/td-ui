@@ -15,6 +15,8 @@
 @rate-prefix                  : ~"@{td-prefix}-rate";
 @pagination-prefix            : ~"@{td-prefix}-pagination";
 @tree-prefix                  : ~"@{td-prefix}-tree";
+@row-prefix                   : ~"@{td-prefix}-row";
+@col-prefix                   : ~"@{td-prefix}-col";
 
 :export {
   prefix: @td-prefix;
@@ -32,6 +34,8 @@
   ratePrefix: @rate-prefix;
   paginationPrefix: @pagination-prefix;
   treePrefix: @tree-prefix;
+  rowPrefix: @row-prefix;
+  colPrefix: @col-prefix;
 }
 
 // Global
@@ -96,6 +100,37 @@
 @primary-8                    : color(~`colorPalette("@{primary-color}", 8)`);
 @primary-9                    : color(~`colorPalette("@{primary-color}", 9)`);
 @primary-10                   : color(~`colorPalette("@{primary-color}", 10)`);
+
+// grid
+@grid-columns                 : 24;
+@grid-gutter-width            : 0;
+
+// Media queries breakpoints
+// Extra small screen / phone
+@screen-xs              : 480px;
+@screen-xs-min          : @screen-xs;
+
+// Small screen / tablet
+@screen-sm              : 768px;
+@screen-sm-min          : @screen-sm;
+
+// Medium screen / desktop
+@screen-md              : 992px;
+@screen-md-min          : @screen-md;
+
+// Large screen / wide desktop
+@screen-lg              : 1200px;
+@screen-lg-min          : @screen-lg;
+
+// Extra Large screen / full hd
+@screen-xl              : 1600px;
+@screen-xl-min          : @screen-xl;
+
+// provide a maximum
+@screen-xs-max          : (@screen-sm-min - 1);
+@screen-sm-max          : (@screen-md-min - 1);
+@screen-md-max          : (@screen-lg-min - 1);
+@screen-lg-max          : (@screen-xl-min - 1);
 
 // Link
 @link-color                   : @primary-color;
