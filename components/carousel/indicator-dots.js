@@ -1,26 +1,26 @@
-/* eslint-disable */
 import React from 'react'
-// import PropTypes from 'prop-types'
+import PropTypes from 'prop-types'
 
 function Dot (props) {
   return (
-    <span onClick={((e)=>{
+    <span
+      onClick={((e) => {
         const index = props.index;
-        return (e)=>{
+        return (e) => {
           props.onClick(index);
         }
       })()}
       style={{
-      display: 'inline-block',
-      height: '8px',
-      width: '8px',
-      borderRadius: '4px',
-      backgroundColor: 'white',
-      margin: '7px 5px',
-      opacity: props.selected ? '1' : '0.3',
-      transitionDuration: '300ms',
-      cursor: 'pointer'
-    }} />
+        display: 'inline-block',
+        height: '8px',
+        width: '8px',
+        borderRadius: '4px',
+        backgroundColor: 'white',
+        margin: '7px 5px',
+        opacity: props.selected ? '1' : '0.3',
+        transitionDuration: '300ms',
+        cursor: 'pointer'
+      }} />
   )
 }
 
@@ -32,7 +32,7 @@ export default function IndicatorDots (props) {
     bottom: '0px',
     textAlign: 'center'
   }
-  // Hide dots when there is only one dot.
+  // 当只有一个dot的时候隐藏dot
   if (props.total < 2) {
     return <div style={wrapperStyle} />
   } else {
@@ -46,7 +46,7 @@ export default function IndicatorDots (props) {
   }
 }
 
-// IndicatorDots.propTypes = {
-//   index: PropTypes.number.isRequired,
-//   total: PropTypes.number.isRequired
-// }
+IndicatorDots.propTypes = {
+  index: PropTypes.number.isRequired,
+  total: PropTypes.number.isRequired
+}
