@@ -90,7 +90,9 @@ export default class DropDown extends React.Component {
       <div
         className={classnames(`${prefixCls}-list`, {[`${prefixCls}-list-hidden`]: !visible})}
       >
-        <div className={`${prefixCls}-inner`}>{ overlay }</div>
+        <div className={`${prefixCls}-inner`}>{ React.cloneElement(overlay, {
+          mode: 'vertical'
+        }) }</div>
       </div>
     </div>
   }

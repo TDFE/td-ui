@@ -7,7 +7,7 @@ import Button from '../../button';
 import Icon from '../../icon';
 import Menu from '../../Menu';
 
-const { Item } = Menu;
+const { SubMenu, Item } = Menu;
 
 const MOUNT_NODE = document.getElementById('app');
 
@@ -19,7 +19,7 @@ class Demo extends React.Component {
 
   render() {
     const menu = (
-      <Menu mode='vertical'>
+      <Menu>
         <Menu.Item>
           1st menu item xxx
         </Menu.Item>
@@ -31,6 +31,20 @@ class Demo extends React.Component {
         </Menu.Item>
       </Menu>
     )
+    const menu2 = (
+      <Menu>
+        <Menu.Item>
+          1st menu item xxx
+        </Menu.Item>
+        <Menu.Item>
+          2st menu item xxx
+        </Menu.Item>
+        <SubMenu key="sub3" title="Submenu">
+          <Menu.Item key="7">Option 7</Menu.Item>
+          <Menu.Item key="8">Option 8</Menu.Item>
+        </SubMenu>
+      </Menu>
+    )
     return <div>
       <div style={{margin: 30}}>
         <Dropdown overlay={menu}>
@@ -40,6 +54,12 @@ class Demo extends React.Component {
       <div style={{position: 'absolute', top: 30, left: 250}}>
         <Dropdown overlay={menu} trigger="click">
           <Button>按钮click</Button>
+        </Dropdown>
+      </div>
+
+      <div style={{position: 'absolute', top: 30, left: 500}}>
+        <Dropdown overlay={menu2}>
+          <Button>按钮二级</Button>
         </Dropdown>
       </div>
 
