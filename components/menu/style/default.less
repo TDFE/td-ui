@@ -11,9 +11,7 @@ ul, li{
     line-height: 42px;
     height: 42px;
     font-size: 12px;
-    padding-right: 20px;
-    padding-left: 20px;
-    cursor: pointer;
+    padding: 0 16px;
     position: relative;
     &:hover, &-selected{
       color: @primary-color;
@@ -31,6 +29,9 @@ ul, li{
       font-size: 12px;
       line-height: 1.5;
       padding: 8px 16px;
+    }
+    .@{menu-prefix}-item{
+      padding-left: 24px;
     }
   }
   &-submenu{
