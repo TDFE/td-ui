@@ -42,12 +42,12 @@
   .button-color(@color; @background; @border);
   &:hover,
   &:focus {
-    .button-color(@color; ~`colorPalette("@{background}", 5)`; ~`colorPalette("@{border}", 5)`);
+    .button-color(@color; tint(@background, 20%); tint(@border, 20%));
   }
 
   &:active,
   &.active {
-    .button-color(@color; ~`colorPalette("@{background}", 7)`; ~`colorPalette("@{border}", 7)`);
+    .button-color(@color; shade(@background, 20%); shade(@border, 20%));
   }
 
   .button-disabled();
@@ -62,7 +62,7 @@
 
   &:active,
   &.active {
-    .button-color(~`colorPalette("@{primary-color}", 7)`; @background; ~`colorPalette("@{btn-primary-border-color}", 7)`);
+    .button-color(shade(@primary-color, 20%); @background; shade(@btn-primary-border-color, 20%));
   }
 
   .button-disabled();

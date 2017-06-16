@@ -67,12 +67,12 @@
   },
   "dependencies": {
     "classnames": "^2.2.5",
+    "hoist-non-react-statics": "^1.2.0",
     "lodash": "^4.17.4",
     "prop-types": "^15.5.10",
     "rc-animate": "^2.3.6",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
-    "shallowequal": "^1.0.1",
-    "rc-animate": "^2.3.6"
+    "shallowequal": "^1.0.1"
   }
 }
