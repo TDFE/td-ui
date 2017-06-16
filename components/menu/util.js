@@ -26,7 +26,6 @@ function getDomKeys (domArr = []) {
     let item = domArr[i];
     loopDom(back, item, 'root', i);
   }
-  console.log(back);
   return back;
 }
 
