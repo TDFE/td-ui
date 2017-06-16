@@ -59,15 +59,24 @@
 @border-style-base            : solid;
 
 // Color
-@primary-color                : @blue-6;
-@success-color                : @green-6;
-@error-color                  : @red-6;
-@highlight-color              : @red-6;
-@warning-color                : @yellow-6;
+@primary-color                : @blue-5;
+@success-color                : @green-5;
+@error-color                  : @red-5;
+@highlight-color              : @red-5;
+@warning-color                : @yellow-5;
 @disabled-color               : fade(#000, 25%);
 @shadow-color                 : rgba(0, 0, 0, .2);
 @text-color                   : fade(#000, 65%);
 @text-color-secondary   : fade(#000, 43%);
+
+@primary-1: tint(@primary-5, 80%);
+@primary-2: tint(@primary-5, 60%);
+@primary-3: tint(@primary-5, 40%);
+@primary-4: tint(@primary-5, 20%);
+@primary-5: @primary-color;
+@primary-6: shade(@primary-5, 20%);
+@primary-7: shade(@primary-5, 40%);
+@primary-8: shade(@primary-5, 60%);
 
 //outline
 @outline-color          : @primary-color;
@@ -94,16 +103,6 @@
 @ease-in-quint                : cubic-bezier(0.755, 0.05, 0.855, 0.06);
 @ease-in-out-quint            : cubic-bezier(0.86, 0, 0.07, 1);
 
-@primary-1                    : color(~`colorPalette("@{primary-color}", 1)`);
-@primary-2                    : color(~`colorPalette("@{primary-color}", 2)`);
-@primary-                     : color(~`colorPalette("@{primary-color}", 3)`);
-@primary-4                    : color(~`colorPalette("@{primary-color}", 4)`);
-@primary-5                    : color(~`colorPalette("@{primary-color}", 5)`);
-@primary-                     : @primary-color;
-@primary-7                    : color(~`colorPalette("@{primary-color}", 7)`);
-@primary-8                    : color(~`colorPalette("@{primary-color}", 8)`);
-@primary-9                    : color(~`colorPalette("@{primary-color}", 9)`);
-@primary-10                   : color(~`colorPalette("@{primary-color}", 10)`);
 
 // grid
 @grid-columns                 : 24;
@@ -149,8 +148,8 @@
 
 // Link
 @link-color                   : @primary-color;
-@link-hover-color             : @primary-5;
-@link-active-color            : @primary-7;
+@link-hover-color             : @primary-4;
+@link-active-color            : @primary-6;
 @link-decoration              : none;
 @link-hover-decoration        : none;
 
@@ -205,9 +204,9 @@
 @input-disabled-bg           : @disabled-bg;
 
 //Rate
-@rate-reject-color              : #ff6c5c;
-@rate-accept-color              : #a7db65;
-@rate-review-color              : #f8d436;
+@rate-reject-color              : @red-5;
+@rate-accept-color              : @green-5;
+@rate-review-color              : @yellow-5;
 @rate-height                    : 30px;
 @rate-width                     : 100px;
 @rate-score-width               : 24px;
