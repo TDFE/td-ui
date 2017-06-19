@@ -18,11 +18,14 @@
  	static defaultProps={
  		prefixCls:s.inputNumberPrefix,
  		type:'text',
+ 		placeholder:'请输入',
+ 		btnType:'vertical',
  	};
  	static propTypes={
  		prefixCls:PropTypes.string,
  		disabled:PropTypes.bool,
  		size:PropTypes.oneOf(['small','default','large']),
+ 		btnType:PropTypes.oneOf(['vertical','crosswise']),
  		max:PropTypes.number,
  		min:PropTypes.number,
  		step:PropTypes.oneOfType([PropTypes.number,PropTypes.string]),
@@ -137,15 +140,19 @@
 			[`${prefixCls}-sm`]: props.size === "small",
 			[`${prefixCls}-lg`]: props.size === "large",
 		});
+		const btnclasses=cn({
+			[`${prefixCls}-handler-wrap`]: props.btnType === "vertical",
+			[`${prefixCls}-handler-wrap-cw`]: props.btnType === "crosswise",
+		});
 		let upDisabledClass='',downDisabledClass='';
 		const { value } = this.state;
 		if (value) {
 			if (!isNaN(value)) {
 				const val = Number(value);
-				if (val >= props.max) {
+				if (val >= props.max||(val+props.step)>props.max) {
 					upDisabledClass = `${prefixCls}-handler-up-disabled`;
 				}
-				if (val <= props.min) {
+				if (val <= props.min||(val-props.step)<props.min) {
 					downDisabledClass = `${prefixCls}-handler-down-disabled`;
 				}
 			} else {
@@ -158,7 +165,7 @@
 	    //控制点击事件
 	    const editable = !props.readOnly && !props.disabled;
 	    return (<div className={classes} style={props.style}>
-	    	<div className={`${prefixCls}-handler-wrap`}>
+	    	<div className={`${btnclasses}`}>
 	    	<button 
 	    	disabled={isUpDisabled}
 	    	className={`${prefixCls}-handler ${prefixCls}-handler-up ${upDisabledClass}`}
