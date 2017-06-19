@@ -1,0 +1,41 @@
+@import "../../style/themes/default.less";
+
+.@{menu-prefix}-inline {
+  .@{menu-prefix}{
+    &-item{
+      line-height: 42px;
+      height: 42px;
+      font-size: 12px;
+      padding-right: 26px;
+      padding-left: 48px;
+      cursor: pointer;
+      position: relative;
+      &:after{
+        content: "";
+        position: absolute;
+        right: -1px;
+        top: 0;
+        bottom: 0;
+        border-right: 3px solid @primary-color;
+        transform: scaleY(.0001);
+        transition: all .2s;
+      }
+      &-selected{
+        background-color: #ecf6fd;
+        &:after{
+          transform: scaleY(1);
+        }
+      }
+    }
+    &-submenu{
+      &-title{
+        &:after{
+          content: "\e901";
+          font-family: 'tdicon';
+          position: absolute;
+          right: 16px;
+        }
+      }
+    }
+  }
+}
