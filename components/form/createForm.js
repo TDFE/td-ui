@@ -8,6 +8,9 @@
  */
 
 import React from 'react';
+import ReactDOM from 'react-dom';
+import scrollIntoView from 'dom-scroll-into-view';
+import has from 'lodash/has';
 import warning fromm 'warning';
 import FieldsStore from './fieldsStore';
 import {
@@ -25,6 +28,42 @@ import {
 } from './utils';
 
 const DEFAULT_TRIGGER = 'onChange';
+
+function computedStyle(el, prop) {
+  const getComputedStyle = window.getComputedStyle;
+  const style =
+    // If we have getComputedStyle
+    getComputedStyle ?
+      getComputedStyle(el) :
+      // Otherwise, we are in IE and use currentStyle
+      el.currentStyle;
+  if (style) {
+    return style
+      [
+      // Switch to camelCase for CSSOM
+      // DEV: Grabbed from jQuery
+      // https://github.com/jquery/jquery/blob/1.9-stable/src/css.js#L191-L194
+      // https://github.com/jquery/jquery/blob/1.9-stable/src/core.js#L593-L597
+      prop.replace(/-(\w)/gi, (word, letter) => {
+        return letter.toUpperCase();
+      })
+      ];
+  }
+  return undefined;
+}
+
+function getScrollableContainer(n) {
+  let node = n;
+  let nodeName;
+  while ((nodeName = node.nodeName.toLowerCase()) !== 'body') {
+    const overflowY = computedStyle(node, 'overflowY');
+    if (node !== n && (overflowY === 'auto' || overflowY === 'scroll')) {
+      return node;
+    }
+    node = node.parentNode;
+  }
+  return nodeName === 'body' ? node.ownerDocument : node;
+}
 
 export default ({
     mapPropsToFields,
@@ -52,6 +91,44 @@ export default ({
           this.fieldsStore.replaceFields(mapPropsToFields(nextProps));
         }
       }
+
+      validateFieldsAndScroll = (ns, opt, cb) => {
+        const { names, callback, options } = getParams(ns, opt, cb);
+
+        const newCb = (error, values) => {
+          if (error) {
+            const validNames = this.fieldsStore.getValidFieldsName();
+            let firstNode;
+            let firstTop;
+            for (const name of validNames) {
+              if (has(error, name)) {
+                const instance = this.getFieldInstance(name);
+                if (instance) {
+                  const node = ReactDOM.findDOMNode(instance);
+                  const top = node.getBoundingClientRect().top;
+                  if (firstTop === undefined || firstTop > top) {
+                    firstTop = top;
+                    firstNode = node;
+                  }
+                }
+              }
+            }
+            if (firstNode) {
+              const c = options.container || getScrollableContainer(firstNode);
+              scrollIntoView(firstNode, c, {
+                onlyScrollIfNeeded: true,
+                ...options.scroll
+              });
+            }
+          }
+
+          if (typeof callback === 'function') {
+            callback(error, values);
+          }
+        };
+
+        return this.validateFields(names, options, newCb);
+      };
 
       onCollectCommon = (name_, action, args) => {
         let name = name_;
@@ -96,8 +173,8 @@ export default ({
         this.validateFieldsInternal([fieldContent], {
           action,
           options: {
-            firstFields: !!fieldMeta.validateFirst,
-          },
+            firstFields: !!fieldMeta.validateFirst
+          }
         });
       };
 
@@ -135,7 +212,7 @@ export default ({
           fieldMeta.ref = fieldElem.ref;
           return React.cloneElement(fieldElem, {
             ...props,
-            ...this.fieldsStore.getFieldValuePropValue(fieldMeta),
+            ...this.fieldsStore.getFieldValuePropValue(fieldMeta)
           });
         };
       };
@@ -153,7 +230,7 @@ export default ({
           trigger: DEFAULT_TRIGGER,
           leadingName,
           name,
-          ...usersFieldOption,
+          ...usersFieldOption
         };
 
         const {
@@ -161,7 +238,7 @@ export default ({
           trigger,
           validateTrigger = trigger,
           exclusive,
-          validate,
+          validate
         } = fieldOption;
 
         const fieldMeta = this.fieldsStore.getFieldMeta(name);
@@ -204,7 +281,7 @@ export default ({
         const meta = {
           ...fieldMeta,
           ...fieldOption,
-          validate: validateRules,
+          validate: validateRules
         };
         this.fieldsStore.setFieldMeta(name, meta);
         if (fieldMetaProp) {
@@ -249,14 +326,14 @@ export default ({
               if (has(fieldsValue, path)) {
                 newFields[path] = {
                   name: path,
-                  value: get(fieldsValue, path),
+                  value: get(fieldsValue, path)
                 };
               }
             }
           } else if (fieldsMeta[name]) {
             newFields[name] = {
               name,
-              value,
+              value
             };
           } else {
             warning(
@@ -278,6 +355,152 @@ export default ({
         return flattenArray(actionRules);
       };
 
+      saveRef(name, _, component) {
+        if (!component) {
+          // after destroy, delete data
+          this.fieldsStore.clearField(name);
+          delete this.instances[name];
+          delete this.cachedBind[name];
+          return;
+        }
+        const fieldMeta = this.fieldsStore.getFieldMeta(name);
+        if (fieldMeta) {
+          const ref = fieldMeta.ref;
+          if (ref) {
+            if (typeof ref === 'string') {
+              throw new Error(`can not set ref string for ${name}`);
+            }
+            ref(component);
+          }
+        }
+        this.instances[name] = component;
+      };
+
+      validateFieldsInternal = (fields, {
+        fieldNames,
+        action,
+        options = {}
+      }, callback) => {
+        const allRules = {};
+        const allValues = {};
+        const allFields = {};
+        const alreadyErrors = {};
+        fields.forEach((field) => {
+          const name = field.name;
+          if (options.force !== true && field.dirty === false) {
+            if (field.errors) {
+              set(alreadyErrors, name, { errors: field.errors });
+            }
+            return;
+          }
+          const fieldMeta = this.fieldsStore.getFieldMeta(name);
+          const newField = {
+            ...field
+          };
+          newField.errors = undefined;
+          newField.validating = true;
+          newField.dirty = true;
+          allRules[name] = this.getRules(fieldMeta, action);
+          allValues[name] = newField.value;
+          allFields[name] = newField;
+        });
+        this.setFields(allFields);
+        // in case normalize
+        Object.keys(allValues).forEach((f) => {
+          allValues[f] = this.fieldsStore.getFieldValue(f);
+        });
+        if (callback && isEmptyObject(allFields)) {
+          callback(isEmptyObject(alreadyErrors) ? null : alreadyErrors,
+            this.fieldsStore.getFieldsValue(flatFieldNames(fieldNames)));
+          return;
+        }
+        const validator = new AsyncValidator(allRules);
+        if (validateMessages) {
+          validator.messages(validateMessages);
+        }
+        validator.validate(allValues, options, (errors) => {
+          const errorsGroup = {
+            ...alreadyErrors
+          };
+          if (errors && errors.length) {
+            errors.forEach((e) => {
+              const fieldName = e.field;
+              if (!has(errorsGroup, fieldName)) {
+                set(errorsGroup, fieldName, { errors: [] });
+              }
+              const fieldErrors = get(errorsGroup, fieldName.concat('.errors'));
+              fieldErrors.push(e);
+            });
+          }
+          const expired = [];
+          const nowAllFields = {};
+          Object.keys(allRules).forEach((name) => {
+            const fieldErrors = get(errorsGroup, name);
+            const nowField = this.fieldsStore.getField(name);
+            // avoid concurrency problems
+            if (nowField.value !== allValues[name]) {
+              expired.push({
+                name
+              });
+            } else {
+              nowField.errors = fieldErrors && fieldErrors.errors;
+              nowField.value = allValues[name];
+              nowField.validating = false;
+              nowField.dirty = false;
+              nowAllFields[name] = nowField;
+            }
+          });
+          this.setFields(nowAllFields);
+          if (callback) {
+            if (expired.length) {
+              expired.forEach(({ name }) => {
+                const fieldErrors = [{
+                  message: `${name} need to revalidate`,
+                  field: name
+                }];
+                set(errorsGroup, name, {
+                  expired: true,
+                  errors: fieldErrors
+                });
+              });
+            }
+
+            callback(isEmptyObject(errorsGroup) ? null : errorsGroup,
+              this.fieldsStore.getFieldsValue(flatFieldNames(fieldNames)));
+          }
+        });
+      };
+
+      validateFields = (ns, opt, cb) => {
+        const { names, callback, options } = getParams(ns, opt, cb);
+        const fieldNames = names || this.fieldsStore.getValidFieldsName();
+        const fields = fieldNames
+          .filter(name => {
+            const fieldMeta = this.fieldsStore.getFieldMeta(name);
+            return hasRules(fieldMeta.validate);
+          }).map((name) => {
+            const field = this.fieldsStore.getField(name);
+            field.value = this.fieldsStore.getFieldValue(name);
+            return field;
+          });
+        if (!fields.length) {
+          if (callback) {
+            callback(null, this.fieldsStore.getFieldsValue(flatFieldNames(fieldNames)));
+          }
+          return;
+        }
+        if (!('firstFields' in options)) {
+          options.firstFields = fieldNames.filter((name) => {
+            const fieldMeta = this.fieldsStore.getFieldMeta(name);
+            return !!fieldMeta.validateFirst;
+          });
+        }
+        this.validateFieldsInternal(fields, {
+          fieldNames,
+          options
+        }, callback);
+      };
+
       isSubmitting = () => {
         return this.state.submitting;
       };
@@ -285,11 +508,11 @@ export default ({
       submit = callback => {
         const fn = () => {
           this.setState({
-            submitting: false,
+            submitting: false
           });
         };
         this.setState({
-          submitting: true,
+          submitting: true
         });
         callback(fn);
       };
@@ -314,6 +537,7 @@ export default ({
             isSubmitting: this.isSubmitting,
             submit: this.submit,
             validateFields: this.validateFields,
+            validateFieldsAndScroll: this.validateFieldsAndScroll,
             resetFields: this.resetFields
           }
         };
