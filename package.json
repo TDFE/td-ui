@@ -72,13 +72,16 @@
     "yargs": "^8.0.1"
   },
   "dependencies": {
+    "async-validator": "^1.7.1",
     "classnames": "^2.2.5",
+    "dom-scroll-into-view": "^1.2.1",
     "hoist-non-react-statics": "^1.2.0",
     "lodash": "^4.17.4",
     "prop-types": "^15.5.10",
     "rc-animate": "^2.3.6",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
-    "shallowequal": "^1.0.1"
+    "shallowequal": "^1.0.1",
+    "warning": "^3.0.0"
   }
 }
