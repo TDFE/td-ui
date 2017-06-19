@@ -7,7 +7,7 @@
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import cn from 'classNames';
+import cn from 'classnames';
 import omit from 'lodash/omit';
 import s from './style';
 import is from '../util/is';
