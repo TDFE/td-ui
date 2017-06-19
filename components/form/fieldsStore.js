@@ -32,7 +32,7 @@ export default class FieldsStore {
     const fieldsMeta = this.fieldsMeta;
     const nowFields = {
       ...this.fields,
-      ...fields,
+      ...fields
     };
     const nowValues = {};
     Object.keys(fieldsMeta).forEach((f) => {
@@ -46,12 +46,11 @@ export default class FieldsStore {
       const value = nowValues[f];
       const fieldMeta = fieldsMeta[f];
       if (fieldMeta && fieldMeta.normalize) {
-        const nowValue =
-                fieldMeta.normalize(value, this.getValueFromFields(f, this.fields), nowValues);
+        const nowValue = fieldMeta.normalize(value, this.getValueFromFields(f, this.fields), nowValues);
         if (nowValue !== value) {
           nowFields[f] = {
             ...nowFields[f],
-            value: nowValue,
+            value: nowValue
           };
         }
       }
@@ -96,9 +95,7 @@ export default class FieldsStore {
 
   getValidFieldsName() {
     const fieldsMeta = this.fieldsMeta;
-    return fieldsMeta ?
-      Object.keys(fieldsMeta).filter(name => !fieldsMeta[name].hidden) :
-      [];
+    return fieldsMeta ? Object.keys(fieldsMeta).filter(name => !fieldsMeta[name].hidden) : [];
   }
 
   getFieldValuePropValue(fieldMeta) {
@@ -118,11 +115,10 @@ export default class FieldsStore {
     return { [valuePropName]: fieldValue };
   }
 
-
   getField(name) {
     return {
       ...this.fields[name],
-      name,
+      name
     };
   }
   getFieldMember(name, member) {
@@ -175,14 +171,14 @@ export default class FieldsStore {
           if (has(initialValues, path)) {
             fieldsMeta[path] = {
               ...fieldsMeta[path],
-              initialValue: get(initialValues, path),
+              initialValue: get(initialValues, path)
             };
           }
         }
       } else if (fieldsMeta[name]) {
         fieldsMeta[name] = {
           ...fieldsMeta[name],
-          initialValue: initialValues[name],
+          initialValue: initialValues[name]
         };
       }
     });

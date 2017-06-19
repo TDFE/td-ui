@@ -81,7 +81,11 @@ export default class FormItem extends React.Component {
       if (FIELD_META_PROP in child.props) {
         controls.push(child);
       } else if (child.props.children) {
-        controls = controls.concat(this.getControls(child.props.children, recursively));
+        if (child.type.name === 'FormControl') {
+          controls = controls.concat(this.getControls(child.type(Object.assign({}, child.props, { form: this.context.form })), recursively));
+        } else {
+          controls = controls.concat(this.getControls(child.props.children, recursively));
+        }
       }
     }
     return controls;
@@ -127,7 +131,7 @@ export default class FormItem extends React.Component {
     if (isFieldValidating(fieldId)) {
       return 'validating';
     }
-    if (!!getFieldError(fieldId)) {
+    if (getFieldError(fieldId)) {
       return 'error';
     }
     const fieldValue = getFieldValue(fieldId);
@@ -141,9 +145,7 @@ export default class FormItem extends React.Component {
     let classes = '';
     const form = this.context.form;
     const props = this.props;
-    const validateStatus = (props.validateStatus === undefined && form) ?
-      this.getValidateStatus() :
-      props.validateStatus;
+    const validateStatus = (props.validateStatus === undefined && form) ? this.getValidateStatus() : props.validateStatus;
 
     if (validateStatus) {
       classes = classNames(
@@ -153,7 +155,7 @@ export default class FormItem extends React.Component {
           'has-warning': validateStatus === 'warning',
           'has-error': validateStatus === 'error',
           'is-validating': validateStatus === 'validating'
-        },
+        }
       );
     }
     return (
@@ -209,8 +211,8 @@ export default class FormItem extends React.Component {
     // Keep label is original where there should have no colon
     const haveColon = colon && !context.vertical;
     // Remove duplicated user input colon
-    if (haveColon && typeof label === 'string' && (label as string).trim() !== '') {
-      labelChildren = (label as string).replace(/[：|:]\s*$/, '');
+    if (haveColon && typeof label === 'string' && label.trim() !== '') {
+      labelChildren = label.replace(/[：|:]\s*$/, '');
     }
 
     return label ? (
@@ -227,13 +229,29 @@ export default class FormItem extends React.Component {
   };
 
   renderChildren = () => {
-    const children = React.Children.map(this.props.children => {
+    const children = React.Children.map(this.props.children, child => {
       if (child && typeof child.type === 'function' && !child.props.size) {
+        if (child.type.name === 'FormControl') {
+          return child.type(Object.assign({}, child.props, { size: 'large', form: this.context.form }));
+        }
+
         return React.cloneElement(child, { size: 'large' });
+      }
+      if (child && child.type.name === 'FormControl') {
+        return child.type(Object.assign({}, child.props, { form: this.context.form }));
       }
       return child;
     });
-    return [];
+    return [
+      this.renderLabel(),
+      this.renderWrapper(
+        this.renderValidateWrapper(
+          children,
+          this.renderHelp(),
+          this.renderExtra()
+        )
+      )
+    ];
   };
 
   renderFormItem = children => {
@@ -244,7 +262,7 @@ export default class FormItem extends React.Component {
       [`${prefixCls}-item`]: true,
       [`${prefixCls}-item-with-help`]: !!this.getHelpMsg(),
       [`${prefixCls}-item-no-colon`]: !props.colon,
-      [`${props.className}`]: !!props.className,
+      [`${props.className}`]: !!props.className
     };
 
     return (

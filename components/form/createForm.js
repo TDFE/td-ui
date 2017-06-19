@@ -10,8 +10,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import scrollIntoView from 'dom-scroll-into-view';
+import AsyncValidator from 'async-validator';
+import get from 'lodash/get';
 import has from 'lodash/has';
-import warning fromm 'warning';
+import set from 'lodash/set';
+import warning from 'warning';
 import FieldsStore from './fieldsStore';
 import {
   argumentContainer,
@@ -31,23 +34,9 @@ const DEFAULT_TRIGGER = 'onChange';
 
 function computedStyle(el, prop) {
   const getComputedStyle = window.getComputedStyle;
-  const style =
-    // If we have getComputedStyle
-    getComputedStyle ?
-      getComputedStyle(el) :
-      // Otherwise, we are in IE and use currentStyle
-      el.currentStyle;
+  const style = getComputedStyle ? getComputedStyle(el) : el.currentStyle;
   if (style) {
-    return style
-      [
-      // Switch to camelCase for CSSOM
-      // DEV: Grabbed from jQuery
-      // https://github.com/jquery/jquery/blob/1.9-stable/src/css.js#L191-L194
-      // https://github.com/jquery/jquery/blob/1.9-stable/src/core.js#L593-L597
-      prop.replace(/-(\w)/gi, (word, letter) => {
-        return letter.toUpperCase();
-      })
-      ];
+    return style[prop.replace(/-(\w)/gi, (word, letter) => letter.toUpperCase())];
   }
   return undefined;
 }
@@ -77,6 +66,7 @@ export default ({
   }) => WrappedComponent => argumentContainer(
     class extends React.Component {
       constructor(props) {
+        super(props);
         const fields = mapPropsToFields && mapPropsToFields(props);
         this.fieldsStore = new FieldsStore(fields || {});
         this.instances = {};
@@ -138,9 +128,7 @@ export default ({
         } else if (fieldMeta.originalProps && fieldMeta.originalProps[action]) {
           fieldMeta.originalProps[action](...args);
         }
-        const value = fieldMeta.getValueFromEvent ?
-          fieldMeta.getValueFromEvent(...args) :
-          getValueFromEvent(...args);
+        const value = fieldMeta.getValueFromEvent ? fieldMeta.getValueFromEvent(...args) : getValueFromEvent(...args);
         if (onValuesChange) {
           onValuesChange(this.props, set({}, name, value));
         }
@@ -157,10 +145,10 @@ export default ({
         const { validate } = fieldMeta;
         const fieldContent = {
           ...field,
-          dirty: hasRules(validate),
+          dirty: hasRules(validate)
         };
         this.setFields({
-          [name]: fieldContent,
+          [name]: fieldContent
         });
       };
 
@@ -168,7 +156,7 @@ export default ({
         const { field, fieldMeta } = this.onCollectCommon(name_, action, args);
         const fieldContent = {
           ...field,
-          dirty: true,
+          dirty: true
         };
         this.validateFieldsInternal([fieldContent], {
           action,
@@ -257,7 +245,7 @@ export default ({
 
         const inputProps = {
           ...this.fieldsStore.getFieldValuePropValue(fieldOption),
-          ref: this.getCacheBind(name, `${name}__ref`, this.saveRef),
+          ref: this.getCacheBind(name, `${name}__ref`, this.saveRef)
         };
         if (fieldNameProp) {
           inputProps[fieldNameProp] = name;

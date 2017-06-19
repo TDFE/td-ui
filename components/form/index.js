@@ -9,7 +9,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import omit from 'lodash/omit';
-import warning from 'warning';
 
 import FormItem from './formItem';
 import FormControl from './formControl';
@@ -70,4 +69,29 @@ export default class Form extends React.Component {
       }
     );
   };
+
+  render() {
+    const {
+      prefixCls, hideRequiredMark, className = '', layout
+    } = this.props;
+    const formClassName = classNames(prefixCls, {
+      [`${prefixCls}-horizontal`]: layout === 'horizontal',
+      [`${prefixCls}-vertical`]: layout === 'vertical',
+      [`${prefixCls}-inline`]: layout === 'inline',
+      [`${prefixCls}-hide-required-mark`]: hideRequiredMark
+    }, className);
+
+    const formProps = omit(this.props, [
+      'prefixCls',
+      'className',
+      'layout',
+      'inline',
+      'horizontal',
+      'vertical',
+      'form',
+      'hideRequiredMark'
+    ]);
+
+    return <form {...formProps} className={formClassName} />;
+  }
 }
