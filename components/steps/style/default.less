@@ -1,0 +1,45 @@
+@import "../../style/themes/default.less";
+@import "./base.less";
+
+.@{steps-prefix} {
+  min-height: 100px;
+  &-step{
+    display: inline-block;
+    vertical-align: top;
+    &-con{
+      display: inline-block;
+      position: relative;
+    }
+    &-main{
+      position: absolute;
+      width: 300px;
+    }
+    &-icon{
+      border: 2px solid @step-gray;
+      width: @icon-height;
+      height: @icon-height;
+      border-radius: @icon-height;
+      line-height: @icon-height;
+      display: inline-block;
+      text-align: center;
+      color: @step-gray;
+    }
+    &-finished{
+      .@{steps-prefix}{
+        &-step-icon{
+          border-color: @step-blue;
+          color: @step-blue;
+        }
+      }
+    }
+    &-progress{
+      .@{steps-prefix}{
+        &-step-icon{
+          background: @step-blue;
+          border-color: @step-blue;
+          color: #fff;
+        }
+      }
+    }
+  }
+}
