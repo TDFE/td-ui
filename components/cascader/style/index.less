@@ -1,0 +1,98 @@
+@import "../../style/themes/default.less";
+
+.@{cascader-prefix} {
+    width: 100px;
+
+    &-picker {
+        position: relative;
+        display: inline-block;
+        cursor: pointer;
+        vertical-align: middle;
+        font-size: 12px;
+        background-color: #fff;
+        border-radius: 6px;
+
+        .input-wrapper {
+            width: 200px;
+            input {
+                display: block;
+                cursor: pointer;
+                width: 100%;
+                z-index: 1;
+                font-size: 12px;
+            }
+        }
+
+        .picker-label {
+            position: absolute;
+            left: 0;
+            height: 20px;
+            line-height: 20px;
+            top: 50%;
+            margin-top: -10px;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            width: 100%;
+            padding: 0 12px 0 8px;
+            z-index: 1;
+
+            div {
+                float: left;
+
+                span {
+                    margin: auto 3px;
+                }
+            }
+        }
+
+        .picker-clear {
+            position: absolute;
+            right: 30px;
+            top: 50%;
+            z-index: 2;
+            margin-top: -10px;
+        }
+    }
+
+    &-menus {
+        font-size: 12px;
+        background: #fff;
+        position: absolute;
+        z-index: 1050;
+        border: 1px solid #d9d9d9;
+        border-radius: 6px;
+        box-shadow: 0 1px 6px hsla(0,0%,39%,.2);
+        white-space: nowrap;
+    }
+
+    &-menu {
+        display: inline-block;
+        vertical-align: top;
+        min-width: 111px;
+        max-height: 155px;
+        height: 155px;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        overflow-y:auto;
+        border-right: 1px solid #e9e9e9;
+        overflow: auto;
+
+        &-item:hover {
+            background: #eaf8fe;
+        }
+        &-item {
+            padding: 7px 26px 7px 16px;
+            cursor: pointer;
+            white-space: nowrap;
+            -webkit-transition: all .3s ease;
+            transition: all .3s ease;
+        }
+        &-item.active {
+            background-color: #37A7FC;
+            color: #fff;
+            font-weight: 700;
+        }
+    }
+}
