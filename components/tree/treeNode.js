@@ -3,6 +3,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import cn from 'classnames';
 import assign from 'object-assign';
+import { browser } from './util';
+const browserUa = typeof window !== 'undefined' ? browser(window.navigator) : '';
+const ieOrEdge = /.*(IE|Edge).+/.test(browserUa);
 
 class TreeNode extends Component {
   static defaultProps = {
@@ -159,7 +162,7 @@ class TreeNode extends Component {
   render() {
     const props = this.props;
     const { prefixCls, expanded, title, disabled, selected } = props;
-    const dataLoading = this.state.dataLoading;
+    const { dataLoading, dragNodeHighlight } = this.state;
     const expandedState = expanded ? 'open' : 'close';
     let canRenderSwitcher = true;
     let newChildren = this.renderChildren(props);
@@ -170,24 +173,31 @@ class TreeNode extends Component {
     if (!newChildren) {
       canRenderSwitcher = false;
     }
-    const domProps = {};
+    const domProps = {
+      className: `${prefixCls}-content ${prefixCls}-content-${expandedState}`
+    };
+
     if (!props.disabled) {
+      if (props.selected || dragNodeHighlight) {
+        domProps.className += ' selected';
+      }
       domProps.onClick = e => {
         e.preventDefault();
         this.onSelect();
       }
       if (props.draggable) {
         domProps.className += ' draggable';
+        if (ieOrEdge) {
+          domProps.href = '#';
+        }
         domProps.draggable = true;
+        domProps['aria-grabbed'] = true;
         domProps.onDragStart = this.onDragStart;
       }
     }
     const selectHandle = () => {
       const icon = (props.showIcon || (props.loadData && dataLoading)) ? <span className={cn(iconEleCls)}></span> : '';
-      const content = <span className={cn(`${prefixCls}-title`, {
-        [`${prefixCls}-title-disabled`]: disabled,
-        [`${prefixCls}-title-selected`]: !disabled && selected
-      })}>{title}</span>;
+      const content = <span className={`${prefixCls}-title`}>{title}</span>;
       return (
         <span {...domProps} ref='selectHandle' title={typeof title === 'string' ? title : ''}>
           {icon}

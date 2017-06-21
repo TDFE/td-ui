@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import cn from 'classnames';
 import assign from 'object-assign';
 import s from './style';
-import { arrEqual, loopAllChildren, getAllChildChecked, getAllChildUnchecked, getAllParentChecked, getAllParentUnchecked } from './util';
+import { arrEqual, loopAllChildren, getAllChildChecked, getAllChildUnchecked, getAllParentChecked, getAllParentUnchecked, getOffset } from './util';
 
 const prefixCls = s.treePrefix;
 
@@ -280,7 +280,6 @@ class Tree extends Component {
     this.props.onSelect(selectedKeys, newSt);
   }
   onDragStart(e, treeNode) {
-    console.log('start');
     this.dragNode = treeNode;
     this.dragNodesKeys = this.getDragNodes(treeNode);
     const st = {
@@ -288,11 +287,26 @@ class Tree extends Component {
     }
   }
   onDragEnterGap(e, treeNode) {
-
+    const ele = treeNode.refs.selectHandle;
+    const offsetTop = getOffset(ele).top;
+    const offsetHeight = ele.offsetHeight;
+    const pageY = e.pageY;
+    const gapHeight = 2;
+    if (pageY > offsetTop + offsetHeight - gapHeight) { // bottom
+      this.dropPosition = 1;
+      return 1;
+    }
+    if (pageY < offsetTop + gapHeight) { // top
+      this.dropPosition = -1;
+      return -1;
+    }
+    this.dropPosition = 0;
+    return 0;
   }
   onDragEnter(e, treeNode) {
-    console.log('enter');
-    if (this.dragNode.props.eventKey === treeNode.props.eventKey) {
+    console.log(e.pageY);
+    const enterGap = this.onDragEnterGap(e, treeNode);
+    if (this.dragNode.props.eventKey === treeNode.props.eventKey && enterGap === 0) {
       this.setState({
         dragOverNodeKey: ''
       });
@@ -300,19 +314,54 @@ class Tree extends Component {
     }
     const st = {
       dragOverNodeKey: treeNode.props.eventKey
+    };
+    const expandedKeys = this.getExpandedKeys(treeNode, true);
+    if (expandedKeys) {
+      st.expandedKeys = expandedKeys;
     }
+    this.setState(st);
+    this.props.onDragEnter({
+      event: e,
+      node: treeNode,
+      expandedKeys: (expandedKeys && [...expandedKeys]) || [...this.state.expandedKeys]
+    })
   }
   onDragOver(e, treeNode) {
     this.props.onDragOver({event: e, node: treeNode});
   }
   onDragLeave(e, treeNode) {
-    console.log('leave');
+    this.props.onDragLeave({event: e, node: treeNode});
   }
   onDrop(e, treeNode) {
-    console.log('drop');
+    const key = treeNode.props.eventKey;
+    this.setState({
+      dragOverNodeKey: '',
+      dropNodeKey: key
+    })
+    if (this.dragNodesKeys.indexOf(key) !== -1) {
+      if (console.warn) {
+        console.warn('can not drop to dragNode(include it\'s children node)')
+      };
+      return false;
+    }
+    const posArr = treeNode.props.pos.split('-');
+    const res = {
+      event: e,
+      node: treeNode,
+      dragNode: this.dragNode,
+      dragNodesKeys: [...this.dragNodesKeys],
+      dropPosition: this.dropPosition + Number(posArr[posArr.length - 1])
+    }
+    if (this.dropPosition !== 0) {
+      res.dropToGap = true;
+    }
+    this.props.onDrop(res);
   }
   onDragEnd(e, treeNode) {
-    console.log('end');
+    this.setState({
+      dragOverNodeKey: ''
+    });
+    this.props.onDragEnd({event: e, node: treeNode});
   }
   getDragNodes(treeNode) {
     const dragNodesKeys = [];
@@ -327,7 +376,7 @@ class Tree extends Component {
   }
   getExpandedKeys(treeNode, expand) {
     const key = treeNode.props.eventKey;
-    const expandedKeys = this.state.expandedKeys;
+    const expandedKeys = [...this.state.expandedKeys];
     const index = expandedKeys.indexOf(key);
     let exKeys;
     if (index > -1 && !expand) {

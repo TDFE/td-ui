@@ -7,6 +7,7 @@ import Control from './control';
 import LoadData from './loadData';
 import Line from './line';
 import Filter from './filter';
+import Drag from './drag';
 const MOUNT_NODE = document.getElementById('app');
 
 let Tree = require('../index').default;
@@ -31,6 +32,9 @@ let render = () => {
         <p>我是分割线我是分割线</p>
         <p>过滤</p>
         <Filter />
+        <p>我是分割线我是分割线</p>
+        <p>拖动示例</p>
+        <Drag />
       </div>
     );
   }

@@ -164,3 +164,43 @@ export function getAllParentUnchecked(obj, pos, checkedKeys, halfCheckedKeys) {
   };
   loop(pos);
 }
+
+export function getOffset(ele) {
+  let rect, doc, win, docElem;
+  // getClientRects获取元素占据页面的所有矩形区域
+  // getBoundingClientRect是DOM元素到浏览器可视范围的距离（不包含文档卷起的部分）
+  if (!ele.getClientRects().length) {
+    return { top: 0, left: 0 };
+  }
+  rect = ele.getBoundingClientRect();
+  if (rect.width || rect.height) {
+    doc = ele.ownerDocument;
+    win = doc.defaultView;
+    docElem = doc.documentElement;
+    return {
+      top: rect.top + win.pageYOffset - docElem.clientTop,
+      left: rect.left + win.pageXOffset - docElem.clientLeft
+    };
+  }
+  return rect;
+}
+
+export function browser(navigator) {
+  let tem;
+  const ua = navigator.userAgent;
+  let M = ua.match(/(opera|chrome|safari|firefox|msie|trident(?=\/))\/?\s*(\d+)/i) || [];
+  if (/trident/i.test(M[1])) {
+    tem = /\brv[ :]+(\d+)/g.exec(ua) || [];
+    return `IE ${tem[1] || ''}`;
+  }
+  if (M[1] === 'Chrome') {
+    tem = ua.match(/\b(OPR|Edge)\/(\d+)/);
+    if (tem) return tem.slice(1).join(' ').replace('OPR', 'Opera');
+  }
+  M = M[2] ? [M[1], M[2]] : [navigator.appName, navigator.appVersion, '-?'];
+  tem = ua.match(/version\/(\d+)/i);
+  if (tem) {
+    M.splice(1, 1, tem[1]);
+  }
+  return M.join(' ');
+}

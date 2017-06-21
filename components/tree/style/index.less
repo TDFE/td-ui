@@ -14,6 +14,30 @@
     ul {
       padding-left: @tree-switcher-width / 3 * 2;
     }
+    &.drag-over > .@{prefixCls}-content {
+      background-color: yellow;
+    }
+    &.drag-over-gap-top > .@{prefixCls}-content, &.drag-over-gap-bottom > .@{prefixCls}-content  {
+      position: relative;
+      &:after {
+        content: '';
+        width: 100%;
+        height: 2px;
+        position: absolute;
+        left: 0;
+        background-color: yellow;
+      }
+    }
+    &.drag-over-gap-top > .@{prefixCls}-content {
+      &:after {
+        top: 0;
+      }
+    }
+    &.drag-over-gap-bottom > .@{prefixCls}-content {
+      &:after {
+        bottom: 0;
+      }
+    }
   }
   &-line {
     & > li:not(:last-of-type) {
@@ -212,6 +236,15 @@
       }
     }
   }
+  &-treenode-disabled{
+    & > .@{prefixCls}-content {
+      color: @disabled-color;
+      cursor: not-allowed;
+      &:hover {
+        background-color: inherit;
+      }
+    }
+  }
   &-icon {
     &-loading {
       &:after {
@@ -225,25 +258,24 @@
       }
     }
   }
-  &-title {
+
+  &-content {
     margin-left: 5px;
     display: inline-block;
     padding: 0 5px;
     // width: calc(100% - @tree-switcher-width - 10px);
     vertical-align: middle;
     line-height: @tree-switcher-height;
+    height: @tree-switcher-height;
     cursor: pointer;
-    &:not(&-disabled) {
-      &:hover {
-        background-color: @primary-color;
-      }
-    }
-    &-disabled {
-      color: @disabled-color;
-      cursor: not-allowed;
-    }
-    &-selected {
+    &:hover {
       background-color: @primary-color;
+    }
+    &.selected {
+      background-color: @primary-color;
+    }
+    &.draggable {
+      width: calc(100% - (@tree-switcher-width + 15px));
     }
   }
   &-child {
