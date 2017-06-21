@@ -1,4 +1,6 @@
-@import "variables";
+@import "./valiables.less";
+
+@tdicon-font-path: "../fonts/";
 
 @font-face {
   font-family: 'tdicon';
@@ -22,6 +24,66 @@
   line-height: 1;
 }
 
+.tdicon-copy {
+  &:before {
+    content: @tdicon-copy;
+  }
+}
+.tdicon-setting {
+  &:before {
+    content: @tdicon-setting;
+  }
+}
+.tdicon-edit {
+  &:before {
+    content: @tdicon-edit;
+  }
+}
+.tdicon-upload {
+  &:before {
+    content: @tdicon-upload;
+  }
+}
+.tdicon-download {
+  &:before {
+    content: @tdicon-download;
+  }
+}
+.tdicon-bars {
+  &:before {
+    content: @tdicon-bars;
+  }
+}
+.tdicon-question {
+  &:before {
+    content: @tdicon-question;
+  }
+}
+.tdicon-plus {
+  &:before {
+    content: @tdicon-plus;
+  }
+}
+.tdicon-close {
+  &:before {
+    content: @tdicon-close;
+  }
+}
+.tdicon-calendar {
+  &:before {
+    content: @tdicon-calendar;
+  }
+}
+.tdicon-clock {
+  &:before {
+    content: @tdicon-clock;
+  }
+}
+.tdicon-loading {
+  &:before {
+    content: @tdicon-loading;
+  }
+}
 .tdicon-sort {
   &:before {
     content: @tdicon-sort;
