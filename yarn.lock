@@ -1573,6 +1573,12 @@ component-bind@1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/component-bind/-/component-bind-1.0.0.tgz#00c608ab7dcd93897c0009651b1d3a8e1e73bbd1"
 
+component-classes@^1.2.5:
+  version "1.2.6"
+  resolved "https://registry.yarnpkg.com/component-classes/-/component-classes-1.2.6.tgz#c642394c3618a4d8b0b8919efccbbd930e5cd691"
+  dependencies:
+    component-indexof "0.0.3"
+
 component-emitter@1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/component-emitter/-/component-emitter-1.1.2.tgz#296594f2753daa63996d2af08d15a95116c9aec3"
@@ -1580,6 +1586,10 @@ component-emitter@1.1.2:
 component-emitter@1.2.1:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/component-emitter/-/component-emitter-1.2.1.tgz#137918d6d78283f7df7a6b7c5a63e140e69425e6"
+
+component-indexof@0.0.3:
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/component-indexof/-/component-indexof-0.0.3.tgz#11d091312239eb8f32c8f25ae9cb002ffe8d3c24"
 
 component-inherit@0.0.3:
   version "0.0.3"
@@ -1759,6 +1769,12 @@ crypto-browserify@^3.11.0:
     pbkdf2 "^3.0.3"
     public-encrypt "^4.0.0"
     randombytes "^2.0.0"
+
+css-animation@1.x:
+  version "1.3.2"
+  resolved "https://registry.yarnpkg.com/css-animation/-/css-animation-1.3.2.tgz#df515820ef5903733ad2db0999403b3037b8b880"
+  dependencies:
+    component-classes "^1.2.5"
 
 css-color-names@0.0.4:
   version "0.0.4"
@@ -5242,7 +5258,7 @@ promise@~7.0.1:
   dependencies:
     asap "~2.0.3"
 
-prop-types@^15.5.10, prop-types@^15.5.4, prop-types@^15.5.7, prop-types@^15.5.8, prop-types@~15.5.7:
+prop-types@15.x, prop-types@^15.5.10, prop-types@^15.5.4, prop-types@^15.5.7, prop-types@^15.5.8, prop-types@~15.5.7:
   version "15.5.10"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.5.10.tgz#2797dfc3126182e3a95e3dfbb2e893ddd7456154"
   dependencies:
@@ -5345,6 +5361,14 @@ range-parser@^1.0.3, range-parser@~1.2.0:
 raw-loader@^0.5.1:
   version "0.5.1"
   resolved "https://registry.yarnpkg.com/raw-loader/-/raw-loader-0.5.1.tgz#0c3d0beaed8a01c966d9787bf778281252a979aa"
+
+rc-animate@^2.4.0:
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/rc-animate/-/rc-animate-2.4.0.tgz#a51b47dadf8ad9af08cddfb5b0217bfa81aee803"
+  dependencies:
+    babel-runtime "6.x"
+    css-animation "1.x"
+    prop-types "15.x"
 
 rc-input-number@^3.6.0:
   version "3.6.0"
@@ -6323,9 +6347,9 @@ tdtool-less@^0.0.7:
     style-loader "^0.17.0"
     webpack "^2.4.1"
 
-tdtool-react@^0.1.0:
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/tdtool-react/-/tdtool-react-0.1.0.tgz#a6716278ee68de53bb184f75edf855f4bcf3b7f0"
+tdtool-react@^0.1.1:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/tdtool-react/-/tdtool-react-0.1.1.tgz#db4525469218f1cab1d611285b9b88de07564326"
   dependencies:
     babel-eslint "^7.2.3"
     babel-loader "^7.0.0"
