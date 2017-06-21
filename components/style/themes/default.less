@@ -1,4 +1,5 @@
 @import "../color/colors.less";
+@import "../../icon/style/index.less";
 
 @td-prefix                    : td;
 @icon-prefix                  : ~"@{td-prefix}icon";
@@ -21,6 +22,7 @@
 @col-prefix                   : ~"@{td-prefix}-col";
 @layout-prefix                : ~"@{td-prefix}-layout";
 @form-prefix                  : ~"@{td-prefix}-form";
+@time-picker-prefix           : ~"@{td-prefix}-time-picker";
 
 :export {
   prefix: @td-prefix;
@@ -44,6 +46,7 @@
   colPrefix: @col-prefix;
   layoutPrefix: @layout-prefix;
   formPrefix: @form-prefix;
+  timePickerPrefix: @time-picker-prefix;
 }
 
 // Global
@@ -83,6 +86,9 @@
 @primary-7: shade(@primary-5, 40%);
 @primary-8: shade(@primary-5, 60%);
 
+@item-hover-bg: @primary-4;
+@item-active-bg: @primary-6;
+
 //outline
 @outline-color          : @primary-color;
 @outline-blur-size      : 0;
@@ -108,12 +114,36 @@
 @ease-in-quint                : cubic-bezier(0.755, 0.05, 0.855, 0.06);
 @ease-in-out-quint            : cubic-bezier(0.86, 0, 0.07, 1);
 
+// z-index list
+@zindex-dialog-mask      : 1000;
+@zindex-dialog           : 1000;
+@zindex-message         : 1010;
+@zindex-popover         : 1030;
+@zindex-picker          : 1050;
+@zindex-dropdown        : 1050;
+@zindex-tooltip         : 1060;
+
+// Shadow
+@box-shadow-base        : @shadow-1-down;
+@shadow-1-up            : 0 -1px 6px @shadow-color;
+@shadow-1-down          : 0 1px 6px @shadow-color;
+@shadow-1-left          : -1px 0 6px @shadow-color;
+@shadow-1-right         : 1px 0 6px @shadow-color;
+@shadow-2               : 0 2px 8px @shadow-color;
+
 // Form
 // ---
 @label-required-color        : @highlight-color;
 @label-color                 : @text-color;
 @form-item-margin-bottom     : 24px;
 @form-item-trailing-colon    : true;
+
+// TimePicker
+// ---
+@time-picker-panel-column-width: 56px;
+@time-picker-panel-width: @time-picker-panel-column-width * 3;
+@time-picker-selected-bg: @primary-6;
+@time-picker-hover-bg: @primary-4;
 
 // grid
 @grid-columns                 : 24;
@@ -158,7 +188,7 @@
 @screen-lg-max          : (@screen-xl-min - 1);
 
 // Link
-@link-color                   : @primary-color;
+@link-color                   : @primary-5;
 @link-hover-color             : @primary-4;
 @link-active-color            : @primary-6;
 @link-decoration              : none;
@@ -224,7 +254,7 @@
 @rate-score-height              : 24px;
 
 //Pagination
-@pagination-item-color            : #2db7f5;
+@pagination-item-color            : @primary-5;
 @pagination-item-width            : 28px;
 @pagination-item-height           : 28px;
 @pagination-item-mini-width       : 20px;
