@@ -427,7 +427,7 @@ const KeyCode = {
   /**
    * WIN_IME
    */
-  WIN_IME: 229,
+  WIN_IME: 229
 };
 
 /*

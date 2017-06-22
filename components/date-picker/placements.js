@@ -14,29 +14,29 @@ const targetOffset = [0, 0];
 
 const placements = {
   bottomLeft: {
-    points: ['tl', 'tl'],
+    points: ['tl', 'bl'],
     overflow: autoAdjustOverflow,
-    offset: [0, -3],
+    offset: [0, 3],
     targetOffset
   },
   bottomRight: {
-    points: ['tr', 'tr'],
+    points: ['tr', 'br'],
+    overflow: autoAdjustOverflow,
+    offset: [0, 3],
+    targetOffset
+  },
+  topRight: {
+    points: ['br', 'tr'],
     overflow: autoAdjustOverflow,
     offset: [0, -3],
     targetOffset
   },
-  topRight: {
-    points: ['br', 'br'],
-    overflow: autoAdjustOverflow,
-    offset: [0, 3],
-    targetOffset
-  },
   topLeft: {
-    points: ['bl', 'bl'],
+    points: ['bl', 'tl'],
     overflow: autoAdjustOverflow,
-    offset: [0, 3],
+    offset: [0, -3],
     targetOffset
-  },
+  }
 };
 
 export default placements;

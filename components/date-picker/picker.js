@@ -12,6 +12,7 @@ import createChainedFunction from '../util/createChainedFunction';
 import KeyCode from '../util/keyCode';
 import Trigger from 'rc-trigger';
 import placements from './placements';
+import s from './style';
 
 function noop() {
 }
@@ -47,7 +48,7 @@ export default class Picker extends React.Component {
   };
 
   static defaultProps = {
-    prefixCls: 'rc-calendar-picker',
+    prefixCls: s.datePickerPrefix,
     style: {},
     align: {},
     placement: 'bottomLeft',
@@ -110,7 +111,7 @@ export default class Picker extends React.Component {
       onKeyDown: this.onCalendarKeyDown,
       onOk: createChainedFunction(calendarProps.onOk, this.onCalendarOk),
       onSelect: createChainedFunction(calendarProps.onSelect, this.onCalendarSelect),
-      onClear: createChainedFunction(calendarProps.onClear, this.onCalendarClear),
+      onClear: createChainedFunction(calendarProps.onClear, this.onCalendarClear)
     };
 
     return React.cloneElement(props.calendar, extraProps);
@@ -121,7 +122,7 @@ export default class Picker extends React.Component {
     if (this.state.open !== open) {
       if (!('open' in this.props)) {
         this.setState({
-          open,
+          open
         }, cb);
       }
       onOpenChange(open);
@@ -134,7 +135,7 @@ export default class Picker extends React.Component {
 
   focus = () => !this.state.open && ReactDOM.findDOMNode(this).focus();
 
-  focusCalendar = () => this.state.open && this.calendarInstance && this.calendarInstance.focus();
+  focusCalendar = () => this.state.open && this.calendarInstance && this.calendarInstance.focus && this.calendarInstance.focus();
 
   onCalendarKeyDown = evt => {
     if (evt.keyCode === KeyCode.ESC) {

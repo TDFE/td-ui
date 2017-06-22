@@ -1,0 +1,55 @@
+@import "../../style/themes/default.less";
+@import "../../input/style/index.less";
+
+.@{date-picker-prefix} {
+  position: relative;
+  display: inline-block;
+  outline: none;
+  font-size: @font-size-base;
+  transition: opacity .3s;
+
+  &-input {
+    cursor: pointer;
+  }
+
+  &-input:hover + &-icon:after {
+    color: @primary-4;
+  }
+
+  &-icon {
+    position: absolute;
+    user-select: none;
+    transition: all .3s;
+    width: @font-size-base;
+    height: @font-size-base;
+    line-height: @font-size-base;
+    right: 0;
+    color: rgba(0,0,0,.43);
+    top: 50%;
+    margin-top: -6px;
+
+    &:after {
+      content: @tdicon-calendar;
+      font-family: tdicon;
+      font-size: @font-size-base;
+      color: rgba(0,0,0,.43);
+      transition: all .3s;
+      display: inline-block;
+      line-height: 1;
+      vertical-align: bottom;
+    }
+  }
+
+  &-container {
+    position: absolute;
+    z-index: @zindex-popover;
+
+    &-calendar {
+      width: 264px;
+      height: 296px;
+      border-radius: @border-radius-base;
+      border: @border-color-base @border-style-base @border-width-base;
+      box-shadow: 0 1px 6px @shadow-color;
+    }
+  }
+}
