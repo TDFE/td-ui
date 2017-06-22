@@ -186,8 +186,16 @@ class Cascader extends Component {
     this.handleComponentUpdate(nextProps, false);
   }
 
+  componentWillUnmount() {
+    document.body.removeEventListener('click');
+  }
+
   componentDidMount () {
     this.handleComponentUpdate(this.props, true);
+    document.body.addEventListener('click', e => {
+      if (e.target && e.target.matches('li.td-cascader-menu-item')) return;
+      this.setState({menuOpen: false});
+    });
   }
 }
 
