@@ -11,13 +11,7 @@ import omit from 'lodash/omit';
 import PropTypes from 'prop-types';
 import Picker from './picker';
 import s from './style';
-
-const FULL_PICKER = 111111;
-const MINUTE_PICKER = 111110;
-const HOUR_PICKER = 111100;
-const DAY_PICKER = 111000;
-const MONTH_PICKER = 110000;
-const YEAR_PICKER = 100000;
+import { FULL_PICKER, MINUTE_PICKER, HOUR_PICKER, DAY_PICKER, MONTH_PICKER, YEAR_PICKER } from './constant';
 
 class Calendar extends React.Component {
   static propTypes = {
