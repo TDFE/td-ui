@@ -20,19 +20,15 @@ export default class Steps extends Component {
   renderHead = () => {
     const { prefixCls, stepNumber, current, icon } = this.props;
     if (icon) {
-      return String(icon) ? <span className={`tdicon tdicon-${icon}`}></span> : icon
+      return <span className="setting-icon">{String(icon) ? <span className={`tdicon tdicon-${icon}`}></span> : icon}</span>
     }
-    return stepNumber >= current ? <span className={`${prefixCls}-step-icon`}>{stepNumber + 1}</span> : <span className={`${prefixCls}-step-icon tdicon tdicon-search`}></span>
+    return stepNumber >= current ? <span className={`${prefixCls}-step-icon`}>{stepNumber + 1}</span> : <span className={`${prefixCls}-step-icon tdicon tdicon-right`}></span>
   }
 
   render() {
-    const { prefixCls, stepNumber, current, stepLength, title, desc, mode } = this.props;
+    const { prefixCls, stepNumber, current, title, desc, mode } = this.props;
     let style = {};
-    if (mode !== 'vertical') {
-      style = {
-        width: `${100 / stepLength}%`
-      }
-    }
+
     return (<div className={classnames(`${prefixCls}-step`, {
       [`${prefixCls}-step-finished`]: current > stepNumber,
       [`${prefixCls}-step-waiting`]: current < stepNumber,

@@ -2,6 +2,25 @@
 
 .@{steps-prefix} {
   &-mini{
-
+    display: flex;
+    .@{steps-prefix} {
+      &-step{
+        margin-right: 30px;
+        &-main{
+          display: inline-block;
+          vertical-align: top;
+          margin-left: 10px;
+        }
+        &-title{
+          padding-top: 3px;
+        }
+        &-icon{
+          width: @icon-min-height;
+          height: @icon-min-height;
+          border-radius: @icon-min-height;
+          line-height: @icon-min-height;
+        }
+      }
+    }
   }
 }
