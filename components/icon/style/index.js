@@ -5,7 +5,4 @@
  * @Last modified time: 2017-05-24 17:33:23
  */
 
-import s from '../../style/index.less';
-import './style.less';
-
-export default s;
+export { default } from './index.less';

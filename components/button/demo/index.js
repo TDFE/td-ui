@@ -5,24 +5,32 @@
  * @Last modified time: 2017-05-16 18:33:09
  */
 
-/* eslint-disable no-unused-vars */
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Row, Col } from '../../grid';
 
 const MOUNT_NODE = document.getElementById('app');
 
 let render = () => {
-  /* eslint-disable no-unused-vars */
   let Button = require('../index').default;
-
-  /* eslint-disable no-unused-vars */
+  const ButtonGroup = Button.Group;
   function Demo() {
     return (
       <div className="td">
-        <Button type="primary" icon="search" onClick={() => alert('这是个测试')}>搜索</Button>
-        <Button type="primary" style={{marginLeft: 10}} size="large" onClick={() => alert('这是个测试')}>确定</Button>
-        <Button style={{marginLeft: 10}} onClick={() => alert('这也是个测试')}>取消</Button>
-        <Button type="dashed" style={{marginLeft: 10}} size="small" onClick={() => alert('这也是个测试')}>取消</Button>
+        <Row>
+          <Col span={6}><Button type="noborder" icon="search" onClick={() => alert('这是个测试')}>搜索</Button></Col>
+          <Col span={6}><Button type="primary" size="large" onClick={() => alert('这是个测试')}>确定</Button></Col>
+          <Col span={6}><Button onClick={() => alert('这也是个测试')}>取消</Button></Col>
+          <Col span={6}><Button type="dashed" size="small" onClick={() => alert('这也是个测试')}>取消</Button></Col>
+        </Row>
+        <Row>
+          <Col span={12} offset={6}>
+            <ButtonGroup>
+              <Button style={{marginLeft: 10}} >Cancel</Button>
+              <Button type="primary">OK</Button>
+            </ButtonGroup>
+          </Col>
+        </Row>
       </div>
     );
   }

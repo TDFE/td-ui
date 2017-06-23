@@ -1,0 +1,45 @@
+@import "../../style/themes/default.less";
+
+.@{confirm-prefix} {
+    .@{dialog-prefix} {
+      &-body {
+        padding: 30px 40px;
+      }
+    }
+    .@{icon-prefix}{
+      font-size: 24px;
+      margin-right: 16px;
+      padding: 0 1px;
+      float: left;
+    }
+    &-confirm, &-warning{
+      .@{icon-prefix}{
+        color: @warning-color;
+      }
+    }
+    &-success{
+      .@{icon-prefix}{
+        color: @success-color;
+      }
+    }
+    &-error{
+      .@{icon-prefix}{
+        color: @error-color;
+      }
+    }
+    &-title{
+      color: rgba(0,0,0,.65);
+      font-weight: 700;
+      font-size: 14px;
+    }
+    &-content{
+      margin-left: 42px;
+      font-size: 12px;
+      color: rgba(0,0,0,.65);
+      margin-top: 8px;
+    }
+    &-btns{
+      text-align: right;
+      margin-top: 30px;
+    }
+}

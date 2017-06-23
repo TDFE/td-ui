@@ -1,0 +1,29 @@
+@import '../../style/themes/default.less';
+
+.@{message-prefix} {
+    font-size: 14px;
+    position: fixed;
+    z-index: 1010;
+    width: 100%;
+    top: 16px;
+    left: 0;
+    pointer-events: none;
+
+    &-notice {
+        padding: 8px;
+        text-align: center;
+        &:first-child {
+            margin-top: -8px;
+        }
+    }
+
+    &-notice-content {
+        padding: 8px 16px;
+        border-radius: @border-radius-base;
+        box-shadow: 0 2px 8px @shadow-color;
+        background: @component-background;
+        display: inline-block;
+        pointer-events: all;
+    }
+}
+

@@ -5,20 +5,17 @@
  * @Last modified time: 2017-05-15 18:54:44
  */
 
-import WebpackDevServer from 'webpack-dev-server';
 import { execSync } from 'child_process';
 import gulpLogger from 'gulp-logger';
 import filter from 'gulp-filter';
 import through2 from 'through2';
 import babel from 'gulp-babel';
-import webpack from 'webpack';
 import shell from 'shelljs';
 import merge2 from 'merge2';
 import gulp from 'gulp';
 import path from 'path';
 
 import transformLess from './utils/transformLess';
-import getConfig from './tdtool.config.comp'
 import logger from './utils/logger';
 
 function babelify(js, dest) {
@@ -84,7 +81,7 @@ function compile(dir, dest) {
       }
     }))
     .pipe(gulp.dest(dest));
-  const assets = gulp.src([`${dir}/**/*.@(png|svg)`])
+  const assets = gulp.src([`${dir}/**/*.@(png|svg|eot|svg|ttf|woff|woff2)`])
     .pipe(gulpLogger({
       beforeEach: 'Begin to compile ',
       colors: true
@@ -109,45 +106,4 @@ gulp.task('compile', () => {
     execSync('rimraf lib');
     return merge2(compile('components', 'lib'));
   }
-})
-
-gulp.task('component', () => {
-  const argv = require('yargs').parse(process.argv.slice(3));
-  if (argv._.length === 0) {
-    logger.fatal('component shoud not be empty.');
-  }
-  const component = argv._[0];
-  const config = getConfig(component);
-  config.output.publicPath = '/';
-  config.plugins.push(new webpack.HotModuleReplacementPlugin());
-  config.entry = [`webpack-dev-server/client?http://localhost:${argv.port || 8080}`, 'webpack/hot/dev-server', config.entry];
-  const rule = config.module.rules.find(x => x.loader === 'babel-loader');
-  if (rule && rule.query && rule.query.plugins) {
-    rule.query.plugins.push([
-      'react-transform', {
-        transforms: [
-          {
-            transform: 'react-transform-hmr',
-            imports: ['react'],
-            locals: ['module'],
-          }, {
-            transform: 'react-transform-catch-errors',
-            imports: ['react', 'redbox-react'],
-          },
-        ],
-      }
-    ]);
-  }
-  const compiler = webpack(config);
-  new WebpackDevServer(compiler, {
-    contentBase: path.resolve(process.cwd(), config.output.path),
-    historyApiFallback: true,
-    inline: true,
-    hot: true
-  }).listen(argv.port || 8080, e => {
-    if (e) {
-      logger.fatal(e);
-    }
-    logger.success(`Server listen to http://localhost:${argv.port || 8080}`)
-  });
-})
+});
