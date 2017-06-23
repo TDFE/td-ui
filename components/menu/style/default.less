@@ -1,0 +1,55 @@
+@import "../../style/themes/default.less";
+
+ul, li{
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.@{menu-prefix} {
+  color: rgba(0,0,0,.65);
+  &-item{
+    line-height: 42px;
+    height: 42px;
+    font-size: 12px;
+    padding: 0 16px;
+    position: relative;
+    &:hover, &-selected{
+      color: @primary-color;
+      a{
+        color: @primary-color;
+      }
+    }
+    a{
+      text-decoration: none;
+    }
+  }
+  &-item-group{
+    &-title{
+      color: rgba(0,0,0,.43);
+      font-size: 12px;
+      line-height: 1.5;
+      padding: 8px 16px;
+    }
+    .@{menu-prefix}-item{
+      padding-left: 24px;
+    }
+  }
+  &-submenu{
+    &-title{
+      padding: 0 16px;
+      height: 42px;
+      line-height: 42px;
+      position: relative;
+      cursor: pointer;
+      &:hover{
+        color: @primary-color;
+      }
+      .tdicon{
+        margin-right: 8px;
+      }
+    }
+    &-hidden{
+      display: none;
+    }
+  }
+}

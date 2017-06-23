@@ -20,3 +20,13 @@ if (ENV !== 'production' &&
 export { default as Button } from './button';
 
 export { default as Input } from './input';
+
+export { default as Icon } from './icon';
+
+export { default as Loading } from './loading';
+
+export { default as Dialog } from './dialog';
+
+export { default as Message } from './message';
+
+export { default as Breadcrumb } from './breadcrumb';

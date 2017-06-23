@@ -1,5 +1,8 @@
 @import '../../style/themes/default.less';
 
+@color: #108ee9;
+@fontSize: 14px;
+
 .@{loading-prefix} {
     width: 100%;
     height: 100%;
@@ -9,6 +12,87 @@
     position: fixed;
     text-align: center;
     vertical-align: middle;
+
+    &-container {
+        color: @color;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        width: 100px;
+        height: 50px;
+
+        &-graph {
+            position: relative;
+            margin: auto 35px;
+            transform: rotate(45deg);
+            animation: loadingRotate 1.2s infinite linear;
+            animation-fill-mode: both;
+            width: 20px;
+            height: 20px;
+            & > div {
+                width: 9px;
+                height: 9px;
+                border-radius: 100%;
+                background-color: @color;
+                position: absolute;
+                animation: loadingdelay 1.5s infinite linear alternate;
+                transform: scale(0.75);
+                opacity: 0.3;
+                transform-origin: 50% 50%;
+            }
+            .loading-1 {
+                left: 0;
+                top: 0;
+            }
+            .loading-2 {
+                right: 0;
+                top: 0;
+                animation-delay: 0.4s;
+            }
+            .loading-3 {
+                bottom: 0;
+                left: 0;
+                animation-delay: 0.8s;
+            }
+            .loading-4 {
+                right: 0;
+                bottom: 0;
+                animation-delay: 1.2s;
+            }
+            @keyframes loadingdelay {
+                to {
+                    opacity: 1
+                }
+            }
+            @keyframes loadingRotate {
+                to {
+                    transform: rotate(405deg);
+                }
+            }
+        }
+
+        &-text {
+            font-size: 12px;
+            margin: 5px 25px;
+        }
+
+        .loading-small {
+            width: 14px;
+            height: 14px;
+            & > div {
+                width: 6px;
+                height: 6px;
+            }
+        }
+        .loading-large {
+            width: 32px;
+            height: 32px;
+            & > div {
+                width: 14px;
+                height: 14px;
+            }
+        }
+    }
 }
 
 .loading-children {

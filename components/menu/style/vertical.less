@@ -1,0 +1,48 @@
+@import "../../style/themes/default.less";
+
+.@{menu-prefix}-vertical {
+  .@{menu-prefix}{
+    &-item{
+      &-selected{
+        background-color: #ecf6fd;
+      }
+    }
+    &-submenu{
+      position: relative;
+      &-title{
+        &:after{
+          content: "\e901";
+          font-family: 'tdicon';
+          position: absolute;
+          right: 16px;
+        }
+      }
+      .@{menu-prefix}{
+        box-shadow: 0 1px 6px rgba(0,0,0,.2);
+        background: #fff;
+        border-radius: @border-radius-base;
+        left: 100%;
+        top: 0;
+        margin-left: 5px;
+        position: absolute;
+        min-width: 100%;
+        &:after{
+          content: "";
+          width: 5px;
+          height: 42px;
+          position: absolute;
+          left: -5px;
+          top: 0;
+        }
+        .@{menu-prefix}-item-selected{
+          background-color: #ecf6fd;
+        }
+      }
+    }
+    &-submenu-child-selected{
+      > .@{menu-prefix}-submenu-title{
+        color: @primary-color;
+      }
+    }
+  }
+}
