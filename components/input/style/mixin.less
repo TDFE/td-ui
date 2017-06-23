@@ -17,10 +17,10 @@
 		.hover(@input-border-color);
 	}
 }
-.active(@color: @outline-color) {
-  border-color: tint(@color, 20%);
+.active() {
+  border-color: @blue-5;
   outline: 0;
-  box-shadow: 0 0 @outline-blur-size @outline-width fade(@color, 20%);
+  box-shadow:0;
 }
 .disabled() {
   background-color: @input-disabled-bg;
@@ -28,17 +28,17 @@
   cursor: not-allowed;
   color: @disabled-color;
   &:hover {
-    .hover(@input-border-color);
+    border-color:@input-border-color;
   }
 }
 .hover(@color: @input-hover-border-color) {
-	border-color: tint(@color, 20%);
+	border-color:  @blue-4;
 }
 .input(){
 	position: relative;
 	display: inline-block;
-	padding:@input-padding-vertical-base @input-padding-horizontal;
-	width: 100%;
+	padding:0 @input-padding-horizontal;
+	width: 280px;
 	height: @input-height-base;
 	cursor: text;
 	font-size: @font-size-base;
@@ -66,6 +66,13 @@
 	&[disabled] {
 		.disabled();
 	}
+	&:active{
+		// border-color: @blue-9;
+		.active();
+	}
+	&:focus{
+		.active();
+	}
 }
 
 
@@ -79,7 +86,7 @@
 	width: 100%;
 	&-addon{
 		position: relative;
-		padding:@input-padding-vertical-base @input-padding-horizontal;
+		padding:0 @input-padding-horizontal;
 		font-size: @font-size-base;
 		font-weight: normal;
 		line-height: 2;
@@ -94,7 +101,6 @@
 	}
 	.@{inputClass}{
 		float: left;
-		width: 100%;
 		margin-bottom: 0;
 	}
 
