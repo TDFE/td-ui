@@ -24,7 +24,7 @@ export default class Progress extends Component {
     // 普通的class
     className: PropTypes.string,
     // success,exception,active,normal(可不传)
-    status: PropTypes.oneOf(['success', 'exception', 'active'])
+    status: PropTypes.oneOf(['success', 'exception'])
   };
   static defaultProps = {
     prefixCls: s.progressPrefix,
@@ -33,26 +33,40 @@ export default class Progress extends Component {
   };
   render () {
     const {prefixCls, type, status, width, percent, className, ...restProps} = this.props;
-    let progressStatus = parseInt(percent.toString(), 10) >= 100 && !(status in this.props) ? 'success' : (status || 'normal');
     let progressInfo;
     let progress;
     let text;
-    let currentWidth = width || 280;
+    let progressStatus = status || 'normal';
+    let currentPercent = percent;
+    if (currentPercent >= 100 && progressStatus !== 'exception') {
+      progressStatus = 'success';
+    } else if (currentPercent < 0) {
+      currentPercent = 0;
+    }
+    let currentWidth = 280;
+    if (width) {
+      if (width >= 180) {
+        currentWidth = width;
+      } else {
+        currentWidth = 180;
+      }
+    }
     switch (progressStatus) {
       case 'success':
-        text = <Icon type="check-circle" className={`${prefixCls}-icon`}></Icon>;
+        text = <Icon type="check-circle"></Icon>;
         if (type === 'circle') {
-          text = <Icon type="check" className={`${prefixCls}-circle-icon`}></Icon>;
+          text = <Icon type="check"></Icon>;
         }
+        currentPercent = 100;
         break;
       case 'exception':
-        text = <Icon type="cross-circle" className={`${prefixCls}-icon`}></Icon>
+        text = <Icon type="cross-circle"></Icon>
         if (type === 'circle') {
-          text = <Icon type="cross" className={`${prefixCls}-circle-icon`}></Icon>
+          text = <Icon type="cross"></Icon>
         }
         break;
       default:
-        text = `${percent}%`;
+        text = `${currentPercent}%`;
     }
     progressInfo = <span className={`${prefixCls}-text`}>{text}</span>;
     if (type === 'line') {
@@ -61,7 +75,7 @@ export default class Progress extends Component {
         height: 8
       };
       const lineStyle = {
-        width: `${percent}%`,
+        width: `${currentPercent}%`,
         height: 8
       };
       progress = (
@@ -79,7 +93,7 @@ export default class Progress extends Component {
         height: 14
       };
       const stripeStyle = {
-        width: `${percent}%`,
+        width: `${currentPercent}%`,
         height: 14
       };
       progress = (
@@ -92,8 +106,16 @@ export default class Progress extends Component {
         </div>
       );
     } else if (type === 'circle') {
-      const circleSize = width || 120;
-      const rotateDeg = (18 / 5) * percent;
+      let circleSize = 120;
+      if (width) {
+        if (width >= 80) {
+          circleSize = width;
+        } else {
+          circleSize = 80;
+        }
+      }
+      let halfCircleSize = circleSize / 2;
+      let rotateDeg = (18 / 5) * currentPercent;
       let outerCircleStyle = {
         width: circleSize,
         height: circleSize
@@ -104,23 +126,30 @@ export default class Progress extends Component {
       };
       let percentCircleStyle = {
         width: circleSize,
-        height: circleSize
+        height: circleSize,
+        clip: `rect(0,${circleSize}px,${circleSize}px,${halfCircleSize}px)`
       };
       let leftCircleStyle = {
         width: circleSize,
         height: circleSize,
-        transform: `rotate(${rotateDeg}deg)`
+        transform: `rotate(${rotateDeg}deg)`,
+        clip: `rect(0,${halfCircleSize}px,${circleSize}px,0)`
       };
       let rightCircleStyle = {
         width: circleSize,
-        height: circleSize
+        height: circleSize,
+        clip: `rect(0,${circleSize}px,${circleSize}px,${halfCircleSize}px)`
       };
-      if (percent > 50) {
-        rightCircleStyle = {
-          width: circleSize,
-          height: circleSize,
+      let textCircleStyle = {
+        width: circleSize,
+        height: circleSize,
+        lineHeight: `${circleSize}px`,
+        fontSize: circleSize * 0.16 + 5
+      };
+      if (currentPercent > 50) {
+        rightCircleStyle = Object.assign(rightCircleStyle, {
           display: 'block'
-        };
+        });
         percentCircleStyle = Object.assign(percentCircleStyle, {
           clip: 'rect(auto,auto,auto,auto)'
         });
@@ -134,7 +163,7 @@ export default class Progress extends Component {
             <div className={`${prefixCls}-circle-right`} style={rightCircleStyle}></div>
             </div>
           </div>
-          <div className={`${prefixCls}-circle-text`}>{text}</div>
+          <div className={`${prefixCls}-circle-text`} style={textCircleStyle}>{text}</div>
         </div>
         </div>
       );
