@@ -4,5 +4,5 @@
  * @Last modified by:   hyx
  * @Last modified time: 2017-06-20
  */
-import Progress from './progress';
-export default Progress;
+import s from './index.less';
+export default s;
