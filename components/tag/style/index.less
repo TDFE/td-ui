@@ -75,7 +75,7 @@
       background-color: @primary-7;
     }
   }
-  @colors: pink, red, orange, yellow, cyan, green, blue, purple;
+  @colors: pink, red, yellow, cyan, green, blue, purple;
   .make-color-classes(@i: length(@colors)) when (@i > 0) {
     .make-color-classes(@i - 1);
     @color: extract(@colors, @i);
