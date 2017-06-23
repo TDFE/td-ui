@@ -1,6 +1,5 @@
-/**
- * @Author: Zhengfeng.Yao <yzf>
- * @Date:   2017-06-01 13:57:08
- * @Last modified by:   yzf
- * @Last modified time: 2017-06-01 13:57:10
- */
+import Tree from './tree';
+import TreeNode from './treeNode';
+Tree.TreeNode = TreeNode;
+export default Tree;
+export { TreeNode };

@@ -1,0 +1,136 @@
+// Base styles of timeline
+// -----------------------------------------------------------
+.button-size(@padding; @font-size; @border-radius) {
+  padding: @padding;
+  font-size: @font-size;
+  border-radius: @border-radius;
+}
+
+.button-color(@color; @background; @border) {
+  color: @color;
+  background-color: @background;
+  border-color: @border;
+
+  > a:only-child {
+    color: currentColor;
+    &:after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      background: transparent;
+    }
+  }
+}
+
+.button-disabled() {
+  &.disabled,
+  &[disabled] {
+    &,
+    &:hover,
+    &:focus,
+    &:active,
+    &.active {
+      .button-color(@btn-disable-color; @btn-disable-bg; @btn-disable-border);
+    }
+  }
+}
+
+.button-variant-primary(@color; @background; @border) {
+  .button-color(@color; @background; @border);
+  &:hover,
+  &:focus {
+    .button-color(@color; ~`colorPalette("@{background}", 5)`; ~`colorPalette("@{border}", 5)`);
+  }
+
+  &:active,
+  &.active {
+    .button-color(@color; ~`colorPalette("@{background}", 7)`; ~`colorPalette("@{border}", 7)`);
+  }
+
+  .button-disabled();
+}
+
+.button-variant-other(@color; @background; @border) {
+  .button-color(@color; @background; @border);
+  &:hover,
+  &:focus {
+    .button-color(@primary-color; @background; @btn-primary-border-color);
+  }
+
+  &:active,
+  &.active {
+    .button-color(~`colorPalette("@{primary-color}", 7)`; @background; ~`colorPalette("@{btn-primary-border-color}", 7)`);
+  }
+
+  .button-disabled();
+}
+
+.btn() {
+  display: inline-block;
+  margin-bottom: 0;
+  font-weight: @btn-font-weight;
+  text-align: center;
+  touch-action: manipulation;
+  cursor: pointer;
+  background-image: none;
+  border: @btn-border-width-base @border-style-base transparent;
+  white-space: nowrap;
+  line-height: @line-height-base;
+  user-select: none;
+  transition: all .3s @ease-in-out;
+  position: relative;
+  .button-size(@btn-padding-base; @btn-font-size-base; @btn-border-radius-base);
+
+  &,
+  &:active,
+  &:focus {
+    outline: 0;
+  }
+
+  &:not([disabled]):hover {
+    text-decoration: none;
+  }
+
+  &:not([disabled]):active {
+    outline: 0;
+    transition: none;
+  }
+
+  &.disabled,
+  &[disabled] {
+    cursor: not-allowed;
+    > * {
+      pointer-events: none;
+    }
+  }
+
+  &-lg {
+    .button-size(@btn-padding-lg; @btn-font-size-lg; @btn-border-radius-base);
+  }
+
+  &-sm {
+    .button-size(@btn-padding-sm; @btn-font-size-sm; @btn-border-radius-base);
+  }
+}
+
+.btn-primary() {
+  .button-variant-primary(@btn-primary-color; @btn-primary-bg; @btn-primary-border-color);
+}
+
+.btn-default() {
+  .button-variant-other(@btn-default-color; @btn-default-bg; @btn-default-border);
+  &:hover,
+  &:focus,
+  &:active,
+  &.active {
+    background: #fff;
+  }
+}
+
+.btn-dashed() {
+  .btn-default();
+  border-style: dashed;
+}

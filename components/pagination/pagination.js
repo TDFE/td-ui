@@ -176,6 +176,7 @@ class Pagination extends Component {
         <a href='javascript:void(0);'></a>
       </div>
     )
+    /*
     if (simple) {
       return (
         <div className={classnames} style={st}>
@@ -188,7 +189,7 @@ class Pagination extends Component {
           {next}
         </div>
       )
-    }
+    } */
     if (allPages <= showNum + pageBufferSize) {
       for (let i = 1; i <= allPages; i++) {
         pageList.push(

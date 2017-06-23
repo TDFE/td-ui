@@ -22,7 +22,12 @@ let render = () => {
     return (
       <div className="td">
       正常demo
-        <InputNumber step={0.011} min={1} max={123} defaultValue={3} size="large" placeholder="dsds" />
+        <InputNumber step={2} min={1} max={10} size="large" placeholder="dsds" />
+        <InputNumber step={3} min={1} max={10} defaultValue={3} size="small" placeholder="dsds" />
+        <InputNumber step={3} min={1} max={10} defaultValue={3} btnType="crosswise" disabled/>
+        <InputNumber step={3} min={1} max={10} defaultValue={3} btnType="crosswise"/>
+        <InputNumber step={1} min={1} max={10} defaultValue={3} disabled/>
+        
       </div>
     );
   }
