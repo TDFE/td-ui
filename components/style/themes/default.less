@@ -2,6 +2,7 @@
 @import "../../icon/style/index.less";
 
 @td-prefix                    : td;
+@switch-prefix                : ~"@{td-prefix}-switch";
 @icon-prefix                  : ~"@{td-prefix}icon";
 @btn-prefix                   : ~"@{td-prefix}-btn";
 @input-prefix                 : ~"@{td-prefix}-input";
@@ -28,6 +29,7 @@
 @date-picker-prefix           : ~"@{td-prefix}-date-picker";
 
 :export {
+  switchPrefix: @switch-prefix;
   prefix: @td-prefix;
   btnPrefix: @btn-prefix;
   inputPrefix: @input-prefix;
