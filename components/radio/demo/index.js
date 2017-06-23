@@ -11,6 +11,7 @@ let render = () => {
   /* eslint-disable no-unused-vars */
   let Radio = require('../index').default;
   let RadioGroup = Radio.RadioGroup;
+  let RadioButton = Radio.RadioButton;
 
   function onChange(e) {
     console.log('checked radio value:' + e.target.value);
@@ -73,6 +74,42 @@ let render = () => {
         </div>
         <div>
           <RadioGroup value="Mac" options={radioOptions2} onChange={onChange}/>
+        </div>
+
+        <RadioGroup value={11} defaultValue={2} direction="vertical" onChange={onChange}>
+          <RadioButton value={11}>radio11</RadioButton>
+          <RadioButton value={22}>radio22</RadioButton>
+          <RadioButton value={33}>radio33</RadioButton>
+        </RadioGroup>
+
+        <div>
+          <RadioGroup value={11} defaultValue={2} disabled direction="vertical" onChange={onChange}>
+            <RadioButton value={11}>radio11</RadioButton>
+            <RadioButton value={22}>radio22</RadioButton>
+            <RadioButton value={33}>radio33</RadioButton>
+          </RadioGroup>
+        </div>
+
+        <div>
+          <RadioGroup defaultValue={22} size="large" onChange={onChange}>
+            <RadioButton value={11}>radio11</RadioButton>
+            <RadioButton disabled value={22}>radio22</RadioButton>
+            <RadioButton value={33}>radio33</RadioButton>
+          </RadioGroup>
+        </div>
+        <div>
+          <RadioGroup defaultValue={22} onChange={onChange}>
+            <RadioButton value={11}>radio11</RadioButton>
+            <RadioButton value={22}>radio22</RadioButton>
+            <RadioButton value={33}>radio33</RadioButton>
+          </RadioGroup>
+        </div>
+        <div>
+          <RadioGroup defaultValue={22}  size="small" onChange={onChange}>
+            <RadioButton value={11}>radio11</RadioButton>
+            <RadioButton disabled value={22}>radio22</RadioButton>
+            <RadioButton value={33}>radio33</RadioButton>
+          </RadioGroup>
         </div>
       </div>
     );
