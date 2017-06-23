@@ -5,7 +5,7 @@
 .handler-disabled(){
 	opacity: 0.72;
 	color: #ccc !important;
-	cursor: not-allowed;
+	cursor: not-allowed !important;
 }
 .@{input-number-prefix} {
 	margin:0;
@@ -72,7 +72,7 @@
 			}
 		}
 		&:hover{
-			height: 60%!important;
+			height: 60%;
 		}
 	}
 	&-handler-wrap &-handler-down{
@@ -88,7 +88,8 @@
 			}
 		}
 		&:hover{
-			height: 60%!important;
+			height: 60%;
+			margin-top:-10%;
 		}
 	}
 	&-handler-wrap &-handler-up-inner,&-handler-wrap &-handler-down-inner{
@@ -112,17 +113,31 @@
 			width: 26px;
 			height: 99%;
 			display: inline-block;
-			border-left: @border-width-base @border-style-base @border-color-base
+			border-left: @border-width-base @border-style-base @border-color-base;
+			&-down-disabled,
+			&-up-disabled{
+				background: #ededed;
+				&:hover{
+					height: 100% !important;
+				}
+			}
 		}
 	}
 	&-handler-down-disabled,
 	&-handler-up-disabled{
 		background: #ededed;
+		&:hover{
+			background: #ededed;
+			height: 50% !important;
+			margin-top: 0 !important;
+		}
 	}
+
 	&-handler-down-disabled,
 	&-handler-up-disabled,
 	&-disabled{
 		.handler-disabled();
+
 	}
 	&:hover {
 		.hover();
@@ -136,7 +151,7 @@
 		.disabled();
 	}
 	&-input{
-		width: 90%;
+		width: 50%;
 		height: @input-height-base - 2px;
 		text-align: left;
 		outline: 0;
@@ -149,6 +164,7 @@
 		.placeholder();
 		&[disabled]{
 			.disabled();
+			background: none;
 		}
 	}
 	&-disabled{
@@ -158,7 +174,8 @@
 			background-color: @disabled-bg;
 		}
 		.@{input-number-prefix}-handler-wrap, .@{input-number-prefix}-handler-wrap-cw{
-			display: none;
+			border-color: @border-color-base !important;
+
 		}
 		.@{input-number-prefix}-handler {
 			.handler-disabled();
