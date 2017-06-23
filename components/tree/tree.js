@@ -10,11 +10,6 @@ const prefixCls = s.treePrefix;
 
 function noop() {
 }
-/*
-expandedKeys: 展开指定的树节点
-autoExpandParent: 是否自动展开父节点
-树节点可以有很多，但在设置checkable时，将会花费更多的计算时间，因此我们缓存了一些计算结果（this.treeNodesStates）来复用，避免多次重复计算，以此提高性能。
-*/
 
 class Tree extends Component {
   static defaultProps = {
