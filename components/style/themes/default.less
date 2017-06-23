@@ -1,6 +1,7 @@
 @import "../color/colors.less";
 
 @td-prefix                    : td;
+@switch-prefix                : ~"@{td-prefix}-switch";
 @icon-prefix                  : ~"@{td-prefix}icon";
 @btn-prefix                   : ~"@{td-prefix}-btn";
 @input-prefix                 : ~"@{td-prefix}-input";
@@ -20,6 +21,7 @@
 @layout-prefix                : ~"@{td-prefix}-layout";
 
 :export {
+  switchPrefix: @switch-prefix;
   prefix: @td-prefix;
   btnPrefix: @btn-prefix;
   inputPrefix: @input-prefix;
