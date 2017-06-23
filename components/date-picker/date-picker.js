@@ -11,7 +11,17 @@ import omit from 'lodash/omit';
 import PropTypes from 'prop-types';
 import Picker from './picker';
 import s from './style';
-import { FULL_PICKER, MINUTE_PICKER, HOUR_PICKER, DAY_PICKER, MONTH_PICKER, YEAR_PICKER } from './constant';
+import {
+  FULL_PICKER,
+  MINUTE_PICKER,
+  HOUR_PICKER,
+  DAY_PICKER,
+  MONTH_PICKER,
+  YEAR_PICKER,
+  YEAR,
+  MONTH,
+  DAY
+} from './constant';
 
 class Calendar extends React.Component {
   static propTypes = {
@@ -30,11 +40,9 @@ class Calendar extends React.Component {
   constructor(props) {
     super(props);
     const calendarType = this.getCalendarType();
-    let currentSelectPanel = calendarType >= HOUR_PICKER ? 'time' : (
-      calendarType === DAY_PICKER ? 'day' : (calendarType === MONTH_PICKER ? 'month' : 'year')
-    );
+    let selectingType = calendarType >= DAY_PICKER ? DAY : (calendarType === MONTH_PICKER ? MONTH : YEAR);
     this.state = {
-      currentSelectPanel
+      selectingType
     };
   }
 
@@ -82,11 +90,30 @@ class Calendar extends React.Component {
 
   onClear = () => {};
 
+  renderHeader = () => {
+    const { prefixCls } = this.props;
+    return (
+      <div className={`${prefixCls}-header`}></div>
+    );
+  };
+
+  renderTable = () => {};
+
+  renderFooter = () => {};
+
   render() {
     const { prefixCls } = this.props;
     return (
       <div className={prefixCls}>
-        <div className={`${prefixCls}-calendar`}></div>
+        {
+          this.renderHeader()
+        }
+        {
+          this.renderTable()
+        }
+        {
+          this.renderFooter()
+        }
       </div>
     )
   }
@@ -121,7 +148,7 @@ export default class DatePicker extends React.Component {
     const props = omit(this.props, ['onChange']);
     const { prefixCls } = props;
     const calendar = (
-      <Calendar prefixCls={`${prefixCls}-container`}/>
+      <Calendar prefixCls={`${prefixCls}-calendar`}/>
     );
     const input = ({ value: inputValue }) => (
       <div>
@@ -138,6 +165,8 @@ export default class DatePicker extends React.Component {
     return (
       <span className={prefixCls}>
         <Picker
+          transitionName="slide-up"
+          prefixCls={`${prefixCls}-container`}
           calendar={calendar}
           >
           {input}

@@ -1,4 +1,5 @@
 @import "../../style/themes/default.less";
+@import "../../style/mixins/index";
 @import "../../input/style/index.less";
 
 .@{date-picker-prefix} {
@@ -42,14 +43,45 @@
 
   &-container {
     position: absolute;
-    z-index: @zindex-popover;
+    z-index: @zindex-picker;
 
-    &-calendar {
-      width: 264px;
-      height: 296px;
-      border-radius: @border-radius-base;
-      border: @border-color-base @border-style-base @border-width-base;
-      box-shadow: 0 1px 6px @shadow-color;
+    &.slide-up-enter.slide-up-enter-active&-placement-topLeft,
+    &.slide-up-enter.slide-up-enter-active&-placement-topRight,
+    &.slide-up-appear.slide-up-appear-active&-placement-topLeft,
+    &.slide-up-appear.slide-up-appear-active&-placement-topRight {
+      animation-name: tdSlideDownIn;
+    }
+
+    &.slide-up-enter.slide-up-enter-active&-placement-bottomLeft,
+    &.slide-up-enter.slide-up-enter-active&-placement-bottomRight,
+    &.slide-up-appear.slide-up-appear-active&-placement-bottomLeft,
+    &.slide-up-appear.slide-up-appear-active&-placement-bottomRight {
+      animation-name: tdSlideUpIn;
+    }
+
+    &.slide-up-leave.slide-up-leave-active&-placement-topLeft,
+    &.slide-up-leave.slide-up-leave-active&-placement-topRight {
+      animation-name: tdSlideDownOut;
+    }
+
+    &.slide-up-leave.slide-up-leave-active&-placement-bottomLeft,
+    &.slide-up-leave.slide-up-leave-active&-placement-bottomRight {
+      animation-name: tdSlideUpOut;
+    }
+  }
+
+  &-calendar {
+    position: relative;
+    width: @date-picker-panel-width;
+    height: @date-picker-panel-height;
+    border-radius: @border-radius-base;
+    border: @border-color-base @border-style-base @border-width-base;
+    box-shadow: 0 1px 6px @shadow-color;
+    padding: @date-picker-gap-vertial @date-picker-gap-horizontal;
+
+    &-header {
+      height: @date-picker-cell-size;
+      line-height: @date-picker-cell-size;
     }
   }
 }

@@ -11,3 +11,7 @@ export const HOUR_PICKER = 111100;
 export const DAY_PICKER = 111000;
 export const MONTH_PICKER = 110000;
 export const YEAR_PICKER = 100000;
+export const YEAR = 'year';
+export const MONTH = 'month';
+export const DAY = 'day';
+export const TIME = 'time';
