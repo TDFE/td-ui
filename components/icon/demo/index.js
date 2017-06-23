@@ -5,17 +5,14 @@
  * @Last modified time: 2017-05-16 18:33:09
  */
 
-/* eslint-disable no-unused-vars */
 import React from 'react';
 import ReactDOM from 'react-dom';
 
 const MOUNT_NODE = document.getElementById('app');
 
 let render = () => {
-  /* eslint-disable no-unused-vars */
   let Icon = require('../index').default;
 
-  /* eslint-disable no-unused-vars */
   function Demo() {
     return (
       <div className="td">

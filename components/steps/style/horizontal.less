@@ -1,0 +1,54 @@
+@import "../../style/themes/default.less";
+
+.@{steps-prefix} {
+  &-horizontal{
+    display: flex;
+    .@{steps-prefix} {
+      &-step{
+        flex: 1;
+        &:last-child{
+          flex: initial;
+        }
+        &-line{
+          width: 100%;
+          padding-left: 24px;
+          top: 11px;
+          i{
+            height: 2px ;
+            &:after{
+              height: 2px;
+              width: 0%;
+            }
+          }
+        }
+        &-finished{
+          .@{steps-prefix}{
+            &-step{
+              &-line{
+                i{
+                  &:after{
+                    width: 100%;
+                  }
+                }
+              }
+            }
+          }
+        }
+        &-progress{
+          .@{steps-prefix}{
+            &-step{
+              &-line{
+                i{
+                  &:after{
+                    width: 50%;
+                  }
+                }
+              }
+            }
+          }
+        }
+
+      }
+    }
+  }
+}

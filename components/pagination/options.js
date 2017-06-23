@@ -22,7 +22,7 @@ class Options extends Component {
       <div className={prefixCls}>
         <select value={value} onChange={this.onChange} ref='select'>
           {
-            pageSizeOptions.map((item, index) => <option value={item} key={index}>{item}</option>)
+            pageSizeOptions.map((item, index) => <option value={item} key={index}>{item}条／页</option>)
           }
         </select>
       </div>

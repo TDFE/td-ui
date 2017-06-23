@@ -26,16 +26,17 @@ class QuickJumper extends Component {
     const keyCode = e.keyCode;
     if (isNaN(value)) {
       value = current;
+    } else if (value > allPages) {
+      value = allPages;
     }
     if (value === '') {
       return;
     }
     if (keyCode === 13) {
       value = parseInt(value);
+      this.setState({value});
       if (value !== current) {
-        this.props.onChange(value > allPages ? allPages : value);
-      } else {
-        this.setState({value});
+        this.props.onChange(value);
       }
     }
   }
