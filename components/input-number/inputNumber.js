@@ -43,6 +43,7 @@
  			focused:props.focused,
  			inputValue:props.defaultValue
  		};
+ 		console.log(this.state);
  	}
  	onFocus() {
  		this.setState({focused:true});
@@ -98,16 +99,19 @@
  	}
  	renderInput(){
  		const props=assign({},this.props);
- 		const otherProps=omit(this.props,['prefixCls']);
+ 		const otherProps=omit(this.props,['prefixCls','value','btnType']);
  		const prefixCls = props.prefixCls;
  		if(!props.type){
  			return props.children;
  		}
  		const editable = !props.readOnly && !props.disabled;
+ 		// console.log(props,otherProps);
 		if('value' in props){
 			otherProps.value = props.value;
 			delete otherProps.defaultValue;
 		}
+ 		// console.log(props,otherProps);
+
 		let inputDisplayValue;
 		if (this.state.focused) {
 			inputDisplayValue = this.state.inputValue;
@@ -146,20 +150,19 @@
 		});
 		let upDisabledClass='',downDisabledClass='';
 		const { value } = this.state;
-		if (value) {
 			if (!isNaN(value)) {
 				const val = Number(value);
-				if (val >= props.max||(val+props.step)>props.max) {
+				if ((val >= props.max||(val+props.step)>props.max)||props.disabled) {
 					upDisabledClass = `${prefixCls}-handler-up-disabled`;
 				}
-				if (val <= props.min||(val-props.step)<props.min) {
+				if (val <= props.min||(val-props.step)<props.min||props.disabled) {
 					downDisabledClass = `${prefixCls}-handler-down-disabled`;
 				}
 			} else {
 				upDisabledClass = `${prefixCls}-handler-up-disabled`;
 				downDisabledClass = `${prefixCls}-handler-down-disabled`;
 			}
-		}
+		
 		const isUpDisabled=!!upDisabledClass || disabled ;
 		const isDownDisabled=!!downDisabledClass || disabled ;
 	    //控制点击事件

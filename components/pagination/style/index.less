@@ -69,6 +69,7 @@
   }
   &-disabled {
     cursor: not-allowed;
+    background-color: @disabled-bg;
     &:hover {
       border-color: #d9d9d9;
       &:after{
@@ -121,6 +122,10 @@
       }
     }
   }
+  &-options {
+    float: left;
+    margin-right: 8px;
+  }
   &-quick-jumper {
     float: left;
     input {
@@ -157,7 +162,14 @@
     border: 0;
     margin-right: 0;
   }
+  .@{prefixCls}-item-active {
+    a {
+      background-color: #fff;
+      color: @pagination-item-color;
+    }
+  }
   .@{prefixCls}-prev, .@{prefixCls}-next {
+    background-color: #fff;
     &:after {
       width: @pagination-item-mini-width;
       height: @pagination-item-mini-height;
@@ -170,6 +182,11 @@
       width: @pagination-item-mini-width;
       height: @pagination-item-mini-height;
       line-height: @pagination-item-mini-height;
+    }
+  }
+  .@{prefixCls}-quick-jumper {
+    input {
+      height: @pagination-item-mini-height;
     }
   }
 }

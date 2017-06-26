@@ -30,7 +30,8 @@ export default class Input extends Component {
 	static defaultProps = {
 		disabled: false,
 		prefixCls: s.inputPrefix,
-		type: 'text'
+		type: 'text',
+		placeholder:'请输入内容',
 	};
 
 	static propTypes = {

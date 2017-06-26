@@ -1,0 +1,49 @@
+@import "../../style/themes/default.less";
+
+.@{tabs-prefix} {
+  font-size: @font-size-base;
+  color: @text-color;
+  width: 100%;
+
+  box-sizing: border-box;
+  position: relative;
+  overflow: hidden;
+
+  .tabsBars{
+    border-bottom: 1px solid #d9d9d9;
+    margin-bottom: 16px;
+    outline: none;
+    height: 30px;
+    span{
+      border: 1px solid @border-color-base;
+      display: inline-block;
+      float: left;
+      padding: 5px 16px 4px;
+      border-radius: 4px 4px 0 0;
+      margin-right: 2px;
+      cursor: pointer;
+      border-bottom: 0;
+      background-color: #f9f9f9;
+    }
+    .active{
+      color: @primary-color;
+      border-bottom: 0;
+      background-color: #fff;
+      padding-bottom: 5px;
+    }
+    //.active:after{
+    //  content: '';
+    //  display: block;
+    //  height: 1px;
+    //}
+  }
+
+  .tabsContent{
+    //border: 1px solid @border-color-base;
+  }
+
+  .tabContentHidden{
+    display: none;
+  }
+
+}
