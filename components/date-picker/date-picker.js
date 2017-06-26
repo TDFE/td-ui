@@ -9,7 +9,11 @@ import React from 'react';
 import warning from 'warning';
 import omit from 'lodash/omit';
 import PropTypes from 'prop-types';
+import moment from 'moment';
 import Picker from './picker';
+import Button from '../button';
+import Input from '../input';
+import Icon from '../icon';
 import s from './style';
 import {
   FULL_PICKER,
@@ -20,8 +24,11 @@ import {
   YEAR_PICKER,
   YEAR,
   MONTH,
-  DAY
+  DAY,
+  TIME
 } from './constant';
+
+moment.locale('zh-CN');
 
 class Calendar extends React.Component {
   static propTypes = {
@@ -42,7 +49,9 @@ class Calendar extends React.Component {
     const calendarType = this.getCalendarType();
     let selectingType = calendarType >= DAY_PICKER ? DAY : (calendarType === MONTH_PICKER ? MONTH : YEAR);
     this.state = {
-      selectingType
+      selectingType,
+      calendarType,
+      value: props.value || props.defaultValue || moment()
     };
   }
 
@@ -92,14 +101,61 @@ class Calendar extends React.Component {
 
   renderHeader = () => {
     const { prefixCls } = this.props;
+    const { selectingType, calendarType, value } = this.state;
     return (
-      <div className={`${prefixCls}-header`}></div>
+      <div className={`${prefixCls}-header`}>
+        <Button type="noborder" icon="return" />
+        <div className={`${prefixCls}-header-btn`}>
+        {
+          selectingType === TIME ? value.format('YYYY年MM月DD日') : (
+            (selectingType === DAY || calendarType >= DAY_PICKER) ? value.format('YYYY年MM月') : (
+              selectingType === MONTH ? value.format('YYYY年') : `${Math.floor(value.year() / 10) * 10}年-${Math.ceil(value.year() / 10) * 10 - 1}`
+            )
+          )
+        }
+        </div>
+        <Button type="noborder" icon="enter" />
+      </div>
     );
   };
 
-  renderTable = () => {};
+  renderTable = () => {
+    const { prefixCls } = this.props;
+    return (
+      <div className={`${prefixCls}-table`}></div>
+    );
+  };
 
-  renderFooter = () => {};
+  onNow = () => {};
+
+  onToday = () => {};
+
+  onCurMonth = () => {};
+
+  onCurYear = () => {};
+
+  renderFooter = () => {
+    const { prefixCls } = this.props;
+    const { selectingType, calendarType } = this.state;
+    return (
+      <div className={`${prefixCls}-footer`}
+        onClick={
+          selectingType === TIME ? this.onNow : (
+            (selectingType === DAY || calendarType >= DAY_PICKER) ? this.onToday : (
+              selectingType === MONTH ? this.onCurMonth : this.onCurYear
+            )
+          )
+        }>
+        {
+          selectingType === TIME ? '此刻' : (
+            (selectingType === DAY || calendarType >= DAY_PICKER) ? '今天' : (
+              selectingType === MONTH ? '本月' : '今年'
+            )
+          )
+        }
+      </div>
+    );
+  };
 
   render() {
     const { prefixCls } = this.props;
@@ -152,13 +208,14 @@ export default class DatePicker extends React.Component {
     );
     const input = ({ value: inputValue }) => (
       <div>
-        <input
+        <Input
           readOnly
           value={(inputValue && inputValue.format(props.format)) || ''}
           placeholder="请选择"
-          className={`${prefixCls}-input ${s.inputPrefix}`}
+          className={`${prefixCls}-input`}
+          suffix={<Icon type="calendar" />}
           />
-        <span className={`${prefixCls}-icon`}/>
+        {/* <span className={`${prefixCls}-icon`}/> */}
       </div>
     );
 

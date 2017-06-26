@@ -1,5 +1,3 @@
-@import "../../style/themes/default";
-
 .input-lg(){
 	padding:@input-padding-vertical-lg @input-padding-horizontal;
 	height: @input-height-lg;
@@ -61,6 +59,10 @@
 	}
 	&:hover {
 		.hover();
+	}
+
+	&[readonly] {
+		cursor: pointer;
 	}
 
 	&[disabled] {
@@ -127,12 +129,54 @@
 		border-bottom-left-radius: 0;
 		border-top-left-radius: 0;
 	}
+}
 
+.input-affix-wrapper(@inputClass) {
+  position: relative;
+  display: inline-block;
+  width: 100%;
 
+  .@{inputClass} {
+    z-index: 1;
+  }
 
+	.@{icon-prefix} {
+		transition: all .3s;
+	}
 
+  &:hover {
+		.@{icon-prefix} {
+			color: tint(@input-hover-border-color, 20%);
+		}
 
+		.@{inputClass} {
+	    .hover();
+	  }
+	}
 
+  .@{inputClass}-prefix,
+  .@{inputClass}-suffix {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+    line-height: 0;
+    color: @input-color;
+  }
 
+  .@{inputClass}-prefix {
+    left: @input-padding-horizontal;
+  }
 
+  .@{inputClass}-suffix {
+    right: @input-padding-horizontal;
+  }
+
+  .@{inputClass}:not(:first-child) {
+    padding-left: @input-padding-horizontal + @input-affix-width;
+  }
+
+  .@{inputClass}:not(:last-child) {
+    padding-right: @input-padding-horizontal + @input-affix-width;
+  }
 }

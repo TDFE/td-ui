@@ -1,6 +1,5 @@
 @import "../../style/themes/default.less";
 @import "../../style/mixins/index";
-@import "../../input/style/index.less";
 
 .@{date-picker-prefix} {
   position: relative;
@@ -8,38 +7,6 @@
   outline: none;
   font-size: @font-size-base;
   transition: opacity .3s;
-
-  &-input {
-    cursor: pointer;
-  }
-
-  &-input:hover + &-icon:after {
-    color: @primary-4;
-  }
-
-  &-icon {
-    position: absolute;
-    user-select: none;
-    transition: all .3s;
-    width: @font-size-base;
-    height: @font-size-base;
-    line-height: @font-size-base;
-    right: 0;
-    color: rgba(0,0,0,.43);
-    top: 50%;
-    margin-top: -6px;
-
-    &:after {
-      content: @tdicon-calendar;
-      font-family: tdicon;
-      font-size: @font-size-base;
-      color: rgba(0,0,0,.43);
-      transition: all .3s;
-      display: inline-block;
-      line-height: 1;
-      vertical-align: bottom;
-    }
-  }
 
   &-container {
     position: absolute;
@@ -82,6 +49,56 @@
     &-header {
       height: @date-picker-cell-size;
       line-height: @date-picker-cell-size;
+      user-select: none;
+      font-size: @font-size-base;
+      position: relative;
+
+      .@{btn-prefix} {
+        padding: (@date-picker-cell-size - @font-size-base) / 2;
+      }
+
+      &-btn {
+        display: inline-block;
+        cursor: pointer;
+        text-align: center;
+        color: @date-picker-font-color;
+        user-select: none;
+        font-size: @font-size-base;
+        width: @date-picker-panel-width - @date-picker-cell-size * 2;
+
+        &:hover {
+          background: #f6f6f6;
+        }
+
+        &:active {
+          background: #e5e5e5;
+        }
+      }
+    }
+
+    &-table {
+      height: @date-picker-cell-size * 7;
+      line-height: @date-picker-cell-size;
+      user-select: none;
+      font-size: @font-size-base - 2;
+    }
+
+    &-footer {
+      height: @date-picker-cell-size;
+      line-height: @date-picker-cell-size;
+      cursor: pointer;
+      text-align: center;
+      color: @date-picker-font-color;
+      user-select: none;
+      font-size: @font-size-base;
+
+      &:hover {
+        background: #f6f6f6;
+      }
+
+      &:active {
+        background: #e5e5e5;
+      }
     }
   }
 }
