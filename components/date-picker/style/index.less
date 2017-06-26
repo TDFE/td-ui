@@ -1,5 +1,6 @@
 @import "../../style/themes/default.less";
 @import "../../style/mixins/index";
+@import './mixin.less';
 
 .@{date-picker-prefix} {
   position: relative;
@@ -65,7 +66,7 @@
         display: inline-block;
         cursor: pointer;
         text-align: center;
-        color: @date-picker-font-color;
+        color: @date-picker-header-font-color;
         user-select: none;
         font-size: @font-size-base;
         width: @date-picker-panel-width - @date-picker-cell-size * 2;
@@ -85,6 +86,12 @@
       line-height: @date-picker-cell-size;
       user-select: none;
       font-size: @font-size-base - 2;
+
+      .date-table(~'@{date-picker-prefix}-calendar-table');
+
+      table,th,td {
+        border: 0;
+      }
     }
 
     &-footer {
@@ -92,7 +99,7 @@
       line-height: @date-picker-cell-size;
       cursor: pointer;
       text-align: center;
-      color: @date-picker-font-color;
+      color: @date-picker-header-font-color;
       user-select: none;
       font-size: @font-size-base;
 

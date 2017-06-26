@@ -27,6 +27,7 @@ import {
   DAY,
   TIME
 } from './constant';
+import { DateTable } from './common';
 
 moment.locale('zh-CN');
 
@@ -177,9 +178,23 @@ class Calendar extends React.Component {
   };
 
   renderTable = () => {
-    const { prefixCls } = this.props;
+    const { prefixCls, onSelect } = this.props;
+    const { selectingType, value } = this.state;
     return (
-      <div className={`${prefixCls}-table`}></div>
+      <div className={`${prefixCls}-table`}>
+        {
+          selectingType === DAY && (
+            <DateTable
+              prefixCls={`${prefixCls}-table-date`}
+              onSelect={current => {
+                this.setState({ value: current });
+                onSelect(current);
+              }}
+              value={value}
+              />
+          )
+        }
+      </div>
     );
   };
 
