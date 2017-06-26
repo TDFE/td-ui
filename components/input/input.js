@@ -54,7 +54,7 @@ export default class Input extends Component {
     }
   }
 	handleKeyDown =(e)=>{
-		
+
 		const {onPressEnter,onKeyDown}=this.props;
 		if(e.keyCode===13 &&onPressEnter){
 			onPressEnter(e);
@@ -66,7 +66,7 @@ export default class Input extends Component {
 		}
 
 	}
-	
+
 	renderLabeledInput(children) {
 		const props = this.props;
 		if (!props.addonBefore && !props.addonAfter) {
@@ -83,15 +83,15 @@ export default class Input extends Component {
 		return (<span className={wrapperClassName}>{addonBefore}{children}{addonAfter}</span>);
 	}
 	renderLabeledIcon(children) {
-		const {props} = this;
-		if (!('prefix' in props) || !('suffix' in props)) {
+		const { props } = this;
+		if (!('prefix' in props) && !('suffix' in props)) {
 			return children;
 		}
 		const prefix = props.prefix ? (<span className={`${props.prefixCls}-prefix`}>{props.prefix}</span>) : null;
 		const suffix = props.suffix ? (<span className={`${props.prefixCls}-suffix`}>{props.suffix}</span>) : null;
 
 		return (
-			<span className={`${props.prefixCls}-affix-wapper`} style={props.style}>
+			<span className={`${props.prefixCls}-affix-wrapper`} style={props.style}>
 			{prefix}
 			{cloneElement(children, { style: null })}
 			{suffix}

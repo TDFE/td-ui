@@ -5,8 +5,7 @@
  * @Last modified time: 2017-05-24 15:04:33
  */
 
-import s from '../style/themes/default.less';
-/* eslint-disable no-unused-vars */
+import s from './style';
 import React from 'react';
 import cn from 'classnames';
 import omit from 'lodash/omit';
