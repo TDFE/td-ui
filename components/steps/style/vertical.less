@@ -1,0 +1,56 @@
+@import "../../style/themes/default.less";
+
+.@{steps-prefix} {
+  &-vertical{
+    .@{steps-prefix} {
+      &-step{
+        display: block;
+        &-main{
+          display: inline-block;
+          vertical-align: top;
+          min-height: 70px;
+          margin-left: 10px;
+        }
+        &-line{
+          height: 100%;
+          padding-top: 24px;
+          left: 11px;
+          i{
+            width: 2px ;
+            height: 100%;
+            &:after{
+              width: 2px;
+              height: 0%;
+            }
+          }
+        }
+        &-finished{
+          .@{steps-prefix}{
+            &-step{
+              &-line{
+                i{
+                  &:after{
+                    height: 100%;
+                  }
+                }
+              }
+            }
+          }
+        }
+        &-progress{
+          .@{steps-prefix}{
+            &-step{
+              &-line{
+                i{
+                  &:after{
+                    height: 50%;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

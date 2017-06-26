@@ -2,6 +2,7 @@
 @import "../iconfont/index.less";
 
 @td-prefix                    : td;
+@switch-prefix                : ~"@{td-prefix}-switch";
 @icon-prefix                  : ~"@{td-prefix}icon";
 @btn-prefix                   : ~"@{td-prefix}-btn";
 @input-prefix                 : ~"@{td-prefix}-input";
@@ -21,11 +22,15 @@
 @row-prefix                   : ~"@{td-prefix}-row";
 @col-prefix                   : ~"@{td-prefix}-col";
 @layout-prefix                : ~"@{td-prefix}-layout";
+@tabs-prefix                  : ~"@{td-prefix}-tabs";
+@progress-prefix              : ~"@{td-prefix}-progress";
 @form-prefix                  : ~"@{td-prefix}-form";
+@steps-prefix                 : ~"@{td-prefix}-steps";
 @time-picker-prefix           : ~"@{td-prefix}-time-picker";
 @date-picker-prefix           : ~"@{td-prefix}-date-picker";
 
 :export {
+  switchPrefix: @switch-prefix;
   prefix: @td-prefix;
   btnPrefix: @btn-prefix;
   inputPrefix: @input-prefix;
@@ -46,7 +51,10 @@
   rowPrefix: @row-prefix;
   colPrefix: @col-prefix;
   layoutPrefix: @layout-prefix;
+  tabsPrefix: @tabs-prefix;
+  progressPrefix: @progress-prefix;
   formPrefix: @form-prefix;
+  stepsPrefix: @steps-prefix;
   timePickerPrefix: @time-picker-prefix;
   datePickerPrefix: @date-picker-prefix;
 }
@@ -274,3 +282,15 @@
 @pagination-font-size-sm          : @font-size-sm;
 
 //Tree
+@tree-switcher-width              : 24px;
+@tree-switcher-height             : 24px;
+@tree-checkbox-width              : 14px;
+@tree-checkbox-height             : 14px;
+@tree-checkbox-color              : @primary-color;
+@tree-checkbox-disabled-color     : @disabled-color;
+@tree-checkbox-disabled-bg        : @disabled-bg;
+
+// steps
+@step-blue:        @blue-5;
+@step-gray:        #ccc;
+@step-black:        #999;
