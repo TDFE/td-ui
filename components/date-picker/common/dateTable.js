@@ -83,7 +83,7 @@ export default class DateTable extends React.Component {
     }
 
     const cellClass = `${prefixCls}-cell`;
-    const todayClass = `${prefixCls}-today`;
+    const todayClass = `${prefixCls}-cur`;
     const selectedClass = `${prefixCls}-selected`;
     const lastMonthDayClass = `${prefixCls}-last-month-cell`;
     const nextMonthDayClass = `${prefixCls}-next-month-btn-day`;

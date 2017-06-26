@@ -27,7 +27,7 @@ import {
   DAY,
   TIME
 } from './constant';
-import { DateTable } from './common';
+import { DateTable, MonthTable, YearTable } from './common';
 
 moment.locale('zh-CN');
 
@@ -157,6 +157,30 @@ class Calendar extends React.Component {
     }
   };
 
+  onDateSelect = current => {
+    this.setState({ value: current });
+    if (this.state.calendarType >= HOUR_PICKER) {
+      this.setState({ selectingType: TIME });
+    }
+    this.props.onSelect(current);
+  };
+
+  onMonthSelect = current => {
+    this.setState({ value: current });
+    if (this.state.calendarType >= DAY_PICKER) {
+      this.setState({ selectingType: DAY });
+    }
+    this.props.onSelect(current);
+  };
+
+  onYearSelect = current => {
+    this.setState({ value: current });
+    if (this.state.calendarType >= MONTH_PICKER) {
+      this.setState({ selectingType: MONTH });
+    }
+    this.props.onSelect(current);
+  };
+
   renderHeader = () => {
     const { prefixCls } = this.props;
     const { selectingType, value } = this.state;
@@ -178,7 +202,7 @@ class Calendar extends React.Component {
   };
 
   renderTable = () => {
-    const { prefixCls, onSelect } = this.props;
+    const { prefixCls } = this.props;
     const { selectingType, value } = this.state;
     return (
       <div className={`${prefixCls}-table`}>
@@ -186,10 +210,25 @@ class Calendar extends React.Component {
           selectingType === DAY && (
             <DateTable
               prefixCls={`${prefixCls}-table-date`}
-              onSelect={current => {
-                this.setState({ value: current });
-                onSelect(current);
-              }}
+              onSelect={this.onDateSelect}
+              value={value}
+              />
+          )
+        }
+        {
+          selectingType === MONTH && (
+            <MonthTable
+              prefixCls={`${prefixCls}-table-month`}
+              onSelect={this.onMonthSelect}
+              value={value}
+              />
+          )
+        }
+        {
+          selectingType === YEAR && (
+            <YearTable
+              prefixCls={`${prefixCls}-table-year`}
+              onSelect={this.onYearSelect}
               value={value}
               />
           )

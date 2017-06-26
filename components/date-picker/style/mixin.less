@@ -36,6 +36,16 @@
   }
 }
 
+.curColors() {
+  .colors(@date-picker-hover-color;@date-picker-hover-color;@date-picker-background-color;);
+  &:hover {
+    .colors(@date-picker-hover-color;@date-picker-hover-color;@date-picker-background-color;);
+  }
+  &:active {
+    .colors(@date-picker-background-color;@date-picker-active-color;@date-picker-active-color;);
+  }
+}
+
 .disabledColors() {
   cursor: not-allowed;
   .colors(@date-picker-disabled-border;@date-picker-disabled-color;@date-picker-disabled-color;);
@@ -58,21 +68,17 @@
   }
 }
 
-.date-table(@prefixCls) {
-  &-date {
+.type-table(@type;@width) {
+  &-@{type} {
     width: 100%;
     border-collapse: collapse;
     max-width: 100%;
-
-    th div {
-      text-align: center;
-    }
 
     &-cell {
       cursor: pointer;
 
       div {
-        width: @date-picker-cell-size - 2;
+        width: @width;
         height: @date-picker-cell-size - 2;
         border-radius: 4px;
         border: 1px solid @date-picker-background-color;
@@ -82,12 +88,24 @@
       .defaultColors();
     }
 
-    &-today,&-selected {
-      .selectedColors();
+    &-date-last-month-cell,&-date-next-month-btn-day {
+      .minorColors();
     }
 
-    &-last-month-cell,&-next-month-btn-day {
+    &-minor {
       .minorColors();
+    }
+
+    &-placeholder {
+      height: @date-picker-cell-size;
+    }
+
+    &-cur {
+      .curColors();
+    }
+
+    &-selected {
+      .selectedColors();
     }
 
     &-disabled-cell {
@@ -97,8 +115,20 @@
       }
     }
 
-    &-disabled-cell&-selected,&-disabled-cell&-today {
+    &-disabled-cell&-selected,&-disabled-cell&-cur {
       .disabledSelected();
     }
   }
+}
+
+.date-table() {
+  .type-table(~'date', @date-picker-cell-size - 2);
+}
+
+.month-table() {
+  .type-table(~'month', @date-picker-cell-size * 7 / 4 - 2);
+}
+
+.year-table() {
+  .type-table(~'year', @date-picker-cell-size * 7 / 4 - 2);
 }

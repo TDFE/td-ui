@@ -87,7 +87,9 @@
       user-select: none;
       font-size: @font-size-base - 2;
 
-      .date-table(~'@{date-picker-prefix}-calendar-table');
+      .date-table();
+      .month-table();
+      .year-table();
 
       table,th,td {
         border: 0;
