@@ -44,7 +44,7 @@
     }
   }
   &-text {
-    font-size:14px;
+    font-size:@font-size-base;
     color:@text-color;
     vertical-align: middle;
     display: inline-block;
@@ -56,12 +56,8 @@
     .@{progress-prefix} {
       &-text {
         text-align: center;
+        color: @success-color;
       }
-      &-icon {
-        background-color: @success-color;
-        color: #fff;
-      }
-
       &-inner {
         background-color: @success-color;
         &-stripe {
@@ -84,10 +80,7 @@
     .@{progress-prefix} {
       &-text {
         text-align: center;
-      }
-      &-icon {
-        background-color: @exception-color;
-        color: #fff;
+        color: @exception-color;
       }
       &-inner {
         background-color: @exception-color;
@@ -130,7 +123,6 @@
       top:0;
       left:0;
       position: absolute;
-      clip: rect(0,120px,120px,60px);
     }
     &-left,
     &-right{
@@ -141,21 +133,14 @@
       border:8px solid @normal-color;
       border-radius : 50%;
     }
-    &-left {
-      clip: rect(0,60px,120px,0);
-    }
     &-right {
-      clip: rect(0,120px,120px,60px);
       display: none;
     }
     &-text {
-      width: 120px;
-      height: 120px;
       position: absolute;
       top:0;
       left:0;
       text-align: center;
-      line-height: 120px;
       font-size:24px;
       color: @text-color;
     }

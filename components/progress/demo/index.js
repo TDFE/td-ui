@@ -15,11 +15,11 @@ let render = () => {
     return (
       <div className="td">
         <p>line</p>
-        <Progress type="line"/>
+        <Progress type="line" status="success"/>
         <br/>
-        <Progress type="line" percent={20}/>
+        <Progress type="line" percent={20} width={40}/>
         <br/>
-        <Progress type="line" status="active" percent={30}/>
+        <Progress type="line" percent={30} width={500}/>
         <br/>
         <Progress type="line" status="success" percent={40}/>
         <br/>
@@ -29,16 +29,16 @@ let render = () => {
         <br/>
         <Progress type="stripe" percent={20}/>
         <br/>
-        <Progress type="stripe" status="active" percent={30}/>
+        <Progress type="stripe" percent={30}/>
         <br/>
-        <Progress type="stripe" status="success" percent={40}/>
+        <Progress type="stripe" status="success" percent={100}/>
         <br/>
         <Progress type="stripe" status="exception" percent={50}/>
         <p>circle</p>
         <Progress type="circle"/>
-        <Progress type="circle" percent={20}/>
-        <Progress type="circle" status="active" percent={30}/>
-        <Progress type="circle" status="success" percent={40}/>
+        <Progress type="circle" percent={20} width={300}/>
+        <Progress type="circle" percent={30} width={50}/>
+        <Progress type="circle" status="success" percent={100} width={500}/>
         <Progress type="circle" status="exception" percent={50}/>
         <Progress type="circle" status="exception" percent={70}/>
         <Progress type="circle" status="exception" percent={80}/>
