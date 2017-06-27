@@ -16,7 +16,7 @@ let render = () => {
   function Demo() {
     return (
       <div className="td">
-        <DatePicker />
+        <DatePicker format="YYYY-MM"/>
       </div>
     );
   }

@@ -40,8 +40,7 @@ class Select extends Component {
     onMouseEnter: PropTypes.func,
     offset: PropTypes.number,
     width: PropTypes.number,
-    render: PropTypes.func,
-    onScroll: PropTypes.func
+    render: PropTypes.func
   };
 
   state = {
@@ -115,12 +114,6 @@ class Select extends Component {
     this.setState({ active: false });
   }
 
-  handleScroll = e => {
-    const { onScroll } = this.props;
-    console.log(e.target.scrollTop);
-    if (onScroll) {}
-  };
-
   render() {
     if (this.props.options.length === 0) {
       return null;
@@ -138,7 +131,6 @@ class Select extends Component {
         className={cls}
         onMouseEnter={this.handleMouseEnter}
         onMouseLeave={this.handleMouseLeave}
-        onScroll={this.handleScroll}
       >
         <ul ref="list">{this.getOptions()}</ul>
       </div>
