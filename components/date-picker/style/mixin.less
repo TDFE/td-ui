@@ -179,7 +179,10 @@
           transition: all .3s ease;
 
           div {
-            border: 1px solid @date-picker-background-color;
+            border: 1px solid transparent;
+            width: @date-picker-cell-size - 2;
+            margin: 0 auto;
+            border-radius: @border-radius-base;
 
             &:hover {
               background-color: @date-picker-background-color;
@@ -235,6 +238,21 @@
             color: @date-picker-disabled-border;
           }
         }
+      }
+    }
+
+    &-mask {
+      width: @date-picker-panel-width + @date-picker-gap-horizontal * 2;
+      height: @date-picker-cell-size + 10;
+      position: absolute;
+      left: 0;
+      top: @date-picker-cell-size * 4 - 1;
+      background-color: @blue-1;
+
+      span {
+        position: absolute;
+        font-weight: bold;
+        line-height: @date-picker-cell-size + 10;
       }
     }
   }

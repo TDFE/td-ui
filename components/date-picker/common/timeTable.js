@@ -150,10 +150,31 @@ export default class TimeTable extends React.Component {
     );
   }
 
+  renderMask() {
+    const { prefixCls, type } = this.props;
+    return (
+      <div className={`${prefixCls}-mask`}>
+        {
+          type >= MINUTE_PICKER && <span style={{
+            left: parseInt(s.datePickerGap) + parseFloat(this.columnWidth)
+          }}>:</span>
+        }
+        {
+          type >= FULL_PICKER && <span style={{
+            left: parseInt(s.datePickerGap) + parseFloat(this.columnWidth) * 2
+          }}>:</span>
+        }
+      </div>
+    );
+  }
+
   render() {
     const { prefixCls, type } = this.props;
     return (
       <div className={prefixCls}>
+        {
+          this.renderMask()
+        }
         {
           this.renderHours()
         }

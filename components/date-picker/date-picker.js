@@ -376,16 +376,22 @@ export default class DatePicker extends React.Component {
   render() {
     const { value } = this.state;
     const props = omit(this.props, ['onChange']);
-    const { prefixCls } = props;
+    const { prefixCls, format, placeholder } = props;
     const calendar = (
-      <Calendar prefixCls={`${prefixCls}-calendar`} onSelect={this.handleChange}/>
+      <Calendar
+        prefixCls={`${prefixCls}-calendar`}
+        onSelect={this.handleChange}
+        format={format}
+        disabledDate={props.disabledDate}
+        defaultValue={props.defaultPickerValue || moment()}
+        />
     );
     const input = ({ value: inputValue }) => (
       <div>
         <Input
           readOnly
-          value={(inputValue && inputValue.format(props.format)) || ''}
-          placeholder="请选择"
+          value={(inputValue && inputValue.format(format)) || ''}
+          placeholder={placeholder || '请选择'}
           className={`${prefixCls}-input`}
           suffix={<Icon type="calendar" />}
           />
