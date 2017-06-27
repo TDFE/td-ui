@@ -124,9 +124,10 @@ class Cascader extends Component {
   handleComponentUpdate = (props, firstRun) => {
     let { options, values } = props;
 
+    console.log(values);
     if (!options || !values || options.length === 0 || values.length === 0) return
 
-    let valuesOptions = this.getValuesOptions(options, values);
+    const valuesOptions = this.getValuesOptions(options, values);
     this.setState({ valuesOptions });
   }
 
@@ -158,7 +159,15 @@ class Cascader extends Component {
             }
           </div>
           {
-            allowClear ? (<i className="picker-clear" onClick={ () => this.setState({menuArray: [], menuOpen: false, isValueSet: false, valuesOptions: []}) } >x</i>) : ''
+            allowClear ? (<i
+              className={classNames({
+                'picker-clear': true,
+                'tdicon-cross': true
+              })}
+              onClick={ () => this.setState({menuArray: [], menuOpen: false, isValueSet: false, valuesOptions: []}) }
+            >
+              x
+            </i>) : ''
           }
         </div>
 
@@ -193,7 +202,7 @@ class Cascader extends Component {
   componentDidMount () {
     this.handleComponentUpdate(this.props, true);
     document.body.addEventListener('click', e => {
-      if (e.target && e.target.matches('li.td-cascader-menu-item')) return;
+      if (e.target && (e.target.matches('li.td-cascader-menu-item') || e.target.matches('div.picker-label'))) return;
       this.setState({menuOpen: false});
     });
   }

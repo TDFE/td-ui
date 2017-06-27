@@ -17,6 +17,7 @@ let render = () => {
       options={options}
       selectedIndex="0"
       placeholder="请选择城市"
+      allowClear
     />, MOUNT_NODE
   );
 };
