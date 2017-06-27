@@ -132,3 +132,110 @@
 .year-table() {
   .type-table(~'year', @date-picker-cell-size * 7 / 4 - 2);
 }
+
+.time-table() {
+  &-time {
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    list-style: none;
+    font-size: @font-size-base - 2;
+    background-color: @date-picker-background-color;
+    background-clip: padding-box;
+    overflow: hidden;
+    line-height: @date-picker-cell-size;
+
+    &-select {
+      margin: 0;
+      padding: 0;
+      float: left;
+      font-size: @font-size-base - 2;
+      box-sizing: border-box;
+      overflow: hidden;
+      position: relative;
+      height: 100%;
+
+      &:hover {
+        overflow-y: auto;
+      }
+
+      ul {
+        list-style: none;
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        max-height: @date-picker-panel-height;
+        color: @date-picker-font-color;
+
+        li {
+          text-align: center;
+          list-style: none;
+          box-sizing: content-box;
+          margin: 0;
+          line-height: @date-picker-cell-size - 2;
+          cursor: pointer;
+          user-select: none;
+          transition: all .3s ease;
+
+          div {
+            border: 1px solid @date-picker-background-color;
+
+            &:hover {
+              background-color: @date-picker-background-color;
+              border-color: @date-picker-hover-color;
+              color: @date-picker-hover-color;
+            }
+
+            &:active {
+              background-color: @date-picker-active-color;
+              border-color: @date-picker-active-color;
+              color: @date-picker-background-color;
+            }
+          }
+
+          &:first-child {
+            margin-top: @date-picker-cell-size * 3;
+          }
+
+          &:last-child {
+            margin-bottom: @date-picker-cell-size * 3;
+          }
+        }
+      }
+
+      &-option {
+        &-selected div {
+          background-color: @date-picker-select-color;
+          border-color: @date-picker-select-color!important;
+          color: @date-picker-background-color;
+
+          &:hover {
+            background-color: @date-picker-background-color;
+            border-color: @date-picker-hover-color!important;
+            color: @date-picker-hover-color;
+          }
+
+          &:active {
+            background-color: @date-picker-active-color;
+            border-color: @date-picker-active-color!important;
+            color: @date-picker-background-color;
+          }
+        }
+
+        &-disabled div {
+          background-color: @date-picker-disabled-color;
+          border-color: @date-picker-disabled-border!important;
+          color: @date-picker-disabled-border;
+          cursor: not-allowed;
+
+          &:hover,&:active {
+            background-color: @date-picker-disabled-color;
+            border-color: @date-picker-disabled-border!important;
+            color: @date-picker-disabled-border;
+          }
+        }
+      }
+    }
+  }
+}

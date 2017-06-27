@@ -27,7 +27,7 @@ import {
   DAY,
   TIME
 } from './constant';
-import { DateTable, MonthTable, YearTable } from './common';
+import { DateTable, MonthTable, YearTable, TimeTable } from './common';
 
 moment.locale('zh-CN');
 
@@ -181,6 +181,11 @@ class Calendar extends React.Component {
     this.props.onSelect(current);
   };
 
+  onTimeSelect = current => {
+    this.setState({ value: current });
+    this.props.onSelect(current);
+  };
+
   renderHeader = () => {
     const { prefixCls } = this.props;
     const { selectingType, value } = this.state;
@@ -203,7 +208,7 @@ class Calendar extends React.Component {
 
   renderTable = () => {
     const { prefixCls } = this.props;
-    const { selectingType, value } = this.state;
+    const { selectingType, value, calendarType } = this.state;
     return (
       <div className={`${prefixCls}-table`}>
         {
@@ -230,6 +235,16 @@ class Calendar extends React.Component {
               prefixCls={`${prefixCls}-table-year`}
               onSelect={this.onYearSelect}
               value={value}
+              />
+          )
+        }
+        {
+          selectingType === TIME && (
+            <TimeTable
+              prefixCls={`${prefixCls}-table-time`}
+              onSelect={this.onTimeSelect}
+              value={value}
+              type={calendarType}
               />
           )
         }
