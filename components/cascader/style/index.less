@@ -9,7 +9,7 @@
         cursor: pointer;
         vertical-align: middle;
         font-size: 12px;
-        background-color: #fff;
+        background-color: @component-background;
         border-radius: 6px;
 
         .input-wrapper {
@@ -52,13 +52,13 @@
             top: 50%;
             z-index: 2;
             margin-top: -10px;
-            color: #ccc;
+            color: @input-placeholder-color;
         }
 
         .picker-clear {
             opacity: 0;
-            background: #ccc;
-            color: #fff;
+            background: @input-placeholder-color;
+            color: @component-background;
             border-radius: 6px;
         }
 
@@ -69,7 +69,7 @@
 
     &-menus {
         font-size: 12px;
-        background: #fff;
+        background: @component-background;
         position: absolute;
         z-index: 1050;
         border: 1px solid #d9d9d9;
@@ -92,7 +92,7 @@
         overflow: auto;
 
         &-item:hover {
-            background: #eaf8fe;
+            background: @blue-2;
         }
         &-item {
             padding: 7px 26px 7px 16px;
@@ -102,7 +102,7 @@
             transition: all .3s ease;
         }
         &-item.active {
-            background-color: #37A7FC;
+            background-color: @blue-4;
             color: #fff;
             font-weight: 700;
         }
