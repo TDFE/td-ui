@@ -184,18 +184,21 @@
   outline: none;
   font-size: @font-size-base;
   transition: opacity 0.3s ease;
-  width: 100px;
+  width: @time-picker-input-width;
 
   &-input {
     .input;
+    width: @time-picker-input-width;
   }
 
   &-large &-input {
     .input-lg;
+    width: @time-picker-input-width;
   }
 
   &-small &-input {
     .input-sm;
+    width: @time-picker-input-width;
   }
 
   &-open {

@@ -19,6 +19,13 @@ function fixControlledValue(value) {
 	return value;
 }
 
+function onNextFrame(cb) {
+  if (window.requestAnimationFrame) {
+    return window.requestAnimationFrame(cb);
+  }
+  return window.setTimeout(cb, 1);
+}
+
 export default class Input extends Component {
 	static defaultProps = {
 		disabled: false,
@@ -26,6 +33,7 @@ export default class Input extends Component {
 		type: 'text',
 		placeholder:'请输入内容',
 	};
+
 	static propTypes = {
 		id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 		type: PropTypes.string,
@@ -40,32 +48,28 @@ export default class Input extends Component {
 		prefix: PropTypes.node,
 		suffix: PropTypes.node,
 		onKeyDown:PropTypes.func,
-		onPressEnter:PropTypes.func,
-
+		onPressEnter:PropTypes.func
 	};
+
 	componentWillReceiveProps(nextProps) {
-		console.log(nextProps);
-    // Re-render with the new content then recalculate the height as required.
     if (this.props.value !== nextProps.value) {
-      if (this.nextFrameActionId) {
-        clearNextFrameAction(this.nextFrameActionId);
-      }
-      this.nextFrameActionId = onNextFrame(this.resizeTextarea);
+			// TODO
+      // if (this.nextFrameActionId) {
+      //   clearNextFrameAction(this.nextFrameActionId);
+      // }
+      // this.nextFrameActionId = onNextFrame(this.resizeTextarea);
     }
   }
-	handleKeyDown =(e)=>{
 
-		const {onPressEnter,onKeyDown}=this.props;
+	handleKeyDown = e => {
+		const { onPressEnter , onKeyDown }=this.props;
 		if(e.keyCode===13 &&onPressEnter){
 			onPressEnter(e);
-			console.log('onPressEnter');
 		}
 		if(onKeyDown){
 			onKeyDown(e);
-			console.log('onKeyDown')
 		}
-
-	}
+	};
 
 	renderLabeledInput(children) {
 		const props = this.props;
@@ -82,6 +86,7 @@ export default class Input extends Component {
 		});
 		return (<span className={wrapperClassName}>{addonBefore}{children}{addonAfter}</span>);
 	}
+
 	renderLabeledIcon(children) {
 		const { props } = this;
 		if (!('prefix' in props) && !('suffix' in props)) {
@@ -98,6 +103,7 @@ export default class Input extends Component {
 			</span>
 		);
 	}
+
 	renderInput() {
 		const props = assign({}, this.props);
 		const otherProps = omit(this.props, ['prefixCls', 'onPressEnter','addonBefore', 'addonAfter', 'prefix', 'suffix']);

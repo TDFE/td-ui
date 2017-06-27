@@ -27,6 +27,7 @@ import {
   DAY,
   TIME
 } from './constant';
+import { DateTable, MonthTable, YearTable, TimeTable } from './common';
 
 moment.locale('zh-CN');
 
@@ -95,44 +96,206 @@ class Calendar extends React.Component {
     return type;
   };
 
-  onSelect = () => {};
-
   onClear = () => {};
+
+  onPrev = () => {
+    const { selectingType, value } = this.state;
+    let newValue = value.clone();
+    switch (selectingType) {
+      case TIME:
+        newValue.subtract(1, 'days');
+        break;
+      case DAY:
+        newValue.subtract(1, 'months');
+        break;
+      case MONTH:
+        newValue.subtract(1, 'years');
+        break;
+      default:
+        newValue.subtract(10, 'years');
+        break;
+    }
+    this.setState({ value: newValue });
+    this.props.onSelect(newValue);
+  };
+
+  onNext = () => {
+    const { selectingType, value } = this.state;
+    let newValue = value.clone();
+    switch (selectingType) {
+      case TIME:
+        newValue.add(1, 'days');
+        break;
+      case DAY:
+        newValue.add(1, 'months');
+        break;
+      case MONTH:
+        newValue.add(1, 'years');
+        break;
+      default:
+        newValue.add(10, 'years');
+        break;
+    }
+    this.setState({ value: newValue });
+    this.props.onSelect(newValue);
+  };
+
+  onSelectingTypeChange = () => {
+    const { selectingType } = this.state;
+    switch (selectingType) {
+      case TIME:
+        this.setState({ selectingType: DAY });
+        break;
+      case DAY:
+        this.setState({ selectingType: MONTH });
+        break;
+      case MONTH:
+        this.setState({ selectingType: YEAR });
+        break;
+      default:
+        break;
+    }
+  };
+
+  onDateSelect = current => {
+    this.setState({ value: current });
+    if (this.state.calendarType >= HOUR_PICKER) {
+      this.setState({ selectingType: TIME });
+    }
+    this.props.onSelect(current);
+  };
+
+  onMonthSelect = current => {
+    this.setState({ value: current });
+    if (this.state.calendarType >= DAY_PICKER) {
+      this.setState({ selectingType: DAY });
+    }
+    this.props.onSelect(current);
+  };
+
+  onYearSelect = current => {
+    this.setState({ value: current });
+    if (this.state.calendarType >= MONTH_PICKER) {
+      this.setState({ selectingType: MONTH });
+    }
+    this.props.onSelect(current);
+  };
+
+  onTimeSelect = current => {
+    this.setState({ value: current });
+    this.props.onSelect(current);
+  };
 
   renderHeader = () => {
     const { prefixCls } = this.props;
-    const { selectingType, calendarType, value } = this.state;
+    const { selectingType, value } = this.state;
     return (
       <div className={`${prefixCls}-header`}>
-        <Button type="noborder" icon="return" />
-        <div className={`${prefixCls}-header-btn`}>
+        <Button type="noborder" icon="return" onClick={this.onPrev}/>
+        <div className={`${prefixCls}-header-btn`} onClick={this.onSelectingTypeChange}>
         {
           selectingType === TIME ? value.format('YYYY年MM月DD日') : (
-            (selectingType === DAY || calendarType >= DAY_PICKER) ? value.format('YYYY年MM月') : (
+            selectingType === DAY ? value.format('YYYY年MM月') : (
               selectingType === MONTH ? value.format('YYYY年') : `${Math.floor(value.year() / 10) * 10}年-${Math.ceil(value.year() / 10) * 10 - 1}`
             )
           )
         }
         </div>
-        <Button type="noborder" icon="enter" />
+        <Button type="noborder" icon="enter" onClick={this.onNext}/>
       </div>
     );
   };
 
   renderTable = () => {
     const { prefixCls } = this.props;
+    const { selectingType, value, calendarType } = this.state;
     return (
-      <div className={`${prefixCls}-table`}></div>
+      <div className={`${prefixCls}-table`}>
+        {
+          selectingType === DAY && (
+            <DateTable
+              prefixCls={`${prefixCls}-table-date`}
+              onSelect={this.onDateSelect}
+              value={value}
+              />
+          )
+        }
+        {
+          selectingType === MONTH && (
+            <MonthTable
+              prefixCls={`${prefixCls}-table-month`}
+              onSelect={this.onMonthSelect}
+              value={value}
+              />
+          )
+        }
+        {
+          selectingType === YEAR && (
+            <YearTable
+              prefixCls={`${prefixCls}-table-year`}
+              onSelect={this.onYearSelect}
+              value={value}
+              />
+          )
+        }
+        {
+          selectingType === TIME && (
+            <TimeTable
+              prefixCls={`${prefixCls}-table-time`}
+              onSelect={this.onTimeSelect}
+              value={value}
+              type={calendarType}
+              />
+          )
+        }
+      </div>
     );
   };
 
-  onNow = () => {};
+  onNow = () => {
+    const value = moment();
+    this.setState({ value });
+    this.props.onSelect(value);
+  };
 
-  onToday = () => {};
+  onToday = () => {
+    const value = this.state.value.clone();
+    const today = moment();
+    value.date(today.date()).month(today.month()).year(today.year());
+    if (value.valueOf() >= today.valueOf()) {
+      this.setState({ value });
+      this.props.onSelect(value);
+    } else {
+      this.setState({ value: today, selectingType: DAY });
+      this.props.onSelect(today);
+    }
+  };
 
-  onCurMonth = () => {};
+  onCurMonth = () => {
+    const value = this.state.value.clone();
+    const today = moment();
+    value.month(today.month()).year(today.year());
+    if (value.valueOf() >= today.valueOf()) {
+      this.setState({ value });
+      this.props.onSelect(value);
+    } else {
+      this.setState({ value: today });
+      this.props.onSelect(today);
+    }
+  };
 
-  onCurYear = () => {};
+  onCurYear = () => {
+    const value = this.state.value.clone();
+    const today = moment();
+    value.year(today.year());
+    if (value.valueOf() >= today.valueOf()) {
+      this.setState({ value });
+      this.props.onSelect(value);
+    } else {
+      this.setState({ value: today });
+      this.props.onSelect(today);
+    }
+  };
 
   renderFooter = () => {
     const { prefixCls } = this.props;
@@ -177,7 +340,8 @@ class Calendar extends React.Component {
 
 export default class DatePicker extends React.Component {
   static defaultProps = {
-    prefixCls: s.datePickerPrefix
+    prefixCls: s.datePickerPrefix,
+    format: 'YYYY-MM-DD HH:mm:ss'
   };
 
   constructor(props) {
@@ -199,12 +363,22 @@ export default class DatePicker extends React.Component {
     }
   }
 
+  handleChange = (value) => {
+    const props = this.props;
+    if (!('value' in props)) {
+      this.setState({ value });
+    }
+    if ('onChange' in props) {
+      props.onChange(value, (value && value.format(props.format)) || '');
+    }
+  }
+
   render() {
-    // const { value } = this.state;
+    const { value } = this.state;
     const props = omit(this.props, ['onChange']);
     const { prefixCls } = props;
     const calendar = (
-      <Calendar prefixCls={`${prefixCls}-calendar`}/>
+      <Calendar prefixCls={`${prefixCls}-calendar`} onSelect={this.handleChange}/>
     );
     const input = ({ value: inputValue }) => (
       <div>
@@ -215,16 +389,17 @@ export default class DatePicker extends React.Component {
           className={`${prefixCls}-input`}
           suffix={<Icon type="calendar" />}
           />
-        {/* <span className={`${prefixCls}-icon`}/> */}
       </div>
     );
 
     return (
       <span className={prefixCls}>
         <Picker
+          value={value}
           transitionName="slide-up"
           prefixCls={`${prefixCls}-container`}
           calendar={calendar}
+          onChange={this.handleChange}
           >
           {input}
         </Picker>

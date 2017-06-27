@@ -37,7 +37,11 @@ class Select extends Component {
     selectedIndex: PropTypes.number,
     type: PropTypes.string,
     onSelect: PropTypes.func,
-    onMouseEnter: PropTypes.func
+    onMouseEnter: PropTypes.func,
+    offset: PropTypes.number,
+    width: PropTypes.number,
+    render: PropTypes.func,
+    onScroll: PropTypes.func
   };
 
   state = {
@@ -62,7 +66,7 @@ class Select extends Component {
   }
 
   getOptions() {
-    const { options, selectedIndex, prefixCls } = this.props;
+    const { options, selectedIndex, prefixCls, render } = this.props;
     return options.map((item, index) => {
       const cls = classnames({
         [`${prefixCls}-select-option-selected`]: selectedIndex === index,
@@ -78,12 +82,12 @@ class Select extends Component {
         onClick={onclick}
         disabled={item.disabled}
       >
-        {item.value}
+        {render ? render(item.value) : item.value}
       </li>);
     });
   }
 
-  scrollToSelected(duration) {
+  scrollToSelected = duration => {
     // move to selected item
     const select = ReactDom.findDOMNode(this);
     const list = ReactDom.findDOMNode(this.refs.list);
@@ -94,26 +98,35 @@ class Select extends Component {
     if (index < 0) {
       index = 0;
     }
+    let offset = this.props.offset || 0;
     const topOption = list.children[index];
-    const to = topOption.offsetTop;
+    const to = topOption.offsetTop - offset;
     scrollTo(select, to, duration);
-  }
+  };
 
   handleMouseEnter = (e) => {
     this.setState({ active: true });
-    this.props.onMouseEnter(e);
+    if (this.props.onMouseEnter) {
+      this.props.onMouseEnter(e);
+    }
   }
 
   handleMouseLeave = () => {
     this.setState({ active: false });
   }
 
+  handleScroll = e => {
+    const { onScroll } = this.props;
+    console.log(e.target.scrollTop);
+    if (onScroll) {}
+  };
+
   render() {
     if (this.props.options.length === 0) {
       return null;
     }
 
-    const { prefixCls } = this.props;
+    const { prefixCls, width } = this.props;
     const cls = classnames({
       [`${prefixCls}-select`]: 1,
       [`${prefixCls}-select-active`]: this.state.active
@@ -121,9 +134,11 @@ class Select extends Component {
 
     return (
       <div
+        style={ width ? { width } : null }
         className={cls}
         onMouseEnter={this.handleMouseEnter}
         onMouseLeave={this.handleMouseLeave}
+        onScroll={this.handleScroll}
       >
         <ul ref="list">{this.getOptions()}</ul>
       </div>

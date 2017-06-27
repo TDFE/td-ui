@@ -1,0 +1,241 @@
+.colors(@font;@border;@background;) {
+  color: @font;
+  div {
+    border-color: @border;
+    background-color: @background;
+  }
+}
+
+.defaultColors() {
+  .colors(@date-picker-font-color;@date-picker-background-color;@date-picker-background-color;);
+  &:hover {
+    .colors(@date-picker-hover-color;@date-picker-hover-color;@date-picker-background-color;);
+  }
+  &:active {
+    .colors(@date-picker-background-color;@date-picker-active-color;@date-picker-active-color;);
+  }
+}
+
+.minorColors() {
+  .colors(@date-picker-minor-color;@date-picker-background-color;@date-picker-background-color;);
+  &:hover {
+    .colors(@date-picker-hover-color;@date-picker-hover-color;@date-picker-background-color;);
+  }
+  &:active {
+    .colors(@date-picker-background-color;@date-picker-active-color;@date-picker-active-color;);
+  }
+}
+
+.selectedColors() {
+  .colors(@date-picker-background-color;@date-picker-select-color;@date-picker-select-color;);
+  &:hover {
+    .colors(@date-picker-hover-color;@date-picker-hover-color;@date-picker-background-color;);
+  }
+  &:active {
+    .colors(@date-picker-background-color;@date-picker-active-color;@date-picker-active-color;);
+  }
+}
+
+.curColors() {
+  .colors(@date-picker-hover-color;@date-picker-hover-color;@date-picker-background-color;);
+  &:hover {
+    .colors(@date-picker-hover-color;@date-picker-hover-color;@date-picker-background-color;);
+  }
+  &:active {
+    .colors(@date-picker-background-color;@date-picker-active-color;@date-picker-active-color;);
+  }
+}
+
+.disabledColors() {
+  cursor: not-allowed;
+  .colors(@date-picker-disabled-border;@date-picker-disabled-color;@date-picker-disabled-color;);
+  &:hover {
+    .colors(@date-picker-disabled-border;@date-picker-disabled-color;@date-picker-disabled-color;);
+  }
+  &:active {
+    .colors(@date-picker-disabled-border;@date-picker-disabled-color;@date-picker-disabled-color;);
+  }
+}
+
+.disabledSelected() {
+  cursor: not-allowed;
+  .colors(@date-picker-disabled-border;@date-picker-disabled-border;@date-picker-disabled-color;);
+  &:hover {
+    .colors(@date-picker-disabled-border;@date-picker-disabled-border;@date-picker-disabled-color;);
+  }
+  &:active {
+    .colors(@date-picker-disabled-border;@date-picker-disabled-border;@date-picker-disabled-color;);
+  }
+}
+
+.type-table(@type;@width) {
+  &-@{type} {
+    width: 100%;
+    border-collapse: collapse;
+    max-width: 100%;
+
+    &-cell {
+      cursor: pointer;
+
+      div {
+        width: @width;
+        height: @date-picker-cell-size - 2;
+        border-radius: 4px;
+        border: 1px solid @date-picker-background-color;
+        text-align: center;
+      }
+
+      .defaultColors();
+    }
+
+    &-date-last-month-cell,&-date-next-month-btn-day {
+      .minorColors();
+    }
+
+    &-minor {
+      .minorColors();
+    }
+
+    &-placeholder {
+      height: @date-picker-cell-size;
+    }
+
+    &-cur {
+      .curColors();
+    }
+
+    &-selected {
+      .selectedColors();
+    }
+
+    &-disabled-cell {
+      .disabledColors();
+      div {
+        border-radius: 0;
+      }
+    }
+
+    &-disabled-cell&-selected,&-disabled-cell&-cur {
+      .disabledSelected();
+    }
+  }
+}
+
+.date-table() {
+  .type-table(~'date', @date-picker-cell-size - 2);
+}
+
+.month-table() {
+  .type-table(~'month', @date-picker-cell-size * 7 / 4 - 2);
+}
+
+.year-table() {
+  .type-table(~'year', @date-picker-cell-size * 7 / 4 - 2);
+}
+
+.time-table() {
+  &-time {
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    list-style: none;
+    font-size: @font-size-base - 2;
+    background-color: @date-picker-background-color;
+    background-clip: padding-box;
+    overflow: hidden;
+    line-height: @date-picker-cell-size;
+
+    &-select {
+      margin: 0;
+      padding: 0;
+      float: left;
+      font-size: @font-size-base - 2;
+      box-sizing: border-box;
+      overflow: hidden;
+      position: relative;
+      height: 100%;
+
+      &:hover {
+        overflow-y: auto;
+      }
+
+      ul {
+        list-style: none;
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        max-height: @date-picker-panel-height;
+        color: @date-picker-font-color;
+
+        li {
+          text-align: center;
+          list-style: none;
+          box-sizing: content-box;
+          margin: 0;
+          line-height: @date-picker-cell-size - 2;
+          cursor: pointer;
+          user-select: none;
+          transition: all .3s ease;
+
+          div {
+            border: 1px solid @date-picker-background-color;
+
+            &:hover {
+              background-color: @date-picker-background-color;
+              border-color: @date-picker-hover-color;
+              color: @date-picker-hover-color;
+            }
+
+            &:active {
+              background-color: @date-picker-active-color;
+              border-color: @date-picker-active-color;
+              color: @date-picker-background-color;
+            }
+          }
+
+          &:first-child {
+            margin-top: @date-picker-cell-size * 3;
+          }
+
+          &:last-child {
+            margin-bottom: @date-picker-cell-size * 3;
+          }
+        }
+      }
+
+      &-option {
+        &-selected div {
+          background-color: @date-picker-select-color;
+          border-color: @date-picker-select-color!important;
+          color: @date-picker-background-color;
+
+          &:hover {
+            background-color: @date-picker-background-color;
+            border-color: @date-picker-hover-color!important;
+            color: @date-picker-hover-color;
+          }
+
+          &:active {
+            background-color: @date-picker-active-color;
+            border-color: @date-picker-active-color!important;
+            color: @date-picker-background-color;
+          }
+        }
+
+        &-disabled div {
+          background-color: @date-picker-disabled-color;
+          border-color: @date-picker-disabled-border!important;
+          color: @date-picker-disabled-border;
+          cursor: not-allowed;
+
+          &:hover,&:active {
+            background-color: @date-picker-disabled-color;
+            border-color: @date-picker-disabled-border!important;
+            color: @date-picker-disabled-border;
+          }
+        }
+      }
+    }
+  }
+}

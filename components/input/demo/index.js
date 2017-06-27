@@ -13,8 +13,8 @@ const MOUNT_NODE = document.getElementById('app');
 
 let render = () => {
   /* eslint-disable no-unused-vars */
-  let Input = require('../index').Input;
-  let Search = require('../index').Search;
+  let Input = require('../index').default;
+  let Search = Input.Search;
   /* eslint-disable no-unused-vars */
   function Demo() {
     return (
@@ -34,7 +34,7 @@ let render = () => {
 
 
         搜索输入框
-        <Search 
+        <Search
         placeholder="input search text"
         style={{ width: 200 }}
         onSearch={value => console.log(value)}
