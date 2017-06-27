@@ -4,7 +4,6 @@
 import React, { Component } from 'react';
 import classNames from 'classnames';
 import _ from 'lodash/core'
-import Input from '../input/index'
 import s from './style/index';
 
 const prefixCls = s.cascaderPrefix;
@@ -138,7 +137,7 @@ class Cascader extends Component {
       <div className={ prefixCls }>
         <div className={`${prefixCls}-picker`} onClick={this.handleCascaderPickerClick}>
           <div className="input-wrapper">
-            <Input
+            <input
               type="text"
               size="small"
               readOnly
@@ -152,26 +151,36 @@ class Cascader extends Component {
                   <div key={index}>{it.selectedIndex >= 0 ? it.options[it.selectedIndex].label : '' }
                     {index < menuArray.length - 1 ? <span>/</span> : null}
                   </div>))
-                    : valuesOptions.map((it, index) => (
+                  : valuesOptions.map((it, index) => (
                     <div key={index}>{it.label}
                       {index < valuesOptions.length - 1 ? <span>/</span> : null}
                     </div>))
             }
+            <i className={classNames({
+              'picker-icon': 1,
+              'tdicon-unfold': !menuOpen,
+              'tdicon-packup': menuOpen,
+              'allow-clear': allowClear
+            })}
+            ></i>
+
+            {
+              allowClear && isValueSet ? (
+                <i
+                  className={classNames({
+                    'picker-icon': 1,
+                    'picker-clear': true,
+                    'tdicon-cross': true
+                  })}
+                  onClick={ () => this.setState({menuArray: [], menuOpen: false, isValueSet: false, valuesOptions: []}) }
+                ></i>
+              ) : ''
+            }
+
           </div>
-          {
-            allowClear ? (<i
-              className={classNames({
-                'picker-clear': true,
-                'tdicon-cross': true
-              })}
-              onClick={ () => this.setState({menuArray: [], menuOpen: false, isValueSet: false, valuesOptions: []}) }
-            >
-              x
-            </i>) : ''
-          }
         </div>
 
-       {
+        {
           menuOpen ? (
             <div className={`${prefixCls}-menus`}>
               {
