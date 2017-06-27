@@ -1,18 +1,38 @@
 @import "../color/colors.less";
+@import "../iconfont/index.less";
 
 @td-prefix                    : td;
+@switch-prefix                : ~"@{td-prefix}-switch";
 @icon-prefix                  : ~"@{td-prefix}icon";
 @btn-prefix                   : ~"@{td-prefix}-btn";
 @input-prefix                 : ~"@{td-prefix}-input";
 @select-prefix                : ~"@{td-prefix}-select";
 @loading-prefix               : ~"@{td-prefix}-loading";
 @radio-prefix                 : ~"@{td-prefix}-radio";
+@message-prefix               : ~"@{td-prefix}-message";
 @input-number-prefix          : ~"@{td-prefix}-input-number";
 @dialog-prefix                : ~"@{td-prefix}-dialog";
 @confirm-prefix                : ~"@{td-prefix}-confirm";
 @cascader-prefix                : ~"@{td-prefix}-cascader";
+@timeline-prefix              : ~"@{td-prefix}-timeline";
+@confirm-prefix               : ~"@{td-prefix}-confirm";
+@menu-prefix                  : ~"@{td-prefix}-menu";
+@dropdown-prefix              : ~"@{td-prefix}-dropdown";
+@rate-prefix                  : ~"@{td-prefix}-rate";
+@pagination-prefix            : ~"@{td-prefix}-pagination";
+@tree-prefix                  : ~"@{td-prefix}-tree";
+@row-prefix                   : ~"@{td-prefix}-row";
+@col-prefix                   : ~"@{td-prefix}-col";
+@layout-prefix                : ~"@{td-prefix}-layout";
+@tabs-prefix                  : ~"@{td-prefix}-tabs";
+@progress-prefix              : ~"@{td-prefix}-progress";
+@form-prefix                  : ~"@{td-prefix}-form";
+@steps-prefix                 : ~"@{td-prefix}-steps";
+@time-picker-prefix           : ~"@{td-prefix}-time-picker";
+@date-picker-prefix           : ~"@{td-prefix}-date-picker";
 
 :export {
+  switchPrefix: @switch-prefix;
   prefix: @td-prefix;
   btnPrefix: @btn-prefix;
   inputPrefix: @input-prefix;
@@ -21,9 +41,25 @@
   selectPrefix: @select-prefix;
   loadingPrefix: @loading-prefix;
   radioPrefix: @radio-prefix;
+  messagePrefix: @message-prefix;
   dialogPrefix: @dialog-prefix;
   confirmPrefix: @confirm-prefix;
   cascaderPrefix: @cascader-prefix;
+  timelinePrefix: @timeline-prefix;
+  menuPrefix: @menu-prefix;
+  dropdownPrefix: @dropdown-prefix;
+  ratePrefix: @rate-prefix;
+  paginationPrefix: @pagination-prefix;
+  treePrefix: @tree-prefix;
+  rowPrefix: @row-prefix;
+  colPrefix: @col-prefix;
+  layoutPrefix: @layout-prefix;
+  tabsPrefix: @tabs-prefix;
+  progressPrefix: @progress-prefix;
+  formPrefix: @form-prefix;
+  stepsPrefix: @steps-prefix;
+  timePickerPrefix: @time-picker-prefix;
+  datePickerPrefix: @date-picker-prefix;
 }
 
 // Global
@@ -40,18 +76,31 @@
 @border-radius-sm             : 2px;
 @border-width-base            : 1px;
 @border-color-base            : #ccc;
+@border-color-split           : #e9e9e9;
 @border-style-base            : solid;
 
 // Color
-@primary-color                : @blue-6;
-@success-color                : @green-6;
-@error-color                  : @red-6;
-@highlight-color              : @red-6;
-@warning-color                : @yellow-6;
+@primary-color                : @blue-5;
+@success-color                : @green-5;
+@error-color                  : @red-5;
+@highlight-color              : @red-5;
+@warning-color                : @yellow-5;
 @disabled-color               : fade(#000, 25%);
 @shadow-color                 : rgba(0, 0, 0, .2);
 @text-color                   : fade(#000, 65%);
 @text-color-secondary   : fade(#000, 43%);
+
+@primary-1: tint(@primary-5, 80%);
+@primary-2: tint(@primary-5, 60%);
+@primary-3: tint(@primary-5, 40%);
+@primary-4: tint(@primary-5, 20%);
+@primary-5: @primary-color;
+@primary-6: shade(@primary-5, 20%);
+@primary-7: shade(@primary-5, 40%);
+@primary-8: shade(@primary-5, 60%);
+
+@item-hover-bg: @primary-4;
+@item-active-bg: @primary-6;
 
 //outline
 @outline-color          : @primary-color;
@@ -78,21 +127,91 @@
 @ease-in-quint                : cubic-bezier(0.755, 0.05, 0.855, 0.06);
 @ease-in-out-quint            : cubic-bezier(0.86, 0, 0.07, 1);
 
-@primary-1                    : color(~`colorPalette("@{primary-color}", 1)`);
-@primary-2                    : color(~`colorPalette("@{primary-color}", 2)`);
-@primary-                     : color(~`colorPalette("@{primary-color}", 3)`);
-@primary-4                    : color(~`colorPalette("@{primary-color}", 4)`);
-@primary-5                    : color(~`colorPalette("@{primary-color}", 5)`);
-@primary-                     : @primary-color;
-@primary-7                    : color(~`colorPalette("@{primary-color}", 7)`);
-@primary-8                    : color(~`colorPalette("@{primary-color}", 8)`);
-@primary-9                    : color(~`colorPalette("@{primary-color}", 9)`);
-@primary-10                   : color(~`colorPalette("@{primary-color}", 10)`);
+// z-index list
+@zindex-dialog-mask      : 1000;
+@zindex-dialog           : 1000;
+@zindex-message         : 1010;
+@zindex-popover         : 1030;
+@zindex-picker          : 1050;
+@zindex-dropdown        : 1050;
+@zindex-tooltip         : 1060;
+
+// Shadow
+@box-shadow-base        : @shadow-1-down;
+@shadow-1-up            : 0 -1px 6px @shadow-color;
+@shadow-1-down          : 0 1px 6px @shadow-color;
+@shadow-1-left          : -1px 0 6px @shadow-color;
+@shadow-1-right         : 1px 0 6px @shadow-color;
+@shadow-2               : 0 2px 8px @shadow-color;
+
+// Form
+// ---
+@label-required-color        : @highlight-color;
+@label-color                 : @text-color;
+@form-item-margin-bottom     : 24px;
+@form-item-trailing-colon    : true;
+
+// TimePicker
+// ---
+@time-picker-panel-column-width: 56px;
+@time-picker-panel-width: @time-picker-panel-column-width * 3;
+@time-picker-selected-bg: @primary-5;
+@time-picker-hover-bg: @primary-4;
+
+// DatePicker
+@date-picker-cell-size        : 32px;
+@date-picker-gap-horizontal   : 20px;
+@date-picker-gap-vertial      : 4px;
+@date-picker-panel-width      : @date-picker-gap-horizontal * 2 + @date-picker-cell-size * 7;
+@date-picker-panel-height     : @date-picker-cell-size * 9 + @date-picker-gap-vertial * 2;
+@date-picker-font-color       : @blue-8;
+
+// grid
+@grid-columns                 : 24;
+@grid-gutter-width            : 0;
+
+// Layout
+@layout-body-background      : #ececec;
+@layout-header-background    : #404040;
+@layout-header-height        : 64px;
+@layout-header-padding       : 0 50px;
+@layout-footer-padding       : 24px 50px;
+@layout-sider-background     : @layout-header-background;
+@layout-trigger-height       : 48px;
+@layout-zero-trigger-width   : 36px;
+@layout-zero-trigger-height  : 42px;
+
+// Media queries breakpoints
+// Extra small screen / phone
+@screen-xs              : 480px;
+@screen-xs-min          : @screen-xs;
+
+// Small screen / tablet
+@screen-sm              : 768px;
+@screen-sm-min          : @screen-sm;
+
+// Medium screen / desktop
+@screen-md              : 992px;
+@screen-md-min          : @screen-md;
+
+// Large screen / wide desktop
+@screen-lg              : 1200px;
+@screen-lg-min          : @screen-lg;
+
+// Extra Large screen / full hd
+@screen-xl              : 1600px;
+@screen-xl-min          : @screen-xl;
+
+// provide a maximum
+@screen-xs-max          : (@screen-sm-min - 1);
+@screen-sm-max          : (@screen-md-min - 1);
+@screen-md-max          : (@screen-lg-min - 1);
+@screen-lg-max          : (@screen-xl-min - 1);
 
 // Link
-@link-color                   : @primary-color;
-@link-hover-color             : @primary-5;
-@link-active-color            : @primary-7;
+@link-color                   : @primary-5;
+@link-hover-color             : @primary-4;
+@link-active-color            : @primary-6;
 @link-decoration              : none;
 @link-hover-decoration        : none;
 
@@ -123,6 +242,8 @@
 @btn-default-bg                     : #fff;
 @btn-default-border                 : @border-color-base;
 
+@btn-group-border                   : @primary-color;
+
 // Radio bts
 @radio-button-bg            : @btn-default-bg;
 @radio-button-color         : @btn-default-color;
@@ -143,3 +264,36 @@
 @input-addon-bg              : #eee;
 @input-hover-border-color    : @primary-color;
 @input-disabled-bg           : @disabled-bg;
+@input-affix-width           : 0;
+
+//Rate
+@rate-reject-color              : @red-5;
+@rate-accept-color              : @green-5;
+@rate-review-color              : @yellow-5;
+@rate-height                    : 30px;
+@rate-width                     : 100px;
+@rate-score-width               : 24px;
+@rate-score-height              : 24px;
+
+//Pagination
+@pagination-item-color            : @primary-5;
+@pagination-item-width            : 28px;
+@pagination-item-height           : 28px;
+@pagination-item-mini-width       : 20px;
+@pagination-item-mini-height      : 20px;
+@pagination-font-size             : @font-size-base;
+@pagination-font-size-sm          : @font-size-sm;
+
+//Tree
+@tree-switcher-width              : 24px;
+@tree-switcher-height             : 24px;
+@tree-checkbox-width              : 14px;
+@tree-checkbox-height             : 14px;
+@tree-checkbox-color              : @primary-color;
+@tree-checkbox-disabled-color     : @disabled-color;
+@tree-checkbox-disabled-bg        : @disabled-bg;
+
+// steps
+@step-blue:        @blue-5;
+@step-gray:        #ccc;
+@step-black:        #999;

@@ -1,0 +1,192 @@
+@import '../../style/themes/default';
+
+@prefixCls: ~'@{pagination-prefix}';
+
+.@{prefixCls} {
+  overflow: hidden;
+  user-select: none;
+  font-size: @pagination-font-size;
+  &-total-text {
+    float: left;
+    height: @pagination-item-height;
+    line-height: @pagination-item-height;
+    margin-right: 10px;
+  }
+  &-item, &-prev, &-next {
+    float:left;
+    border-radius: 6px;
+    min-width: @pagination-item-width;
+    text-align: center;
+    line-height: @pagination-item-height;
+    height: @pagination-item-height;
+    cursor: pointer;
+    list-style: none;
+    border: 1px solid #d9d9d9;
+    background-color: #fff;
+    margin-right: 8px;
+    box-sizing: border-box;
+    a {
+      color: #666;
+      text-decoration: none;
+      display: block;
+    }
+    &:hover {
+      border-color: @pagination-item-color;
+      a {
+        color: @pagination-item-color;
+      }
+    }
+    &-active {
+      background-color: @pagination-item-color;
+      border-color: @pagination-item-color;
+      a {
+        color: #fff;
+      }
+      &:hover {
+        a {
+          color: #fff;
+        }
+      }
+    }
+  }
+  &-prev, &-next {
+    &:after {
+      content: '';
+      display: block;
+      letter-spacing: 2px;
+      color: #ccc;
+      width: @pagination-item-width;
+      height: @pagination-item-height;
+      text-align: center;
+      line-height: @pagination-item-height;
+      margin-top: -1px;
+    }
+    &:hover {
+      &:after {
+        color: @pagination-item-color;
+      }
+    }
+  }
+  &-disabled {
+    cursor: not-allowed;
+    background-color: @disabled-bg;
+    &:hover {
+      border-color: #d9d9d9;
+      &:after{
+        color: #ccc;
+      }
+    }
+  }
+  &-prev {
+    &:after {
+      content: '<';
+    }
+  }
+  &-next {
+    &:after {
+      content: '>';
+    }
+  }
+  &-jump-prev, &-jump-next {
+    float:left;
+    margin-right: 8px;
+    cursor: pointer;
+    &:after {
+      content: '•••';
+      display: block;
+      letter-spacing: 2px;
+      color: #ccc;
+      font-size: 12px;
+      width: @pagination-item-width;
+      height: @pagination-item-height;
+      text-align: center;
+      line-height: @pagination-item-height;
+    }
+    &:hover {
+      &:after {
+        color: @pagination-item-color;
+      }
+    }
+  }
+  &-jump-prev {
+    &:hover {
+      &:after {
+        content: '<<'
+      }
+    }
+  }
+  &-jump-next {
+    &:hover {
+      &:after {
+        content: '>>';
+      }
+    }
+  }
+  &-options {
+    float: left;
+    margin-right: 8px;
+  }
+  &-quick-jumper {
+    float: left;
+    input {
+      box-sizing: border-box;
+      height: @pagination-item-height;
+      width: 50px;
+      background: #fff;
+      border: 1px solid #d9d9d9;
+      border-radius: 6px;
+      outline: none;
+      color: #666;
+      padding: 5px;
+      margin: 0 5px;
+      transition: all .3s;
+      &:focus {
+        border-color: @pagination-item-color;
+        box-shadow: 0 0 0 2px fadeout(@pagination-item-color, 80%);
+      }
+    }
+  }
+}
+
+.@{prefixCls}-mini{
+  font-size: @pagination-font-size-sm;
+  .@{prefixCls}-total-text{
+    height: @pagination-item-mini-height;
+    line-height: @pagination-item-mini-height;
+    margin-right: 2px;
+  }
+  .@{prefixCls}-item, .@{prefixCls}-prev, .@{prefixCls}-next {
+    min-width: @pagination-item-mini-width;
+    height: @pagination-item-mini-height;
+    line-height: @pagination-item-mini-height;
+    border: 0;
+    margin-right: 0;
+  }
+  .@{prefixCls}-item-active {
+    a {
+      background-color: #fff;
+      color: @pagination-item-color;
+    }
+  }
+  .@{prefixCls}-prev, .@{prefixCls}-next {
+    background-color: #fff;
+    &:after {
+      width: @pagination-item-mini-width;
+      height: @pagination-item-mini-height;
+      line-height: @pagination-item-mini-height;
+    }
+  }
+  .@{prefixCls}-jump-prev, .@{prefixCls}-jump-next {
+    margin-right: 0;
+    &:after {
+      width: @pagination-item-mini-width;
+      height: @pagination-item-mini-height;
+      line-height: @pagination-item-mini-height;
+    }
+  }
+  .@{prefixCls}-quick-jumper {
+    input {
+      height: @pagination-item-mini-height;
+    }
+  }
+}
