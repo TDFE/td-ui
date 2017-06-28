@@ -6,5 +6,7 @@
  */
 
 import DatePicker from './date-picker';
+import RangePicker from './range-picker';
 
+DatePicker.RangePicker = RangePicker;
 export default DatePicker;

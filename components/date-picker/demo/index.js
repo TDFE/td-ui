@@ -13,6 +13,7 @@ const MOUNT_NODE = document.getElementById('app');
 
 let render = () => {
   const DatePicker = require('../index').default;
+  const RangePicker = DatePicker.RangePicker;
 
   function Demo() {
     return (
@@ -26,6 +27,11 @@ let render = () => {
           </Col>
           <Col span={8}>
             <DatePicker format="YYYY-MM-DD HH:mm:ss"/>
+          </Col>
+        </Row>
+        <Row>
+          <Col span={8}>
+            <RangePicker format="YYYY-MM-DD"/>
           </Col>
         </Row>
       </div>
