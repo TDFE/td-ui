@@ -279,7 +279,7 @@ class Calendar extends React.Component {
       this.setState({ value });
       this.props.onSelect(value);
     } else {
-      this.setState({ value: today });
+      this.setState({ value: today, selectingType: MONTH });
       this.props.onSelect(today);
     }
   };
@@ -305,14 +305,14 @@ class Calendar extends React.Component {
         onClick={
           selectingType === TIME ? this.onNow : (
             (selectingType === DAY || calendarType >= DAY_PICKER) ? this.onToday : (
-              selectingType === MONTH ? this.onCurMonth : this.onCurYear
+              (selectingType === MONTH || calendarType >= MONTH_PICKER) ? this.onCurMonth : this.onCurYear
             )
           )
         }>
         {
           selectingType === TIME ? '此刻' : (
             (selectingType === DAY || calendarType >= DAY_PICKER) ? '今天' : (
-              selectingType === MONTH ? '本月' : '今年'
+              (selectingType === MONTH || calendarType >= MONTH_PICKER) ? '本月' : '今年'
             )
           )
         }
@@ -341,7 +341,8 @@ class Calendar extends React.Component {
 export default class DatePicker extends React.Component {
   static defaultProps = {
     prefixCls: s.datePickerPrefix,
-    format: 'YYYY-MM-DD HH:mm:ss'
+    format: 'YYYY-MM-DD HH:mm:ss',
+    allowClear: true
   };
 
   constructor(props) {
@@ -373,10 +374,16 @@ export default class DatePicker extends React.Component {
     }
   }
 
+  clearSelection = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    this.handleChange(null);
+  }
+
   render() {
     const { value } = this.state;
     const props = omit(this.props, ['onChange']);
-    const { prefixCls, format, placeholder } = props;
+    const { prefixCls, format, placeholder, allowClear, disabled } = props;
     const calendar = (
       <Calendar
         prefixCls={`${prefixCls}-calendar`}
@@ -386,14 +393,22 @@ export default class DatePicker extends React.Component {
         defaultValue={props.defaultPickerValue || moment()}
         />
     );
+    const icon = allowClear && !disabled && value ? (
+      <Icon
+        type="cross-circle"
+        className={`${prefixCls}-clear`}
+        onClick={this.clearSelection}
+      />
+  ) : <Icon type="calendar" />;
     const input = ({ value: inputValue }) => (
       <div>
         <Input
           readOnly
+          disabled={disabled}
           value={(inputValue && inputValue.format(format)) || ''}
           placeholder={placeholder || '请选择'}
           className={`${prefixCls}-input`}
-          suffix={<Icon type="calendar" />}
+          suffix={icon}
           />
       </div>
     );
