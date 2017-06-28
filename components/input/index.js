@@ -7,6 +7,6 @@
 /* eslint-disable */
 
 import Input from './input';
-import Search from './search'; 
-// export default Input;
-export {Input,Search};
+import Search from './search';
+Input.Search = Search;
+export default Input;

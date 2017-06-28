@@ -16,7 +16,10 @@
 	}
 }
 .active() {
-  border-color: @blue-5;
+  .active(@blue-5);
+}
+.active(@border-color) {
+  border-color: @border-color;
   outline: 0;
   box-shadow:0;
 }
@@ -36,7 +39,7 @@
 	position: relative;
 	display: inline-block;
 	padding:0 @input-padding-horizontal;
-	width: 280px;
+	width: @input-width-base;
 	height: @input-height-base;
 	cursor: text;
 	font-size: @font-size-base;

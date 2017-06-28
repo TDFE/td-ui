@@ -18,7 +18,7 @@ export default class RadioGroup extends Component {
   };
 
   static propTypes = {
-    option: PropTypes.array,
+    options: PropTypes.array,
     defaultValue: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     size: PropTypes.oneOf(['large', 'default', 'small']),

@@ -1,5 +1,6 @@
-@import "../../style/themes/default.less";
-@import "../../style/mixins/index";
+@import "../../style/index.less";
+@import "../../style/mixins/index.less";
+@import './mixin.less';
 
 .@{date-picker-prefix} {
   position: relative;
@@ -7,6 +8,14 @@
   outline: none;
   font-size: @font-size-base;
   transition: opacity .3s;
+
+  &-input {
+    width: @date-picker-input-width!important;
+  }
+
+  &-clear {
+    cursor: pointer;
+  }
 
   &-container {
     position: absolute;
@@ -61,7 +70,7 @@
         display: inline-block;
         cursor: pointer;
         text-align: center;
-        color: @date-picker-font-color;
+        color: @date-picker-header-font-color;
         user-select: none;
         font-size: @font-size-base;
         width: @date-picker-panel-width - @date-picker-cell-size * 2;
@@ -81,6 +90,15 @@
       line-height: @date-picker-cell-size;
       user-select: none;
       font-size: @font-size-base - 2;
+
+      .date-table();
+      .month-table();
+      .year-table();
+      .time-table();
+
+      table,th,td {
+        border: 0;
+      }
     }
 
     &-footer {
@@ -88,7 +106,7 @@
       line-height: @date-picker-cell-size;
       cursor: pointer;
       text-align: center;
-      color: @date-picker-font-color;
+      color: @date-picker-header-font-color;
       user-select: none;
       font-size: @font-size-base;
 
