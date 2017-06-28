@@ -60,7 +60,6 @@ class Cascader extends Component {
 
   handleCascaderPickerClick = () => {
     const { menuArray, menuOpen } = this.state;
-    console.log(this.state);
     const { options } = this.props;
     if (menuArray.length === 0) {
       const menuMap = { level: 0, selectedIndex: -1, options }
@@ -124,7 +123,6 @@ class Cascader extends Component {
   handleComponentUpdate = (props, firstRun) => {
     let { options, values } = props;
 
-    console.log(values);
     if (!options || !values || options.length === 0 || values.length === 0) return
 
     const valuesOptions = this.getValuesOptions(options, values);
