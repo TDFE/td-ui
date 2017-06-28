@@ -5,6 +5,7 @@ import React, { Component } from 'react';
 import classNames from 'classnames';
 import _ from 'lodash/core'
 import s from './style/index';
+import Input from '../input/index'
 
 const prefixCls = s.cascaderPrefix;
 
@@ -137,7 +138,7 @@ class Cascader extends Component {
       <div className={ prefixCls }>
         <div className={`${prefixCls}-picker`} onClick={this.handleCascaderPickerClick}>
           <div className="input-wrapper">
-            <input
+            <Input
               type="text"
               size="small"
               readOnly
