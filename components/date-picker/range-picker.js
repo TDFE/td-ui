@@ -12,8 +12,7 @@ import React from 'react';
 import classNames from 'classnames';
 import moment from 'moment';
 import Picker from './picker';
-import RangeCalendar from './rangeCalendar';
-// import Button from '../button';
+import RangeCalendar from './range-calendar';
 import Icon from '../icon';
 import s from './style';
 
@@ -120,7 +119,7 @@ export default class RangePicker extends React.Component {
     const { state, props } = this;
     const { value, showDate, hoverValue, open } = state;
     const {
-      prefixCls, style, disabledDate, inputClass,
+      prefixCls, style, disabledDate,
       showTime, format, startPlaceholder,
       endPlaceholder, disabled, allowClear
     } = props;
@@ -150,21 +149,21 @@ export default class RangePicker extends React.Component {
       const start = inputValue[0];
       const end = inputValue[1];
       return (
-        <span className={inputClass} disabled={disabled}>
+        <span className={`${prefixCls}-input`} disabled={disabled}>
           <input
             disabled={disabled}
             readOnly
             value={start && start.format(format) || ''}
-            placeholder={startPlaceholder}
-            className={`${prefixCls}-input`}
+            placeholder={startPlaceholder || '开始时间'}
+            className={`${prefixCls}-input-item`}
             />
-          <span className={`${prefixCls}-separator`}> ~ </span>
+          <span className={`${prefixCls}-input-separator`}> ~ </span>
           <input
             disabled={disabled}
             readOnly
             value={end && end.format(format) || ''}
-            placeholder={endPlaceholder}
-            className={`${prefixCls}-input`}
+            placeholder={endPlaceholder || '结束时间'}
+            className={`${prefixCls}-input-item`}
             />
           {icon}
         </span>

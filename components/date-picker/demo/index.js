@@ -29,7 +29,7 @@ let render = () => {
             <DatePicker format="YYYY-MM-DD HH:mm:ss"/>
           </Col>
         </Row>
-        <Row>
+        <Row style={{padding: 10}}>
           <Col span={8}>
             <RangePicker format="YYYY-MM-DD"/>
           </Col>
