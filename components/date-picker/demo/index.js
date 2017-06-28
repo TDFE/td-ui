@@ -7,6 +7,7 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Row, Col } from '../../grid';
 
 const MOUNT_NODE = document.getElementById('app');
 
@@ -16,7 +17,17 @@ let render = () => {
   function Demo() {
     return (
       <div className="td">
-        <DatePicker format="YYYY-MM"/>
+        <Row>
+          <Col span={8}>
+            <DatePicker format="YYYY-MM"/>
+          </Col>
+          <Col span={8}>
+            <DatePicker format="YYYY-MM-DD"/>
+          </Col>
+          <Col span={8}>
+            <DatePicker format="YYYY-MM-DD HH:mm:ss"/>
+          </Col>
+        </Row>
       </div>
     );
   }
