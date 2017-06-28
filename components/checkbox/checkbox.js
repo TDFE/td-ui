@@ -49,7 +49,7 @@ export default class Checkbox extends Component {
     if (checkboxGroup) {
       checkboxPropTypes.onChange = checkboxGroup.onChange;
       checkboxPropTypes.disabled = checkboxPropTypes.disabled || checkboxGroup.disabled;
-      checkboxPropTypes.checked = checkboxPropTypes.value === checkboxGroup.value;
+      checkboxPropTypes.checked = checkboxGroup.value.indexOf(checkboxPropTypes.value) !== -1;
     }
 
     const st = Object.assign({}, style);

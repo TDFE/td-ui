@@ -1,3 +1,6 @@
-import Radio from './checkbox';
+import Checkbox from './checkbox';
 
-export default Radio;
+import CheckboxGroup from './checkboxGroup';
+
+Checkbox.CheckboxGroup = CheckboxGroup;
+export default Checkbox;
