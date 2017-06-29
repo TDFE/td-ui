@@ -8,10 +8,41 @@
 import React from 'react';
 
 export default class RangeCalendar extends React.Component {
+  renderTool() {
+    const { prefixCls } = this.props;
+    return (
+      <div className={`${prefixCls}-tool`}>
+        <div className={`${prefixCls}-tool-split`}/>
+      </div>
+    );
+  }
+
+  renderTime() {
+    const { prefixCls } = this.props;
+    return (
+      <div className={`${prefixCls}-time`}>
+        <div className={`${prefixCls}-time-item`}>
+          <div className={`${prefixCls}-time-item-split`}/>
+        </div>
+        <div className={`${prefixCls}-time-split`}>~</div>
+        <div className={`${prefixCls}-time-item`}>
+          <div className={`${prefixCls}-time-item-split`}/>
+        </div>
+      </div>
+    );
+  }
+
   render() {
     const { prefixCls } = this.props;
     return (
-      <div className={prefixCls}></div>
+      <div className={prefixCls}>
+        {
+          this.renderTool()
+        }
+        {
+          this.renderTime()
+        }
+      </div>
     );
   }
 }

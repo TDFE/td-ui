@@ -163,5 +163,56 @@
     border: @border-width-base @border-style-base @border-color-base;
     box-shadow: 0 1px 6px @shadow-color;
     padding: 0 @date-picker-gap-horizontal @date-picker-gap-vertial @date-picker-gap-horizontal;
+
+    &-tool {
+      position: relative;
+      height: @range-picker-tool-height;
+      width: 100%;
+      text-align: left;
+      vertical-align: middle;
+      padding-bottom: @date-picker-gap-vertial;
+
+      &-split {
+        position: absolute;
+        height: 2px;
+        background-color: #eee;
+        width: @range-picker-panel-width + @date-picker-gap-horizontal * 2;
+        left: 0 - @date-picker-gap-horizontal;
+        top: @range-picker-tool-height;
+      }
+    }
+
+    &-time {
+      position: relative;
+      height: @range-picker-time-height;
+      width: 100%;
+      padding-bottom: @date-picker-gap-vertial;
+
+      &-item {
+        float: left;
+        position: relative;
+        display: inline-block;
+        height: 100%;
+        width: @date-picker-panel-width;
+        text-align: center;
+
+        &-split {
+          position: absolute;
+          height: 2px;
+          background-color: #eee;
+          width: @date-picker-panel-width;
+          left: 0;
+          top: @range-picker-time-height;
+        }
+      }
+
+      &-split {
+        display: inline-block;
+        width: @date-picker-gap-horizontal;
+        text-align: center;
+        float: left;
+        margin-top: @range-picker-time-height / 4;
+      }
+    }
   }
 }
