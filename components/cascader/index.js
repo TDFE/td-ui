@@ -1,6 +1,6 @@
 /**
- * @Author: Zhengfeng.Yao <yzf>
- * @Date:   2017-05-24 15:04:30
- * @Last modified by:   yzf
- * @Last modified time: 2017-05-24 15:04:33
+ * Created by wxy on 2017/6/16.
  */
+import Cascader from './cascader';
+
+export default Cascader;
