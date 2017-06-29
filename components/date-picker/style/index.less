@@ -120,6 +120,22 @@
       vertical-align: middle;
       padding-bottom: @date-picker-gap-vertial;
 
+      .@{btn-prefix}-group {
+        margin-top: 5px;
+
+        .@{btn-prefix} {
+          font-weight: bold;
+          color: @date-picker-header-font-color;
+
+          &:hover {
+            color: tint(@primary-color, 20%);
+          }
+          &:active {
+            color: @date-picker-header-font-color;
+          }
+        }
+      }
+
       &-split {
         position: absolute;
         height: 2px;
@@ -142,13 +158,14 @@
         display: inline-block;
         height: 100%;
         width: @date-picker-panel-width;
-        text-align: center;
+        text-align: left;
 
         &-label {
           font-size: @font-size-base;
           font-weight: bold;
           color: @date-picker-header-font-color;
           line-height: @range-picker-time-height;
+          padding-left: @range-picker-time-height / 2;
         }
 
         &-value {

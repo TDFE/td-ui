@@ -6,9 +6,6 @@
  */
 
 import React from 'react';
-// import warning from 'warning';
-// import omit from 'lodash/omit';
-// import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import moment from 'moment';
 import Picker from './picker';
@@ -135,7 +132,8 @@ export default class RangePicker extends React.Component {
         className={calendarClassName}
         showTime={showTime}
         inputPlaceholder={[startPlaceholder, endPlaceholder]}
-        value={showDate || pickerValueAdapter(props.defaultPickerValue) || pickerValueAdapter(moment())}
+        value={value}
+        showDate={showDate || pickerValueAdapter(props.defaultPickerValue) || pickerValueAdapter(moment())}
         onValueChange={this.handleShowDateChange}
         hoverValue={hoverValue}
         onHoverChange={this.handleHoverChange}
