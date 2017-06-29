@@ -220,12 +220,31 @@
       }
     }
 
-    &-header {
-      .calendar-header();
-    }
+    &-tables {
+      &-header {
+        .calendar-header();
+      }
 
-    &-table {
-      .calendar-table();
+      &-table {
+        .calendar-table();
+
+        &-time-mask {
+          width: @date-picker-panel-width;
+          top: @date-picker-cell-size * 4 - 6;
+
+          &-colon {
+            left: 0 + @date-picker-panel-width / 2;
+          }
+
+          &-first-colon {
+            left: 0 + @date-picker-panel-width / 3;
+          }
+
+          &-second-colon {
+            left: 0 + @date-picker-panel-width / 3 * 2;
+          }
+        }
+      }
     }
   }
 }

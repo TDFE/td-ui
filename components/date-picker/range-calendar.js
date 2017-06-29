@@ -8,6 +8,7 @@
 import React from 'react';
 import moment from 'moment';
 import Button from '../button';
+import Calendar from './calendar';
 
 const ButtonGroup = Button.Group;
 
@@ -61,18 +62,30 @@ export default class RangeCalendar extends React.Component {
     );
   }
 
+  onStartSelect = value => {};
+
+  onEndSelect = value => {};
+
   renderPanel() {
-    const { prefixCls } = this.props;
+    const { prefixCls, value, format } = this.props;
     return (
       <div className={`${prefixCls}-panel`}>
         <div className={`${prefixCls}-container`}>
-          <div className={`${prefixCls}-header`}></div>
-          <div className={`${prefixCls}-table`}></div>
+          <Calendar
+            prefixCls={`${prefixCls}-tables`}
+            value={value[0]}
+            format={format}
+            onSelect={this.onStartSelect}
+            />
         </div>
         <div className={`${prefixCls}-panel-split`}/>
         <div className={`${prefixCls}-container`}>
-          <div className={`${prefixCls}-header`}></div>
-          <div className={`${prefixCls}-table`}></div>
+          <Calendar
+            prefixCls={`${prefixCls}-tables`}
+            value={value[1]}
+            format={format}
+            onSelect={this.onEndSelect}
+            />
         </div>
       </div>
     );

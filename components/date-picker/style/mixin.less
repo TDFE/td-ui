@@ -103,6 +103,7 @@
     width: 100%;
     border-collapse: collapse;
     max-width: 100%;
+    display: inline-block;
 
     &-cell {
       cursor: pointer;
@@ -283,6 +284,18 @@
         position: absolute;
         font-weight: bold;
         line-height: @date-picker-cell-size + 10;
+      }
+
+      &-colon {
+        left: @date-picker-gap-horizontal + @date-picker-panel-width / 2;
+      }
+
+      &-first-colon {
+        left: @date-picker-gap-horizontal + @date-picker-panel-width / 3;
+      }
+
+      &-second-colon {
+        left: @date-picker-gap-horizontal + @date-picker-panel-width / 3 * 2;
       }
     }
   }
