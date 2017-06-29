@@ -1,9 +1,9 @@
 /**
-* @Author: Zhengfeng.Yao <yzf>
-* @Date:   2017-06-21 14:26:49
-* @Last modified by:   yzf
-* @Last modified time: 2017-06-22 09:49:27
-*/
+ * @Author: Zhengfeng.Yao <yzf>
+ * @Date:   2017-06-21 14:26:49
+ * @Last modified by:   yzf
+ * @Last modified time: 2017-06-29 11:13:37
+ */
 
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -31,7 +31,7 @@ let render = () => {
         </Row>
         <Row style={{padding: 10}}>
           <Col span={8}>
-            <RangePicker format="YYYY-MM-DD"/>
+            <RangePicker format="YYYY-MM-DD HH:mm:ss"/>
           </Col>
         </Row>
       </div>

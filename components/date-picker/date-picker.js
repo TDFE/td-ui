@@ -29,8 +29,6 @@ import {
 } from './constant';
 import { DateTable, MonthTable, YearTable, TimeTable } from './common';
 
-moment.locale('zh-CN');
-
 class Calendar extends React.Component {
   static propTypes = {
     disabledDate: PropTypes.func,
