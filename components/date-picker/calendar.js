@@ -89,6 +89,7 @@ export default class Calendar extends React.Component {
 
   onPrev = () => {
     const { selectingType, value } = this.state;
+    const { disabledDate } = this.props;
     let newValue = value.clone();
     switch (selectingType) {
       case TIME:
@@ -104,11 +105,14 @@ export default class Calendar extends React.Component {
         newValue.subtract(10, 'years');
         break;
     }
-    this.setState({ value: newValue });
-    this.props.onSelect(newValue);
+    if (!disabledDate || !disabledDate(newValue)) {
+      this.setState({ value: newValue });
+      this.props.onSelect(newValue);
+    }
   };
 
   onNext = () => {
+    const { disabledDate } = this.props;
     const { selectingType, value } = this.state;
     let newValue = value.clone();
     switch (selectingType) {
@@ -125,8 +129,10 @@ export default class Calendar extends React.Component {
         newValue.add(10, 'years');
         break;
     }
-    this.setState({ value: newValue });
-    this.props.onSelect(newValue);
+    if (!disabledDate || !disabledDate(newValue)) {
+      this.setState({ value: newValue });
+      this.props.onSelect(newValue);
+    }
   };
 
   onSelectingTypeChange = () => {
