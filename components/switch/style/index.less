@@ -1,0 +1,87 @@
+@import "../../style/themes/default.less";
+
+.td-switch{
+  position: relative;
+  display: inline-block;
+  box-sizing: border-box;
+  height: 22px;
+  min-width: 44px;
+  line-height: 20px;
+  vertical-align: middle;
+  border-radius: 20px;
+  border: 1px solid #ccc;
+  background-color: rgba(0,0,0,.25);
+  cursor: pointer;
+  font-size:14px;
+  font-family: Consolas;
+  text-align: center;
+  user-select: none;
+  transition: background-color .3s;
+  &-small{
+    height: 16px;
+    min-width: 38px;
+    line-height: 16px;
+    &-checked{
+      background-color: @primary-color;
+    }
+  }
+  &-checked{
+    background-color: @primary-color;
+  }
+}
+
+.td-switch-button{
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  left: 1px;
+  top: 1px;
+  border: 1px solid #fff;
+  border-radius: 18px;
+  background-color: #fff;
+  cursor: pointer;
+  transition: all .3s,width .3s;
+  z-index: 10;
+  &:active{
+    width: 20px;
+  }
+  &-on{
+    left: 22px;
+    &:active{
+      margin-left:-4px;
+    }
+  }
+  &-small{
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    left: 0px;
+    top: 0px;
+    &:active{
+      width: 16px;
+    }
+    &-on{
+      left: 22px;
+      &:active{
+        margin-left:-4px;
+      }
+  }
+  }
+}
+
+.td-child-common {
+  width: 22px;
+  color: #f5f5f5;
+  position: absolute;
+}
+.td-child{
+  &-check{
+    .td-child-common;
+    left: 2px;
+  }
+  &-uncheck{
+    .td-child-common;
+    right: 2px;
+  }
+}
+

@@ -63,7 +63,7 @@
     line-height: 1;
     width: 20px;
     transition: color 0.3s ease;
-    .iconfont-font(@tdicon-close);
+    .iconfont-font(@tdicon-cross-circle);
   }
 
   &-clear-btn:hover:after {
@@ -113,11 +113,11 @@
       list-style: none;
       box-sizing: content-box;
       margin: 0;
-      padding: 0 0 0 8px;
+      padding: 0;
       width: 100%;
       height: 24px;
       line-height: 24px;
-      text-align: left;
+      text-align: center;
       cursor: pointer;
       user-select: none;
       transition: background 0.3s;
@@ -184,18 +184,21 @@
   outline: none;
   font-size: @font-size-base;
   transition: opacity 0.3s ease;
-  width: 100px;
+  width: @time-picker-input-width;
 
   &-input {
     .input;
+    width: @time-picker-input-width;
   }
 
   &-large &-input {
     .input-lg;
+    width: @time-picker-input-width;
   }
 
   &-small &-input {
     .input-sm;
+    width: @time-picker-input-width;
   }
 
   &-open {

@@ -1,0 +1,172 @@
+/**
+ * @Author: Yingxi.Hao <yzf>
+ * @Date:   2017-06-20
+ * @Last modified by:   hyx
+ * @Last modified time: 2017-06-23
+ */
+@import '../../style/themes/default';
+@import '../../style/mixins/index';
+@success-color: #75d444;
+@exception-color: #ed4c3c;
+@normal-color: #2ea5ff;
+@background-color: #eee;
+@text-color: #333;
+.@{progress-prefix} {
+  display: inline-block;
+  margin-right: 2.75em;
+  &-wrapper {
+    display: inline-block;
+    padding:5px;
+  }
+  &-line {
+    font-size: @font-size-base;//14px
+    position: relative;
+  }
+  &-outer {
+    display: inline-block;
+    background-color: @background-color;
+    border-radius: 4px;
+    vertical-align: middle;
+  }
+  &-inner {
+    display: inline-block;
+    border-radius: 4px;
+    background-color: @normal-color;
+    vertical-align: top;
+    &-stripe {
+      display: inline-block;
+      border-radius: 4px;
+      vertical-align: top;
+      background: @normal-color linear-gradient(45deg,rgba(0,0,0,.10) 25%,@normal-color 0,@normal-color 50%,rgba(0,0,0,.10) 0,rgba(0,0,0,.10) 75%,@normal-color 0);
+      background-size: 30px 30px;
+      height: 14px;
+      animation: progress-bar-stripes 0.5s linear infinite;
+    }
+  }
+  &-text {
+    font-size:@font-size-base;
+    color:@text-color;
+    vertical-align: middle;
+    display: inline-block;
+    margin-left:10px;
+    width: 2em;
+    text-align: right;
+  }
+  &-status-success {
+    .@{progress-prefix} {
+      &-text {
+        text-align: center;
+        color: @success-color;
+      }
+      &-inner {
+        background-color: @success-color;
+        &-stripe {
+          background: @success-color linear-gradient(45deg,rgba(0,0,0,.10) 25%,@success-color 0,@success-color 50%,rgba(0,0,0,.10) 0,rgba(0,0,0,.10) 75%,@success-color 0);
+          background-size: 30px 30px;
+        }
+      }
+      &-circle {
+       &-text {
+         color: @success-color;
+       }
+        &-left,
+        &-right {
+          border-color: @success-color;
+        }
+      }
+    }
+  }
+  &-status-exception {
+    .@{progress-prefix} {
+      &-text {
+        text-align: center;
+        color: @exception-color;
+      }
+      &-inner {
+        background-color: @exception-color;
+        &-stripe {
+          background: @exception-color linear-gradient(45deg,rgba(0,0,0,.10) 25%,@exception-color 0,@exception-color 50%,rgba(0,0,0,.10) 0,rgba(0,0,0,.10) 75%,@exception-color 0);
+          background-size: 30px 30px;
+        }
+      }
+      &-circle {
+        &-text {
+          color: @exception-color;
+        }
+        &-left,
+        &-right {
+          border-color: @exception-color;
+        }
+      }
+    }
+  }
+  @keyframes progress-bar-stripes {
+    0%{
+      background-position: 0 0
+    }
+    100% {
+      background-position: 30px 0
+    }
+  }
+  &-circle {
+    &-outer {
+      border-radius : 50%;
+      background-color: #fff;
+      position: relative;
+    }
+    &-inner {
+      border-radius : 50%;
+      box-sizing: border-box;
+      border: 8px solid @background-color;
+    }
+    &-percent {
+      top:0;
+      left:0;
+      position: absolute;
+    }
+    &-left,
+    &-right{
+      box-sizing:border-box;
+      top:0;
+      left:0;
+      position: absolute;
+      border:8px solid @normal-color;
+      border-radius : 50%;
+    }
+    &-right {
+      display: none;
+    }
+    &-text {
+      position: absolute;
+      top:0;
+      left:0;
+      text-align: center;
+      font-size:24px;
+      color: @text-color;
+    }
+  }
+  //&-line-inner {
+  //  & span{
+  //    background: rgba(255,255,255,0.2);
+  //    animation: progress-bar-line 1.5s cubic-bezier(.23,1,.32,1) infinite;
+  //    height:8px;
+  //    vertical-align: top;
+  //    border-radius:4px;
+  //  }
+  //}
+
+  //@keyframes progress-bar-line {
+  //  0% {
+  //    opacity:0.1;
+  //    width:0;
+  //  }
+  //  20% {
+  //    opacity: 0.5;
+  //    width: 0;
+  //  }
+  //  100% {
+  //    opacity:1;
+  //    width:100%
+  //  }
+  //}
+}
