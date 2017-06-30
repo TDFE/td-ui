@@ -80,9 +80,15 @@ export default class RangeCalendar extends React.Component {
     return (disabledDate && disabledDate(end)) || (end.valueOf() <= start.valueOf());
   };
 
-  onStartSelect = value => {};
+  onStartSelect = start => {
+    const { value } = this.props;
+    this.props.onSelect([start, value[1]]);
+  };
 
-  onEndSelect = value => {};
+  onEndSelect = end => {
+    const { value } = this.props;
+    this.props.onSelect([value[0], end]);
+  };
 
   renderPanel() {
     const { prefixCls, value, format } = this.props;

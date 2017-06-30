@@ -258,16 +258,11 @@
         }
 
         &-disabled div {
-          background-color: @date-picker-disabled-color;
-          border-color: @date-picker-disabled-border!important;
-          color: @date-picker-disabled-border;
+          background-color: @date-picker-disabled-color!important;
+          border-color: transparent!important;
+          color: @date-picker-disabled-border!important;
           cursor: not-allowed;
-
-          &:hover,&:active {
-            background-color: @date-picker-disabled-color;
-            border-color: @date-picker-disabled-border!important;
-            color: @date-picker-disabled-border;
-          }
+          border-radius: 0!important;
         }
       }
     }
