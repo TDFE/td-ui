@@ -48,6 +48,12 @@ export default class Calendar extends React.Component {
     };
   }
 
+  componentWillReceiveProps({value}) {
+    if (value) {
+      this.setState({ value });
+    }
+  }
+
   getCalendarType = () => {
     const { format } = this.props;
     if (!format) {
@@ -203,7 +209,7 @@ export default class Calendar extends React.Component {
   };
 
   renderTable = () => {
-    const { prefixCls } = this.props;
+    const { prefixCls, disabledDate } = this.props;
     const { selectingType, value, calendarType } = this.state;
     return (
       <div className={`${prefixCls}-table`}>
@@ -213,6 +219,7 @@ export default class Calendar extends React.Component {
               prefixCls={`${prefixCls}-table-date`}
               onSelect={this.onDateSelect}
               value={value}
+              disabledDate={disabledDate}
               />
           )
         }
@@ -222,6 +229,7 @@ export default class Calendar extends React.Component {
               prefixCls={`${prefixCls}-table-month`}
               onSelect={this.onMonthSelect}
               value={value}
+              disabledDate={disabledDate}
               />
           )
         }
@@ -231,6 +239,7 @@ export default class Calendar extends React.Component {
               prefixCls={`${prefixCls}-table-year`}
               onSelect={this.onYearSelect}
               value={value}
+              disabledDate={disabledDate}
               />
           )
         }
@@ -240,6 +249,7 @@ export default class Calendar extends React.Component {
               prefixCls={`${prefixCls}-table-time`}
               onSelect={this.onTimeSelect}
               value={value}
+              disabledDate={disabledDate}
               type={calendarType}
               />
           )

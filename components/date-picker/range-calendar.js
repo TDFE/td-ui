@@ -62,6 +62,24 @@ export default class RangeCalendar extends React.Component {
     );
   }
 
+  disabledStartDate = start => {
+    const { value, disabledDate } = this.props;
+    const end = value[1];
+    if (!end) {
+      return disabledDate && disabledDate(start);
+    }
+    return (disabledDate && disabledDate(start)) || (start.valueOf() >= end.valueOf());
+  };
+
+  disabledEndDate = end => {
+    const { value, disabledDate } = this.props;
+    const start = value[0];
+    if (!start) {
+      return disabledDate && disabledDate(end);
+    }
+    return (disabledDate && disabledDate(end)) || (end.valueOf() <= start.valueOf());
+  };
+
   onStartSelect = value => {};
 
   onEndSelect = value => {};
@@ -75,6 +93,7 @@ export default class RangeCalendar extends React.Component {
             prefixCls={`${prefixCls}-tables`}
             value={value[0]}
             format={format}
+            disabledDate={this.disabledStartDate}
             onSelect={this.onStartSelect}
             />
         </div>
@@ -85,6 +104,7 @@ export default class RangeCalendar extends React.Component {
             className={`${prefixCls}-tables-right`}
             value={value[1]}
             format={format}
+            disabledDate={this.disabledEndDate}
             onSelect={this.onEndSelect}
             />
         </div>
