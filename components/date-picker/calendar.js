@@ -195,13 +195,13 @@ export default class Calendar extends React.Component {
       <div className={`${prefixCls}-header`}>
         <Button type="noborder" icon="return" onClick={this.onPrev}/>
         <div className={`${prefixCls}-header-btn`} onClick={this.onSelectingTypeChange}>
-        {
-          selectingType === TIME ? value.format('YYYY年MM月DD日') : (
-            selectingType === DAY ? value.format('YYYY年MM月') : (
-              selectingType === MONTH ? value.format('YYYY年') : `${Math.floor(value.year() / 10) * 10}年-${Math.ceil(value.year() / 10) * 10 - 1}`
+          {
+            selectingType === TIME ? value.format('YYYY年MM月DD日') : (
+              selectingType === DAY ? value.format('YYYY年MM月') : (
+                selectingType === MONTH ? value.format('YYYY年') : `${Math.floor(value.year() / 10) * 10}年-${Math.ceil(value.year() / 10) * 10 - 1}`
+              )
             )
-          )
-        }
+          }
         </div>
         <Button type="noborder" icon="enter" onClick={this.onNext}/>
       </div>
@@ -220,7 +220,7 @@ export default class Calendar extends React.Component {
               onSelect={this.onDateSelect}
               value={value}
               disabledDate={disabledDate}
-              />
+            />
           )
         }
         {
@@ -230,7 +230,7 @@ export default class Calendar extends React.Component {
               onSelect={this.onMonthSelect}
               value={value}
               disabledDate={disabledDate}
-              />
+            />
           )
         }
         {
@@ -240,7 +240,7 @@ export default class Calendar extends React.Component {
               onSelect={this.onYearSelect}
               value={value}
               disabledDate={disabledDate}
-              />
+            />
           )
         }
         {
@@ -251,7 +251,7 @@ export default class Calendar extends React.Component {
               value={value}
               disabledDate={disabledDate}
               type={calendarType}
-              />
+            />
           )
         }
       </div>

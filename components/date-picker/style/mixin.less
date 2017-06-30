@@ -59,7 +59,7 @@
 .selectedColors() {
   .colors(@date-picker-background-color;@date-picker-select-color;@date-picker-select-color;);
   &:hover {
-    .colors(@date-picker-hover-color;@date-picker-hover-color;@date-picker-background-color;);
+    .colors(@date-picker-hover-color;@date-picker-hover-color;"transparent";);
   }
   &:active {
     .colors(@date-picker-background-color;@date-picker-active-color;@date-picker-active-color;);
@@ -164,6 +164,47 @@
   .type-table(~'year', @date-picker-cell-size * 7 / 4 - 2);
 }
 
+.scrollbar(@type) {
+  & &-@{type}&-select::scrollbar {
+    background-color: transparent;
+    width: @date-picker-scrollbar-width;
+
+    &-thumb {
+      border-radius: @date-picker-scrollbar-width / 2;
+    }
+  }
+
+  & &-select:hover&-@{type}::scrollbar-thumb {
+    background-color: @date-picker-scrollbar-color;
+  }
+
+  & &-@{type}&-select::-webkit-scrollbar {
+    background-color: transparent;
+    width: @date-picker-scrollbar-width;
+
+    &-thumb {
+      border-radius: @date-picker-scrollbar-width / 2;
+    }
+  }
+
+  & &-select:hover&-@{type}::-webkit-scrollbar-thumb {
+    background-color: @date-picker-scrollbar-color;
+  }
+
+  & &-@{type}&-select::-moz-scrollbar {
+    background-color: transparent;
+    width: @date-picker-scrollbar-width;
+
+    &-thumb {
+      border-radius: @date-picker-scrollbar-width / 2;
+    }
+  }
+
+  & &-select:hover&-@{type}::-moz-scrollbar-thumb {
+    background-color: @date-picker-scrollbar-color;
+  }
+}
+
 .time-table() {
   &-time {
     height: 100%;
@@ -176,19 +217,20 @@
     overflow: hidden;
     line-height: @date-picker-cell-size;
 
+    .scrollbar(~'hour');
+    .scrollbar(~'minute');
+    .scrollbar(~'second');
+
     &-select {
       margin: 0;
       padding: 0;
       float: left;
       font-size: @font-size-base - 2;
       box-sizing: border-box;
-      overflow: hidden;
+      overflow-x: hidden;
+      overflow-y: auto;
       position: relative;
       height: 100%;
-
-      &:hover {
-        overflow-y: auto;
-      }
 
       ul {
         list-style: none;
@@ -201,6 +243,7 @@
 
         li {
           text-align: center;
+          padding-left: @date-picker-scrollbar-width;
           list-style: none;
           box-sizing: content-box;
           margin: 0;
@@ -216,7 +259,7 @@
             border-radius: @border-radius-base;
 
             &:hover {
-              background-color: @date-picker-background-color;
+              background-color: transparent;
               border-color: @date-picker-hover-color;
               color: @date-picker-hover-color;
             }
@@ -245,7 +288,7 @@
           color: @date-picker-background-color;
 
           &:hover {
-            background-color: @date-picker-background-color;
+            background-color: transparent;
             border-color: @date-picker-hover-color!important;
             color: @date-picker-hover-color;
           }

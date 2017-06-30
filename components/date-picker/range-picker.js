@@ -138,7 +138,7 @@ export default class RangePicker extends React.Component {
         hoverValue={hoverValue}
         onHoverChange={this.handleHoverChange}
         disabledDate={disabledDate}
-        />
+      />
     );
     const icon = (!disabled && allowClear && value && (value[0] || value[1])) ? (
       <Icon type="cross-circle" className={`${prefixCls}-clear`} onClick={this.clearSelection}/>
@@ -154,7 +154,7 @@ export default class RangePicker extends React.Component {
             value={start && start.format(format) || ''}
             placeholder={startPlaceholder || '开始时间'}
             className={`${prefixCls}-input-item`}
-            />
+          />
           <span className={`${prefixCls}-input-separator`}> ~ </span>
           <input
             disabled={disabled}
@@ -162,7 +162,7 @@ export default class RangePicker extends React.Component {
             value={end && end.format(format) || ''}
             placeholder={endPlaceholder || '结束时间'}
             className={`${prefixCls}-input-item`}
-            />
+          />
           {icon}
         </span>
       );
@@ -178,7 +178,7 @@ export default class RangePicker extends React.Component {
           onChange={this.handleChange}
           open={open}
           onOpenChange={this.handleOpenChange}
-          >
+        >
           {input}
         </Picker>
       </span>

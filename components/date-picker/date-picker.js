@@ -68,7 +68,7 @@ export default class DatePicker extends React.Component {
         disabledDate={props.disabledDate}
         defaultValue={props.defaultPickerValue || moment()}
         showFooter={true}
-        />
+      />
     );
     const icon = allowClear && !disabled && value ? (
       <Icon
@@ -76,7 +76,7 @@ export default class DatePicker extends React.Component {
         className={`${prefixCls}-clear`}
         onClick={this.clearSelection}
       />
-  ) : <Icon type="calendar" />;
+    ) : <Icon type="calendar" />;
     const input = ({ value: inputValue }) => (
       <div>
         <Input
@@ -86,7 +86,7 @@ export default class DatePicker extends React.Component {
           placeholder={placeholder || '请选择'}
           className={`${prefixCls}-input`}
           suffix={icon}
-          />
+        />
       </div>
     );
 
@@ -98,7 +98,7 @@ export default class DatePicker extends React.Component {
           prefixCls={`${prefixCls}-container`}
           calendar={calendar}
           onChange={this.handleChange}
-          >
+        >
           {input}
         </Picker>
       </span>

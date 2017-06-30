@@ -101,7 +101,7 @@ export default class RangeCalendar extends React.Component {
             format={format}
             disabledDate={this.disabledStartDate}
             onSelect={this.onStartSelect}
-            />
+          />
         </div>
         <div className={`${prefixCls}-panel-split`}/>
         <div className={`${prefixCls}-container`}>
@@ -112,7 +112,7 @@ export default class RangeCalendar extends React.Component {
             format={format}
             disabledDate={this.disabledEndDate}
             onSelect={this.onEndSelect}
-            />
+          />
         </div>
       </div>
     );

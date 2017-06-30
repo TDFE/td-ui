@@ -48,13 +48,14 @@ class Select extends Component {
   };
 
   componentDidMount() {
-   // jump to selected option
+  // jump to selected option
     this.scrollToSelected(0);
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate({ value: preValue, selectedIndex: preSelected }) {
     // smooth scroll to selected option
-    if (prevProps.selectedIndex !== this.props.selectedIndex) {
+    const { value, selectedIndex } = this.props;
+    if (preSelected !== selectedIndex || (value && !value.isSame(preValue))) {
       this.scrollToSelected(120);
     }
   }
@@ -119,11 +120,11 @@ class Select extends Component {
       return null;
     }
 
-    const { prefixCls, width } = this.props;
+    const { prefixCls, width, type } = this.props;
     const cls = classnames({
       [`${prefixCls}-select`]: 1,
       [`${prefixCls}-select-active`]: this.state.active
-    });
+    }, `${prefixCls}-${type}`);
 
     return (
       <div

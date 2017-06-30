@@ -78,9 +78,10 @@ export default class TimeTable extends React.Component {
         selectedIndex={selectedIndex}
         options={options}
         type="hour"
+        value={value}
         onSelect={this.onHourSelect}
         render={item => <div>{item}</div>}
-        />
+      />
     );
   }
 
@@ -111,10 +112,11 @@ export default class TimeTable extends React.Component {
         offset={offset}
         selectedIndex={selectedIndex}
         options={options}
-        type="hour"
+        type="minute"
+        value={value}
         onSelect={this.onMinuteSelect}
         render={item => <div>{item}</div>}
-        />
+      />
     );
   }
 
@@ -144,10 +146,11 @@ export default class TimeTable extends React.Component {
         offset={offset}
         selectedIndex={selectedIndex}
         options={options}
-        type="hour"
+        type="second"
+        value={value}
         onSelect={this.onSecondSelect}
         render={item => <div>{item}</div>}
-        />
+      />
     );
   }
 
