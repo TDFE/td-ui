@@ -4,16 +4,24 @@
 /* eslint-disable  */
 import React from 'react';
 import ReactDOM from 'react-dom';
-
+import Basic from './basic';
+import ShowSearch from './showSearch';
+import Group from './group';
 const MOUNT_NODE = document.getElementById('app');
-
 let render = () => {
-    let Select = require('../index').default;
-    let Option = Select.Option;
-    ReactDOM.render(<Select>
-        <div>我是孩子</div>
-        <Option>00</Option>
-    </Select>, MOUNT_NODE);
+  function Demo() {
+    return (
+      <div className="td">
+        <Basic />
+        <p>我是分隔线我是分隔线我是分隔线我是分隔线我是分隔线</p>
+        <ShowSearch />
+        <p>我是分隔线我是分隔线我是分隔线我是分隔线我是分隔线</p>
+        <Group />
+      </div>
+    );
+  }
+
+  ReactDOM.render(<Demo />, MOUNT_NODE);
 };
 
 try {

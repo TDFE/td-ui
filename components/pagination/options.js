@@ -1,6 +1,8 @@
 /* eslint-disable no-unused-vars */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import Select from '../select';
+const Option = Select.Option;
 
 class Options extends Component {
   constructor(props) {
@@ -9,9 +11,7 @@ class Options extends Component {
       value: props.pageSize
     }
   }
-  onChange = e => {
-    const ref = this.refs.select;
-    const value = ref.value;
+  onChange = value => {
     this.setState({value});
     this.props.onShowSizeChange(parseInt(value));
   }
@@ -20,11 +20,11 @@ class Options extends Component {
     const { value } = this.state;
     return (
       <div className={prefixCls}>
-        <select value={value} onChange={this.onChange} ref='select'>
+        <Select value={value} onChange={this.onChange} ref='select'>
           {
-            pageSizeOptions.map((item, index) => <option value={item} key={index}>{item}条／页</option>)
+            pageSizeOptions.map((item, index) => <Option value={item} key={index}>{item}条／页</Option>)
           }
-        </select>
+        </Select>
       </div>
     )
   }
