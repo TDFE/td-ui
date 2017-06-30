@@ -6,12 +6,15 @@
 @icon-prefix                  : ~"@{td-prefix}icon";
 @btn-prefix                   : ~"@{td-prefix}-btn";
 @input-prefix                 : ~"@{td-prefix}-input";
+@checkbox-prefix              : ~"@{td-prefix}-checkbox";
 @select-prefix                : ~"@{td-prefix}-select";
 @loading-prefix               : ~"@{td-prefix}-loading";
 @radio-prefix                 : ~"@{td-prefix}-radio";
 @message-prefix               : ~"@{td-prefix}-message";
 @input-number-prefix          : ~"@{td-prefix}-input-number";
 @dialog-prefix                : ~"@{td-prefix}-dialog";
+@confirm-prefix                : ~"@{td-prefix}-confirm";
+@cascader-prefix                : ~"@{td-prefix}-cascader";
 @timeline-prefix              : ~"@{td-prefix}-timeline";
 @confirm-prefix               : ~"@{td-prefix}-confirm";
 @menu-prefix                  : ~"@{td-prefix}-menu";
@@ -27,8 +30,11 @@
 @form-prefix                  : ~"@{td-prefix}-form";
 @steps-prefix                 : ~"@{td-prefix}-steps";
 @time-picker-prefix           : ~"@{td-prefix}-time-picker";
+@upload-prefix                : ~"@{td-prefix}-upload";
 @date-picker-prefix           : ~"@{td-prefix}-date-picker";
 @range-picker-prefix          : ~"@{td-prefix}-range-picker";
+@transfer-prefix              : ~"@{td-prefix}-transfer";
+@checkbox-prefix                 : ~"@{td-prefix}-checkbox";
 
 :export {
   switchPrefix: @switch-prefix;
@@ -43,6 +49,7 @@
   messagePrefix: @message-prefix;
   dialogPrefix: @dialog-prefix;
   confirmPrefix: @confirm-prefix;
+  cascaderPrefix: @cascader-prefix;
   timelinePrefix: @timeline-prefix;
   menuPrefix: @menu-prefix;
   dropdownPrefix: @dropdown-prefix;
@@ -57,10 +64,13 @@
   formPrefix: @form-prefix;
   stepsPrefix: @steps-prefix;
   timePickerPrefix: @time-picker-prefix;
+  uploadPrefix: @upload-prefix;
   datePickerPrefix: @date-picker-prefix;
+  transferPrefix: @transfer-prefix;
   datePickerPanelSize: @date-picker-time-offset * 7;
   datePickerGap: @date-picker-gap;
   rangePickerPrefix: @range-picker-prefix;
+  checkboxPrefix: @checkbox-prefix;
 }
 
 // Global
@@ -310,9 +320,31 @@
 @tree-switcher-height             : 24px;
 @tree-checkbox-width              : 14px;
 @tree-checkbox-height             : 14px;
-@tree-checkbox-color              : @primary-color;
+@tree-checkbox-color              : @primary-5;
 @tree-checkbox-disabled-color     : @disabled-color;
 @tree-checkbox-disabled-bg        : @disabled-bg;
+
+//Select
+@select-height-base               : 26px;
+@select-height-sm                 : 20px;
+@select-height-lg                 : 30px;
+@select-focus-color               : @primary-5;
+@select-shadow-color              : @primary-1;
+@select-color                     : rgba(0, 0, 0, .5);
+@select-font-size                 : @font-size-sm;
+@select-item-hover-color          : #ecf6fd;
+@select-item-selected-color       : rgba(0,0,0,.65);
+
+//Upload
+@upload-height                    : 28px;
+@upload-width                     : 100px;
+@upload-hover-color               : @link-hover-color;
+@upload-active-color              : @link-active-color;
+@upload-font-size                 : @font-size-base;
+@upload-color-base                : #666;
+@upload-file-height               : 24px;
+@upload-hover-bgColor             : #f7f7f7;
+@upload-note-color                : #999;
 
 // steps
 @step-blue:        @blue-5;

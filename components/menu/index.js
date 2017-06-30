@@ -13,3 +13,4 @@ Menu.Item = MenuItem;
 Menu.SubMenu = SubMenu;
 Menu.ItemGroup = ItemGroup;
 export default Menu;
+export { MenuItem, ItemGroup, SubMenu };

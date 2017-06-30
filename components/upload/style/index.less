@@ -1,0 +1,86 @@
+@import '../../style/themes/default';
+@prefixCls: ~'@{upload-prefix}';
+.@{prefixCls} {
+  &-file {
+    font-size: @upload-font-size;
+    color: @upload-color-base;
+    &-select {
+      position: relative;
+      width: @upload-width;
+      height: @upload-height;
+      line-height: @upload-height;
+      text-align: center;
+      vertical-align: middle;
+      border: 1px solid @upload-color-base;
+      border-radius: 5px;
+      cursor: pointer;
+      color: #333;
+      &:hover {
+        border-color: @upload-hover-color;
+        color: @upload-hover-color;
+      }
+      &:active {
+        border-color: @upload-active-color;
+        color: @upload-active-color;
+      }
+    }
+    &-click {
+      .upload {
+        margin-right: 8px;
+      }
+    }
+    &-btn {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      z-index: 2;
+      cursor: pointer;
+    }
+    &-list {
+      padding: 10px 0;
+      line-height: @upload-file-height;
+      font-size: @font-size-sm;
+    }
+    &-single {
+      border-radius: 5px;
+      width: 250px;
+      padding: 0 5px;
+      padding-right: 20px;
+      position: relative;
+      cursor: pointer;
+      &:hover {
+        background-color: @upload-hover-bgColor;
+        .close {
+          display: block;
+        }
+      }
+      .copy {
+        margin-right: 8px;
+      }
+      .close {
+        position: absolute;
+        right: 5px;
+        top: 50%;
+        margin-top: -@font-size-sm / 2;
+        font-size: @font-size-sm;
+        display: none;
+        color: #fff;
+        background-color: @primary-color;
+        border-radius: 20px;
+        &:hover {
+          background-color: @link-hover-color;
+        }
+        &:active {
+          background-color: @link-active-color;
+        }
+      }
+    }
+    &-note {
+      color: #999;
+      line-height: @upload-file-height;
+    }
+  }
+}
