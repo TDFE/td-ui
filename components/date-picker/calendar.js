@@ -9,6 +9,7 @@ import React from 'react';
 import warning from 'warning';
 import PropTypes from 'prop-types';
 import moment from 'moment';
+import cn from 'classnames';
 import Button from '../button';
 import {
   FULL_PICKER,
@@ -316,10 +317,10 @@ export default class Calendar extends React.Component {
   };
 
   render() {
-    const { prefixCls, showFooter } = this.props;
+    const { prefixCls, showFooter, className } = this.props;
 
     return (
-      <div className={prefixCls}>
+      <div className={cn(prefixCls, className)}>
         {
           this.renderHeader()
         }

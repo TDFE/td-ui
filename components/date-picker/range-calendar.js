@@ -82,6 +82,7 @@ export default class RangeCalendar extends React.Component {
         <div className={`${prefixCls}-container`}>
           <Calendar
             prefixCls={`${prefixCls}-tables`}
+            className={`${prefixCls}-tables-right`}
             value={value[1]}
             format={format}
             onSelect={this.onEndSelect}
