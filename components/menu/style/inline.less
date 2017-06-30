@@ -30,10 +30,17 @@
     &-submenu{
       &-title{
         &:after{
-          content: "\e901";
+          content: "\e916";
           font-family: 'tdicon';
           position: absolute;
           right: 16px;
+        }
+      }
+      &-child-open{
+        &>.@{menu-prefix}-submenu-title{
+          &:after{
+            content: "\e917";
+          }
         }
       }
     }

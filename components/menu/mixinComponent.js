@@ -11,7 +11,7 @@ export default class MixinComponent extends React.Component {
       domKeys,
       onSelect,
       onOpenChange,
-      level: level || 1,
+      level: level ? (level + this.num) : 1,
       eventKey: child.key || `${eventKey}-${index}`,
       mode
     }
