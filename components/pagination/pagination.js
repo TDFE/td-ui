@@ -23,7 +23,8 @@ class Pagination extends Component {
     size: '',
     showQuickJumper: false,
     simple: false,
-    pageSizeOptions: ['10', '20', '30', '40']
+    pageSizeOptions: ['10', '20', '30', '40'],
+    prefixCls
   }
   static PropTypes = {
     showNum: PropTypes.oneOf([3, 5, 7]),
@@ -157,7 +158,7 @@ class Pagination extends Component {
   }
   render() {
     const pageList = [];
-    const { style, className, total, showSizeChanger, showNum, size, showTotal, showQuickJumper, simple, pageSizeOptions } = this.props;
+    const { style, className, total, showSizeChanger, showNum, size, showTotal, showQuickJumper, simple, pageSizeOptions, prefixCls } = this.props;
     const { current, pageSize } = this.state;
     const allPages = this._calcAllPages();
     const classnames = cn(prefixCls, className, {

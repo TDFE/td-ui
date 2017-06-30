@@ -16,7 +16,8 @@ export default class MenuItem extends React.Component {
     children: PropTypes.oneOfType([PropTypes.string, PropTypes.node])
   }
 
-  itemClick = () => {
+  itemClick = e => {
+    e.nativeEvent.stopImmediatePropagation()
     const { eventKey } = this.props;
     this.props.onSelect([eventKey]);
   }
