@@ -18,6 +18,11 @@ export default class SubMenu extends MixinComponent {
     children: PropTypes.oneOfType([PropTypes.string, PropTypes.node])
   }
 
+  constructor (props) {
+    super(props);
+    this.num = 1;
+  }
+
   mouseEnter = () => {
     const { openKeys, eventKey, mode } = this.props;
     if (mode !== 'inline') {
@@ -60,7 +65,8 @@ export default class SubMenu extends MixinComponent {
     }
     return <li
       className={classnames(`${prefixCls}-submenu`, {
-        [`${prefixCls}-submenu-child-selected`]: checkSelected(domKeys, selectedKeys, eventKey)
+        [`${prefixCls}-submenu-child-selected`]: checkSelected(domKeys, selectedKeys, eventKey),
+        [`${prefixCls}-submenu-child-open`]: openKeys.indexOf(eventKey) >= 0
       })}
       onMouseEnter={this.mouseEnter}
       onMouseLeave={this.mouseLeave}

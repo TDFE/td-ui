@@ -11,7 +11,7 @@ import Confirm from './confirm';
 Dialog.confirm = function(props) {
   const config = Object.assign({
     cancelBtn: true,
-    icon: 'down',
+    icon: 'question',
     type: 'confirm'
   }, props)
   return Confirm(config)
@@ -20,7 +20,7 @@ Dialog.confirm = function(props) {
 Dialog.success = function(props) {
   const config = Object.assign({
     cancelBtn: false,
-    icon: 'down',
+    icon: 'check',
     type: 'success'
   }, props)
   return Confirm(config)
@@ -29,7 +29,7 @@ Dialog.success = function(props) {
 Dialog.error = function(props) {
   const config = Object.assign({
     cancelBtn: false,
-    icon: 'down',
+    icon: 'cross-circle',
     type: 'error'
   }, props)
   return Confirm(config)
@@ -38,7 +38,7 @@ Dialog.error = function(props) {
 Dialog.warning = function(props) {
   const config = Object.assign({
     cancelBtn: false,
-    icon: 'down',
+    icon: 'question',
     type: 'warning'
   }, props)
   return Confirm(config)
