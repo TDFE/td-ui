@@ -8,7 +8,7 @@
 /* eslint-disable */
 import React, {Component,cloneElement} from 'react';
 import cn from 'classnames';
-import Input from './Input';
+import Input from './input';
 import Icon from '../icon';
 import s from './style';
 export default class Search extends Component{

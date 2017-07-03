@@ -5,4 +5,4 @@
  * @Last modified time: 2017-05-24 17:33:23
  */
 
-export { default } from './index.less';
+export { default } from '../../style/themes/default.less';
