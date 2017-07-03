@@ -246,19 +246,20 @@ class Pagination extends Component {
     return (
       <div className={classnames} style={st}>
         {
-          showTotal ? <div className={`${prefixCls}-total-text`}>
-                        {this.showTotal()}
-                      </div> : ''
+          showTotal ? (
+            <div className={`${prefixCls}-total-text`}>
+              {this.showTotal()}
+            </div>
+          ) : ''
         }
-        {pageList}
+        { pageList }
         {
           showSizeChanger ? <Options prefixCls={`${prefixCls}-options`} pageSizeOptions={pageSizeOptions} pageSize={pageSize} onShowSizeChange={this.onShowSizeChange}/> : ''
         }
         {
           showQuickJumper ? <QuickJumper prefixCls={`${prefixCls}-quick-jumper`} current={current}
-          allPages={allPages} onChange={page => this.onClick(page)} current={current}/> : ''
+            allPages={allPages} onChange={page => this.onClick(page)} current={current}/> : ''
         }
-
       </div>
     )
   }

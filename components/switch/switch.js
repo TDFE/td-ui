@@ -5,7 +5,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import s from './style';
-import cn from 'classNames';
+import cn from 'classnames';
 
 export default class Switch extends React.Component {
   static defaultProps = {
