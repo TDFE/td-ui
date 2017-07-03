@@ -21,6 +21,8 @@
 @col-prefix                   : ~"@{td-prefix}-col";
 @layout-prefix                : ~"@{td-prefix}-layout";
 @form-prefix                  : ~"@{td-prefix}-form";
+@tooltip-prefix               : ~"@{td-prefix}-tooltip";
+
 
 :export {
   prefix: @td-prefix;
@@ -44,6 +46,7 @@
   colPrefix: @col-prefix;
   layoutPrefix: @layout-prefix;
   formPrefix: @form-prefix;
+  tooltipPrefix: @tooltip-prefix;
 }
 
 // Global
@@ -231,5 +234,22 @@
 @pagination-item-mini-height      : 20px;
 @pagination-font-size             : @font-size-base;
 @pagination-font-size-sm          : @font-size-sm;
+
+// Tooltip
+// ---
+//* Tooltip max width
+@tooltip-max-width: 250px;
+//** Tooltip text color
+@tooltip-color: @text-color;//#fff;
+//** Tooltip background color
+@tooltip-bg: @component-background;//rgba(64, 64, 64, .85);
+//** Tooltip arrow width
+@tooltip-arrow-width: 5px;
+//** Tooltip distance with trigger
+@tooltip-distance: @tooltip-arrow-width - 1 + 4;
+//** Tooltip arrow color
+@tooltip-arrow-color: @tooltip-bg;
+@tooltip-title-bg: @background-color-base;
+@box-shadow-base : 0 -1px 6px @shadow-color;
 
 //Tree
