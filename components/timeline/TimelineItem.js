@@ -2,7 +2,8 @@
  * Created by kongliang on 19/06/2017.
  */
 import React from 'react';
-import cn from 'classnames';
+import PropTypes from 'prop-types';
+import cn from 'classNames';
 import s from './style';
 
 export default class TimelineItem extends React.Component {
@@ -12,6 +13,16 @@ export default class TimelineItem extends React.Component {
     last: false,
     pending: false
   };
+
+  static propTypes = {
+    prefixCls: PropTypes.string,
+    className: PropTypes.string,
+    color: PropTypes.string,
+    dot: React.PropTypes.node,
+    pending: React.PropTypes.bool,
+    last: React.PropTypes.bool,
+    style: PropTypes.object
+  }
 
   render() {
     const {prefixCls, className, color = '', last, children, pending, dot, ...restProps} = this.props;

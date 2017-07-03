@@ -75,6 +75,8 @@ export { default as TimePicker } from './time-picker';
 
 export { default as Timeline } from './timeline';
 
+export { default as Tooltip } from './tooltip';
+
 export { default as Transfer } from './transfer';
 
 export { default as Tree } from './tree';

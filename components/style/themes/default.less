@@ -28,6 +28,7 @@
 @tabs-prefix                  : ~"@{td-prefix}-tabs";
 @progress-prefix              : ~"@{td-prefix}-progress";
 @form-prefix                  : ~"@{td-prefix}-form";
+@tooltip-prefix               : ~"@{td-prefix}-tooltip";
 @steps-prefix                 : ~"@{td-prefix}-steps";
 @time-picker-prefix           : ~"@{td-prefix}-time-picker";
 @upload-prefix                : ~"@{td-prefix}-upload";
@@ -62,6 +63,7 @@
   tabsPrefix: @tabs-prefix;
   progressPrefix: @progress-prefix;
   formPrefix: @form-prefix;
+  tooltipPrefix: @tooltip-prefix;
   stepsPrefix: @steps-prefix;
   timePickerPrefix: @time-picker-prefix;
   uploadPrefix: @upload-prefix;
@@ -318,6 +320,23 @@
 @pagination-item-mini-height      : 20px;
 @pagination-font-size             : @font-size-base;
 @pagination-font-size-sm          : @font-size-sm;
+
+// Tooltip
+// ---
+//* Tooltip max width
+@tooltip-max-width: 250px;
+//** Tooltip text color
+@tooltip-color: @text-color;//#fff;
+//** Tooltip background color
+@tooltip-bg: @component-background;//rgba(64, 64, 64, .85);
+//** Tooltip arrow width
+@tooltip-arrow-width: 5px;
+//** Tooltip distance with trigger
+@tooltip-distance: @tooltip-arrow-width - 1 + 4;
+//** Tooltip arrow color
+@tooltip-arrow-color: @tooltip-bg;
+@tooltip-title-bg: @background-color-base;
+@box-shadow-base : 0 -1px 6px @shadow-color;
 
 //Tree
 @tree-switcher-width              : 24px;
