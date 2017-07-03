@@ -2,7 +2,7 @@
  * Created by kongliang on 19/06/2017.
  */
 import React from 'react';
-import cn from 'classNames';
+import cn from 'classnames';
 import s from './style';
 
 export default class TimelineItem extends React.Component {

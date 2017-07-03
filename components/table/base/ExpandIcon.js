@@ -18,7 +18,7 @@ export default class ExpandIcon extends React.Component {
     expandable: PropTypes.any,
     expanded: PropTypes.bool,
     needIndentSpaced: PropTypes.bool,
-    onExpand: PropTypes.func,
+    onExpand: PropTypes.func
   }
 
   shouldComponentUpdate(nextProps) {

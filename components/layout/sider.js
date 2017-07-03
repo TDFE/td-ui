@@ -5,33 +5,32 @@
  * @Last modified time: 2017-06-14 11:42:30
  */
 
-if (typeof window !== 'undefined') {
- window.matchMedia = window.matchMedia || mediaQuery => ({
-   media: mediaQuery,
-   matches: false,
-   addListener() {
-   },
-   removeListener() {
-   }
- });
-}
-
 import React from 'react';
 import classNames from 'classnames';
 import omit from 'lodash/omit';
 import Icon from '../icon';
 import s from './style';
 
+if (typeof window !== 'undefined') {
+  window.matchMedia = window.matchMedia || (mediaQuery => ({
+    media: mediaQuery,
+    matches: false,
+    addListener() {
+    },
+    removeListener() {
+    }
+  }));
+}
+
 const dimensionMap = {
   xs: '480px',
   sm: '768px',
   md: '992px',
   lg: '1200px',
-  xl: '1600px',
+  xl: '1600px'
 };
 
 export default class Sider extends React.Component {
-
   static defaultProps = {
     prefixCls: `${s.layoutPrefix}-sider`,
     collapsible: false,
@@ -133,8 +132,7 @@ export default class Sider extends React.Component {
     const status = this.state.collapsed ? 'collapsed' : 'expanded';
     const defaultTrigger = iconObj[status];
     const triggerDom = (
-      trigger !== null ?
-      zeroWidthTrigger || (
+      trigger !== null ? zeroWidthTrigger || (
         <div className={`${prefixCls}-trigger`} onClick={this.toggle}>
           {trigger || defaultTrigger}
         </div>

@@ -31,9 +31,9 @@ export default class RadioButton extends Component {
     }
 
     return (
-        <Radio
-          {...radioPropTypes}
-        />
+      <Radio
+        {...radioPropTypes}
+      />
     );
   }
 }

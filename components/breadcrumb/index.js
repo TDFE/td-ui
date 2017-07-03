@@ -4,8 +4,9 @@
  * @Last modified by:   yc
  * @Last modified time: 2017-05-29 17:51:10
  */
- import Breadcrumb from './Breadcrumb';
- import BreadcrumbItem from './BreadcrumbItem';
 
- Breadcrumb.Item = BreadcrumbItem;
- export default Breadcrumb;
+import Breadcrumb from './Breadcrumb';
+import BreadcrumbItem from './BreadcrumbItem';
+
+Breadcrumb.Item = BreadcrumbItem;
+export default Breadcrumb;

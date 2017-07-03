@@ -15,7 +15,7 @@ export default class TableHeader extends React.Component {
   static propTypes = {
     prefixCls: PropTypes.string,
     rowStyle: PropTypes.object,
-    rows: PropTypes.array,
+    rows: PropTypes.array
   }
 
   shouldComponentUpdate(nextProps) {

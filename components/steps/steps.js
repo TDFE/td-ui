@@ -17,16 +17,16 @@ export default class Steps extends Component {
     const { prefixCls, children, current, mode } = this.props;
     return (<div className={`${prefixCls} ${prefixCls}-${mode}`}>
       {
-          React.Children.map(children, (child, index) => {
-            const props = {
-              stepNumber: index,
-              current,
-              mode,
-              stepLength: children.length
-            };
-            return React.cloneElement(child, props);
-          })
-        }
+        React.Children.map(children, (child, index) => {
+          const props = {
+            stepNumber: index,
+            current,
+            mode,
+            stepLength: children.length
+          };
+          return React.cloneElement(child, props);
+        })
+      }
     </div>)
   }
 }

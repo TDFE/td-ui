@@ -46,7 +46,7 @@ export default function confirm(config) {
       className={`${prefixCls} ${prefixCls}-${config.type}`}
       width={config.width || 416}
     >
-        <div className={`${prefixCls}-inner`}>
+      <div className={`${prefixCls}-inner`}>
         <div className={`${prefixCls}-body`}>
           <Icon type={config.icon} />
           <span className={`${prefixCls}-title`}>{config.title}</span>

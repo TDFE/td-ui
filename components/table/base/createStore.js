@@ -34,6 +34,6 @@ export default function createStore(initialState) {
   return {
     setState,
     getState,
-    subscribe,
+    subscribe
   };
 }

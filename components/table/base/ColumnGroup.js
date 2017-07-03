@@ -12,8 +12,8 @@ import PropTypes from 'prop-types';
 
 export default class ColumnGroup extends Component {
   static propTypes = {
-    title: PropTypes.node,
-  }
+    title: PropTypes.node
+  };
 
-  static isTableColumnGroup = true
+  static isTableColumnGroup = true;
 }
