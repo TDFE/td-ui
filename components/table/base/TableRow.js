@@ -26,7 +26,7 @@ export default class TableRow extends React.Component {
     columns: PropTypes.array,
     height: PropTypes.oneOfType([
       PropTypes.string,
-      PropTypes.number,
+      PropTypes.number
     ]),
     visible: PropTypes.bool,
     index: PropTypes.number,
@@ -43,7 +43,7 @@ export default class TableRow extends React.Component {
     store: PropTypes.object.isRequired,
     expandedRow: PropTypes.bool,
     fixed: PropTypes.bool,
-    rowKey: PropTypes.string,
+    rowKey: PropTypes.string
   }
 
   static defaultProps = {
@@ -52,13 +52,13 @@ export default class TableRow extends React.Component {
     onDestroy() {},
     expandIconColumnIndex: 0,
     expandRowByClick: false,
-    onHover() {},
-  }
+    onHover() {}
+  };
 
   state = {
     hovered: false,
-    height: null,
-  }
+    height: null
+  };
 
   componentDidMount() {
     const { store } = this.props;
@@ -86,7 +86,7 @@ export default class TableRow extends React.Component {
       expandable,
       expandRowByClick,
       expanded,
-      onExpand,
+      onExpand
     } = this.props;
     if (expandable && expandRowByClick) {
       onExpand(!expanded, record, event, index);
@@ -144,7 +144,7 @@ export default class TableRow extends React.Component {
     const {
       prefixCls, columns, record, visible, index,
       expandIconColumnIndex, expandIconAsCell, expanded, expandRowByClick,
-      expandable, onExpand, needIndentSpaced, indent, indentSize,
+      expandable, onExpand, needIndentSpaced, indent, indentSize
     } = this.props;
 
     let { className } = this.props;

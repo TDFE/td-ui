@@ -47,7 +47,7 @@ export default class Table extends React.Component {
     scroll: PropTypes.object,
     rowRef: PropTypes.func,
     getBodyWrapper: PropTypes.func,
-    children: PropTypes.node,
+    children: PropTypes.node
   }
 
   static defaultProps = {
@@ -75,7 +75,7 @@ export default class Table extends React.Component {
     scroll: {},
     rowRef: () => null,
     getBodyWrapper: body => body,
-    emptyText: () => 'No Data',
+    emptyText: () => 'No Data'
   }
 
   constructor(props) {
@@ -85,7 +85,7 @@ export default class Table extends React.Component {
     this.columnManager = new ColumnManager(props.columns, props.children);
     this.store = createStore({
       currentHoverKey: null,
-      expandedRowsHeight: {},
+      expandedRowsHeight: {}
     });
     this.setScrollPosition('left');
 
@@ -102,7 +102,7 @@ export default class Table extends React.Component {
       expandedRowKeys,
       currentHoverKey: null,
       fixedColumnsHeadRowsHeight: [],
-      fixedColumnsBodyRowsHeight: [],
+      fixedColumnsBodyRowsHeight: []
     };
   }
 
@@ -211,7 +211,7 @@ export default class Table extends React.Component {
         key: 'rc-table-expandIconAsCell',
         className: `${prefixCls}-expand-icon-th`,
         title: '',
-        rowSpan: rows.length,
+        rowSpan: rows.length
       });
     }
 
@@ -273,13 +273,13 @@ export default class Table extends React.Component {
         props: {
           colSpan: colCount,
         },
-        children: fixed !== 'right' ? content : '&nbsp;',
+        children: fixed !== 'right' ? content : '&nbsp;'
       }),
     }];
     if (expandIconAsCell && fixed !== 'right') {
       columns.unshift({
         key: 'expand-icon-placeholder',
-        render: () => null,
+        render: () => null
       });
     }
     return (
@@ -311,7 +311,7 @@ export default class Table extends React.Component {
       onRowClick,
       onRowDoubleClick,
       onRowMouseEnter,
-      onRowMouseLeave,
+      onRowMouseLeave
     } = props;
     const { fixedColumnsBodyRowsHeight } = this.state;
     let rst = [];
@@ -428,14 +428,14 @@ export default class Table extends React.Component {
   getLeftFixedTable() {
     return this.getTable({
       columns: this.columnManager.leftColumns(),
-      fixed: 'left',
+      fixed: 'left'
     });
   }
 
   getRightFixedTable() {
     return this.getTable({
       columns: this.columnManager.rightColumns(),
-      fixed: 'right',
+      fixed: 'right'
     });
   }
 
@@ -641,7 +641,6 @@ export default class Table extends React.Component {
   syncFixedTableRowHeight = () => {
     const tableRect = this.tableNode.getBoundingClientRect();
     // If tableNode's height less than 0, suppose it is hidden and don't recalculate rowHeight.
-    // see: https://github.com/ant-design/ant-design/issues/4836
     if (tableRect.height !== undefined && tableRect.height <= 0) {
       return;
     }
@@ -662,7 +661,7 @@ export default class Table extends React.Component {
     }
     this.setState({
       fixedColumnsHeadRowsHeight,
-      fixedColumnsBodyRowsHeight,
+      fixedColumnsBodyRowsHeight
     });
   }
 
@@ -728,7 +727,7 @@ export default class Table extends React.Component {
 
   handleRowHover = (isHover, key) => {
     this.store.setState({
-      currentHoverKey: isHover ? key : null,
+      currentHoverKey: isHover ? key : null
     });
   }
 
@@ -755,7 +754,7 @@ export default class Table extends React.Component {
     const content = [
       this.getTable({ columns: this.columnManager.groupedColumns() }),
       this.getEmptyText(),
-      this.getFooter(),
+      this.getFooter()
     ];
 
     const scrollTable = isTableScroll

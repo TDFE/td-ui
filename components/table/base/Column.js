@@ -18,14 +18,14 @@ export default class Column extends Component {
     dataIndex: PropTypes.string,
     width: PropTypes.oneOfType([
       PropTypes.number,
-      PropTypes.string,
+      PropTypes.string
     ]),
     fixed: PropTypes.oneOf([
       true,
       'left',
-      'right',
+      'right'
     ]),
     render: PropTypes.func,
-    onCellClick: PropTypes.func,
-  }
+    onCellClick: PropTypes.func
+  };
 }

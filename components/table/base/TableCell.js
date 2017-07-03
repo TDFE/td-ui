@@ -19,7 +19,7 @@ export default class TableCell extends React.Component {
     indent: PropTypes.number,
     indentSize: PropTypes.number,
     column: PropTypes.object,
-    expandIcon: PropTypes.node,
+    expandIcon: PropTypes.node
   }
 
   isInvalidRenderCellText(text) {
