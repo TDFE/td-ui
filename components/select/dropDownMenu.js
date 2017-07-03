@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React, { Component, cloneElement } from 'react';
 import { findDOMNode } from 'react-dom';
 import PropTypes from 'prop-types';

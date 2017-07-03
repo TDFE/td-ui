@@ -1,7 +1,7 @@
 /**
  * Created by sunxianxiong on 17/6/8.
  */
-/* eslint-disable no-unused-vars */
+
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import cn from 'classnames';
@@ -18,11 +18,11 @@ export default class RadioButton extends Component {
   };
 
   render() {
-    const {props, context} = this;
+    const { props, context } = this;
 
-    const {radioGroup} = context;
+    const { radioGroup } = context;
 
-    const radioPropTypes = {...props};
+    const radioPropTypes = { ...props };
 
     if (radioGroup) {
       radioPropTypes.onChange = radioGroup.onChange;

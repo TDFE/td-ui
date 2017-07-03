@@ -4,8 +4,8 @@
  * @Last modified by:   ljq
  * @Last modified time: 2017-05-25 15:03:32
  */
-/* eslint-disable */
-import React, {Component,cloneElement} from 'react';
+
+import React, { Component, cloneElement } from 'react';
 import PropTypes from 'prop-types';
 import cn from 'classnames';
 import omit from 'lodash/omit';
@@ -31,7 +31,7 @@ export default class Input extends Component {
 		disabled: false,
 		prefixCls: s.inputPrefix,
 		type: 'text',
-		placeholder:'请输入内容',
+		placeholder:'请输入内容'
 	};
 
 	static propTypes = {
@@ -63,10 +63,10 @@ export default class Input extends Component {
 
 	handleKeyDown = e => {
 		const { onPressEnter , onKeyDown }=this.props;
-		if(e.keyCode===13 &&onPressEnter){
+		if (e.keyCode === 13 && onPressEnter) {
 			onPressEnter(e);
 		}
-		if(onKeyDown){
+		if (onKeyDown) {
 			onKeyDown(e);
 		}
 	};
@@ -82,7 +82,7 @@ export default class Input extends Component {
 		const addonAfter = props.addonAfter ? (<span className={addonClassName}>{props.addonAfter}</span>) : null;
 		const className = cn({
 			[`${props.prefixCls}-wrapper`]: true,
-			[wrapperClassName]: (addonBefore || addonAfter),
+			[wrapperClassName]: (addonBefore || addonAfter)
 		});
 		return (<span className={wrapperClassName}>{addonBefore}{children}{addonAfter}</span>);
 	}
@@ -113,7 +113,7 @@ export default class Input extends Component {
 		}
 		const inputClassName = cn(prefixCls, {
 			[`${prefixCls}-sm`]: props.size === "small",
-			[`${prefixCls}-lg`]: props.size === "large",
+			[`${prefixCls}-lg`]: props.size === "large"
 		}, props.className);
 		if ('value' in props) {
 			otherProps.value = fixControlledValue(props.value);

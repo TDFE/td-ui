@@ -56,19 +56,19 @@ export default class ColumnManager {
 
   leafColumns() {
     return this._cache('leafColumns', () =>
-      this._leafColumns(this.columns);
+      this._leafColumns(this.columns)
     );
   }
 
   leftLeafColumns() {
     return this._cache('leftLeafColumns', () =>
-      this._leafColumns(this.leftColumns());
+      this._leafColumns(this.leftColumns())
     );
   }
 
   rightLeafColumns() {
     return this._cache('rightLeafColumns', () =>
-      this._leafColumns(this.rightColumns());
+      this._leafColumns(this.rightColumns())
     );
   }
 

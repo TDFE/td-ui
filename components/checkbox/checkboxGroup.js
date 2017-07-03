@@ -1,8 +1,8 @@
 /**
  * Created by sunxianxiong on 17/6/28.
  */
-/* eslint-disable no-unused-vars */
-import React, {Component} from 'react';
+
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import cn from 'classnames';
 import shallowEqual from 'shallowequal';
@@ -27,7 +27,7 @@ export default class CheckboxGroup extends Component {
     disabled: PropTypes.bool
   };
 
-  //  通过context传递值
+  // 通过context传递值
   static childContextTypes = {
     checkboxGroup: PropTypes.object
   };

@@ -1,7 +1,7 @@
 /**
  * Created by sunxianxiong on 17/6/2.
  */
-/* eslint-disable no-unused-vars */
+
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import cn from 'classnames';
@@ -29,7 +29,7 @@ export default class RadioGroup extends Component {
     disabled: PropTypes.bool
   };
 
-  //  通过context传递值
+  // 通过context传递值
   static childContextTypes = {
     radioGroup: PropTypes.object
   };

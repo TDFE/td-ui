@@ -1,6 +1,5 @@
 
-/* eslint-disable */
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import cn from 'classnames';
 import s from './style';
@@ -243,16 +242,16 @@ export default class Select extends Component {
         if (open) {
           this.setState({
             open: false
-          })
+          });
           if (this.props.showSearch) {
             if (labelValue && labelValue.value) {
               this.setState({
                 inputValue: labelValue.label
-              })
+              });
             } else {
               this.setState({
                 inputValue: ''
-              })
+              });
             }
           }
         }
@@ -270,7 +269,7 @@ export default class Select extends Component {
     e.nativeEvent.stopImmediatePropagation();
     this.setState({
       open: true
-    })
+    });
   }
   updateFocusClassName = () => {
     const { refs, props } = this;
