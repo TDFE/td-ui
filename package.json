@@ -72,6 +72,7 @@
     "yargs": "^8.0.1"
   },
   "dependencies": {
+    "add-dom-event-listener": "^1.0.2",
     "async-validator": "^1.7.1",
     "classnames": "^2.2.5",
     "component-classes": "^1.2.6",
