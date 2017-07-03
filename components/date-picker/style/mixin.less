@@ -1,0 +1,405 @@
+.pickerContainer() {
+  background: @date-picker-background-color;
+  position: absolute;
+  z-index: @zindex-picker;
+
+  &.slide-up-enter.slide-up-enter-active&-placement-topLeft,
+  &.slide-up-enter.slide-up-enter-active&-placement-topRight,
+  &.slide-up-appear.slide-up-appear-active&-placement-topLeft,
+  &.slide-up-appear.slide-up-appear-active&-placement-topRight {
+    animation-name: tdSlideDownIn;
+  }
+
+  &.slide-up-enter.slide-up-enter-active&-placement-bottomLeft,
+  &.slide-up-enter.slide-up-enter-active&-placement-bottomRight,
+  &.slide-up-appear.slide-up-appear-active&-placement-bottomLeft,
+  &.slide-up-appear.slide-up-appear-active&-placement-bottomRight {
+    animation-name: tdSlideUpIn;
+  }
+
+  &.slide-up-leave.slide-up-leave-active&-placement-topLeft,
+  &.slide-up-leave.slide-up-leave-active&-placement-topRight {
+    animation-name: tdSlideDownOut;
+  }
+
+  &.slide-up-leave.slide-up-leave-active&-placement-bottomLeft,
+  &.slide-up-leave.slide-up-leave-active&-placement-bottomRight {
+    animation-name: tdSlideUpOut;
+  }
+}
+
+.colors(@font;@border;@background;) {
+  color: @font;
+  div {
+    border-color: @border;
+    background-color: @background;
+  }
+}
+
+.defaultColors() {
+  .colors(@date-picker-font-color;"transparent";"transparent";);
+  &:hover {
+    .colors(@date-picker-hover-color;@date-picker-hover-color;"transparent";);
+  }
+  &:active {
+    .colors(@date-picker-background-color;@date-picker-active-color;@date-picker-active-color;);
+  }
+}
+
+.minorColors() {
+  .colors(@date-picker-minor-color;"transparent";"transparent";);
+  &:hover {
+    .colors(@date-picker-hover-color;@date-picker-hover-color;"transparent";);
+  }
+  &:active {
+    .colors(@date-picker-background-color;@date-picker-active-color;@date-picker-active-color;);
+  }
+}
+
+.selectedColors() {
+  .colors(@date-picker-background-color;@date-picker-select-color;@date-picker-select-color;);
+  &:hover {
+    .colors(@date-picker-hover-color;@date-picker-hover-color;"transparent";);
+  }
+  &:active {
+    .colors(@date-picker-background-color;@date-picker-active-color;@date-picker-active-color;);
+  }
+}
+
+.curColors() {
+  .colors(@date-picker-hover-color;@date-picker-hover-color;"transparent";);
+  &:hover {
+    .colors(@date-picker-hover-color;@date-picker-hover-color;"transparent";);
+  }
+  &:active {
+    .colors(@date-picker-background-color;@date-picker-active-color;@date-picker-active-color;);
+  }
+}
+
+.disabledColors() {
+  cursor: not-allowed;
+  .colors(@date-picker-disabled-border;@date-picker-disabled-color;@date-picker-disabled-color;);
+  &:hover {
+    .colors(@date-picker-disabled-border;@date-picker-disabled-color;@date-picker-disabled-color;);
+  }
+  &:active {
+    .colors(@date-picker-disabled-border;@date-picker-disabled-color;@date-picker-disabled-color;);
+  }
+}
+
+.disabledSelected() {
+  cursor: not-allowed;
+  .colors(@date-picker-disabled-border;@date-picker-disabled-border;@date-picker-disabled-color;);
+  &:hover {
+    .colors(@date-picker-disabled-border;@date-picker-disabled-border;@date-picker-disabled-color;);
+  }
+  &:active {
+    .colors(@date-picker-disabled-border;@date-picker-disabled-border;@date-picker-disabled-color;);
+  }
+}
+
+.type-table(@type;@width) {
+  &-@{type} {
+    width: 100%;
+    border-collapse: collapse;
+    max-width: 100%;
+    display: inline-block;
+
+    &-cell {
+      cursor: pointer;
+
+      div {
+        width: @width;
+        height: @date-picker-cell-size - 2;
+        border-radius: 4px;
+        border: 1px solid @date-picker-background-color;
+        text-align: center;
+      }
+
+      .defaultColors();
+    }
+
+    &-date-last-month-cell,&-date-next-month-btn-day {
+      .minorColors();
+    }
+
+    &-minor {
+      .minorColors();
+    }
+
+    &-placeholder {
+      height: @date-picker-cell-size;
+    }
+
+    &-cur {
+      .curColors();
+    }
+
+    &-selected {
+      .selectedColors();
+    }
+
+    &-disabled-cell {
+      .disabledColors();
+      div {
+        border-radius: 0;
+      }
+    }
+
+    &-disabled-cell&-selected,&-disabled-cell&-cur {
+      .disabledSelected();
+    }
+  }
+}
+
+.date-table() {
+  .type-table(~'date', @date-picker-cell-size - 2);
+}
+
+.month-table() {
+  .type-table(~'month', @date-picker-cell-size * 7 / 4 - 2);
+}
+
+.year-table() {
+  .type-table(~'year', @date-picker-cell-size * 7 / 4 - 2);
+}
+
+.scrollbar(@type) {
+  & &-@{type}&-select::scrollbar {
+    background-color: transparent;
+    width: @date-picker-scrollbar-width;
+
+    &-thumb {
+      border-radius: @date-picker-scrollbar-width / 2;
+    }
+  }
+
+  & &-select:hover&-@{type}::scrollbar-thumb {
+    background-color: @date-picker-scrollbar-color;
+  }
+
+  & &-@{type}&-select::-webkit-scrollbar {
+    background-color: transparent;
+    width: @date-picker-scrollbar-width;
+
+    &-thumb {
+      border-radius: @date-picker-scrollbar-width / 2;
+    }
+  }
+
+  & &-select:hover&-@{type}::-webkit-scrollbar-thumb {
+    background-color: @date-picker-scrollbar-color;
+  }
+
+  & &-@{type}&-select::-moz-scrollbar {
+    background-color: transparent;
+    width: @date-picker-scrollbar-width;
+
+    &-thumb {
+      border-radius: @date-picker-scrollbar-width / 2;
+    }
+  }
+
+  & &-select:hover&-@{type}::-moz-scrollbar-thumb {
+    background-color: @date-picker-scrollbar-color;
+  }
+}
+
+.time-table() {
+  &-time {
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    list-style: none;
+    font-size: @font-size-base - 2;
+    background-color: @date-picker-background-color;
+    background-clip: padding-box;
+    overflow: hidden;
+    line-height: @date-picker-cell-size;
+
+    .scrollbar(~'hour');
+    .scrollbar(~'minute');
+    .scrollbar(~'second');
+
+    &-select {
+      margin: 0;
+      padding: 0;
+      float: left;
+      font-size: @font-size-base - 2;
+      box-sizing: border-box;
+      overflow-x: hidden;
+      overflow-y: auto;
+      position: relative;
+      height: 100%;
+
+      ul {
+        list-style: none;
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        max-height: @date-picker-panel-height;
+        color: @date-picker-font-color;
+
+        li {
+          text-align: center;
+          padding-left: @date-picker-scrollbar-width;
+          list-style: none;
+          box-sizing: content-box;
+          margin: 0;
+          line-height: @date-picker-cell-size - 2;
+          cursor: pointer;
+          user-select: none;
+          transition: all .3s ease;
+
+          div {
+            border: 1px solid transparent;
+            width: @date-picker-cell-size - 2;
+            margin: 0 auto;
+            border-radius: @border-radius-base;
+
+            &:hover {
+              background-color: transparent;
+              border-color: @date-picker-hover-color;
+              color: @date-picker-hover-color;
+            }
+
+            &:active {
+              background-color: @date-picker-active-color;
+              border-color: @date-picker-active-color;
+              color: @date-picker-background-color;
+            }
+          }
+
+          &:first-child {
+            margin-top: @date-picker-cell-size * 3;
+          }
+
+          &:last-child {
+            margin-bottom: @date-picker-cell-size * 3;
+          }
+        }
+      }
+
+      &-option {
+        &-selected div {
+          background-color: @date-picker-select-color;
+          border-color: @date-picker-select-color!important;
+          color: @date-picker-background-color;
+
+          &:hover {
+            background-color: transparent;
+            border-color: @date-picker-hover-color!important;
+            color: @date-picker-hover-color;
+          }
+
+          &:active {
+            background-color: @date-picker-active-color;
+            border-color: @date-picker-active-color!important;
+            color: @date-picker-background-color;
+          }
+        }
+
+        &-disabled div {
+          background-color: @date-picker-disabled-color!important;
+          border-color: transparent!important;
+          color: @date-picker-disabled-border!important;
+          cursor: not-allowed;
+          border-radius: 0!important;
+        }
+      }
+    }
+
+    &-mask {
+      width: @date-picker-panel-width + @date-picker-gap-horizontal * 2;
+      height: @date-picker-cell-size + 10;
+      position: absolute;
+      left: 0;
+      top: @date-picker-cell-size * 4 - 1;
+      background-color: @blue-1;
+
+      span {
+        position: absolute;
+        font-weight: bold;
+        line-height: @date-picker-cell-size + 10;
+      }
+
+      &-colon {
+        left: @date-picker-gap-horizontal + @date-picker-panel-width / 2;
+      }
+
+      &-first-colon {
+        left: @date-picker-gap-horizontal + @date-picker-panel-width / 3;
+      }
+
+      &-second-colon {
+        left: @date-picker-gap-horizontal + @date-picker-panel-width / 3 * 2;
+      }
+    }
+  }
+}
+
+.calendar-header() {
+  height: @date-picker-cell-size;
+  line-height: @date-picker-cell-size;
+  user-select: none;
+  font-size: @font-size-base;
+  position: relative;
+
+  .@{btn-prefix} {
+    padding: (@date-picker-cell-size - @font-size-base) / 2;
+  }
+
+  &-btn {
+    display: inline-block;
+    cursor: pointer;
+    text-align: center;
+    color: @date-picker-header-font-color;
+    user-select: none;
+    font-size: @font-size-base;
+    font-weight: bold;
+    width: @date-picker-panel-width - @date-picker-cell-size * 2;
+
+    &:hover {
+      background: #f6f6f6;
+    }
+
+    &:active {
+      background: #e5e5e5;
+    }
+  }
+}
+
+.calendar-table() {
+  height: @date-picker-cell-size * 7;
+  line-height: @date-picker-cell-size;
+  user-select: none;
+  font-size: @font-size-base - 2;
+
+  .date-table();
+  .month-table();
+  .year-table();
+  .time-table();
+
+  table,th,td {
+    border: 0;
+  }
+}
+
+.calendar-footer() {
+  height: @date-picker-cell-size;
+  line-height: @date-picker-cell-size;
+  cursor: pointer;
+  text-align: center;
+  color: @date-picker-header-font-color;
+  user-select: none;
+  font-size: @font-size-base;
+
+  &:hover {
+    background: #f6f6f6;
+  }
+
+  &:active {
+    background: #e5e5e5;
+  }
+}

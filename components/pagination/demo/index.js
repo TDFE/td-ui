@@ -1,7 +1,14 @@
 /* eslint-disable no-unused-vars */
 import React from 'react';
 import ReactDOM from 'react-dom';
-
+import Basic from './basic';
+import More from './more';
+import ChangeSize from './changeSize';
+import Jumper from './jumper';
+import Small from './small';
+import Control from './control';
+import Total from './total';
+import Num from './num';
 const MOUNT_NODE = document.getElementById('app');
 
 let render = () => {
@@ -12,11 +19,28 @@ let render = () => {
   function Demo() {
     return (
       <div className="td">
-        <Pagination showNum={5} showSizeChanger={true} total={99} showTotal={(total, range) => {
-          return `${range[0]}-${range[1]} of ${total} items`
-        }} onChange={(current, pageSize) => {
-          console.log(current);
-        }}/>
+        <p>基础分页</p>
+        <Basic />
+        <p>我是分割线我是分割线我是分割线我是分割线我是分割线我是分割线</p>
+        <p>更多分页</p>
+        <More />
+        <p>我是分割线我是分割线我是分割线我是分割线我是分割线我是分割线</p>
+        <p>改变每页显示条目数</p>
+        <ChangeSize />
+        <p>我是分割线我是分割线我是分割线我是分割线我是分割线我是分割线</p>
+        <p>快速跳转到某一页</p>
+        <Jumper />
+        <p>我是分割线我是分割线我是分割线我是分割线我是分割线我是分割线</p>
+        <p>迷你版本</p>
+        <Small />
+        <p>我是分割线我是分割线我是分割线我是分割线我是分割线我是分割线</p>
+        <p>受控制的页码</p>
+        <Control />
+        <p>我是分割线我是分割线我是分割线我是分割线我是分割线我是分割线</p>
+        <p>总数</p>
+        <Total />
+        <p>我是分割线我是分割线我是分割线我是分割线我是分割线我是分割线</p>
+        <Num />
       </div>
     );
   }

@@ -16,7 +16,8 @@ export default class MenuItem extends React.Component {
     children: PropTypes.oneOfType([PropTypes.string, PropTypes.node])
   }
 
-  itemClick = () => {
+  itemClick = e => {
+    e.nativeEvent.stopImmediatePropagation()
     const { eventKey } = this.props;
     this.props.onSelect([eventKey]);
   }
@@ -29,10 +30,14 @@ export default class MenuItem extends React.Component {
         paddingLeft: level * 24
       }
     }
-    return <li
-              className={classnames(`${prefixCls}-item`, {[`${prefixCls}-item-selected`]: selectedKeys.indexOf(eventKey) >= 0})}
-              style={style}
-              onClick={this.itemClick}
-            >{ children }</li>;
+    return (
+      <li
+        className={classnames(`${prefixCls}-item`, {[`${prefixCls}-item-selected`]: selectedKeys.indexOf(eventKey) >= 0})}
+        style={style}
+        onClick={this.itemClick}
+      >
+        { children }
+      </li>
+    );
   }
 }

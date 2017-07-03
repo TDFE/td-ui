@@ -1,5 +1,3 @@
-@import "../../style/themes/default";
-
 .input-lg(){
 	padding:@input-padding-vertical-lg @input-padding-horizontal;
 	height: @input-height-lg;
@@ -17,10 +15,13 @@
 		.hover(@input-border-color);
 	}
 }
-.active(@color: @outline-color) {
-  border-color: tint(@color, 20%);
+.active() {
+  .active(@blue-5);
+}
+.active(@border-color) {
+  border-color: @border-color;
   outline: 0;
-  box-shadow: 0 0 @outline-blur-size @outline-width fade(@color, 20%);
+  box-shadow:0;
 }
 .disabled() {
   background-color: @input-disabled-bg;
@@ -28,17 +29,17 @@
   cursor: not-allowed;
   color: @disabled-color;
   &:hover {
-    .hover(@input-border-color);
+    border-color:@input-border-color;
   }
 }
 .hover(@color: @input-hover-border-color) {
-	border-color: tint(@color, 20%);
+	border-color:  @blue-4;
 }
 .input(){
 	position: relative;
 	display: inline-block;
-	padding:@input-padding-vertical-base @input-padding-horizontal;
-	width: 100%;
+	padding:0 @input-padding-horizontal;
+	width: @input-width-base;
 	height: @input-height-base;
 	cursor: text;
 	font-size: @font-size-base;
@@ -63,8 +64,19 @@
 		.hover();
 	}
 
+	&[readonly] {
+		cursor: pointer;
+	}
+
 	&[disabled] {
 		.disabled();
+	}
+	&:active{
+		// border-color: @blue-9;
+		.active();
+	}
+	&:focus{
+		.active();
 	}
 }
 
@@ -79,7 +91,7 @@
 	width: 100%;
 	&-addon{
 		position: relative;
-		padding:@input-padding-vertical-base @input-padding-horizontal;
+		padding:0 @input-padding-horizontal;
 		font-size: @font-size-base;
 		font-weight: normal;
 		line-height: 2;
@@ -94,7 +106,6 @@
 	}
 	.@{inputClass}{
 		float: left;
-		width: 100%;
 		margin-bottom: 0;
 	}
 
@@ -127,12 +138,54 @@
 		border-bottom-left-radius: 0;
 		border-top-left-radius: 0;
 	}
+}
 
+.input-affix-wrapper(@inputClass) {
+  position: relative;
+  display: inline-block;
+  width: 100%;
 
+  .@{inputClass} {
+    z-index: 1;
+  }
 
+	.@{icon-prefix} {
+		transition: all .3s;
+	}
 
+  &:hover {
+		.@{icon-prefix} {
+			color: tint(@input-hover-border-color, 20%);
+		}
 
+		.@{inputClass} {
+	    .hover();
+	  }
+	}
 
+  .@{inputClass}-prefix,
+  .@{inputClass}-suffix {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+    line-height: 0;
+    color: @input-color;
+  }
 
+  .@{inputClass}-prefix {
+    left: @input-padding-horizontal;
+  }
 
+  .@{inputClass}-suffix {
+    right: @input-padding-horizontal;
+  }
+
+  .@{inputClass}:not(:first-child) {
+    padding-left: @input-padding-horizontal + @input-affix-width;
+  }
+
+  .@{inputClass}:not(:last-child) {
+    padding-right: @input-padding-horizontal + @input-affix-width;
+  }
 }

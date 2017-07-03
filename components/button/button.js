@@ -119,7 +119,7 @@ export default class Button extends Component {
         style={st}
         onMouseUp={this.handleMouseUp}
         onClick={this.handleClick}
-        >
+      >
         {iconNode}{kids}
       </button>
     );

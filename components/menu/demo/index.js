@@ -20,7 +20,6 @@ class Demo extends React.Component {
   }
 
   handleClick = (e) => {
-    console.log('click ', e);
     this.setState({
       current: e.key
     });
@@ -63,7 +62,7 @@ class Demo extends React.Component {
         selectedKeys={this.state.selectedKeys}
         onSelect={this.onSelect}
       >
-        <SubMenu key="sub1" title={<span><Icon type="search" /><span>Navigation One</span></span>}>
+        <SubMenu key="sub1" title={<span><Icon type="setting" /><span>Navigation One</span></span>}>
           <ItemGroup key="g1" title="Item 1">
             <Menu.Item key="1">Option 1</Menu.Item>
             <Menu.Item key="2">Option 2</Menu.Item>
@@ -73,7 +72,7 @@ class Demo extends React.Component {
             <Menu.Item key="4">Option 4</Menu.Item>
           </ItemGroup>
         </SubMenu>
-        <SubMenu key="sub2" title={<span><Icon type="search" /><span>Navigation Two</span></span>}>
+        <SubMenu key="sub2" title={<span><Icon type="calendar" /><span>Navigation Two</span></span>}>
           <Menu.Item key="5">Option 5</Menu.Item>
           <Menu.Item key="6">Option 6</Menu.Item>
           <SubMenu key="sub3" title="Submenu">

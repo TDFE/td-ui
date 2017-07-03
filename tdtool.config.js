@@ -7,6 +7,7 @@ const config1 = new Config({
   filename: 'td-ui.min.js',
   sourceMap: true,
   minimize: true,
+  urlLoaderLimit: 1024,
   extends: [['react', {
     source: [path.resolve(process.cwd(), 'components')]
   }], ['less', {

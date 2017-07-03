@@ -40,19 +40,19 @@ class Basic extends React.Component {
 }
 
 const Layout = generator({
-  prefixCls: s.layoutPrefix,
+  prefixCls: s.layoutPrefix
 })(Basic);
 
 const Header = generator({
-  prefixCls: `${s.layoutPrefix}-header`,
+  prefixCls: `${s.layoutPrefix}-header`
 })(Basic);
 
 const Footer = generator({
-  prefixCls: `${s.layoutPrefix}-footer`,
+  prefixCls: `${s.layoutPrefix}-footer`
 })(Basic);
 
 const Content = generator({
-  prefixCls: `${s.layoutPrefix}-content`,
+  prefixCls: `${s.layoutPrefix}-content`
 })(Basic);
 
 Layout.Header = Header;

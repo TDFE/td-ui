@@ -12,7 +12,7 @@ import start from 'tdtool/lib/cmds/start';
 
 export default async function component() {
   const argv = require('yargs').parse(process.argv.slice(3));
-  run(start.bind(undefined, { config: './tools/tdtool.config.comp.js', port: argv.port || 8080 }));
+  run(start.bind(undefined, { config: './tools/tdtool.config.comp.js', port: argv.port || 9090 }));
   // await runGulpTask('component');
   // await open('http://localhost:8080');
 }

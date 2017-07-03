@@ -6,7 +6,6 @@
  */
 
 import s from './style';
-/* eslint-disable no-unused-vars */
 import React from 'react';
 import cn from 'classnames';
 import omit from 'lodash/omit';
