@@ -1,7 +1,6 @@
 /**
  * Created by Session on 17/6/1.
  */
-/* eslint-disable */
 import React, {Component} from 'react';
 import s from './style/index';
 
