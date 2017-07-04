@@ -1,6 +1,6 @@
 const autoAdjustOverflow = {
   adjustX: 1,
-  adjustY: 1,
+  adjustY: 1
 };
 
 const targetOffset = [0, 0];
@@ -42,8 +42,8 @@ export const placements = {
     targetOffset
   },
   leftTop: {
-    posTop: 'topAlign',//'top', 'topAlign', 'center', 'bottomAlign', 'bottom'
-    posLeft: 'left',//'left', 'leftAlgin', 'center', 'rightAlign', 'right'
+    posTop: 'topAlign', // 'top', 'topAlign', 'center', 'bottomAlign', 'bottom'
+    posLeft: 'left', // 'left', 'leftAlgin', 'center', 'rightAlign', 'right'
     overflow: autoAdjustOverflow,
     offset: [-4, 0],
     targetOffset
@@ -89,7 +89,7 @@ export const placements = {
     overflow: autoAdjustOverflow,
     offset: [-4, 0],
     targetOffset
-  },
+  }
 };
 
 export default placements;

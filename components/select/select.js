@@ -3,23 +3,17 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import cn from 'classnames';
 import s from './style';
-import assign from 'object-assign';
 import classes from 'component-classes';
 import SelectTrigger from './selectTrigger';
 import { MenuItem, ItemGroup } from '../menu';
+
 const prefixCls = s.selectPrefix;
-const KeyCode = {
-  ENTER: 13,
-  ESC: 27,
-  BACKSPACE: 8,
-  DOWN: 40
-}
 
 function noop() {}
 
 const UNSELECTABLE_STYLE = {
   userSelect: 'none',
-  WebkitUserSelect: 'none',
+  WebkitUserSelect: 'none'
 }
 // 暂不考虑mode的情况
 export default class Select extends Component {
@@ -31,16 +25,15 @@ export default class Select extends Component {
     allowClear: false,
     defaultOpen: false,
     optionLabelProp: 'value',
-    optionLabelProp: 'value',
     notFoundContent: 'Not Found',
     onSearch: noop,
     prefixCls: prefixCls,
     onFocus: noop,
     filterOption: true,
-    notFoundContent: 'Not Found',
     onChange: noop,
     defaultValue: ''
   }
+
   static PropTypes = {
     value: PropTypes.string,
     defaultValue: PropTypes.string,
@@ -48,6 +41,7 @@ export default class Select extends Component {
     showSearch: PropTypes.bool,
     prefixCls: PropTypes.string
   }
+
   constructor(props) {
     super(props);
     let open = props.open;
@@ -74,6 +68,7 @@ export default class Select extends Component {
     }
     this.addBodyClickEvent();
   }
+
   addLabelValue = (value, props) => {
     let label = value + '';
     let _value = value + '';
@@ -93,14 +88,15 @@ export default class Select extends Component {
             _value = child.props.value;
           }
         }
-      })
+      });
     }
     loop(props.children);
     return {
       label: label,
       value: _value
-    }
+    };
   }
+
   componentWillReceiveProps(nextProps) {
     if ('value' in nextProps) {
       let labelValue = {...this.addLabelValue(nextProps.value, nextProps)};
@@ -116,9 +112,11 @@ export default class Select extends Component {
       })
     }
   }
+
   componentWillMount() {
     this.adjustOpenState();
   }
+
   adjustOpenState = () => {
     let open = this.state.open;
     let options = [];
@@ -131,16 +129,18 @@ export default class Select extends Component {
       ]
     }
     this._options = options;
-
   }
+
   componentWillUpdate(nextProps, nextState) {
     this.props = nextProps;
     this.state = nextState;
     this.adjustOpenState();
   }
+
   componentWillUnMount() {
     this.removeBodyClickEvent();
   }
+
   renderFilterOptions = (children) => {
     let sel = [];
     const inputValue = this.state.inputValue;
@@ -166,9 +166,9 @@ export default class Select extends Component {
     })
     return sel;
   }
-  defaultFilterFn = () => {
 
-  }
+  defaultFilterFn = () => {}
+
   filterOption = (inputValue, child) => {
     if (!inputValue) {
       return true;
@@ -189,9 +189,9 @@ export default class Select extends Component {
     // }
     return false;
   }
-  onArrowClick = () => {
 
-  }
+  onArrowClick = () => {}
+
   onInputChange = (e) => {
     e.stopPropagation();
     const value = e.target.value;
@@ -222,23 +222,25 @@ export default class Select extends Component {
             label: c.props.children
           }
         }
-      })
+      });
       this.setState({
         selectedKeys: selectedKeys.length ? selectedKeys : oldSelectedKeys,
         labelValue: labelValue || oldLabelValue
-      })
+      });
     })
   }
+
   onInputFocus = e => {
     e.stopPropagation();
     this.setState({
       inputValue: ''
-    })
+    });
   }
+
   addBodyClickEvent = () => {
     if (!this.bodyEvent) {
       document.addEventListener('click', () => {
-        let { open, labelValue, inputValue } = this.state;
+        let { open, labelValue } = this.state;
         if (open) {
           this.setState({
             open: false
@@ -259,28 +261,32 @@ export default class Select extends Component {
       this.bodyEvent = true;
     }
   }
+
   removeBodyClickEvent = () => {
     if (this.bodyEvent) {
       document.removeEventListener('click');
       this.bodyEvent = false;
     }
   }
+
   onOuterClick = e => {
     e.nativeEvent.stopImmediatePropagation();
     this.setState({
       open: true
     });
   }
+
   updateFocusClassName = () => {
-    const { refs, props } = this;
+    const { refs } = this;
     if (this._focused) {
       classes(refs.root).add(`${prefixCls}-focused`);
     } else {
       classes(refs.root).remove(`${prefixCls}-focused`);
     }
   }
+
   getPlaceholderElement() {
-    const { inputValue, value, labelValue } = this.state;
+    const { inputValue, labelValue } = this.state;
     let hidden = false;
     if (inputValue) {
       hidden = true;
@@ -304,8 +310,8 @@ export default class Select extends Component {
     }
     return null;
   }
+
   getInputElement() {
-    const props = this.props;
     let { inputValue } = this.state;
     return (
       <div className={`${prefixCls}-search-field-wrap`}>
@@ -313,8 +319,9 @@ export default class Select extends Component {
       </div>
     )
   }
+
   renderTopControlNode() {
-    const { value, open, inputValue, labelValue } = this.state;
+    const { open, inputValue, labelValue } = this.state;
     const props = this.props;
     const { showSearch } = props;
     const className = `${prefixCls}-selection-rendered`;
@@ -327,7 +334,7 @@ export default class Select extends Component {
         showSelectedValue = true;
       } else {
         if (open) {
-          showSelectedValue = !inputValue; //此时未输入
+          showSelectedValue = !inputValue; // 此时未输入
           if (showSelectedValue) {
             opacity = 0.4;
           }
@@ -357,15 +364,17 @@ export default class Select extends Component {
       </div>];
     }
     return (
-      <div ref={node => this.topCtrlNode = node} className={className}>
+      <div ref={node => { this.topCtrlNode = node; }} className={className}>
         {this.getPlaceholderElement()}
         {innerNode}
       </div>
     )
   }
+
   onPopupFocus = () => {
     console.log(1);
   }
+
   onMenuSelect = (selectedKeys) => {
     const oldValue = this.state.labelValue.value;
     const value = selectedKeys[0];
@@ -379,7 +388,7 @@ export default class Select extends Component {
         inputValue: labelValue.label
       })
     }
-    if (value !== oldValue){
+    if (value !== oldValue) {
       this.props.onChange(value);
     }
     if (this.menuItemTimer) {
@@ -390,18 +399,16 @@ export default class Select extends Component {
       this.menuItemTimer = setTimeout(() => {
         this.setState({
           open: false
-        })
+        });
         this.updateFocusClassName();
-      },100)
+      }, 100);
     }
-
   }
+
   render() {
     const props = this.props;
-    const { open, inputValue, value, labelValue, selectedKeys } = this.state;
+    const { open, inputValue, selectedKeys } = this.state;
     const { allowClear, disabled, className, style, showArrow, mode, size } = props;
-    const multiple = mode === 'multiple';
-    const tags = mode === 'tags';
     const combobox = mode === 'combobox';
     const clear = (<span key='clear' className={`${prefixCls}-selection-clear`}></span>);
     const rootCls = {

@@ -36,7 +36,7 @@ export default class TableCell extends React.Component {
 
   render() {
     const { record, indentSize, prefixCls, indent,
-            index, expandIcon, column } = this.props;
+      index, expandIcon, column } = this.props;
     const { dataIndex, render, className = '' } = column;
 
     // We should return undefined if no dataIndex is specified, but in order to
