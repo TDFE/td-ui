@@ -16,6 +16,7 @@ const UNSELECTABLE_STYLE = {
   WebkitUserSelect: 'none'
 }
 // 暂不考虑mode的情况
+//考虑mode='combobox'的情况
 export default class Select extends Component {
   static defaultProps = {
     showArrow: true,
@@ -119,11 +120,12 @@ export default class Select extends Component {
 
   adjustOpenState = () => {
     let open = this.state.open;
+    let combobox = this.props.mode;
     let options = [];
     if (open) {
       options = this.renderFilterOptions(this.props.children);
     }
-    if (!options.length) {
+    if (!options.length && !combobox) {
       options = [
         <MenuItem className='disabeld' value='NOT_FOUND' key='NOT_FOUND'>{this.props.notFoundContent}</MenuItem>
       ]
@@ -163,6 +165,7 @@ export default class Select extends Component {
       if (this.filterOption(inputValue, child)) {
         sel.push(<MenuItem value={childValue} key={childValue} {...child.props}/>);
       }
+
     })
     return sel;
   }
@@ -173,6 +176,7 @@ export default class Select extends Component {
     if (!inputValue) {
       return true;
     }
+    let filterFn = this.props.filterOption;
     let c = child.props.children;
     if (c.constructor === Array) {
       c = c.join('');
@@ -182,10 +186,14 @@ export default class Select extends Component {
     }
     // if ('filterOption' in this.props) {
     //   if (this.props.filterOption === true) {
-    //     if (inputValue.indexOf(child.props.children) > -1 || inputValue.indexOf(child.props.value) > -1) {
+    //     if (c.indexOf(inputValue) > -1 || child.props.value.indexOf(inputValue) > -1) {
     //       return true;
     //     }
     //   };
+    // } else {
+    //   if (c.indexOf(inputValue) > -1 || child.props.value.indexOf(inputValue) > -1) {
+    //     return true;
+    //   }
     // }
     return false;
   }
@@ -228,13 +236,21 @@ export default class Select extends Component {
         labelValue: labelValue || oldLabelValue
       });
     })
+    if ('mode' in this.props) {
+      if (this.props.mode) {
+        this.props.onChange(value);
+      }
+    }
   }
 
   onInputFocus = e => {
     e.stopPropagation();
-    this.setState({
-      inputValue: ''
-    });
+    const combobox = this.props.mode;
+    if (!combobox) {
+      this.setState({
+        inputValue: ''
+      });
+    }
   }
 
   addBodyClickEvent = () => {
