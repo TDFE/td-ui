@@ -3,7 +3,7 @@
  */
 import React from 'react';
 import PropTypes from 'prop-types';
-import cn from 'classNames';
+import cn from 'classnames';
 
 export default class PopupInner extends React.Component {
   static defaultProps = {

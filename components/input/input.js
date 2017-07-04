@@ -18,12 +18,12 @@ function fixControlledValue(value) {
   return value;
 }
 
-function onNextFrame(cb) {
-  if (window.requestAnimationFrame) {
-    return window.requestAnimationFrame(cb);
-  }
-  return window.setTimeout(cb, 1);
-}
+// function onNextFrame(cb) {
+//   if (window.requestAnimationFrame) {
+//     return window.requestAnimationFrame(cb);
+//   }
+//   return window.setTimeout(cb, 1);
+// }
 
 export default class Input extends Component {
   static defaultProps = {
@@ -75,10 +75,10 @@ export default class Input extends Component {
     const addonClassName = `${wrapperClassName}-addon`;
     const addonBefore = props.addonBefore ? (<span className={addonClassName}>{props.addonBefore}</span>) : null;
     const addonAfter = props.addonAfter ? (<span className={addonClassName}>{props.addonAfter}</span>) : null;
-    const className = cn({
-      [`${props.prefixCls}-wrapper`]: true,
-      [wrapperClassName]: (addonBefore || addonAfter)
-    });
+    // const className = cn({
+    //   [`${props.prefixCls}-wrapper`]: true,
+    //   [wrapperClassName]: (addonBefore || addonAfter)
+    // });
     return (<span className={wrapperClassName}>{addonBefore}{children}{addonAfter}</span>);
   }
 
@@ -94,7 +94,7 @@ export default class Input extends Component {
         {prefix}
         {cloneElement(children, { style: null })}
         {suffix}
-        </span>
+      </span>
     );
   }
 
@@ -106,8 +106,8 @@ export default class Input extends Component {
       return props.children;
     }
     const inputClassName = cn(prefixCls, {
-      [`${prefixCls}-sm`]: props.size === "small",
-      [`${prefixCls}-lg`]: props.size === "large"
+      [`${prefixCls}-sm`]: props.size === 'small',
+      [`${prefixCls}-lg`]: props.size === 'large'
     }, props.className);
     if ('value' in props) {
       otherProps.value = fixControlledValue(props.value);
