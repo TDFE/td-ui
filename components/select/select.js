@@ -16,7 +16,7 @@ const UNSELECTABLE_STYLE = {
   WebkitUserSelect: 'none'
 }
 // 暂不考虑mode的情况
-//考虑mode='combobox'的情况
+// 考虑mode='combobox'的情况
 export default class Select extends Component {
   static defaultProps = {
     showArrow: true,
@@ -165,8 +165,8 @@ export default class Select extends Component {
       if (this.filterOption(inputValue, child)) {
         sel.push(<MenuItem value={childValue} key={childValue} {...child.props}/>);
       }
+    });
 
-    })
     return sel;
   }
 
@@ -176,7 +176,7 @@ export default class Select extends Component {
     if (!inputValue) {
       return true;
     }
-    let filterFn = this.props.filterOption;
+    // let filterFn = this.props.filterOption;
     let c = child.props.children;
     if (c.constructor === Array) {
       c = c.join('');

@@ -23,6 +23,8 @@
     text-align: left;
     border-radius: @border-radius-base @border-radius-base 0 0;
     overflow: hidden;
+    border: 1px solid @table-header-bg;
+    border-bottom: 0;
   }
 
   &-thead > tr > th {
@@ -31,6 +33,7 @@
     transition: background .3s ease;
     text-align: left;
     color: @heading-color;
+    border-bottom: @table-header-border-bottom;
   }
 
   &[colspan] {
@@ -64,6 +67,11 @@
     &:hover {
       & > td {
         background: @table-row-hover-bg;
+      }
+    }
+    &:active {
+      & > td {
+        background: @table-row-active-bg;
       }
     }
   }
@@ -274,6 +282,15 @@
       &:before {
         -moz-transform-origin: 53% 50%; /* fix firefox position */
       }
+    }
+  }
+
+  &-noborder {
+    .@{table-prefix}-header > table,
+    .@{table-prefix}-body > table,
+    .@{table-prefix}-fixed-left table,
+    .@{table-prefix}-fixed-right table {
+      border: 0;
     }
   }
 
