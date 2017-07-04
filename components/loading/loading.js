@@ -46,7 +46,7 @@ export default class Loading extends Component {
                 }
                 <div className="loading-children">
                     {
-                        React.Children.map(this.props.children, child => (<div>我是：{child} </div>))
+                        React.Children.map(this.props.children, child => (<div>{child} </div>))
                     }
                 </div>
             </div>
