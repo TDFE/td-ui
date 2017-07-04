@@ -67,6 +67,7 @@ export default class Table extends React.Component {
       PropTypes.object
     ]),
     bordered: PropTypes.bool,
+    noborder: PropTypes.bool,
     onChange: PropTypes.func,
     locale: PropTypes.object,
     dropdownPrefixCls: PropTypes.string
@@ -81,6 +82,7 @@ export default class Table extends React.Component {
     size: 'large',
     loading: false,
     bordered: false,
+    noborder: false,
     indentSize: 20,
     locale: {},
     rowKey: 'key',
@@ -815,6 +817,7 @@ export default class Table extends React.Component {
     const classString = classNames({
       [`${prefixCls}-${this.props.size}`]: true,
       [`${prefixCls}-bordered`]: this.props.bordered,
+      [`${prefixCls}-noborder`]: this.props.noborder,
       [`${prefixCls}-empty`]: !data.length,
       [`${prefixCls}-without-column-header`]: !showHeader
     });

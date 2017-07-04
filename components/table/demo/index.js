@@ -64,17 +64,18 @@ function renderBasic() {
 
 let render = () => {
   function Demo() {
+    const style = { padding: 5 };
     return (
       <div className="td">
         <Row>
-          <Col span={12}>
+          <Col span={12} style={style}>
             {renderBasic()}
           </Col>
-          <Col span={12}></Col>
+          <Col span={12} style={style}></Col>
         </Row>
         <Row>
-          <Col span={12}></Col>
-          <Col span={12}></Col>
+          <Col span={12} style={style}></Col>
+          <Col span={12} style={style}></Col>
         </Row>
       </div>
     );
