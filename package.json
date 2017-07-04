@@ -78,6 +78,7 @@
     "async-validator": "^1.7.1",
     "classnames": "^2.2.5",
     "component-classes": "^1.2.6",
+    "dom-closest": "^0.2.0",
     "dom-scroll-into-view": "^1.2.1",
     "hoist-non-react-statics": "^1.2.0",
     "lodash": "^4.17.4",

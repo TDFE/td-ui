@@ -121,7 +121,6 @@ export default class TableRow extends React.Component {
     }
   }
 
-
   pullHeight() {
     const { store, expandedRow, fixed, rowKey } = this.props;
     const { expandedRowsHeight } = store.getState();

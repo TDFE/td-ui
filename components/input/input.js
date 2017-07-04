@@ -9,7 +9,6 @@ import React, { Component, cloneElement } from 'react';
 import PropTypes from 'prop-types';
 import cn from 'classnames';
 import omit from 'lodash/omit';
-import assign from 'object-assign';
 import s from './style';
 
 function fixControlledValue(value) {
@@ -42,27 +41,23 @@ export default class Input extends Component {
 		value: PropTypes.any,
 		defaultValue: PropTypes.any,
 		className: PropTypes.string,
-		addonBefore: PropTypes.node,
-		addonAfter: PropTypes.node,
+    addonBefore: PropTypes.node,
+    addonAfter: PropTypes.node,
 		prefixCls: PropTypes.string,
 		prefix: PropTypes.node,
 		suffix: PropTypes.node,
-		onKeyDown:PropTypes.func,
-		onPressEnter:PropTypes.func
+		onKeyDown: PropTypes.func,
+		onPressEnter: PropTypes.func
 	};
 
-	componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps(nextProps) {
     if (this.props.value !== nextProps.value) {
-			// TODO
-      // if (this.nextFrameActionId) {
-      //   clearNextFrameAction(this.nextFrameActionId);
-      // }
-      // this.nextFrameActionId = onNextFrame(this.resizeTextarea);
+      // TODO
     }
   }
 
 	handleKeyDown = e => {
-		const { onPressEnter , onKeyDown }=this.props;
+		const { onPressEnter, onKeyDown } = this.props;
 		if (e.keyCode === 13 && onPressEnter) {
 			onPressEnter(e);
 		}
@@ -105,8 +100,8 @@ export default class Input extends Component {
 	}
 
 	renderInput() {
-		const props = assign({}, this.props);
-		const otherProps = omit(this.props, ['prefixCls', 'onPressEnter','addonBefore', 'addonAfter', 'prefix', 'suffix']);
+		const props = Object.assign({}, this.props);
+		const otherProps = omit(this.props, ['prefixCls', 'onPressEnter', 'addonBefore', 'addonAfter', 'prefix', 'suffix']);
 		const prefixCls = props.prefixCls;
 		if (!props.type) {
 			return props.children;

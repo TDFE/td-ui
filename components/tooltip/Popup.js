@@ -3,20 +3,18 @@
  */
 import React from 'react';
 import ReactDOM from 'react-dom';
-import PropTypes from 'prop-types';
 import PopupInner from './PopupInner';
 
 export default class Popup extends React.Component {
-
   constructor(props) {
     super(props);
-    this.container = null;//the container that holds the popup and will be mounted to document
+    this.container = null; // the container that holds the popup and will be mounted to document
   }
 
   static defaultProps = {
     visible: true,
     left: 0,
-    top: 0,
+    top: 0
   }
 
   componentDidMount() {
@@ -36,7 +34,7 @@ export default class Popup extends React.Component {
   }
 
   getComponent() {
-    const {props, state} = this;
+    const {props} = this;
     const mouseProps = {};
     // if (this.isMouseEnterToShow()) {
     //   mouseProps.onMouseEnter = this.onPopupMouseEnter;
@@ -57,7 +55,6 @@ export default class Popup extends React.Component {
     );
   }
 
-
   getContainer() {
     const popupContainer = document.createElement('div');
     // Make sure default popup container will never cause scrollbar appearing
@@ -70,7 +67,6 @@ export default class Popup extends React.Component {
   }
 
   componentReady() {
-
     const pos = this.props.getToolTipPos(this.container.offsetWidth, this.container.offsetHeight);
     this.container.style.top = pos.top + 'px';
     this.container.style.left = pos.left + 'px';

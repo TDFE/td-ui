@@ -69,6 +69,8 @@ export { default as Steps } from './steps';
 
 export { default as Switch } from './switch';
 
+export { default as Table } from './table';
+
 export { default as Tabs } from './tabs';
 
 export { default as TimePicker } from './time-picker';
