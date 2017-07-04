@@ -19,7 +19,7 @@ function fixControlledValue(value) {
 }
 
 function onNextFrame(cb) {
-  if (window.requestAnimationFrame) {
+	if (window.requestAnimationFrame) {
     return window.requestAnimationFrame(cb);
   }
   return window.setTimeout(cb, 1);
@@ -30,7 +30,7 @@ export default class Input extends Component {
 		disabled: false,
 		prefixCls: s.inputPrefix,
 		type: 'text',
-		placeholder:'请输入内容'
+		placeholder: '请输入内容'
 	};
 
 	static propTypes = {
@@ -41,8 +41,8 @@ export default class Input extends Component {
 		value: PropTypes.any,
 		defaultValue: PropTypes.any,
 		className: PropTypes.string,
-    addonBefore: PropTypes.node,
-    addonAfter: PropTypes.node,
+		addonBefore: PropTypes.node,
+		addonAfter: PropTypes.node,
 		prefixCls: PropTypes.string,
 		prefix: PropTypes.node,
 		suffix: PropTypes.node,
@@ -50,11 +50,11 @@ export default class Input extends Component {
 		onPressEnter: PropTypes.func
 	};
 
-  componentWillReceiveProps(nextProps) {
-    if (this.props.value !== nextProps.value) {
-      // TODO
-    }
-  }
+	componentWillReceiveProps(nextProps) {
+		if (this.props.value !== nextProps.value) {
+			// TODO
+		}
+	}
 
 	handleKeyDown = e => {
 		const { onPressEnter, onKeyDown } = this.props;
@@ -64,7 +64,7 @@ export default class Input extends Component {
 		if (onKeyDown) {
 			onKeyDown(e);
 		}
-	};
+	}
 
 	renderLabeledInput(children) {
 		const props = this.props;
@@ -89,12 +89,11 @@ export default class Input extends Component {
 		}
 		const prefix = props.prefix ? (<span className={`${props.prefixCls}-prefix`}>{props.prefix}</span>) : null;
 		const suffix = props.suffix ? (<span className={`${props.prefixCls}-suffix`}>{props.suffix}</span>) : null;
-
 		return (
 			<span className={`${props.prefixCls}-affix-wrapper`} style={props.style}>
-			{prefix}
-			{cloneElement(children, { style: null })}
-			{suffix}
+				{prefix}
+				{cloneElement(children, { style: null })}
+				{suffix}
 			</span>
 		);
 	}
@@ -114,7 +113,14 @@ export default class Input extends Component {
 			otherProps.value = fixControlledValue(props.value);
 			delete otherProps.defaultValue;
 		}
-		return this.renderLabeledIcon(<input {...otherProps} className={inputClassName} ref="input" onKeyDown={this.handleKeyDown}/>);
+		return this.renderLabeledIcon(
+			<input
+				{...otherProps}
+				className={inputClassName}
+				ref="input"
+				onKeyDown={this.handleKeyDown}
+			/>
+		);
 	}
 
 	render() {

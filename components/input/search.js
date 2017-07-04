@@ -13,13 +13,13 @@ import Icon from '../icon';
 export default class Search extends Component {
   render() {
     const classes = cn({});
-    const searchSuffix = (<Icon type="search" onClick={this.onSearch}/>);
+    const searchSuffix = (<Icon type="search" onClick={this.onSearch} />);
     return (
-		  <Input
-		   className={classes}
-		   suffix={searchSuffix}
-		   ref={node => this.input = node}
-		  />
+      <Input
+        className={classes}
+        suffix={searchSuffix}
+        ref={node => { this.input = node; }}
+      />
     );
-	}
+  }
 }
