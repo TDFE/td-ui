@@ -1,0 +1,56 @@
+@import '../../style/themes/default';
+
+@prefixCls: ~"@{rate-prefix}";
+
+.@{rate-prefix} {
+  height: @rate-height;
+  line-height: @rate-height;
+  border: 1px solid @rate-accept-color;
+  border-radius: @rate-height / 2;
+  display: inline-block;
+  text-align: center;
+  min-width: @rate-width - (@rate-height - @rate-score-height);
+  padding-right: @rate-height - @rate-score-height;
+  font-size: 12px;
+  overflow: hidden;
+  color: @rate-accept-color;
+  &-score {
+    float: left;
+    border-radius: @rate-score-height / 2;
+    min-width: @rate-score-width;
+    height: @rate-score-height;
+    text-align: center;
+    line-height: @rate-score-height;
+    margin: (@rate-height - @rate-score-height) / 2;
+    margin-right: (@rate-height - @rate-score-height);
+    color: #fff;
+    box-sizing:border-box;
+    padding: 0 5px;
+    background: @rate-accept-color;
+  }
+  &-status {
+    float: left;
+  }
+  &-accept {
+    color: @rate-accept-color;
+    border-color: @rate-accept-color;
+    .@{prefixCls}-score {
+      background: @rate-accept-color;
+    }
+  }
+  &-reject{
+    color: @rate-reject-color;
+    border-color: @rate-reject-color;
+    .@{prefixCls}-score {
+      background: @rate-reject-color;
+    }
+  }
+  &-review{
+    color: @rate-review-color;
+    border-color: @rate-review-color;
+    .@{prefixCls}-score {
+      background: @rate-review-color;
+    }
+  }
+
+}

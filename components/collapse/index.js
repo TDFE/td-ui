@@ -1,6 +1,11 @@
 /**
- * @Author: Zhengfeng.Yao <yzf>
- * @Date:   2017-05-24 15:04:30
- * @Last modified by:   yzf
- * @Last modified time: 2017-05-24 15:04:33
+ * @Author: can,yang <yc>
+ * @Date:   2017-06-10 15:47:48
+ * @Last modified by:   yc
+ * @Last modified time: 2017-06-10 15:47:48
  */
+
+import Collapse from './Collapse';
+
+export default Collapse;
+export const Panel = Collapse.Panel;

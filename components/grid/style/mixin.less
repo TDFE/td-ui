@@ -1,0 +1,96 @@
+.make-row(@gutter: @grid-gutter-width) {
+  position: relative;
+  margin-left: (@gutter / -2);
+  margin-right: (@gutter / -2);
+  height: auto;
+  .clearfix;
+}
+
+.make-grid-columns() {
+  .col(@index) {
+    @item: ~".@{td-prefix}-col-@{index}, .@{td-prefix}-col-xs-@{index}, .@{td-prefix}-col-sm-@{index}, .@{td-prefix}-col-md-@{index}, .@{td-prefix}-col-lg-@{index}";
+    .col((@index + 1), @item);
+  }
+  .col(@index, @list) when (@index =< @grid-columns) {
+    @item: ~".@{td-prefix}-col-@{index}, .@{td-prefix}-col-xs-@{index}, .@{td-prefix}-col-sm-@{index}, .@{td-prefix}-col-md-@{index}, .@{td-prefix}-col-lg-@{index}";
+    .col((@index + 1), ~"@{list}, @{item}");
+  }
+  .col(@index, @list) when (@index > @grid-columns) {
+    @{list} {
+      position: relative;
+      // Prevent columns from collapsing when empty
+      min-height: 1px;
+      padding-left: (@grid-gutter-width / 2);
+      padding-right: (@grid-gutter-width / 2);
+    }
+  }
+  .col(1);
+}
+
+.float-grid-columns(@class) {
+  .col(@index) { // initial
+    @item: ~".@{td-prefix}-col@{class}-@{index}";
+    .col((@index + 1), @item);
+  }
+  .col(@index, @list) when (@index =< @grid-columns) {
+    @item: ~".@{td-prefix}-col@{class}-@{index}";
+    .col((@index + 1), ~"@{list}, @{item}");
+  }
+  .col(@index, @list) when (@index > @grid-columns) {
+    @{list} {
+      float: left;
+      flex: 0 0 auto;
+    }
+  }
+  .col(1);
+}
+
+// lesshint false
+.loop-grid-columns(@index, @class) when (@index > 0) {
+  .@{td-prefix}-col@{class}-@{index} {
+    display: block;
+    width: percentage((@index / @grid-columns));
+  }
+  .@{td-prefix}-col@{class}-push-@{index} {
+    left: percentage((@index / @grid-columns));
+  }
+  .@{td-prefix}-col@{class}-pull-@{index} {
+    right: percentage((@index / @grid-columns));
+  }
+  .@{td-prefix}-col@{class}-offset-@{index} {
+    margin-left: percentage((@index / @grid-columns));
+  }
+  .@{td-prefix}-col@{class}-order-@{index} {
+    order: @index;
+  }
+  .loop-grid-columns((@index - 1), @class);
+}
+
+.loop-grid-columns(@index, @class) when (@index = 0) {
+  .@{td-prefix}-col@{class}-@{index} {
+    display: none;
+  }
+  .@{td-prefix}-col-push-@{index} {
+    left: auto;
+  }
+  .@{td-prefix}-col-pull-@{index} {
+    right: auto;
+  }
+  .@{td-prefix}-col@{class}-push-@{index} {
+    left: auto;
+  }
+  .@{td-prefix}-col@{class}-pull-@{index} {
+    right: auto;
+  }
+  .@{td-prefix}-col@{class}-offset-@{index} {
+    margin-left: 0;
+  }
+  .@{td-prefix}-col@{class}-order-@{index} {
+    order: 0;
+  }
+}
+
+.make-grid(@class: ~'') {
+  .float-grid-columns(@class);
+  .loop-grid-columns(@grid-columns, @class);
+}

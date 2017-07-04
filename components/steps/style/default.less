@@ -1,0 +1,102 @@
+@import "../../style/themes/default.less";
+@import "./base.less";
+
+.@{steps-prefix} {
+  &-step{
+    display: inline-block;
+    vertical-align: top;
+    position: relative;
+    &:last-child{
+      .@{steps-prefix}-step-line{
+        display: none;
+      }
+    }
+    &-line{
+      position: absolute;
+      left: 0;
+      box-sizing: border-box;
+      i{
+        background: @step-gray;
+        display: block;
+        &:after{
+          content: "";
+          display: block;
+          background: @step-blue;
+        }
+      }
+    }
+    &-con{
+      display: inline-block;
+      position: relative;
+      .setting-icon{
+        color: @step-gray;
+        font-size: 20px;
+        text-align: center;
+        display: inline-block;
+        width: 24px;
+      }
+    }
+    &-title{
+      font-size: 14px;
+      margin-bottom: 7px;
+      color: @step-gray;
+      font-weight: 700;
+      background-color: #fff;
+      display: inline-block;
+      padding-right: 10px;
+      padding-top: 5px;
+    }
+    &-desc{
+      font-size: 12px;
+      color: @step-gray
+    }
+    &-icon{
+      border: 2px solid @step-gray;
+      width: @icon-height;
+      height: @icon-height;
+      border-radius: @icon-height;
+      line-height: @icon-height;
+      display: inline-block;
+      text-align: center;
+      color: @step-gray;
+      font-size: 12px;
+    }
+    &-finished{
+      .@{steps-prefix}{
+        &-step{
+          &-icon{
+            border-color: @step-blue;
+            color: @step-blue;
+          }
+          &-title, &-desc{
+            color: @step-black;
+          }
+          &-con{
+            .setting-icon{
+              color: @step-blue;
+            }
+          }
+        }
+      }
+    }
+    &-progress{
+      .@{steps-prefix}{
+        &-step{
+          &-icon{
+            background: @step-blue;
+            border-color: @step-blue;
+            color: #fff;
+          }
+          &-title, &-desc{
+            color: @step-blue;
+          }
+          &-con{
+            .setting-icon{
+              color: @step-blue;
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,7 +1,7 @@
 /**
  * Created by sunxianxiong on 17/6/2.
  */
-/* eslint-disable no-unused-vars */
+
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import cn from 'classnames';
@@ -18,7 +18,7 @@ export default class RadioGroup extends Component {
   };
 
   static propTypes = {
-    option: PropTypes.array,
+    options: PropTypes.array,
     defaultValue: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     size: PropTypes.oneOf(['large', 'default', 'small']),
@@ -29,10 +29,11 @@ export default class RadioGroup extends Component {
     disabled: PropTypes.bool
   };
 
-  //  通过context传递值
+  // 通过context传递值
   static childContextTypes = {
     radioGroup: PropTypes.object
   };
+
   getChildContext() {
     return {
       radioGroup: {
@@ -108,8 +109,20 @@ export default class RadioGroup extends Component {
   render() {
     const {props} = this;
     const {
-      className, style, prefixCls, options
+      className, size = '', style, prefixCls, options
     } = props;
+
+    let sizeCls = '';
+    switch (size) {
+      case 'large':
+        sizeCls = 'lg';
+        break;
+      case 'small':
+        sizeCls = 'sm';
+        break;
+      default:
+        break;
+    }
 
     let children = props.children;
 
@@ -145,7 +158,8 @@ export default class RadioGroup extends Component {
 
     const st = Object.assign({}, style);
     const classNames = cn(className, {
-      [`${prefixCls}-group`]: true
+      [`${prefixCls}-group`]: true,
+      [`${prefixCls}-group-${sizeCls}`]: sizeCls
     });
 
     return (

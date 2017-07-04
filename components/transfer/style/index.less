@@ -1,0 +1,116 @@
+@import "../../style/themes/default.less";
+
+.@{transfer-prefix}{
+  display: flex;
+  font-size: @font-size-base;
+  color: @text-color;
+  &-box{
+    flex: 1;
+    border: 1px solid @border-color-base;
+    border-radius: @border-radius-base;
+  }
+  &-middle{
+    position: relative;
+    padding: 0 10px;
+    &-inner{
+      position: relative;
+      top: 50%;
+      transform: translateY(-50%);
+      div:first-child{
+        margin-bottom: 10px;
+      }
+    }
+    .@{btn-prefix}{
+      padding: 2px 10px;
+    }
+  }
+  &-title{
+    border-bottom: 1px solid @border-color-base;
+    padding: 7px 15px;
+    box-sizing: border-box;
+    .fr{
+      float: right;
+    }
+  }
+  &-con{
+    height: 160px;
+    overflow: auto;
+    position: relative;
+    &-item{
+      line-height: 18px;
+      padding: 7px 15px;
+      box-sizing: border-box;
+      cursor: pointer;
+      &:hover{
+        background: @primary-2;
+      }
+    }
+    .null{
+      position: absolute;
+      width: 100%;
+      text-align: center;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+  }
+  &-checkbox {
+    margin-right: 10px;
+    display: inline-block;
+    width: @tree-checkbox-width;
+    height: @tree-checkbox-height;
+    cursor: pointer;
+    border: 1px solid #d9d9d9;
+    box-sizing: border-box;
+    border-radius: 2px;
+    background-color: #fff;
+    position: relative;
+    vertical-align: middle;
+    &:hover {
+      border-color: @tree-checkbox-color;
+    }
+    &-checked,&-indeterminate {
+      background-color: @tree-checkbox-color;
+      border-color: @tree-checkbox-color;
+      &:after {
+        content: '';
+        border-color: #fff;
+        border-style: solid;
+        overflow: hidden;
+        position: absolute;
+        transition: all .1s;
+      }
+    }
+    &-checked {
+      &:after {
+        width: 3px;
+        height: 6px;
+        border-width:0 2px 2px 0;
+        transform: rotate(45deg);
+        left: 4px;
+        top: 1px;
+      }
+    }
+    &-indeterminate {
+      &:after {
+        width: 8px;
+        height: 0;
+        border-width: 2px 0 0;
+        left: 50%;
+        margin-left: -4px;
+        top: 50%;
+        margin-top: -1px;
+      }
+    }
+    &-disabled {
+      cursor: not-allowed;
+      background-color: @tree-checkbox-disabled-bg;
+      border-color: @tree-checkbox-disabled-color;
+      &:hover {
+        border-color: @tree-checkbox-disabled-color;
+      }
+      &:after {
+        border-color: @tree-checkbox-disabled-color;
+      }
+    }
+  }
+}

@@ -14,14 +14,14 @@ const MOUNT_NODE = document.getElementById('app');
 let render = () => {
   /* eslint-disable no-unused-vars */
   let Input = require('../index').default;
-
+  let Search = Input.Search;
   /* eslint-disable no-unused-vars */
   function Demo() {
     return (
       <div className="td">
       正常demo
 
-        <Input placeholder="gina" addonBefore="我是名字"/>
+        <Input placeholder="gina" disabled/>
 
         前置后置标签
         <Input placeholder="gina" addonBefore="我是名字"/>
@@ -33,7 +33,12 @@ let render = () => {
         <Input placeholder="small size" size="small"/>
 
 
-        前置后置带icon
+        搜索输入框
+        <Search
+        placeholder="input search text"
+        style={{ width: 200 }}
+        onSearch={value => console.log(value)}
+    />
       </div>
     );
   }
