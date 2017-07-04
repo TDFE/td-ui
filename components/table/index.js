@@ -5,4 +5,4 @@
  * @Last modified time: 2017-05-24 15:04:33
  */
 
-export { default as Table } from './Table';
+export { default } from './Table';
