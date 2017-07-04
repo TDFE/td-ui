@@ -8,6 +8,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Select from '../../time-picker/select';
+import classNames from 'classnames';
 import {
   FULL_PICKER,
   MINUTE_PICKER
@@ -77,9 +78,10 @@ export default class TimeTable extends React.Component {
         selectedIndex={selectedIndex}
         options={options}
         type="hour"
+        value={value}
         onSelect={this.onHourSelect}
         render={item => <div>{item}</div>}
-        />
+      />
     );
   }
 
@@ -110,10 +112,11 @@ export default class TimeTable extends React.Component {
         offset={offset}
         selectedIndex={selectedIndex}
         options={options}
-        type="hour"
+        type="minute"
+        value={value}
         onSelect={this.onMinuteSelect}
         render={item => <div>{item}</div>}
-        />
+      />
     );
   }
 
@@ -143,10 +146,11 @@ export default class TimeTable extends React.Component {
         offset={offset}
         selectedIndex={selectedIndex}
         options={options}
-        type="hour"
+        type="second"
+        value={value}
         onSelect={this.onSecondSelect}
         render={item => <div>{item}</div>}
-        />
+      />
     );
   }
 
@@ -155,14 +159,15 @@ export default class TimeTable extends React.Component {
     return (
       <div className={`${prefixCls}-mask`}>
         {
-          type >= MINUTE_PICKER && <span style={{
-            left: parseInt(s.datePickerGap) + parseFloat(this.columnWidth)
-          }}>:</span>
+          type >= MINUTE_PICKER && <span className={
+            classNames({
+              [`${prefixCls}-mask-colon`]: type === MINUTE_PICKER,
+              [`${prefixCls}-mask-first-colon`]: type === FULL_PICKER
+            })
+          }>:</span>
         }
         {
-          type >= FULL_PICKER && <span style={{
-            left: parseInt(s.datePickerGap) + parseFloat(this.columnWidth) * 2
-          }}>:</span>
+          type >= FULL_PICKER && <span className={`${prefixCls}-mask-second-colon`}>:</span>
         }
       </div>
     );

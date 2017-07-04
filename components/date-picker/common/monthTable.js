@@ -53,7 +53,7 @@ export default class MonthTable extends React.Component {
             onClick={disabled ? undefined : onSelect.bind(null, current)}
             title={current.format('YYYY/MM')}
             className={cls}
-            >
+          >
             <div>
               {months[i][j]}
             </div>

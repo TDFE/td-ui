@@ -5,7 +5,6 @@
  * @Last modified time: 2017-05-16 18:33:09
  */
 
-/* eslint-disable */
 import React, {Component,cloneElement} from 'react';
 import cn from 'classnames';
 import Input from './input';

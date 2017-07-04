@@ -6,6 +6,7 @@
 @icon-prefix                  : ~"@{td-prefix}icon";
 @btn-prefix                   : ~"@{td-prefix}-btn";
 @input-prefix                 : ~"@{td-prefix}-input";
+@checkbox-prefix              : ~"@{td-prefix}-checkbox";
 @select-prefix                : ~"@{td-prefix}-select";
 @loading-prefix               : ~"@{td-prefix}-loading";
 @radio-prefix                 : ~"@{td-prefix}-radio";
@@ -28,9 +29,13 @@
 @tabs-prefix                  : ~"@{td-prefix}-tabs";
 @progress-prefix              : ~"@{td-prefix}-progress";
 @form-prefix                  : ~"@{td-prefix}-form";
+@tooltip-prefix               : ~"@{td-prefix}-tooltip";
 @steps-prefix                 : ~"@{td-prefix}-steps";
 @time-picker-prefix           : ~"@{td-prefix}-time-picker";
+@upload-prefix                : ~"@{td-prefix}-upload";
 @date-picker-prefix           : ~"@{td-prefix}-date-picker";
+@range-picker-prefix          : ~"@{td-prefix}-range-picker";
+@transfer-prefix              : ~"@{td-prefix}-transfer";
 @checkbox-prefix                 : ~"@{td-prefix}-checkbox";
 
 :export {
@@ -60,11 +65,15 @@
   tabsPrefix: @tabs-prefix;
   progressPrefix: @progress-prefix;
   formPrefix: @form-prefix;
+  tooltipPrefix: @tooltip-prefix;
   stepsPrefix: @steps-prefix;
   timePickerPrefix: @time-picker-prefix;
+  uploadPrefix: @upload-prefix;
   datePickerPrefix: @date-picker-prefix;
+  transferPrefix: @transfer-prefix;
   datePickerPanelSize: @date-picker-time-offset * 7;
   datePickerGap: @date-picker-gap;
+  rangePickerPrefix: @range-picker-prefix;
   checkboxPrefix: @checkbox-prefix;
 }
 
@@ -94,7 +103,9 @@
 @disabled-color               : fade(#000, 25%);
 @shadow-color                 : rgba(0, 0, 0, .2);
 @text-color                   : fade(#000, 65%);
-@text-color-secondary   : fade(#000, 43%);
+@text-color-secondary         : fade(#000, 43%);
+@heading-color                : fade(#000, 85%);
+@heading-color-dark           : fade(#fff, 97%);
 
 @primary-1: tint(@primary-5, 80%);
 @primary-2: tint(@primary-5, 60%);
@@ -173,16 +184,25 @@
 @date-picker-gap-vertial                : 4px;
 @date-picker-panel-width                : @date-picker-cell-size * 7;
 @date-picker-panel-height               : @date-picker-cell-size * 9;
-@date-picker-header-font-color         : @blue-8;
+@date-picker-header-font-color          : @blue-8;
 @date-picker-font-color                 : #666;
 @date-picker-hover-color                : @primary-4;
 @date-picker-select-color               : @primary-5;
 @date-picker-active-color               : @primary-6;
 @date-picker-input-width                : 200px;
 @date-picker-minor-color                : #ccc;
-@date-picker-background-color            : #fff;
+@date-picker-background-color           : #fff;
 @date-picker-disabled-color             : #f7f7f7;
 @date-picker-disabled-border            : #ccc;
+@date-picker-scrollbar-color            : #c1c1c1;
+@date-picker-scrollbar-width            : 8px;
+
+// RangePicker
+@range-picker-time-height               : 36px;
+@range-picker-tool-height               : 40px;
+@range-picker-input-width               : 300px;
+@range-picker-panel-width               : @date-picker-panel-width * 2 + @date-picker-gap-horizontal;
+@range-picker-panel-height              : @date-picker-cell-size * 8 + @range-picker-time-height + @range-picker-tool-height + @date-picker-gap-vertial * 2;
 
 // grid
 @grid-columns                 : 24;
@@ -303,14 +323,53 @@
 @pagination-font-size             : @font-size-base;
 @pagination-font-size-sm          : @font-size-sm;
 
+// Tooltip
+// ---
+//* Tooltip max width
+@tooltip-max-width: 250px;
+//** Tooltip text color
+@tooltip-color: @text-color;//#fff;
+//** Tooltip background color
+@tooltip-bg: @component-background;//rgba(64, 64, 64, .85);
+//** Tooltip arrow width
+@tooltip-arrow-width: 5px;
+//** Tooltip distance with trigger
+@tooltip-distance: @tooltip-arrow-width - 1 + 4;
+//** Tooltip arrow color
+@tooltip-arrow-color: @tooltip-bg;
+@tooltip-title-bg: @background-color-base;
+@box-shadow-base : 0 -1px 6px @shadow-color;
+
 //Tree
 @tree-switcher-width              : 24px;
 @tree-switcher-height             : 24px;
 @tree-checkbox-width              : 14px;
 @tree-checkbox-height             : 14px;
-@tree-checkbox-color              : @primary-color;
+@tree-checkbox-color              : @primary-5;
 @tree-checkbox-disabled-color     : @disabled-color;
 @tree-checkbox-disabled-bg        : @disabled-bg;
+
+//Select
+@select-height-base               : 26px;
+@select-height-sm                 : 20px;
+@select-height-lg                 : 30px;
+@select-focus-color               : @primary-5;
+@select-shadow-color              : @primary-1;
+@select-color                     : rgba(0, 0, 0, .5);
+@select-font-size                 : @font-size-sm;
+@select-item-hover-color          : #ecf6fd;
+@select-item-selected-color       : rgba(0,0,0,.65);
+
+//Upload
+@upload-height                    : 28px;
+@upload-width                     : 100px;
+@upload-hover-color               : @link-hover-color;
+@upload-active-color              : @link-active-color;
+@upload-font-size                 : @font-size-base;
+@upload-color-base                : #666;
+@upload-file-height               : 24px;
+@upload-hover-bgColor             : #f7f7f7;
+@upload-note-color                : #999;
 
 // steps
 @step-blue:        @blue-5;
