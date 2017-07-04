@@ -94,36 +94,36 @@ export default class Input extends Component {
         {prefix}
         {cloneElement(children, { style: null })}
         {suffix}
-			</span>
-		);
-	}
+        </span>
+    );
+  }
 
-	renderInput() {
-		const props = Object.assign({}, this.props);
-		const otherProps = omit(this.props, ['prefixCls', 'onPressEnter', 'addonBefore', 'addonAfter', 'prefix', 'suffix']);
-		const prefixCls = props.prefixCls;
-		if (!props.type) {
-			return props.children;
-		}
-		const inputClassName = cn(prefixCls, {
-			[`${prefixCls}-sm`]: props.size === "small",
-			[`${prefixCls}-lg`]: props.size === "large"
-		}, props.className);
-		if ('value' in props) {
-			otherProps.value = fixControlledValue(props.value);
-			delete otherProps.defaultValue;
-		}
-		return this.renderLabeledIcon(
-			<input
-				{...otherProps}
-				className={inputClassName}
-				ref="input"
-				onKeyDown={this.handleKeyDown}
-			/>
-		);
-	}
+  renderInput() {
+    const props = Object.assign({}, this.props);
+    const otherProps = omit(this.props, ['prefixCls', 'onPressEnter', 'addonBefore', 'addonAfter', 'prefix', 'suffix']);
+    const prefixCls = props.prefixCls;
+    if (!props.type) {
+      return props.children;
+    }
+    const inputClassName = cn(prefixCls, {
+      [`${prefixCls}-sm`]: props.size === "small",
+      [`${prefixCls}-lg`]: props.size === "large"
+    }, props.className);
+    if ('value' in props) {
+      otherProps.value = fixControlledValue(props.value);
+      delete otherProps.defaultValue;
+    }
+    return this.renderLabeledIcon(
+      <input
+        {...otherProps}
+        className={inputClassName}
+        ref="input"
+        onKeyDown={this.handleKeyDown}
+      />
+    );
+  }
 
-	render() {
-		return this.renderLabeledInput(this.renderInput());
-	}
+  render() {
+    return this.renderLabeledInput(this.renderInput());
+  }
 }
