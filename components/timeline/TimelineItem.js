@@ -3,7 +3,7 @@
  */
 import React from 'react';
 import PropTypes from 'prop-types';
-import cn from 'classNames';
+import cn from 'classnames';
 import s from './style';
 
 export default class TimelineItem extends React.Component {
