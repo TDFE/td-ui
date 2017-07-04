@@ -25,7 +25,6 @@ export default class Loading extends Component {
         classNameValue = classTmp;
         break;
     }
-
     return (
       <div>
         {

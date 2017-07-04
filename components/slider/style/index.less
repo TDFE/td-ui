@@ -1,0 +1,118 @@
+@import "../../style/themes/default.less";
+
+@xy-handle-size: 20px;
+@color-active: @blue-5;
+@color-bg: @border-color-split;
+@size: 6px;
+@fix: 6px;
+
+.@{slider-prefix} {
+    position: relative;
+    display: inline-block;
+    background-color: @color-bg;
+    border-radius: 3px;
+
+    .show-value {
+        position: absolute;
+        top: -40px;
+        padding: 10px 0;
+    }
+
+    .value {
+        position: absolute;
+        background-color: @color-active;
+        border-radius: 3px;
+    }
+
+    .handle {
+        position: absolute;
+        width: @size;
+        height: @size;
+
+        &:after {
+            position: relative;
+            display: block;
+            content: '';
+        }
+    }
+}
+
+.@{slider-prefix}-x,
+.@{slider-prefix}-y {
+    .handle:after {
+        width: @size + @fix;
+        height: @size + @fix;
+        background-color: #fff;
+        border: 3px solid @color-active;
+        border-radius: 50%;
+    }
+}
+
+.@{slider-prefix}-x,
+.@{slider-prefix}-y {
+    .handle {
+        cursor: pointer;
+    }
+    .handle:hover {
+        width: 30px;
+        height: 30px;
+    }
+    .handle:after {
+        width: @size + @fix +4;
+        height: @size + @fix +4;
+        background-color: #fff;
+        border: 3px solid @color-active;
+        border-radius: 50%;
+    }
+}
+
+.@{slider-prefix}-x {
+    width: 300px;
+    height: @size;
+
+    .handle {
+        height: 100%;
+        &:after {
+            top: -@fix;
+            left: -(@size+@fix)/2;
+        }
+    }
+
+    .value {
+        top: 0;
+        height: 100%;
+    }
+}
+
+.@{slider-prefix}-y {
+    width: @size;
+    height: 300px;
+
+    .handle {
+        width: 100%;
+        &:after {
+            top: -(@size+@fix)/2;
+            left: -@fix;
+        }
+    }
+
+    .value {
+        left: 0;
+        width: 100%;
+    }
+}
+
+.@{slider-prefix}-disabled {
+    background-color: @border-color-split;
+    .value {
+        background-color: @shadow-color;
+    }
+}
+
+.@{slider-prefix}-disabled.@{slider-prefix}-x,
+.@{slider-prefix}-disabled.@{slider-prefix}-y {
+    .handle:after {
+        border: 3px solid @shadow-color;
+    }
+}
+
