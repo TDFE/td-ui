@@ -12,7 +12,7 @@ import Icon from '../../icon';
 
 const MOUNT_NODE = document.getElementById('app');
 
-let render = () => {
+function renderBasic() {
   let Table = require('../index').default;
   const columns = [{
     title: 'Name',
@@ -59,13 +59,16 @@ let render = () => {
     age: 32,
     address: 'Sidney No. 1 Lake Park',
   }];
+  return <Table columns={columns} dataSource={data} />;
+}
 
+let render = () => {
   function Demo() {
     return (
       <div className="td">
         <Row>
           <Col span={12}>
-            <Table columns={columns} dataSource={data} />
+            {renderBasic()}
           </Col>
           <Col span={12}></Col>
         </Row>
