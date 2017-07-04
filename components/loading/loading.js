@@ -44,7 +44,7 @@ export default class Loading extends Component {
             </div>
           ) : ''
         }
-        <div className="loading-children">
+        <div className={`${prefixLoad}-content`}>
           {
             React.Children.map(this.props.children, child => (<div>{child} </div>))
           }

@@ -19,6 +19,7 @@ import createStore from './createStore';
 import SelectionBox from './SelectionBox';
 import SelectionCheckboxAll from './SelectionCheckboxAll';
 import { flatArray, treeMap, flatFilter, normalizeColumns } from './util';
+import s from './style';
 
 function noop() {
 }
@@ -73,7 +74,7 @@ export default class Table extends React.Component {
 
   static defaultProps = {
     dataSource: [],
-    prefixCls: 'td-table',
+    prefixCls: s.tablePrefix,
     useFixedHeader: false,
     rowSelection: null,
     className: '',
@@ -178,7 +179,7 @@ export default class Table extends React.Component {
     const filteredValueColumns = this.getFilteredValueColumns(this.columns);
     if (filteredValueColumns.length > 0) {
       const filtersFromColumns = this.getFiltersFromColumns(this.columns);
-      const newFilters = assign({}, this.state.filters);
+      const newFilters = Object.assign({}, this.state.filters);
       Object.keys(filtersFromColumns).forEach(key => {
         newFilters[key] = filtersFromColumns[key];
       });
@@ -467,7 +468,7 @@ export default class Table extends React.Component {
 
   handlePageChange = (current, ...otherArguments) => {
     const props = this.props;
-    let pagination = assign({}, this.state.pagination);
+    let pagination = Object.assign({}, this.state.pagination);
     if (current) {
       pagination.current = current;
     } else {
@@ -491,7 +492,7 @@ export default class Table extends React.Component {
 
     const onChange = this.props.onChange;
     if (onChange) {
-      onChange.apply(null, this.prepareParamsArguments(assign({}, this.state, {
+      onChange.apply(null, this.prepareParamsArguments(Object.assign({}, this.state, {
         selectionDirty: false,
         pagination
       })));
@@ -605,7 +606,7 @@ export default class Table extends React.Component {
     const { sortOrder } = this.state;
     const locale = this.getLocale();
     return treeMap(columns, (originColumn, i) => {
-      let column = assign({}, originColumn);
+      let column = Object.assign({}, originColumn);
       let key = this.getColumnKey(column, i);
       let filterDropdown;
       let sortButton;
@@ -666,12 +667,12 @@ export default class Table extends React.Component {
   handleShowSizeChange = (current, pageSize) => {
     const pagination = this.state.pagination;
     pagination.onShowSizeChange(current, pageSize);
-    const nextPagination = assign({}, pagination, { pageSize, current });
+    const nextPagination = Object.assign({}, pagination, { pageSize, current });
     this.setState({ pagination: nextPagination });
 
     const onChange = this.props.onChange;
     if (onChange) {
-      onChange.apply(null, this.prepareParamsArguments(assign({}, this.state, {
+      onChange.apply(null, this.prepareParamsArguments(Object.assign({}, this.state, {
         pagination: nextPagination
       })));
     }
@@ -820,7 +821,7 @@ export default class Table extends React.Component {
 
     columns = this.renderColumnsDropdown(columns);
     columns = columns.map((column, i) => {
-      const newColumn = assign({}, column);
+      const newColumn = Object.assign({}, column);
       newColumn.key = this.getColumnKey(newColumn, i);
       return newColumn;
     });
