@@ -250,16 +250,16 @@ export default class Table extends React.Component {
   };
 
   getSortStateFromColumns = columns => {
-    const sortedColumn = this.getSortOrderColumns(columns).filter(col => col.sortOder)[0];
+    const sortedColumn = this.getSortOrderColumns(columns).filter(col => col.sortOrder)[0];
     if (sortedColumn) {
       return {
         sortColumn: sortedColumn,
-        sortOder: sortedColumn.sortOrder
+        sortOrder: sortedColumn.sortOrder
       };
     }
     return {
       sortColumn: null,
-      sortOder: null
+      sortOrder: null
     };
   };
 
