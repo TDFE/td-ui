@@ -15,7 +15,7 @@ export default class PopupInner extends React.Component {
     prefixCls: PropTypes.string,
     content: React.PropTypes.node.isRequired,
     className: PropTypes.string,
-    title: PropTypes.string
+    title: React.PropTypes.node
   }
 
   render() {
