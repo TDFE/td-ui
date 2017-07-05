@@ -34,11 +34,7 @@ let render = () => {
 
 
         搜索输入框
-        <Search
-        placeholder="input search text"
-        style={{ width: 200 }}
-        onSearch={value => console.log(value)}
-    />
+         <Search placeholder="input search text" style={{ width: 200 }} onSearch={value => console.log(value)}/>
       </div>
     );
   }
