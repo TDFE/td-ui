@@ -509,17 +509,25 @@
       height: 17px;
       text-align: center;
       line-height: 14px;
-      border: @border-width-base @border-style-base @table-border-color;
       user-select: none;
-      background: @component-background;
+      border-radius: @border-radius-sm;
+      color: #fff;
     }
 
-    &-expanded:after {
-      content: '-';
+    &-expanded {
+      border: @border-width-base @border-style-base @red-4;
+      background: @red-4;
+      &:after {
+        content: '-';
+      }
     }
 
-    &-collapsed:after {
-      content: '+';
+    &-collapsed {
+      background: @green-4;
+      border: @border-width-base @border-style-base @green-4;
+      &:after {
+        content: '+';
+      }
     }
 
     &-spaced {
@@ -537,7 +545,7 @@
   tr&-expanded-row {
     &,
     &:hover {
-      background: #fbfbfb;
+      background: #f9f9f9;
     }
   }
 
