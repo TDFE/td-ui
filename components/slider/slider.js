@@ -28,13 +28,13 @@ class Slider extends Component {
   }
 
   render() {
-    const { axis, disabled, showValue, sliderWidth, sliderHeight } = this.props;
+    const { axis, disabled, showValue, sliderWidth, sliderHeight, style } = this.props;
     let pos = this.getPosition();
     let valueStyle = {};
     if (axis === 'x') valueStyle.width = pos.left;
     if (axis === 'y') valueStyle.height = pos.top;
 
-    let sliderStyle = {}
+    let sliderStyle = {...style}
     if (axis === 'x') sliderStyle.width = sliderWidth;
     if (axis === 'y') sliderStyle.height = sliderHeight;
 
