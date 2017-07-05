@@ -212,7 +212,7 @@ export default class FilterMenu extends React.Component {
 
     return (
       <Dropdown
-        trigger={['click']}
+        trigger="click"
         overlay={menus}
         visible={this.neverShown ? false : this.state.visible}
         onVisibleChange={this.onVisibleChange}
