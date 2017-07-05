@@ -254,7 +254,7 @@ class Pagination extends Component {
         }
         { pageList }
         {
-          showSizeChanger ? <Options prefixCls={`${prefixCls}-options`} pageSizeOptions={pageSizeOptions} pageSize={pageSize} onShowSizeChange={this.onShowSizeChange}/> : ''
+          showSizeChanger ? <Options prefixCls={`${prefixCls}-options`} size={size} pageSizeOptions={pageSizeOptions} pageSize={pageSize} onShowSizeChange={this.onShowSizeChange}/> : ''
         }
         {
           showQuickJumper ? <QuickJumper prefixCls={`${prefixCls}-quick-jumper`} current={current}

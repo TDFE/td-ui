@@ -3,9 +3,9 @@
  */
 
 export function getOffsetToBody(dom) {
-  let offsetX = 0,
-    offsetY = 0,
-    offsetParent = dom;
+  let offsetX = 0;
+  let offsetY = 0;
+  let offsetParent = dom;
   while (offsetParent) {
     offsetX += dom.offsetLeft;
     offsetY += dom.offsetTop;
@@ -17,9 +17,8 @@ export function getOffsetToBody(dom) {
   return [offsetX, offsetY];
 }
 
-
 export function contains(rootClass, n) {
-  var node = n;
+  let node = n;
   while (node && node !== document.body) {
     if (node.className === rootClass) {
       return true;
@@ -31,11 +30,10 @@ export function contains(rootClass, n) {
 }
 
 export function placeTooltip(placeTop, placeLeft, tooltipW, tooltipH, targetRect) {
-
-  const targetW = targetRect.width,
-    targetH = targetRect.height,
-    targetLeft = targetRect.left,
-    targetTop = targetRect.top;
+  const targetW = targetRect.width;
+  const targetH = targetRect.height;
+  const targetLeft = targetRect.left;
+  const targetTop = targetRect.top;
   let left, top;
   switch (placeTop) {
     case 'bottom':

@@ -119,7 +119,7 @@ export default class Table extends React.Component {
   componentWillReceiveProps(nextProps) {
     if ('expandedRowKeys' in nextProps) {
       this.setState({
-        expandedRowKeys: nextProps.expandedRowKeys,
+        expandedRowKeys: nextProps.expandedRowKeys
       });
     }
     if (nextProps.columns && nextProps.columns !== this.props.columns) {
@@ -188,8 +188,7 @@ export default class Table extends React.Component {
 
   getRowKey(record, index) {
     const rowKey = this.props.rowKey;
-    const key = (typeof rowKey === 'function') ?
-      rowKey(record, index) : record[rowKey];
+    const key = (typeof rowKey === 'function') ? rowKey(record, index) : record[rowKey];
     warningOnce(
       key !== undefined,
       'Each record in table should have a unique `key` prop,' +
@@ -239,7 +238,7 @@ export default class Table extends React.Component {
       const cell = {
         key: column.key,
         className: column.className || '',
-        children: column.title,
+        children: column.title
       };
       if (column.children) {
         this.getHeaderRows(column.children, currentRow + 1, rows);
@@ -271,10 +270,10 @@ export default class Table extends React.Component {
       key: 'extra-row',
       render: () => ({
         props: {
-          colSpan: colCount,
+          colSpan: colCount
         },
         children: fixed !== 'right' ? content : '&nbsp;'
-      }),
+      })
     }];
     if (expandIconAsCell && fixed !== 'right') {
       columns.unshift({
@@ -336,9 +335,7 @@ export default class Table extends React.Component {
         onHoverProps.onHover = this.handleRowHover;
       }
 
-      const height = (fixed && fixedColumnsBodyRowsHeight[i]) ?
-        fixedColumnsBodyRowsHeight[i] : null;
-
+      const height = (fixed && fixedColumnsBodyRowsHeight[i]) ? fixedColumnsBodyRowsHeight[i] : null;
 
       let leafColumns;
       if (fixed === 'left') {
@@ -645,9 +642,7 @@ export default class Table extends React.Component {
       return;
     }
     const { prefixCls } = this.props;
-    const headRows = this.refs.headTable ?
-            this.refs.headTable.querySelectorAll('thead') :
-            this.refs.bodyTable.querySelectorAll('thead');
+    const headRows = this.refs.headTable ? this.refs.headTable.querySelectorAll('thead') : this.refs.bodyTable.querySelectorAll('thead');
     const bodyRows = this.refs.bodyTable.querySelectorAll(`.${prefixCls}-row`) || [];
     const fixedColumnsHeadRowsHeight = [].map.call(
       headRows, row => row.getBoundingClientRect().height || 'auto'

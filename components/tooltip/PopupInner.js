@@ -3,10 +3,9 @@
  */
 import React from 'react';
 import PropTypes from 'prop-types';
-import cn from 'classNames';
+import cn from 'classnames';
 
 export default class PopupInner extends React.Component {
-
   static defaultProps = {
     // prefixCls: s.timelinePrefix,
     title: ''
@@ -16,7 +15,7 @@ export default class PopupInner extends React.Component {
     prefixCls: PropTypes.string,
     content: React.PropTypes.node.isRequired,
     className: PropTypes.string,
-    title: PropTypes.string,
+    title: PropTypes.string
   }
 
   render() {
@@ -25,7 +24,6 @@ export default class PopupInner extends React.Component {
     const popClassName = cn({
       [`${prefixCls}-popup`]: true
     }, className);
-
 
     return (
       <div {...restProps} className={popClassName}>

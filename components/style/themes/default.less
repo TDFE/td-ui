@@ -1,5 +1,6 @@
 @import "../color/colors.less";
 @import "../iconfont/index.less";
+@import "../base.less";
 
 @td-prefix                    : td;
 @switch-prefix                : ~"@{td-prefix}-switch";
@@ -13,8 +14,8 @@
 @message-prefix               : ~"@{td-prefix}-message";
 @input-number-prefix          : ~"@{td-prefix}-input-number";
 @dialog-prefix                : ~"@{td-prefix}-dialog";
-@confirm-prefix                : ~"@{td-prefix}-confirm";
-@cascader-prefix                : ~"@{td-prefix}-cascader";
+@confirm-prefix               : ~"@{td-prefix}-confirm";
+@cascader-prefix              : ~"@{td-prefix}-cascader";
 @slider-prefix                : ~"@{td-prefix}-slider";
 @timeline-prefix              : ~"@{td-prefix}-timeline";
 @confirm-prefix               : ~"@{td-prefix}-confirm";
@@ -36,7 +37,8 @@
 @date-picker-prefix           : ~"@{td-prefix}-date-picker";
 @range-picker-prefix          : ~"@{td-prefix}-range-picker";
 @transfer-prefix              : ~"@{td-prefix}-transfer";
-@checkbox-prefix                 : ~"@{td-prefix}-checkbox";
+@checkbox-prefix              : ~"@{td-prefix}-checkbox";
+@table-prefix                 : ~"@{td-prefix}-table";
 
 :export {
   switchPrefix: @switch-prefix;
@@ -75,6 +77,7 @@
   datePickerGap: @date-picker-gap;
   rangePickerPrefix: @range-picker-prefix;
   checkboxPrefix: @checkbox-prefix;
+  tablePrefix: @table-prefix;
 }
 
 // Global
@@ -91,7 +94,7 @@
 @border-radius-sm             : 2px;
 @border-width-base            : 1px;
 @border-color-base            : #ccc;
-@border-color-split           : #e9e9e9;
+@border-color-split           : #eee;
 @border-style-base            : solid;
 
 // Color
@@ -167,6 +170,17 @@
 @label-color                 : @text-color;
 @form-item-margin-bottom     : 24px;
 @form-item-trailing-colon    : true;
+
+// Table
+// ---
+@table-header-bg                        : #eee;
+@table-row-hover-bg                     : #f6f6f6;
+@table-row-active-bg                    : #e5e5e5;
+@table-padding-vertical                 : 9px;
+@table-padding-horizontal               : 8px;
+@table-font-color                       : #666;
+@table-border-color                     : #ddd;
+@table-border-radius                    : 0;
 
 // TimePicker
 // ---

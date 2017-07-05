@@ -7,19 +7,19 @@ import s from './style/index';
 
 export default class Loading extends Component {
   static defaultProps = {
-      prefixLoad: s.loadingPrefix
+    prefixLoad: s.loadingPrefix
   };
 
   render() {
-    const {prefixLoad, text, graph, size, loading} = this.props;
-    let classTmp = prefixLoad + "-container-graph";
+    const {prefixLoad, text, size, loading} = this.props;
+    let classTmp = prefixLoad + '-container-graph';
     let classNameValue;
     switch (size) {
-      case "small":
-        classNameValue = [classTmp, "loading-small"].join(' ');
+      case 'small':
+        classNameValue = [classTmp, 'loading-small'].join(' ');
         break;
-      case "large":
-        classNameValue = [classTmp, "loading-large"].join(' ');
+      case 'large':
+        classNameValue = [classTmp, 'loading-large'].join(' ');
         break;
       default:
         classNameValue = classTmp;
@@ -44,7 +44,7 @@ export default class Loading extends Component {
             </div>
           ) : ''
         }
-        <div className="loading-children">
+        <div className={`${prefixLoad}-content`}>
           {
             React.Children.map(this.props.children, child => (<div>{child} </div>))
           }

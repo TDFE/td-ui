@@ -53,13 +53,12 @@
     &:after {
       content: '';
       display: block;
-      letter-spacing: 2px;
       color: #ccc;
       width: @pagination-item-width;
       height: @pagination-item-height;
       text-align: center;
       line-height: @pagination-item-height;
-      margin-top: -1px;
+      margin-top: -2px;
     }
     &:hover {
       &:after {
@@ -174,6 +173,7 @@
       width: @pagination-item-mini-width;
       height: @pagination-item-mini-height;
       line-height: @pagination-item-mini-height;
+      margin-top: 0;
     }
   }
   .@{prefixCls}-jump-prev, .@{prefixCls}-jump-next {
@@ -188,5 +188,8 @@
     input {
       height: @pagination-item-mini-height;
     }
+  }
+  .@{prefixCls}-options {
+
   }
 }
