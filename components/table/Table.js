@@ -604,7 +604,7 @@ export default class Table extends React.Component {
   };
 
   renderColumnsDropdown = columns => {
-    const { prefixCls, dropdownPrefixCls } = this.props;
+    const { prefixCls, dropdownPrefixCls, bordered } = this.props;
     const { sortOrder } = this.state;
     const locale = this.getLocale();
     return treeMap(columns, (originColumn, i) => {
@@ -658,8 +658,14 @@ export default class Table extends React.Component {
       column.title = (
         <span>
           {column.title}
-          {sortButton}
-          {filterDropdown}
+          {
+            (sortButton || filterDropdown) && (
+              <div style={{ display: 'inline-block', float: bordered ? 'right' : '' }}>
+                {sortButton}
+                {filterDropdown}
+              </div>
+            )
+          }
         </span>
       );
       return column;

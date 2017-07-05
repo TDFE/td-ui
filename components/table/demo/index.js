@@ -267,7 +267,7 @@ function renderSortAndFilter(Table) {
             <Button onClick={this.clearFilters}>Clear filters</Button>
             <Button onClick={this.clearAll}>Clear filters and sorters</Button>
           </div>
-          <Table columns={columns} dataSource={data} onChange={this.handleChange} />
+          <Table columns={columns} dataSource={data} onChange={this.handleChange} bordered/>
         </div>
       );
     }
