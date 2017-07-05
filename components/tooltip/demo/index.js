@@ -23,7 +23,7 @@ let render = () => {
           <p>MOUSE OVER ME!</p>
         </Tooltip>
 
-        <Tooltip content="just a simple word" style={{display: 'inline-block'}} trigger="click" placement="bottom">
+        <Tooltip content="just a simple word" style={{marginLeft: 100, display: 'inline-block'}} trigger="click" placement="bottom">
           <p>CLICK ME!</p>
         </Tooltip>
       </div>

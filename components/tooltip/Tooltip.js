@@ -104,9 +104,9 @@ export default class Tooltip extends React.Component {
     if (trigger.indexOf('click') !== -1) {
       mouseProps.onClick = this.onPopupMouseClick;
     }
-    const child = React.cloneElement(this.props.children, mouseProps);
-    return <div style={style} className={s.root}>
-      {child}
+    const child = React.cloneElement(this.props.children);
+    return <div style={style}  className={prefixCls + '-root'}>
+      <div {...mouseProps}>{child}</div>
       {this.state.popVisible ? (
         <Popup
           ref="popup"
