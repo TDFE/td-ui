@@ -32,10 +32,14 @@ export default class Loading extends Component {
             <div className={prefixLoad}>
               <div className={`${prefixLoad}-container`}>
                 <div className={classNameValue}>
-                  <div className="loading-1"></div>
-                  <div className="loading-2"></div>
-                  <div className="loading-3"></div>
-                  <div className="loading-4"></div>
+                  <div />
+                  <div />
+                  <div />
+                  <div />
+                  <div />
+                  <div />
+                  <div />
+                  <div />
                 </div>
                 <div className={`${prefixLoad}-container-text`}>
                   {text}
