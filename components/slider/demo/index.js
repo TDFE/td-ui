@@ -15,11 +15,20 @@ let render = () => {
   ReactDOM.render(
     <div style={{padding: '20px'}}>
       <Slider
+        axis='y'
+        y={15}
+        ymin={10}
+        ymax={36}
+        toFixed={2}
+        showValue
+      />
+      <Slider
         axis='x'
         x={15}
         xmin={10}
         xmax={36}
         toFixed={2}
+        style={{marginLeft: 20}}
         showValue
       />
     </div>

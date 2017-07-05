@@ -39,17 +39,6 @@
 
 .@{slider-prefix}-x,
 .@{slider-prefix}-y {
-    .handle:after {
-        width: @size + @fix;
-        height: @size + @fix;
-        background-color: #fff;
-        border: 3px solid @color-active;
-        border-radius: 50%;
-    }
-}
-
-.@{slider-prefix}-x,
-.@{slider-prefix}-y {
     .handle {
         cursor: pointer;
     }
@@ -58,8 +47,8 @@
         height: 30px;
     }
     .handle:after {
-        width: @size + @fix +4;
-        height: @size + @fix +4;
+        width: @size + @fix + @fix;
+        height: @size + @fix + @fix;
         background-color: #fff;
         border: 3px solid @color-active;
         border-radius: 50%;
