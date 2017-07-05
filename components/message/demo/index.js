@@ -17,7 +17,9 @@ let render = () => {
   ReactDOM.render(
     <div>
       <button onClick={ () => message.info('info message') }>info show</button>
-      <button onClick={ () => message.warning('warning message', 4) }>warn show</button>
+      <button onClick={ () => message.warning('warning message', 4) }>warning show</button>
+      <button onClick={ () => message.error('error message') }>error show</button>
+      <button onClick={ () => message.success('success message') }>success show</button>
     </div>
     , MOUNT_NODE);
 };
