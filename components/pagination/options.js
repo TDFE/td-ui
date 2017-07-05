@@ -16,11 +16,11 @@ class Options extends Component {
     this.props.onShowSizeChange(parseInt(value));
   }
   render() {
-    const { prefixCls, pageSizeOptions } = this.props;
+    const { prefixCls, pageSizeOptions, size } = this.props;
     const { value } = this.state;
     return (
       <div className={prefixCls}>
-        <Select value={value} onChange={this.onChange} ref='select'>
+        <Select value={value} size={size} onChange={this.onChange} ref='select'>
           {
             pageSizeOptions.map((item, index) => <Option value={item} key={index}>{item}条／页</Option>)
           }
