@@ -17,10 +17,27 @@
         }
     }
 
-    &-notice-content {
+    &-custom-content {
         padding: 8px 16px;
-        border-radius: @border-radius-base;
+        border-radius: 5px;
         box-shadow: 0 2px 8px @shadow-color;
+
+        &-info {
+            background: #D6EDFE;
+        }
+        &-warning {
+            background: #FCF2CF;
+        }
+        &-error {
+            background: #FADBD9;
+        }
+        &-success {
+            background: #D7E7CE;
+        }
+    }
+
+    &-notice-content {
+        border-radius: @border-radius-base;
         background: @component-background;
         display: inline-block;
         pointer-events: all;
