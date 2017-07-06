@@ -5,7 +5,6 @@
  * @Last modified time: 2017-07-04 10:13:44
  */
 
-/* eslint-disable */
 import React from 'react';
 import ReactDOM from 'react-dom';
 import closest from 'dom-closest';
@@ -14,6 +13,7 @@ import Dropdown from '../dropdown';
 import Icon from '../icon';
 import Checkbox from '../checkbox';
 import Radio from '../radio';
+import Menu, { SubMenu, Item as MenuItem } from 'rc-menu';
 
 const FilterDropdownMenuWrapper = props => (
   <div className={props.className} onClick={props.onClick}>
@@ -80,7 +80,7 @@ export default class FilterMenu extends React.Component {
 
   handleClearFilters = () => {
     this.setState({
-      selectedKeys: [],
+      selectedKeys: []
     }, this.handleConfirm);
   }
 
@@ -102,45 +102,45 @@ export default class FilterMenu extends React.Component {
     }
   }
 
-  // renderMenuItem(item) {
-  //   const { column } = this.props;
-  //   const multiple = ('filterMultiple' in column) ? column.filterMultiple : true;
-  //   const input = multiple ? (
-  //     <Checkbox checked={this.state.selectedKeys.indexOf(item.value.toString()) >= 0} />
-  //   ) : (
-  //     <Radio checked={this.state.selectedKeys.indexOf(item.value.toString()) >= 0} />
-  //   );
-  //
-  //   return (
-  //     <MenuItem key={item.value}>
-  //       {input}
-  //       <span>{item.text}</span>
-  //     </MenuItem>
-  //   );
-  // }
+  renderMenuItem(item) {
+    const { column } = this.props;
+    const multiple = ('filterMultiple' in column) ? column.filterMultiple : true;
+    const input = multiple ? (
+      <Checkbox checked={this.state.selectedKeys.indexOf(item.value.toString()) >= 0} />
+    ) : (
+      <Radio checked={this.state.selectedKeys.indexOf(item.value.toString()) >= 0} />
+    );
+
+    return (
+      <MenuItem key={item.value}>
+        {input}
+        <span>{item.text}</span>
+      </MenuItem>
+    );
+  }
 
   hasSubMenu() {
     const { column: { filters = [] } } = this.props;
     return filters.some(item => !!(item.children && item.children.length > 0));
   }
 
-  // renderMenus(items) {
-  //   return items.map(item => {
-  //     if (item.children && item.children.length > 0) {
-  //       const { keyPathOfSelectedItem } = this.state;
-  //       const containSelected = Object.keys(keyPathOfSelectedItem).some(
-  //         key => keyPathOfSelectedItem[key].indexOf(item.value) >= 0,
-  //       );
-  //       const subMenuCls = containSelected ? `${this.props.dropdownPrefixCls}-submenu-contain-selected` : '';
-  //       return (
-  //         <SubMenu title={item.text} className={subMenuCls} key={item.value.toString()}>
-  //           {this.renderMenus(item.children)}
-  //         </SubMenu>
-  //       );
-  //     }
-  //     return this.renderMenuItem(item);
-  //   });
-  // }
+  renderMenus(items) {
+    return items.map(item => {
+      if (item.children && item.children.length > 0) {
+        const { keyPathOfSelectedItem } = this.state;
+        const containSelected = Object.keys(keyPathOfSelectedItem).some(
+          key => keyPathOfSelectedItem[key].indexOf(item.value) >= 0,
+        );
+        const subMenuCls = containSelected ? `${this.props.dropdownPrefixCls}-submenu-contain-selected` : '';
+        return (
+          <SubMenu title={item.text} className={subMenuCls} key={item.value.toString()}>
+            {this.renderMenus(item.children)}
+          </SubMenu>
+        );
+      }
+      return this.renderMenuItem(item);
+    });
+  }
 
   handleMenuItemClick = (info) => {
     if (info.keyPath.length <= 1) {
@@ -166,7 +166,7 @@ export default class FilterMenu extends React.Component {
       title: locale.filterTitle,
       className: classNames(filterIcon.className, {
         [`${prefixCls}-icon`]: true
-      }),
+      })
     }) : <Icon title={locale.filterTitle} type="screening" className={dropdownSelectedClass} />;
   }
   render() {
@@ -182,7 +182,7 @@ export default class FilterMenu extends React.Component {
       </FilterDropdownMenuWrapper>
     ) : (
       <FilterDropdownMenuWrapper className={`${prefixCls}-dropdown`}>
-        {/* <Menu
+        <Menu
           multiple={multiple}
           onClick={this.handleMenuItemClick}
           prefixCls={`${dropdownPrefixCls}-menu`}
@@ -192,7 +192,7 @@ export default class FilterMenu extends React.Component {
           selectedKeys={this.state.selectedKeys}
         >
           {this.renderMenus(column.filters)}
-        </Menu> */}
+        </Menu>
         <div className={`${prefixCls}-dropdown-btns`}>
           <a
             className={`${prefixCls}-dropdown-link confirm`}
