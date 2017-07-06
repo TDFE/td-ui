@@ -14,13 +14,15 @@ export default class DropDown extends React.Component {
     prefixCls: PropTypes.string,
     trigger: PropTypes.oneOf(['click', 'hover']),
     placement: PropTypes.oneOf(['bottomLeft', 'bottomCenter', 'bottomRight', 'topLeft', 'topCenter', 'topRight']),
-    overlay: PropTypes.node
+    overlay: PropTypes.node,
+    visible: PropTypes.bool,
+    onVisibleChange: PropTypes.func
   }
 
   constructor(props) {
     super(props);
     this.state = {
-      visible: false
+      visible: props.visible || false
     }
     this.bodyEvent = false;
     if (props.trigger === 'click') {
@@ -32,21 +34,32 @@ export default class DropDown extends React.Component {
     if (nextProps.trigger === 'click') {
       this.addBodyClickEvent();
     }
+    if ('visible' in nextProps) {
+      this.setState({
+        visible: nextProps.visible
+      });
+    }
+  }
+
+  onVisibleChange(visible) {
+    if ('onVisibleChange' in this.props) {
+      this.props.onVisibleChange(visible);
+    } else {
+      this.setState({
+        visible
+      });
+    }
   }
 
   mouseEnter = () => {
     if (this.props.trigger === 'hover') {
-      this.setState({
-        visible: true
-      });
+      this.onVisibleChange(true);
     }
   }
 
   mouseLeave = () => {
     if (this.props.trigger === 'hover') {
-      this.setState({
-        visible: false
-      });
+      this.onVisibleChange(false);
     }
   }
 
@@ -55,9 +68,7 @@ export default class DropDown extends React.Component {
       document.addEventListener('click', () => {
         console.log('body click');
         if (this.state.visible) {
-          this.setState({
-            visible: false
-          });
+          this.onVisibleChange(false);
         }
       }, false);
       this.bodyEvent = true;
@@ -72,10 +83,7 @@ export default class DropDown extends React.Component {
 
   click = (e) => {
     e.nativeEvent.stopImmediatePropagation();
-    console.log('btn click');
-    this.setState({
-      visible: !this.state.visible
-    });
+    this.onVisibleChange(!this.state.visible);
   }
 
   render() {
