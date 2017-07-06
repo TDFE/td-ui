@@ -85,6 +85,7 @@
     "moment": "^2.18.1",
     "prop-types": "^15.5.10",
     "rc-animate": "^2.3.6",
+    "rc-menu": "^5.0.10",
     "rc-trigger": "^1.11.2",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
