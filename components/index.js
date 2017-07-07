@@ -57,6 +57,8 @@ export { default as Message } from './message';
 
 export { default as Pagination } from './pagination';
 
+export { default as Popover } from './popover';
+
 export { default as Progress } from './progress';
 
 export { default as Radio } from './radio';
