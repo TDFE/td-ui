@@ -3,6 +3,7 @@
 .@{dropdown-prefix} {
   display: inline-block;
   position: relative;
+  vertical-align: top;
   &-list{
     position: absolute;
     width: 400px;
@@ -42,13 +43,13 @@
 
   &-bottomLeft, &-bottomRight{
     .@{dropdown-prefix}-list{
-      top: 100%;
+      top: 0;
     }
   }
   &-topLeft, &-topRight, &-topCenter{
     .@{dropdown-prefix}{
       &-list{
-        bottom: 100%;
+        bottom: 0;
       }
       &-inner{
         bottom: 0;

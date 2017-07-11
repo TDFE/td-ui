@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
+import ReactDOM from 'react-dom';
 import s from './style';
 
 export default class DropDown extends React.Component {
@@ -16,7 +17,8 @@ export default class DropDown extends React.Component {
     placement: PropTypes.oneOf(['bottomLeft', 'bottomCenter', 'bottomRight', 'topLeft', 'topCenter', 'topRight']),
     overlay: PropTypes.node,
     visible: PropTypes.bool,
-    onVisibleChange: PropTypes.func
+    onVisibleChange: PropTypes.func,
+    getPopupContainer: PropTypes.func
   }
 
   constructor(props) {
@@ -28,6 +30,18 @@ export default class DropDown extends React.Component {
     if (props.trigger === 'click') {
       this.addBodyClickEvent();
     }
+    this.rootDom = null;
+  }
+
+  componentDidMount() {
+    if (!this.rootDom) {
+      this.rootDom = this.getContainer();
+      this.setContainerInner();
+    }
+  }
+
+  componentWillUnmount() {
+    this.removeContainer();
   }
 
   componentWillReceiveProps(nextProps) {
@@ -37,8 +51,67 @@ export default class DropDown extends React.Component {
     if ('visible' in nextProps) {
       this.setState({
         visible: nextProps.visible
+      }, () => {
+        this.setContainerInner();
       });
+    } else {
+      this.setContainerInner();
     }
+  }
+
+  removeContainer = () => {
+    if (this.rootDom) {
+      const container = this.rootDom;
+      ReactDOM.unmountComponentAtNode(container);
+      container.parentNode.removeChild(container);
+      this.rootDom = null;
+    }
+  }
+
+  getContainer = () => {
+    const { getPopupContainer, placement } = this.props;
+    const popupContainer = document.createElement('div');
+    const { clientWidth, clientHeight, offsetLeft, offsetTop } = this.refs.btnBox;
+    const bottomType = ['bottomLeft', 'bottomRight', 'bottomCenter'];
+    console.log(clientWidth, clientHeight, offsetLeft, offsetTop);
+    popupContainer.style.position = 'absolute';
+    popupContainer.style.width = `${clientWidth}px`;
+    popupContainer.style.left = `${offsetLeft}px`;
+    popupContainer.style.top = `${offsetTop + (bottomType.indexOf(placement) >= 0 ? clientHeight : 0)}px`;
+    popupContainer.style.height = '0px';
+    const mountNode = getPopupContainer ? getPopupContainer() : window.document.body;
+    mountNode.appendChild(popupContainer);
+    return popupContainer;
+  }
+
+  setContainerInner = () => {
+    if (this.rootDom) {
+      const component = this.getInnerDom();
+      ReactDOM.unstable_renderSubtreeIntoContainer(this, component, this.rootDom, function callback() {
+        this._component = this;
+        // if (ready) {
+        //   ready.call(this);
+        // }
+      })
+    }
+  }
+
+  getInnerDom = () => {
+    const { overlay, prefixCls, placement } = this.props;
+    const { visible } = this.state;
+    return <div
+      className={`${prefixCls} ${prefixCls}-${placement}`}
+      onMouseEnter={this.mouseEnter}
+      onMouseLeave={this.mouseLeave}
+    >
+      <div
+        className={classnames(`${prefixCls}-list`, {[`${prefixCls}-list-hidden`]: !visible})}
+      >
+        <div className={`${prefixCls}-inner`}>{ React.cloneElement(overlay, {
+          mode: 'vertical'
+        }) }</div>
+      </div>
+    </div>
   }
 
   onVisibleChange(visible) {
@@ -47,7 +120,7 @@ export default class DropDown extends React.Component {
     } else {
       this.setState({
         visible
-      });
+      }, () => this.setContainerInner());
     }
   }
 
@@ -87,21 +160,14 @@ export default class DropDown extends React.Component {
   }
 
   render() {
-    const { overlay, prefixCls, children, placement } = this.props;
-    const { visible } = this.state;
+    const { prefixCls, children, placement } = this.props;
     return <div
       className={`${prefixCls} ${prefixCls}-${placement}`}
       onMouseEnter={this.mouseEnter}
       onMouseLeave={this.mouseLeave}
+      ref='btnBox'
     >
       <span onClick={this.click}>{ children }</span>
-      <div
-        className={classnames(`${prefixCls}-list`, {[`${prefixCls}-list-hidden`]: !visible})}
-      >
-        <div className={`${prefixCls}-inner`}>{ React.cloneElement(overlay, {
-          mode: 'vertical'
-        }) }</div>
-      </div>
     </div>
   }
 }
