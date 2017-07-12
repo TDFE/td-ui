@@ -1,14 +1,25 @@
-import React from 'react';
+import React, { cloneElement } from 'react';
 import PropTypes from 'prop-types';
-import classnames from 'classnames';
+import Trigger from 'rc-trigger';
+import placements from './placements';
 import ReactDOM from 'react-dom';
 import s from './style';
 
 export default class DropDown extends React.Component {
   static defaultProps = {
     prefixCls: s.dropdownPrefix,
+    mouseEnterDelay: 0.15,
+    mouseLeaveDelay: 0.1,
+    placement: 'bottomLeft',
+    defaultVisible: false,
+    onVisibleChange() {
+    },
     trigger: 'hover',
-    placement: 'bottomLeft'
+    showAction: [],
+    hideAction: [],
+    overlayClassName: '',
+    overlayStyle: {},
+    minOverlayWidthMatchTrigger: true
   }
 
   static propTypes = {
@@ -23,151 +34,113 @@ export default class DropDown extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-      visible: props.visible || false
-    }
-    this.bodyEvent = false;
-    if (props.trigger === 'click') {
-      this.addBodyClickEvent();
-    }
-    this.rootDom = null;
-  }
-
-  componentDidMount() {
-    if (!this.rootDom) {
-      this.rootDom = this.getContainer();
-      this.setContainerInner();
-    }
-  }
-
-  componentWillUnmount() {
-    this.removeContainer();
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.trigger === 'click') {
-      this.addBodyClickEvent();
-    }
-    if ('visible' in nextProps) {
-      this.setState({
-        visible: nextProps.visible
-      }, () => {
-        this.setContainerInner();
-      });
+    if ('visible' in props) {
+      this.state = {
+        visible: props.visible
+      };
     } else {
-      this.setContainerInner();
+      this.state = {
+        visible: props.defaultVisible
+      };
     }
   }
 
-  removeContainer = () => {
-    if (this.rootDom) {
-      const container = this.rootDom;
-      ReactDOM.unmountComponentAtNode(container);
-      container.parentNode.removeChild(container);
-      this.rootDom = null;
-    }
-  }
-
-  getContainer = () => {
-    const { getPopupContainer, placement } = this.props;
-    const popupContainer = document.createElement('div');
-    const { clientWidth, clientHeight, offsetLeft, offsetTop } = this.refs.btnBox;
-    const bottomType = ['bottomLeft', 'bottomRight', 'bottomCenter'];
-    console.log(clientWidth, clientHeight, offsetLeft, offsetTop);
-    popupContainer.style.position = 'absolute';
-    popupContainer.style.width = `${clientWidth}px`;
-    popupContainer.style.left = `${offsetLeft}px`;
-    popupContainer.style.top = `${offsetTop + (bottomType.indexOf(placement) >= 0 ? clientHeight : 0)}px`;
-    popupContainer.style.height = '0px';
-    const mountNode = getPopupContainer ? getPopupContainer() : window.document.body;
-    mountNode.appendChild(popupContainer);
-    return popupContainer;
-  }
-
-  setContainerInner = () => {
-    if (this.rootDom) {
-      const component = this.getInnerDom();
-      ReactDOM.unstable_renderSubtreeIntoContainer(this, component, this.rootDom, function callback() {
-        this._component = this;
-        // if (ready) {
-        //   ready.call(this);
-        // }
-      })
-    }
-  }
-
-  getInnerDom = () => {
-    const { overlay, prefixCls, placement } = this.props;
-    const { visible } = this.state;
-    return <div
-      className={`${prefixCls} ${prefixCls}-${placement}`}
-      onMouseEnter={this.mouseEnter}
-      onMouseLeave={this.mouseLeave}
-    >
-      <div
-        className={classnames(`${prefixCls}-list`, {[`${prefixCls}-list-hidden`]: !visible})}
-      >
-        <div className={`${prefixCls}-inner`}>{ React.cloneElement(overlay, {
-          mode: 'vertical'
-        }) }</div>
-      </div>
-    </div>
-  }
-
-  onVisibleChange(visible) {
-    if ('onVisibleChange' in this.props) {
-      this.props.onVisibleChange(visible);
-    } else {
+  componentWillReceiveProps({ visible }) {
+    if (visible !== undefined) {
       this.setState({
         visible
-      }, () => this.setContainerInner());
+      });
     }
   }
 
-  mouseEnter = () => {
-    if (this.props.trigger === 'hover') {
-      this.onVisibleChange(true);
+  onClick = (e) => {
+    const props = this.props;
+    const overlayProps = props.overlay.props;
+    // do no call onVisibleChange, if you need click to hide, use onClick and control visible
+    if (!('visible' in props)) {
+      this.setState({
+        visible: false
+      });
+    }
+    if (overlayProps.onClick) {
+      overlayProps.onClick(e);
     }
   }
 
-  mouseLeave = () => {
-    if (this.props.trigger === 'hover') {
-      this.onVisibleChange(false);
+  onVisibleChange = (visible) => {
+    const props = this.props;
+    if (!('visible' in props)) {
+      this.setState({
+        visible
+      });
+    }
+    props.onVisibleChange(visible);
+  }
+
+  getMenuElement() {
+    const { overlay } = this.props;
+    const extraOverlayProps = {
+      prefixCls: `td-menu`,
+      onClick: this.onClick,
+      mode: 'vertical'
+    };
+    if (typeof overlay.type === 'string') {
+      delete extraOverlayProps.prefixCls;
+    }
+    return cloneElement(overlay, extraOverlayProps);
+  }
+
+  getPopupDomNode() {
+    return this.refs.trigger.getPopupDomNode();
+  }
+
+  afterVisibleChange = (visible) => {
+    if (visible && this.props.minOverlayWidthMatchTrigger) {
+      const overlayNode = this.getPopupDomNode();
+      const rootNode = ReactDOM.findDOMNode(this);
+      if (rootNode.offsetWidth > overlayNode.offsetWidth) {
+        overlayNode.style.width = `${rootNode.offsetWidth}px`;
+      }
     }
   }
 
-  addBodyClickEvent = () => {
-    if (!this.bodyEvent) {
-      document.addEventListener('click', () => {
-        console.log('body click');
-        if (this.state.visible) {
-          this.onVisibleChange(false);
-        }
-      }, false);
-      this.bodyEvent = true;
+  getTransitionName() {
+    const { placement = '' } = this.props;
+    if (placement.indexOf('top') >= 0) {
+      return 'slide-down';
     }
-  }
-
-  removeBodyClickEvent = () => {
-    if (this.bodyEvent) {
-      document.removeEventListener('click');
-    }
-  }
-
-  click = (e) => {
-    e.nativeEvent.stopImmediatePropagation();
-    this.onVisibleChange(!this.state.visible);
+    return 'slide-up';
   }
 
   render() {
-    const { prefixCls, children, placement } = this.props;
-    return <div
-      className={`${prefixCls} ${prefixCls}-${placement}`}
-      onMouseEnter={this.mouseEnter}
-      onMouseLeave={this.mouseLeave}
-      ref='btnBox'
+    const {
+      prefixCls, children, animation,
+      align, placement, getPopupContainer,
+      showAction, hideAction,
+      overlayClassName, overlayStyle,
+      trigger, overlay, ...otherProps
+    } = this.props;
+    return <Trigger
+      {...otherProps}
+      prefixCls={`${prefixCls}-menu`}
+      ref="trigger"
+      popupClassName={overlayClassName}
+      popupStyle={overlayStyle}
+      builtinPlacements={placements}
+      action={[trigger]}
+      showAction={showAction}
+      hideAction={hideAction}
+      popupPlacement={placement}
+      popupAlign={align}
+      popupTransitionName={this.getTransitionName()}
+      popupAnimation={animation}
+      popupVisible={this.state.visible}
+      afterPopupVisibleChange={this.afterVisibleChange}
+      popup={this.getMenuElement()}
+      onPopupVisibleChange={this.onVisibleChange}
+      getPopupContainer={getPopupContainer}
     >
-      <span onClick={this.click}>{ children }</span>
-    </div>
+      {children}
+    </Trigger>
   }
 }

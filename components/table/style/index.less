@@ -402,10 +402,8 @@
 
   &-filter-dropdown {
     min-width: 96px;
-    margin-left: -8px;
     background: @component-background;
     border-radius: @border-radius-base;
-    box-shadow: @box-shadow-base;
 
     .@{td-prefix}-dropdown-menu {
       border: 0;
@@ -415,6 +413,8 @@
       &-without-submenu {
         max-height: 400px;
         overflow-x: hidden;
+        position: relative;
+        outline: none;
       }
 
       &-item > label + span {

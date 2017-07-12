@@ -13,7 +13,7 @@ import Dropdown from '../dropdown';
 import Icon from '../icon';
 import Checkbox from '../checkbox';
 import Radio from '../radio';
-import Menu, { SubMenu, Item as MenuItem } from 'rc-menu';
+import Menu, { SubMenu, MenuItem } from '../menu';
 
 const FilterDropdownMenuWrapper = props => (
   <div className={props.className} onClick={props.onClick}>
@@ -64,7 +64,7 @@ export default class FilterMenu extends React.Component {
     }
   }
 
-  setSelectedKeys = ({ selectedKeys }) => {
+  setSelectedKeys = (selectedKeys) => {
     this.setState({ selectedKeys });
   }
 
@@ -185,11 +185,11 @@ export default class FilterMenu extends React.Component {
         <Menu
           multiple={multiple}
           onClick={this.handleMenuItemClick}
-          prefixCls={`${dropdownPrefixCls}-menu`}
           className={dropdownMenuClass}
           onSelect={this.setSelectedKeys}
           onDeselect={this.setSelectedKeys}
           selectedKeys={this.state.selectedKeys}
+          mode='vertical'
         >
           {this.renderMenus(column.filters)}
         </Menu>
