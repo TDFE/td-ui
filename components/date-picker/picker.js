@@ -160,7 +160,6 @@ export default class Picker extends React.Component {
     }
     if (
       cause.source === 'keyboard' ||
-      (!props.calendar.props.timePicker && cause.source !== 'dateInput') ||
       cause.source === 'todayButton') {
       this.close(this.focus);
     }

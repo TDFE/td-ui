@@ -1,4 +1,4 @@
-// Base styles of timeline
+// Base styles of buttons
 // -----------------------------------------------------------
 .button-size(@padding; @font-size; @border-radius) {
   padding: @padding;
@@ -68,6 +68,38 @@
   .button-disabled();
 }
 
+.button-group-base(@btnClassName) {
+  position: relative;
+  display: inline-block;
+  > .@{btnClassName} {
+    position: relative;
+    z-index: 1;
+
+    &:hover,
+    &:focus,
+    &:active,
+    &.active {
+      z-index: 2;
+    }
+
+    &:disabled {
+      z-index: 0;
+    }
+  }
+
+  // size
+  &-lg > .@{btnClassName} {
+    .button-size(@btn-padding-lg; @btn-font-size-lg; @btn-border-radius-base);
+  }
+
+  &-sm > .@{btnClassName} {
+    .button-size(@btn-padding-sm; @btn-font-size-sm; @btn-border-radius-base);
+    > .@{icon-prefix} {
+      font-size: @font-size-base;
+    }
+  }
+}
+
 .btn() {
   display: inline-block;
   margin-bottom: 0;
@@ -133,4 +165,63 @@
 .btn-dashed() {
   .btn-default();
   border-style: dashed;
+}
+
+.btn-noborder() {
+  .btn-default();
+  border-width: 0;
+}
+
+.btn-group(@btnClassName: btn) {
+  .button-group-base(@btnClassName);
+
+  .@{btnClassName} + .@{btnClassName},
+  .@{btnClassName} + &,
+  & + .@{btnClassName},
+  & + & {
+    margin-left: -1px;
+  }
+
+  .@{btnClassName}:not(:first-child):not(:last-child) {
+    border-radius: 0;
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+
+  > .@{btnClassName}:first-child {
+    margin-left: 0;
+    &:not(:last-child) {
+      border-bottom-right-radius: 0;
+      border-top-right-radius: 0;
+      padding-right: 8px;
+    }
+  }
+
+  > .@{btnClassName}:last-child:not(:first-child) {
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+    padding-left: 8px;
+  }
+
+  & > & {
+    float: left;
+  }
+
+  & > &:not(:first-child):not(:last-child) > .@{btnClassName} {
+    border-radius: 0;
+  }
+
+  & > &:first-child:not(:last-child) {
+    > .@{btnClassName}:last-child {
+      border-bottom-right-radius: 0;
+      border-top-right-radius: 0;
+      padding-right: 8px;
+    }
+  }
+
+  & > &:last-child:not(:first-child) > .@{btnClassName}:first-child {
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+    padding-left: 8px;
+  }
 }

@@ -1,12 +1,12 @@
 function isArray (obj) {
-  return toString.call(obj) === '[object Array]'
+  return toString.call(obj) === '[object Array]';
 }
 
 function getKey (item, pKey, index) {
   if (item.key) {
-    return item.key
+    return item.key;
   } else {
-    return `${pKey}-${index}`
+    return `${pKey}-${index}`;
   }
 }
 
@@ -15,7 +15,7 @@ function loopDom (back, dom, parentKey, index) {
     const pKey = getKey(dom, parentKey, index);
     back[pKey] = dom.props.children.map((item, i) => {
       loopDom(back, item, pKey, i);
-      return getKey(item, pKey, i)
+      return getKey(item, pKey, i);
     });
   }
 }
@@ -26,7 +26,6 @@ function getDomKeys (domArr = []) {
     let item = domArr[i];
     loopDom(back, item, 'root', i);
   }
-  console.log(back);
   return back;
 }
 
@@ -39,7 +38,7 @@ function getChildren(domKeys, eventKey) {
       back = back.concat(getChildren(domKeys, find[i]));
     }
   }
-  return back
+  return back;
 }
 function checkSelected (domKeys, selectedKeys, eventKey) {
   const child = getChildren(domKeys, eventKey);
@@ -58,4 +57,4 @@ function checkSelected (domKeys, selectedKeys, eventKey) {
 export {
   getDomKeys,
   checkSelected
-}
+};

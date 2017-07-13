@@ -4,6 +4,7 @@
  * @Last modified by:   yc
  * @Last modified time: 2017-06-14 13:02:31
  */
- import Carousel from './carousel'
 
- export default Carousel;
+import Carousel from './carousel'
+
+export default Carousel;

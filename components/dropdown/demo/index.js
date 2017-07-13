@@ -14,7 +14,9 @@ const MOUNT_NODE = document.getElementById('app');
 class Demo extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {}
+    this.state = {
+      visible: true
+    }
   }
 
   render() {
@@ -47,7 +49,12 @@ class Demo extends React.Component {
     )
     return <div>
       <div style={{margin: 30}}>
-        <Dropdown overlay={menu}>
+        <Dropdown overlay={menu} visible={this.state.visible} onVisibleChange={(b) => {
+          console.log(b);
+          this.setState({
+            visible: b
+          });
+        }}>
           <Button>按钮按钮</Button>
         </Dropdown>
       </div>

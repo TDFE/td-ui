@@ -6,122 +6,19 @@
  */
 
 import React from 'react';
-import warning from 'warning';
 import omit from 'lodash/omit';
-import PropTypes from 'prop-types';
+import moment from 'moment';
 import Picker from './picker';
+import Input from '../input';
+import Icon from '../icon';
+import Calendar from './calendar';
 import s from './style';
-import {
-  FULL_PICKER,
-  MINUTE_PICKER,
-  HOUR_PICKER,
-  DAY_PICKER,
-  MONTH_PICKER,
-  YEAR_PICKER,
-  YEAR,
-  MONTH,
-  DAY
-} from './constant';
-
-class Calendar extends React.Component {
-  static propTypes = {
-    disabledDate: PropTypes.func,
-    value: PropTypes.object,
-    defaultValue: PropTypes.object,
-    className: PropTypes.string,
-    style: PropTypes.object,
-    onSelect: PropTypes.func,
-    onOk: PropTypes.func,
-    onClear: PropTypes.func,
-    format: PropTypes.string,
-    prefixCls: PropTypes.string
-  };
-
-  constructor(props) {
-    super(props);
-    const calendarType = this.getCalendarType();
-    let selectingType = calendarType >= DAY_PICKER ? DAY : (calendarType === MONTH_PICKER ? MONTH : YEAR);
-    this.state = {
-      selectingType
-    };
-  }
-
-  getCalendarType = () => {
-    const { format } = this.props;
-    if (!format) {
-      return FULL_PICKER;
-    }
-    let type = 0;
-    if (format.indexOf('ss') >= 0) {
-      type += 1;
-    }
-    if (format.indexOf('mm') >= 0) {
-      type += 10;
-    }
-    if (format.indexOf('HH') >= 0) {
-      type += 100;
-    }
-    if (format.indexOf('DD') >= 0) {
-      type += 1000;
-    }
-    if (format.indexOf('MM') >= 0) {
-      type += 10000;
-    }
-    if (format.indexOf('YYYY') >= 0) {
-      type += 100000;
-    }
-    switch (type) {
-      case FULL_PICKER:
-      case MINUTE_PICKER:
-      case HOUR_PICKER:
-      case DAY_PICKER:
-      case MONTH_PICKER:
-      case YEAR_PICKER:
-        break;
-      default:
-        warning(false, `Format ${format} is not support. Use default format YYYY-MM-DD HH:mm:ss.`);
-        type = FULL_PICKER;
-        break;
-    }
-    return type;
-  };
-
-  onSelect = () => {};
-
-  onClear = () => {};
-
-  renderHeader = () => {
-    const { prefixCls } = this.props;
-    return (
-      <div className={`${prefixCls}-header`}></div>
-    );
-  };
-
-  renderTable = () => {};
-
-  renderFooter = () => {};
-
-  render() {
-    const { prefixCls } = this.props;
-    return (
-      <div className={prefixCls}>
-        {
-          this.renderHeader()
-        }
-        {
-          this.renderTable()
-        }
-        {
-          this.renderFooter()
-        }
-      </div>
-    )
-  }
-}
 
 export default class DatePicker extends React.Component {
   static defaultProps = {
-    prefixCls: s.datePickerPrefix
+    prefixCls: s.datePickerPrefix,
+    format: 'YYYY-MM-DD HH:mm:ss',
+    allowClear: true
   };
 
   constructor(props) {
@@ -143,32 +40,65 @@ export default class DatePicker extends React.Component {
     }
   }
 
+  handleChange = (value) => {
+    const props = this.props;
+    if (!('value' in props)) {
+      this.setState({ value });
+    }
+    if ('onChange' in props) {
+      props.onChange(value, (value && value.format(props.format)) || '');
+    }
+  }
+
+  clearSelection = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    this.handleChange(null);
+  }
+
   render() {
-    // const { value } = this.state;
+    const { value } = this.state;
     const props = omit(this.props, ['onChange']);
-    const { prefixCls } = props;
+    const { prefixCls, format, placeholder, allowClear, disabled } = props;
     const calendar = (
-      <Calendar prefixCls={`${prefixCls}-calendar`}/>
+      <Calendar
+        prefixCls={`${prefixCls}-calendar`}
+        onSelect={this.handleChange}
+        format={format}
+        disabledDate={props.disabledDate}
+        defaultValue={props.defaultPickerValue || moment()}
+        showFooter={true}
+      />
     );
+    const icon = allowClear && !disabled && value ? (
+      <Icon
+        type="cross-circle"
+        className={`${prefixCls}-clear`}
+        onClick={this.clearSelection}
+      />
+    ) : <Icon type="calendar" />;
     const input = ({ value: inputValue }) => (
       <div>
-        <input
+        <Input
           readOnly
-          value={(inputValue && inputValue.format(props.format)) || ''}
-          placeholder="请选择"
-          className={`${prefixCls}-input ${s.inputPrefix}`}
-          />
-        <span className={`${prefixCls}-icon`}/>
+          disabled={disabled}
+          value={(inputValue && inputValue.format(format)) || ''}
+          placeholder={placeholder || '请选择'}
+          className={`${prefixCls}-input`}
+          suffix={icon}
+        />
       </div>
     );
 
     return (
       <span className={prefixCls}>
         <Picker
+          value={value}
           transitionName="slide-up"
           prefixCls={`${prefixCls}-container`}
           calendar={calendar}
-          >
+          onChange={this.handleChange}
+        >
           {input}
         </Picker>
       </span>

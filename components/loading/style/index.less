@@ -16,87 +16,126 @@
     &-container {
         color: @color;
         position: absolute;
-        left: 50%;
-        top: 50%;
+        left: calc(~"50% - 50px");
+        top: calc(~"50% - 41px");
         width: 100px;
-        height: 50px;
+        height: 82px;
 
         &-graph {
-            position: relative;
-            margin: auto 35px;
-            transform: rotate(45deg);
-            animation: loadingRotate 1.2s infinite linear;
-            animation-fill-mode: both;
-            width: 20px;
-            height: 20px;
-            & > div {
-                width: 9px;
-                height: 9px;
-                border-radius: 100%;
-                background-color: @color;
-                position: absolute;
-                animation: loadingdelay 1.5s infinite linear alternate;
-                transform: scale(0.75);
-                opacity: 0.3;
-                transform-origin: 50% 50%;
+          position: relative;
+          margin: auto;
+          width: 64px;
+          height: 64px;
+          animation: ball-spin-fade-rotate 6s infinite linear;
+          font-size: 0;
+          color: @primary-color;
+
+          & > div {
+            width: 16px;
+            height: 16px;
+            margin-top: -8px;
+            margin-left: -8px;
+            position: absolute;
+            border-radius: 100%;
+            display: inline-block;
+            float: none;
+            background-color: currentColor;
+            border: 0 solid currentColor;
+            animation: ball-spin-fade 1s infinite linear;
+
+            &:nth-child(1) {
+              top: 5%;
+              left: 50%;
+              animation-delay: -1.125s;
             }
-            .loading-1 {
-                left: 0;
-                top: 0;
+
+            &:nth-child(2) {
+              top: 18.1801948466%;
+              left: 81.8198051534%;
+              animation-delay: -1.25s;
             }
-            .loading-2 {
-                right: 0;
-                top: 0;
-                animation-delay: 0.4s;
+
+            &:nth-child(3) {
+              top: 50%;
+              left: 95%;
+              animation-delay: -1.375s;
             }
-            .loading-3 {
-                bottom: 0;
-                left: 0;
-                animation-delay: 0.8s;
+
+            &:nth-child(4) {
+              top: 81.8198051534%;
+              left: 81.8198051534%;
+              animation-delay: -1.5s;
             }
-            .loading-4 {
-                right: 0;
-                bottom: 0;
-                animation-delay: 1.2s;
+
+            &:nth-child(5) {
+              top: 94.9999999966%;
+              left: 50.0000000005%;
+              animation-delay: -1.625s;
             }
-            @keyframes loadingdelay {
-                to {
-                    opacity: 1
-                }
+
+            &:nth-child(6) {
+              top: 81.8198046966%;
+              left: 18.1801949248%;
+              animation-delay: -1.75s;
             }
-            @keyframes loadingRotate {
-                to {
-                    transform: rotate(405deg);
-                }
+
+            &:nth-child(7) {
+              top: 49.9999750815%;
+              left: 5.0000051215%;
+              animation-delay: -1.875s;
             }
+
+            &:nth-child(8) {
+              top: 18.179464974%;
+              left: 18.1803700518%;
+              animation-delay: -2s;
+            }
+          }
+
+          @keyframes ball-spin-fade-rotate {
+            100% {
+              transform: rotate(360deg);
+            }
+          }
+
+          @keyframes ball-spin-fade {
+            0%, 100% {
+              opacity: 1;
+              transform: scale(1);
+            }
+
+            50% {
+              opacity: .25;
+              transform: scale(0.5);
+            }
+          }
         }
 
         &-text {
             font-size: 12px;
-            margin: 5px 25px;
+            margin: 15px 25px;
         }
 
         .loading-small {
-            width: 14px;
-            height: 14px;
+            width: 32px;
+            height: 32px;
             & > div {
                 width: 6px;
                 height: 6px;
             }
         }
         .loading-large {
-            width: 32px;
-            height: 32px;
+            width: 64px;
+            height: 64px;
             & > div {
                 width: 14px;
                 height: 14px;
             }
         }
     }
-}
 
-.loading-children {
-    background-color: #f5f5f5;
-    width: 100%;
-    height: 100%;
+    &-content {
+      width: 100%;
+      height: 100%;
+    }
 }

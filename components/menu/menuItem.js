@@ -16,9 +16,20 @@ export default class MenuItem extends React.Component {
     children: PropTypes.oneOfType([PropTypes.string, PropTypes.node])
   }
 
-  itemClick = () => {
+  itemClick = e => {
+    e.nativeEvent.stopImmediatePropagation();
     const { eventKey } = this.props;
-    this.props.onSelect([eventKey]);
+    const { selectedKeys, multiple } = this.props;
+    let backSelected = [].concat(selectedKeys);
+    const index = selectedKeys.indexOf(eventKey);
+    if (index >= 0) {
+      backSelected.splice(index, 1);
+    } else if (multiple) {
+      backSelected = backSelected.concat([eventKey]);
+    } else {
+      backSelected = [eventKey]
+    }
+    this.props.onSelect(backSelected);
   }
 
   render() {
@@ -29,10 +40,14 @@ export default class MenuItem extends React.Component {
         paddingLeft: level * 24
       }
     }
-    return <li
-              className={classnames(`${prefixCls}-item`, {[`${prefixCls}-item-selected`]: selectedKeys.indexOf(eventKey) >= 0})}
-              style={style}
-              onClick={this.itemClick}
-            >{ children }</li>;
+    return (
+      <li
+        className={classnames(`${prefixCls}-item`, {[`${prefixCls}-item-selected`]: selectedKeys.indexOf(eventKey) >= 0})}
+        style={style}
+        onClick={this.itemClick}
+      >
+        { children }
+      </li>
+    );
   }
 }

@@ -5,15 +5,15 @@
  * @Last modified time: 2017-06-21 16:04:56
  */
 
-export default function createChainedFunction(...args) {
-  const argsCopy = [].slice.call(args, 0);
-  if (argsCopy.length === 1) {
-    return argsCopy[0];
+export default function createChainedFunction(...funcs) {
+  const fucsCopy = [].slice.call(funcs, 0);
+  if (fucsCopy.length === 1) {
+    return fucsCopy[0];
   }
-  return function chainedFunction() {
-    for (let i = 0; i < argsCopy.length; i++) {
-      if (argsCopy[i] && argsCopy[i].apply) {
-        argsCopy[i].apply(this, args);
+  return function chainedFunction(...args) {
+    for (let i = 0; i < fucsCopy.length; i++) {
+      if (fucsCopy[i] && fucsCopy[i].apply) {
+        fucsCopy[i].apply(this, args);
       }
     }
   };

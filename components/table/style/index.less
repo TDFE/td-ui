@@ -1,0 +1,649 @@
+@import "../../style/themes/default.less";
+@import "../../style/mixins/index.less";
+
+.@{table-prefix}-wrapper {
+  .clearfix;
+}
+
+.@{table-prefix} {
+  font-size: @font-size-base;
+  color: @table-font-color;
+  overflow: hidden;
+  position: relative;
+  border-radius: @table-border-radius @table-border-radius 0 0;
+
+  &-body {
+    transition: opacity 0.3s ease;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    text-align: left;
+    border-radius: @table-border-radius @table-border-radius 0 0;
+    overflow: hidden;
+    border: @border-width-base @border-style-base @table-header-bg;
+    border-bottom: 0;
+  }
+
+  &-thead > tr > th {
+    background: @table-header-bg;
+    font-weight: bold;
+    transition: background .3s ease;
+    text-align: left;
+    color: @table-font-color;
+    border-bottom: @border-width-base * 2 @border-style-base @table-border-color;
+
+    &[colspan] {
+      text-align: center;
+      border-bottom: 0;
+    }
+  }
+
+  .@{icon-prefix}-screening {
+    margin-left: 4px;
+    font-size: @font-size-base;
+    cursor: pointer;
+    color: #aaa;
+    transition: all .3s;
+    &:hover {
+      color: @text-color;
+    }
+  }
+
+  .@{table-prefix}-filter-selected.@{icon-prefix}-screening {
+    color: @primary-color;
+  }
+
+  &-tbody > tr > td {
+    border-bottom: @border-width-base @border-style-base @table-border-color;
+    transition: all .3s;
+  }
+
+  &-thead > tr,
+  &-tbody > tr {
+    transition: all .3s;
+    &.@{table-prefix}-row-hover,
+    &:hover {
+      & > td {
+        background: @table-row-hover-bg;
+      }
+    }
+    &:active {
+      & > td {
+        background: @table-row-active-bg;
+      }
+    }
+  }
+
+  &-thead > tr:hover {
+    background: none;
+  }
+
+  &-footer {
+    padding: @table-padding-vertical @table-padding-horizontal;
+    background: @table-header-bg;
+    border-radius: 0 0 @table-border-radius @table-border-radius;
+    position: relative;
+    &:before {
+      content: '';
+      height: 1px;
+      background: @table-header-bg;
+      position: absolute;
+      top: -1px;
+      width: 100%;
+      left: 0;
+    }
+  }
+
+  &.@{table-prefix}-bordered &-footer {
+    border: @border-width-base @border-style-base @table-border-color;
+  }
+
+  &-title {
+    padding: @table-padding-vertical 0;
+    position: relative;
+    top: 1px;
+    border-radius: @table-border-radius @table-border-radius 0 0;
+  }
+
+  &.@{table-prefix}-bordered &-title {
+    border: @border-width-base @border-style-base @table-border-color;
+    padding-left: @table-padding-horizontal;
+    padding-right: @table-padding-horizontal;
+  }
+
+  &-title + &-content {
+    position: relative;
+    border-radius: @table-border-radius @table-border-radius 0 0;
+    overflow: hidden;
+    .@{table-prefix}-bordered & {
+      &,
+      table {
+        border-radius: 0;
+      }
+    }
+  }
+
+  &-without-column-header &-title + &-content,
+  &-without-column-header table {
+    border-radius: 0;
+  }
+
+  &-tbody > tr.@{table-prefix}-row-selected {
+    background: #fafafa;
+  }
+
+  &-thead > tr > th.@{table-prefix}-column-sort {
+    background: #eaeaea;
+  }
+
+  &-thead > tr > th,
+  &-tbody > tr > td {
+    padding: @table-padding-vertical @table-padding-horizontal;
+    word-break: break-all;
+  }
+
+  &-thead > tr > th.@{table-prefix}-selection-column-custom {
+    padding-left: 16px;
+    padding-right: 0;
+  }
+
+  &-thead > tr > th.@{table-prefix}-selection-column,
+  &-tbody > tr > td.@{table-prefix}-selection-column {
+    text-align: center;
+    min-width: 62px;
+    width: 62px;
+  }
+
+  &-expand-icon-th,
+  &-row-expand-icon-cell {
+    text-align: center;
+    min-width: 50px;
+    width: 50px;
+  }
+
+  &-header {
+    background: @table-header-bg;
+    overflow: hidden;
+  }
+
+  &-header table {
+    border-radius: @table-border-radius @table-border-radius 0 0;
+  }
+
+  &-loading {
+    position: relative;
+    .@{table-prefix}-body {
+      background: @component-background;
+      opacity: 0.5;
+    }
+    .@{table-prefix}-spin-holder {
+      height: 20px;
+      line-height: 20px;
+      left: 50%;
+      top: 50%;
+      margin-left: -30px;
+      position: absolute;
+    }
+    .@{table-prefix}-with-pagination {
+      margin-top: -20px;
+    }
+    .@{table-prefix}-without-pagination {
+      margin-top: 10px;
+    }
+  }
+
+  &-middle {
+    .@{table-prefix}-thead > tr > th:not(.@{table-prefix}-selection-column),
+    .@{table-prefix}-tbody > tr > td {
+      padding: 10px 8px;
+    }
+
+    .@{table-prefix}-title,
+    .@{table-prefix}-footer {
+      padding: 10px 8px;
+    }
+  }
+
+  &-small {
+    border: @border-width-base @border-style-base @table-border-color;
+    border-radius: @table-border-radius;
+
+    .@{table-prefix}-header > table,
+    .@{table-prefix}-body > table {
+      border: 0;
+      padding: 0 8px;
+    }
+
+    .@{table-prefix}-thead > tr > th {
+      background: @component-background;
+      border-bottom: @border-width-base @border-style-base @table-border-color;
+    }
+
+    .@{table-prefix}-tbody > tr > td {
+      padding: 6px 8px;
+    }
+
+    .@{table-prefix}-title,
+    .@{table-prefix}-footer,
+    .@{table-prefix}-thead > tr > th:not(.@{table-prefix}-selection-column) {
+      padding: 10px 8px;
+    }
+
+    .@{table-prefix}-title {
+      border-bottom: @border-width-base @border-style-base @table-border-color;
+      top: 0;
+    }
+
+    .@{table-prefix}-header {
+      background: @component-background;
+      table {
+        border-bottom: @border-width-base @border-style-base @table-border-color;
+      }
+    }
+
+    .@{table-prefix}-placeholder,
+    .@{table-prefix}-row:last-child td {
+      border-bottom: 0;
+    }
+  }
+
+  &-column-sorter {
+    margin-left: 4px;
+    display: inline-block;
+    width: 14px;
+    height: 16px;
+    vertical-align: middle;
+    text-align: center;
+    &-up,
+    &-down {
+      line-height: 5px;
+      height: 7px;
+      display: block;
+      width: 12px;
+      cursor: pointer;
+      &:hover .@{icon-prefix} {
+        color: @text-color;
+      }
+      &.on {
+        .@{icon-prefix}-triangle-up,
+        .@{icon-prefix}-triangle-down {
+          color: @primary-color;
+        }
+      }
+    }
+    .@{icon-prefix}-triangle-up,
+    .@{icon-prefix}-triangle-down {
+      .iconfont-size-under-12px(7px);
+      line-height: 6px;
+      height: 6px;
+      color: #aaa;
+      &:before {
+        -moz-transform-origin: 53% 50%; /* fix firefox position */
+      }
+    }
+  }
+
+  .@{dropdown-prefix} {
+    vertical-align: middle;
+  }
+
+  &-noborder {
+    .@{table-prefix}-header > table,
+    .@{table-prefix}-body > table,
+    .@{table-prefix}-fixed-left table,
+    .@{table-prefix}-fixed-right table {
+      border: 0;
+    }
+  }
+
+  &-bordered {
+    .@{table-prefix}-header > table,
+    .@{table-prefix}-body > table,
+    .@{table-prefix}-fixed-left table,
+    .@{table-prefix}-fixed-right table {
+      border: @border-width-base @border-style-base @table-border-color;
+      border-right: 0;
+      border-bottom: 0;
+    }
+
+    &.@{table-prefix}-empty {
+      .@{table-prefix}-placeholder {
+        border-left: @border-width-base @border-style-base @table-border-color;
+        border-right: @border-width-base @border-style-base @table-border-color;
+      }
+    }
+
+    &.@{table-prefix}-fixed-header {
+      .@{table-prefix}-header > table {
+        border-bottom: 0;
+      }
+
+      .@{table-prefix}-body > table {
+        border-top: 0;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+      }
+
+      .@{table-prefix}-body-inner > table {
+        border-top: 0;
+      }
+
+      .@{table-prefix}-placeholder {
+        border: 0;
+      }
+    }
+
+    .@{table-prefix}-thead > tr > th {
+      border-bottom: @border-width-base * 2 @border-style-base @table-border-color;
+      border-right: @border-width-base @border-style-base @table-border-color;
+
+      &[colspan] {
+        border-bottom: @border-width-base;
+      }
+    }
+
+    .@{table-prefix}-tbody > tr > td {
+      border-right: @border-width-base @border-style-base @table-border-color;
+    }
+
+    &.@{table-prefix}-small {
+      border-right: 0;
+
+      .@{table-prefix}-header > table,
+      .@{table-prefix}-body > table,
+      .@{table-prefix}-fixed-left table,
+      .@{table-prefix}-fixed-right table {
+        border: 0;
+        padding: 0;
+      }
+
+      .@{table-prefix}-title {
+        border: 0;
+        border-bottom: @border-width-base @border-style-base @table-border-color;
+        border-right: @border-width-base @border-style-base @table-border-color;
+      }
+
+      .@{table-prefix}-footer {
+        border: 0;
+        border-top: @border-width-base @border-style-base @table-border-color;
+        border-right: @border-width-base @border-style-base @table-border-color;
+        &:before {
+          display: none;
+        }
+      }
+
+      .@{table-prefix}-placeholder {
+        border-left: 0;
+        border-bottom: 0;
+      }
+    }
+  }
+
+  &-placeholder {
+    position: relative;
+    padding: @table-padding-vertical @table-padding-horizontal;
+    background: @component-background;
+    border-bottom: @border-width-base @border-style-base @table-border-color;
+    text-align: center;
+    font-size: @font-size-base;
+    color: @text-color-secondary;
+    .@{icon-prefix} {
+      margin-right: 4px;
+    }
+  }
+
+  &-pagination {
+    margin: 16px 0;
+    float: right;
+  }
+
+  &-filter-dropdown {
+    min-width: 96px;
+    background: @component-background;
+    border-radius: @border-radius-base;
+
+    .@{td-prefix}-dropdown-menu {
+      border: 0;
+      box-shadow: none;
+      border-radius: @border-radius-base @border-radius-base 0 0;
+
+      &-without-submenu {
+        max-height: 400px;
+        overflow-x: hidden;
+        position: relative;
+        outline: none;
+      }
+
+      &-item > label + span {
+        padding: 0;
+      }
+
+      &-sub {
+        border-radius: @border-radius-base;
+        box-shadow: @box-shadow-base;
+      }
+
+      .@{td-prefix}-dropdown-submenu-contain-selected {
+        .@{td-prefix}-dropdown-menu-submenu-title:after {
+          color: @primary-color;
+          font-weight: bold;
+          text-shadow: 0 0 2px @primary-2;
+        }
+      }
+    }
+
+    .@{td-prefix}-dropdown-menu-item {
+      overflow: hidden;
+    }
+
+    > .@{td-prefix}-dropdown-menu > .@{td-prefix}-dropdown-menu-item:last-child,
+    > .@{td-prefix}-dropdown-menu > .@{td-prefix}-dropdown-menu-submenu:last-child .@{td-prefix}-dropdown-menu-submenu-title {
+      border-radius: 0;
+    }
+
+    &-btns {
+      overflow: hidden;
+      padding: 7px 8px;
+      border-top: @border-width-base @border-style-base @table-border-color;
+    }
+
+    &-link {
+      color: @link-color;
+      &:hover {
+        color: @link-hover-color;
+      }
+      &:active {
+        color: @link-active-color;
+      }
+      &.confirm {
+        float: left;
+      }
+      &.clear {
+        float: right;
+      }
+    }
+  }
+
+  &-selection {
+    &-select-all-custom {
+      margin-right: 4px !important;
+    }
+
+    .@{icon-prefix}-down {
+      color: #aaa;
+      transition: all .3s;
+    }
+
+    &-menu {
+      min-width: 96px;
+      margin-top: 5px;
+      margin-left: -30px;
+      background: @component-background;
+      border-radius: @border-radius-base;
+      box-shadow: @box-shadow-base;
+
+      .@{td-prefix}-action-down {
+        color: #aaa;
+      }
+    }
+
+    &-down {
+      cursor: pointer;
+      padding: 0;
+      display: inline-block;
+      line-height: 1;
+      &:hover .@{icon-prefix}-down {
+        color: #666;
+      }
+    }
+  }
+
+  &-row {
+    &-expand-icon {
+      cursor: pointer;
+      display: inline-block;
+      width: 17px;
+      height: 17px;
+      text-align: center;
+      line-height: 14px;
+      user-select: none;
+      border-radius: @border-radius-sm;
+      color: #fff;
+    }
+
+    &-expanded {
+      border: @border-width-base @border-style-base @red-4;
+      background: @red-4;
+      &:after {
+        content: '-';
+      }
+    }
+
+    &-collapsed {
+      background: @green-4;
+      border: @border-width-base @border-style-base @green-4;
+      &:after {
+        content: '+';
+      }
+    }
+
+    &-spaced {
+      visibility: hidden;
+      &:after {
+        content: '.';
+      }
+    }
+
+    &[class*="@{table-prefix}-row-level-0"] .@{table-prefix}-selection-column > span {
+      display: inline-block;
+    }
+  }
+
+  tr&-expanded-row {
+    &,
+    &:hover {
+      background: #f9f9f9;
+    }
+  }
+
+  .@{table-prefix}-row-indent + .@{table-prefix}-row-expand-icon {
+    margin-right: 8px;
+  }
+
+  &-scroll {
+    overflow: auto;
+    overflow-x: hidden;
+    table {
+      width: auto;
+      min-width: 100%;
+    }
+  }
+
+  &-body-inner {
+    height: 100%;
+  }
+
+  &-fixed-header &-body {
+    position: relative;
+    background: @component-background;
+  }
+
+  &-fixed-header &-body-inner {
+    overflow: scroll;
+  }
+
+  &-fixed-header &-scroll &-header {
+    overflow: scroll;
+    padding-bottom: 20px;
+    margin-bottom: -20px;
+  }
+
+  /* fix firefox scrollbar bug */
+  &-fixed-header&-empty &-scroll &-body {
+    padding-bottom: 20px;
+    margin-bottom: -20px;
+  }
+
+  &-fixed-left,
+  &-fixed-right {
+    position: absolute;
+    top: 0;
+    overflow: hidden;
+    transition: box-shadow .3s ease;
+    border-radius: 0;
+    table {
+      width: auto;
+      background: @component-background;
+    }
+  }
+
+  &-fixed-header &-fixed-left &-body-outer &-fixed,
+  &-fixed-header &-fixed-right &-body-outer &-fixed {
+    border-radius: 0;
+  }
+
+  &-fixed-left {
+    left: 0;
+    box-shadow: 6px 0 6px -4px @shadow-color;
+    .@{table-prefix}-header {
+      overflow-y: hidden;
+    }
+    // hide scrollbar in left fixed columns
+    .@{table-prefix}-body-inner {
+      margin-right: -20px;
+      padding-right: 20px;
+    }
+    .@{table-prefix}-fixed-header & .@{table-prefix}-body-inner {
+      padding-right: 0;
+    }
+    &,
+    table {
+      border-radius: @table-border-radius 0 0 0;
+    }
+  }
+
+  &-fixed-right {
+    right: 0;
+    box-shadow: -6px 0 6px -4px @shadow-color;
+    &,
+    table {
+      border-radius: 0 @table-border-radius 0 0;
+    }
+    // hide expand row content in right-fixed Table
+    .@{table-prefix}-expanded-row {
+      color: transparent;
+      pointer-events: none;
+    }
+  }
+
+  &&-scroll-position-left &-fixed-left {
+    box-shadow: none;
+  }
+
+  &&-scroll-position-right &-fixed-right {
+    box-shadow: none;
+  }
+}

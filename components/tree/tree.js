@@ -31,7 +31,8 @@ class Tree extends Component {
     onDragOver: noop,
     onDragLeave: noop,
     onDrop: noop,
-    onDragEnd: noop
+    onDragEnd: noop,
+    prefixCls
   }
   static PropTypes = {
     multipe: PropTypes.bool,
@@ -433,6 +434,7 @@ class Tree extends Component {
   }
   render() {
     const props = this.props;
+    const prefixCls = props.prefixCls;
     const domProps = {
       className: cn(prefixCls, props.className, {
         [`${prefixCls}-line`]: props.showLine
