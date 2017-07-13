@@ -259,6 +259,7 @@ function renderSortAndFilter(Table) {
         onFilter: (value, record) => record.address.includes(value),
         sorter: (a, b) => a.address.length - b.address.length,
         sortOrder: sortedInfo.columnKey === 'address' && sortedInfo.order,
+        filterMultiple: false
       }];
       return (
         <div>

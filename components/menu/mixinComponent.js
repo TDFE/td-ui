@@ -2,7 +2,7 @@ import React from 'react';
 
 export default class MixinComponent extends React.Component {
   renderItem = (child, index) => {
-    const { prefixCls, level, openKeys, selectedKeys, domKeys, onSelect, onOpenChange, mode } = this.props;
+    const { prefixCls, level, openKeys, selectedKeys, domKeys, onSelect, onOpenChange, mode, multiple } = this.props;
     const eventKey = this.props.eventKey || '';
     let newChildProps = {
       prefixCls,
@@ -13,7 +13,8 @@ export default class MixinComponent extends React.Component {
       onOpenChange,
       level: level ? (level + this.num) : 1,
       eventKey: child.key || `${eventKey}-${index}`,
-      mode
+      mode,
+      multiple
     }
     return React.cloneElement(child, newChildProps);
   }
