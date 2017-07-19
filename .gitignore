@@ -42,3 +42,4 @@ _book
 dist
 lib
 .idea
+.DS_Store

@@ -6,7 +6,7 @@ ul, li{
   margin: 0;
 }
 .@{menu-prefix} {
-  color: rgba(0,0,0,.65);
+  color: @menu-text-color;
   &-item{
     line-height: 42px;
     height: 42px;
@@ -22,6 +22,19 @@ ul, li{
     }
     a{
       text-decoration: none;
+      display: block;
+      color: @menu-text-color;
+      &:before{
+        position: absolute;
+        background-color: transparent;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        content: "";
+      }
     }
   }
   &-item-group{
@@ -41,6 +54,7 @@ ul, li{
       height: 42px;
       line-height: 42px;
       position: relative;
+      font-size: 12px;
       cursor: pointer;
       &:hover{
         color: @primary-color;
