@@ -20,13 +20,25 @@ export function getOffsetToBody(dom) {
 export function contains(rootClass, n) {
   let node = n;
   while (node && node !== document.body) {
-    if (node.className === rootClass) {
+    if (node.className.indexOf(rootClass) !== -1) {
       return true;
     }
     node = node.parentNode;
   }
 
   return false;
+}
+
+export function getPopupClassNameFromAlign(builtinPlacements, prefixCls, align) {
+  const points = align.points;
+  for (const placement in builtinPlacements) {
+    if (builtinPlacements.hasOwnProperty(placement)) {
+      if (isPointsEq(builtinPlacements[placement].points, points)) {
+        return `${prefixCls}-placement-${placement}`;
+      }
+    }
+  }
+  return '';
 }
 
 export function placeTooltip(placeTop, placeLeft, tooltipW, tooltipH, targetRect) {
