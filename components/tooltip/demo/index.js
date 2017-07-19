@@ -19,12 +19,16 @@ let render = () => {
   function Demo() {
     return (
       <div style={{paddingLeft: '40px', paddingTop: '20px', display: 'inline-block'}}>
-        <Tooltip content={content} title="this is title" placement="leftTop">
+        <Tooltip overlayStyle={{color:'red'}} content={content} title="this is title" placement="leftTop" autoAdjustOverflow={true}>
           <p>MOUSE OVER ME!</p>
         </Tooltip>
 
-        <Tooltip content="just a simple word" style={{marginLeft: 100, display: 'inline-block'}} trigger="click" placement="bottom">
+        <Tooltip content="just a simple word" overlayStyle={{marginLeft: 100, display: 'inline-block'}} trigger="click" placement="right">
           <p>CLICK ME!</p>
+        </Tooltip>
+
+        <Tooltip content="I am always visible" overlayStyle={{marginLeft: 200, display: 'inline-block'}} placement="bottomLeft" visible={true}>
+          <p>WATCH ME!</p>
         </Tooltip>
       </div>
     );

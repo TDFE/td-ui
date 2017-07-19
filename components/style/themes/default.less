@@ -353,9 +353,11 @@
 @tooltip-arrow-width: 5px;
 //** Tooltip distance with trigger
 @tooltip-distance: @tooltip-arrow-width - 1 + 4;
+@tooltip-arrow-outer-width: (@tooltip-arrow-width + 1);
 //** Tooltip arrow color
 @tooltip-arrow-color: @tooltip-bg;
 @tooltip-title-bg: @background-color-base;
+@tooltip-arrow-outer-color: fadeout(@border-color-base, 30%);
 @box-shadow-base : 0 -1px 6px @shadow-color;
 
 //Tree

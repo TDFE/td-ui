@@ -36,7 +36,7 @@ export const placements = {
   },
   topLeft: {
     posTop: 'top',
-    posLeft: 'leftAlgin',
+    posLeft: 'leftAlign',
     overflow: autoAdjustOverflow,
     offset: [0, -4],
     targetOffset
@@ -78,7 +78,7 @@ export const placements = {
   },
   bottomLeft: {
     posTop: 'bottom',
-    posLeft: 'leftAlgin',
+    posLeft: 'leftAlign',
     overflow: autoAdjustOverflow,
     offset: [0, 4],
     targetOffset
