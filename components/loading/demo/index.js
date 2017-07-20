@@ -11,7 +11,7 @@ let render = () => {
     /* eslint-disable*/
     let Loading = require('../index').default;
     ReactDOM.render(
-        <Loading text="加载中..." size="large" loading={false}>
+        <Loading text="加载中..." size="large">
             <div>
                 内容
             </div>
