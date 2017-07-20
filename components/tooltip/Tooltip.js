@@ -111,15 +111,15 @@ export default class Tooltip extends React.Component {
     const tooltipPos = {left: 0, top: 0};
     let placement = placements[this.props.placement],
       result = placeTooltip(placement.posTop, placement.posLeft, width, height, targetBound);
-    tooltipPos.left = result.left + placement.offset[0];
-    tooltipPos.top = result.top + placement.offset[1];
+    tooltipPos.left = result.left + placement.offset[0] + document.body.scrollLeft;
+    tooltipPos.top = result.top + placement.offset[1] + document.body.scrollTop;
     if (this.props.autoAdjustOverflow) {
       for (let i = 0, len = placementBacks.length; i < len; i++) {
         placement = placements[placementBacks[i]];
         result = placeTooltip(placement.posTop, placement.posLeft, width, height, targetBound);
         if (isPlacementValid(result.left, result.top, width, height)) {
-          tooltipPos.left = result.left + placement.offset[0];
-          tooltipPos.top = result.top + placement.offset[1];
+          tooltipPos.left = result.left + placement.offset[0] + document.body.scrollLeft;
+          tooltipPos.top = result.top + placement.offset[1] + document.body.scrollTop;
           if (placementBacks[i] !== this.state.adjustedPlacement) {
             this.setState({adjustedPlacement: placementBacks[i]});
           }
@@ -148,7 +148,7 @@ export default class Tooltip extends React.Component {
           ref="popup"
           getToolTipPos={this.getToolTipPos}
           content={content || title}
-          title={title}
+          title={content ? title : null}
           placement={this.state.adjustedPlacement}
           prefixCls={prefixCls}
         />
