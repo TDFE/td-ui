@@ -110,7 +110,11 @@ class TreeNode extends Component {
       switcherCls[`${prefixCls}-switcher-disabled`] = true;
       return <span className={cn(switcherCls)}></span>;
     }
-    return <span className={cn(switcherCls)} onClick={this.onExpand}></span>;
+    return <span className={cn(switcherCls)} onClick={this.onExpand}>
+      {
+        props.showLine && !props.children ? <Icon type='copy' className='copy' /> : null
+      }
+    </span>;
   }
   renderNoopSwitcher(props) {
     const prefixCls = props.prefixCls;

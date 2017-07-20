@@ -107,7 +107,7 @@ class Upload extends React.Component {
               fileList.map((file, index) => <div className={`${prefixCls}-file-single`} key={index}>
                 <Icon className='tdicon-copy copy' type='copy'/>
                 {file.path}
-                <Icon className='tdicon-close close' type='close' onClick={() => this.handleClick(index)}/>
+                <Icon type='cross' className='close' onClick={() => this.handleClick(index)}/>
               </div>)
             }
           </div> : null

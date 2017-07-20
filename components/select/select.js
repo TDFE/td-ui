@@ -59,9 +59,9 @@ export default class Select extends Component {
     let combobox = props.mode === 'combobox';
     if (props.showSearch && value.length) {
       inputValue = value[0].label;
-    } else if (combobox) {
+    }
+    if (combobox) {
       inputValue = props.value;
-      console.log(inputValue);
     }
     this.state = {
       open,
@@ -110,9 +110,9 @@ export default class Select extends Component {
       let combobox = nextProps.mode === 'combobox';
       if (nextProps.showSearch && value.length) {
         inputValue = value[0].label;
-      } else if (combobox) {
+      }
+      if (combobox) {
         inputValue = nextProps.value;
-        console.log(inputValue);
       }
       this.setState({
         value,
@@ -128,7 +128,7 @@ export default class Select extends Component {
 
   adjustOpenState = () => {
     let open = this.state.open;
-    let combobox = this.props.mode;
+    let combobox = this.props.mode === 'combobox';
     let options = [];
     if (open) {
       options = this.renderFilterOptions(this.props.children);
@@ -174,7 +174,6 @@ export default class Select extends Component {
         sel.push(<MenuItem value={childValue} key={childValue} {...child.props}/>);
       }
     });
-
     return sel;
   }
 
@@ -193,11 +192,12 @@ export default class Select extends Component {
   }
 
   defaultFilterFn = (inputValue, child) => {
+    let combobox = this.props.mode === 'combobox';
     let c = child.props.children;
     if (c.constructor === Array) {
       c = c.join('');
     }
-    return c.indexOf(inputValue) > -1 || child.props.value.indexOf(inputValue) > -1;
+    return c.indexOf(inputValue) > -1 || child.props.value.indexOf(inputValue) > -1 || combobox;
   }
 
   onInputChange = (e) => {
@@ -249,7 +249,7 @@ export default class Select extends Component {
 
   onInputFocus = e => {
     e.stopPropagation();
-    const combobox = this.props.mode;
+    const combobox = this.props.mode === 'combobox';
     if (!combobox) {
       this.setState({
         inputValue: ''
@@ -258,6 +258,7 @@ export default class Select extends Component {
   }
 
   addBodyClickEvent = () => {
+    let combobox = this.props.mode === 'combobox';
     if (!this.bodyEvent) {
       document.addEventListener('click', () => {
         let { open, value } = this.state;
@@ -265,7 +266,7 @@ export default class Select extends Component {
           this.setState({
             open: false
           });
-          if (this.props.showSearch) {
+          if (this.props.showSearch && !combobox) {
             if (value.length) {
               this.setState({
                 inputValue: value[0].label
