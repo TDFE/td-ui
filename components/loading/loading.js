@@ -7,7 +7,8 @@ import s from './style/index';
 
 export default class Loading extends Component {
   static defaultProps = {
-    prefixLoad: s.loadingPrefix
+    prefixLoad: s.loadingPrefix,
+    loading:true
   };
 
   render() {
