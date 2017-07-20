@@ -58,8 +58,8 @@ export default class Tooltip extends React.Component {
     this.delaySetPopupVisible(true, this.props.mouseEnterDelay);
   }
 
-  setPopVisible = (visilble) => {
-    this.setState({popVisible: visilble});
+  setPopVisible = (visible) => {
+    this.setState({popVisible: visible});
     if (this.props.onVisibleChange) {
       this.props.onVisibleChange(visible);
     }
@@ -101,7 +101,6 @@ export default class Tooltip extends React.Component {
   }
 
   componentWillUnmount() {
-    this.removeContainer();
     document.body.removeEventListener('click', this.onDocumentClick)
   }
 

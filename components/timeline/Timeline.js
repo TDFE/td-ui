@@ -17,7 +17,7 @@ export default class Timeline extends React.Component {
     prefixCls: PropTypes.string,
     className: PropTypes.string,
     /** 指定最后一个幽灵节点是否存在或内容 */
-    pending: React.PropTypes.node,
+    pending: PropTypes.node,
     style: PropTypes.object
   }
 

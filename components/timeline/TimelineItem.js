@@ -18,9 +18,9 @@ export default class TimelineItem extends React.Component {
     prefixCls: PropTypes.string,
     className: PropTypes.string,
     color: PropTypes.string,
-    dot: React.PropTypes.node,
-    pending: React.PropTypes.bool,
-    last: React.PropTypes.bool,
+    dot: PropTypes.node,
+    pending: PropTypes.bool,
+    last: PropTypes.bool,
     style: PropTypes.object
   }
 
