@@ -6920,9 +6920,9 @@ tdtool-react@^0.1.1:
     eslint-plugin-standard "^3.0.1"
     template-string-loader "^0.0.3"
 
-tdtool@^0.0.9:
-  version "0.0.9"
-  resolved "https://registry.yarnpkg.com/tdtool/-/tdtool-0.0.9.tgz#f8bd73596c47be36b6f1196d1cdd362f5a265db1"
+tdtool@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/tdtool/-/tdtool-0.1.0.tgz#f9923af962d907e27c9282d7168402114a72bc52"
   dependencies:
     babel-core "^6.24.1"
     babel-plugin-react-transform "^2.0.2"
