@@ -22,7 +22,7 @@ export default class Steps extends Component {
     if (icon) {
       return <span className="setting-icon">{String(icon) ? <span className={`tdicon tdicon-${icon}`}></span> : icon}</span>
     }
-    return stepNumber >= current ? <span className={`${prefixCls}-step-icon`}>{stepNumber + 1}</span> : <span className={`${prefixCls}-step-icon tdicon tdicon-check`}></span>
+    return stepNumber >= current ? <span className={`${prefixCls}-step-icon`}>{stepNumber + 1}</span> : <span className={`${prefixCls}-step-icon tdicon tdicon-right`}></span>
   }
 
   render() {

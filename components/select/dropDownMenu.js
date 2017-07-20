@@ -1,8 +1,10 @@
-import React, { Component } from 'react';
+/* eslint-disable */
+import React, { Component, cloneElement } from 'react';
 import { findDOMNode } from 'react-dom';
+import PropTypes from 'prop-types';
 import Menu from '../menu';
 import scrollIntoView from 'dom-scroll-into-view';
-
+import { getSelectedKeys } from './util';
 function toArray(children) {
   const ret = [];
   React.Children.forEach(children, (c) => {
@@ -10,7 +12,6 @@ function toArray(children) {
   });
   return ret;
 }
-
 export default class DropdownMenu extends Component {
   componentWillMount() {
     this.lastInputValue = this.props.inputValue;
@@ -44,7 +45,7 @@ export default class DropdownMenu extends Component {
   }
   renderMenu() {
     const props = this.props;
-    const { menuItems, prefixCls, onMenuSelect, selectedKeys } = props;
+    const { menuItems, defaultActiveFirstOption, value, onMenuSelect, prefixCls,inputValue, selectedKeys } = props;
     if (menuItems && menuItems.length) {
       const menuProps = {};
       menuProps.onSelect = onMenuSelect;

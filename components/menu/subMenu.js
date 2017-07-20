@@ -3,9 +3,8 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import s from './style';
 import { checkSelected } from './util';
-import MixinComponent from './mixinComponent';
 
-export default class SubMenu extends MixinComponent {
+export default class SubMenu extends React.Component {
   static defaultProps = {
     prefixCls: s.menuPrefix,
     title: '',
@@ -18,14 +17,10 @@ export default class SubMenu extends MixinComponent {
     children: PropTypes.oneOfType([PropTypes.string, PropTypes.node])
   }
 
-  constructor (props) {
-    super(props);
-    this.num = 1;
-  }
-
   mouseEnter = () => {
     const { openKeys, eventKey, mode } = this.props;
     if (mode !== 'inline') {
+      console.log('enter');
       const nextOpenKeys = openKeys.concat([eventKey]);
       this.props.onOpenChange(nextOpenKeys);
     }
@@ -34,6 +29,7 @@ export default class SubMenu extends MixinComponent {
   mouseLeave = () => {
     const { openKeys, eventKey, mode } = this.props;
     if (mode !== 'inline') {
+      console.log('leave');
       const index = openKeys.indexOf(eventKey);
       if (index >= 0) {
         openKeys.splice(index, 1);
@@ -55,6 +51,23 @@ export default class SubMenu extends MixinComponent {
     this.props.onOpenChange(nextOpenKeys);
   }
 
+  renderItem = (child, index) => {
+    const { prefixCls, level, openKeys, selectedKeys, domKeys, onSelect, onOpenChange, mode } = this.props;
+    const eventKey = this.props.eventKey || '';
+    let newChildProps = {
+      prefixCls,
+      openKeys,
+      selectedKeys,
+      domKeys,
+      onSelect,
+      onOpenChange,
+      level: level + 1,
+      eventKey: child.key || `${eventKey}-${index}`,
+      mode
+    }
+    return React.cloneElement(child, newChildProps);
+  }
+
   render() {
     const { prefixCls, title, children, level, openKeys, eventKey, mode, selectedKeys, domKeys } = this.props;
     let style = {};
@@ -65,8 +78,7 @@ export default class SubMenu extends MixinComponent {
     }
     return <li
       className={classnames(`${prefixCls}-submenu`, {
-        [`${prefixCls}-submenu-child-selected`]: checkSelected(domKeys, selectedKeys, eventKey),
-        [`${prefixCls}-submenu-child-open`]: openKeys.indexOf(eventKey) >= 0
+        [`${prefixCls}-submenu-child-selected`]: checkSelected(domKeys, selectedKeys, eventKey)
       })}
       onMouseEnter={this.mouseEnter}
       onMouseLeave={this.mouseLeave}
@@ -81,5 +93,3 @@ export default class SubMenu extends MixinComponent {
     </li>;
   }
 }
-
-// module.exports = mixin(SubMenu)

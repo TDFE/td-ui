@@ -2,10 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cn from 'classnames';
 /* eslint-disable no-unused-vars */
-import Button from '../button';
+import Animate from 'rc-animate';
 /* eslint-disable no-unused-vars */
-import Icon from '../icon';
+import Button from '../button';
 import s from './style';
+/* eslint-disable no-unused-vars */
+import LazyRenderBox from './lazyRenderBox';
 
 function noop() {}
 
@@ -75,11 +77,14 @@ export default class Dialog extends React.Component {
   render() {
     const { visible, prefixCls, children, width, maskClosable, closable, className } = this.props;
     return (<div>
-      <div className={cn(`${prefixCls}-mask`, { [`${prefixCls}-mask-hidden`]: !visible })}></div>
+      <LazyRenderBox
+      >
+        <div className={cn(`${prefixCls}-mask`, { [`${prefixCls}-mask-hidden`]: !visible })}></div>
+      </LazyRenderBox>
       <div className={cn(`${prefixCls}-wrap`, { [`${prefixCls}-wrap-hidden`]: !visible })} onClick={maskClosable ? this.maskClose : null}>
         <div className={`${prefixCls} ${className}`} style={{ width }}>
           <div className={`${prefixCls}-content`}>
-            {closable ? <button className={`${prefixCls}-close`} onClick={() => this.props.onCancel()}><Icon type='cross'/></button> : ''}
+            {closable ? <button className={`${prefixCls}-close`} onClick={() => this.props.onCancel()}>×</button> : ''}
             {this.renderHeader()}
             <div className={`${prefixCls}-body`}>
               {children}

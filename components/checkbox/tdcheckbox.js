@@ -1,7 +1,7 @@
 /**
  * Created by sunxianxiong on 17/5/31.
  */
-
+/* eslint-disable no-unused-vars */
 import React from 'react';
 import PropTypes from 'prop-types';
 import shallowEqual from 'shallowequal';

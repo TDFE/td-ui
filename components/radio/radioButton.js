@@ -1,9 +1,10 @@
 /**
  * Created by sunxianxiong on 17/6/8.
  */
-
+/* eslint-disable no-unused-vars */
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+import cn from 'classnames';
 import Radio from './radio';
 import s from './style';
 
@@ -17,11 +18,11 @@ export default class RadioButton extends Component {
   };
 
   render() {
-    const { props, context } = this;
+    const {props, context} = this;
 
-    const { radioGroup } = context;
+    const {radioGroup} = context;
 
-    const radioPropTypes = { ...props };
+    const radioPropTypes = {...props};
 
     if (radioGroup) {
       radioPropTypes.onChange = radioGroup.onChange;
@@ -30,9 +31,9 @@ export default class RadioButton extends Component {
     }
 
     return (
-      <Radio
-        {...radioPropTypes}
-      />
+        <Radio
+          {...radioPropTypes}
+        />
     );
   }
 }

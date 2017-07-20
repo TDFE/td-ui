@@ -1,9 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import s from './style';
-import MixinComponent from './mixinComponent';
 
-export default class ItemGroup extends MixinComponent {
+export default class ItemGroup extends React.Component {
   static defaultProps = {
     prefixCls: s.menuPrefix,
     title: '',
@@ -16,9 +15,21 @@ export default class ItemGroup extends MixinComponent {
     children: PropTypes.oneOfType([PropTypes.string, PropTypes.node])
   }
 
-  constructor (props) {
-    super(props);
-    this.num = 0;
+  renderItem = (child, index) => {
+    const { prefixCls, level, openKeys, selectedKeys, domKeys, onSelect, onOpenChange, mode } = this.props;
+    const eventKey = this.props.eventKey || '';
+    let newChildProps = {
+      prefixCls,
+      openKeys,
+      selectedKeys,
+      domKeys,
+      onSelect,
+      onOpenChange,
+      level: level || 1,
+      eventKey: child.key || `${eventKey}-${index}`,
+      mode
+    }
+    return React.cloneElement(child, newChildProps);
   }
 
   render() {

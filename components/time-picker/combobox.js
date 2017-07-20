@@ -160,8 +160,8 @@ class Combobox extends Component {
     }
 
     const AMPMOptions = ['am', 'pm'] // If format has A char, then we should uppercase AM/PM
-      .map(c => format.match(/\sA/) ? c.toUpperCase() : c)
-      .map(c => ({ value: c }));
+                          .map(c => format.match(/\sA/) ? c.toUpperCase() : c)
+                          .map(c => ({ value: c }));
 
     const selected = this.isAM() ? 0 : 1;
 

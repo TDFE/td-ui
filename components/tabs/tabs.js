@@ -2,8 +2,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import TabPane from './tabpanel';
+// import TabBar from './tabbar'
+// import cn from 'classNames';
+// import omit from 'lodash/omit';
 import s from './style';
-
+// import Icon from '../icon';
 function getDefaultActiveKey(props) {
   let activeKey;
   React.Children.forEach(props.children, (child) => {

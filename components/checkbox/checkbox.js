@@ -1,8 +1,8 @@
 /**
  * Created by sunxianxiong on 17/6/8.
  */
-
-import React, { Component } from 'react';
+/* eslint-disable no-unused-vars */
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import cn from 'classnames';
 import shallowEqual from 'shallowequal';

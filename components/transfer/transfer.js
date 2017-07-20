@@ -187,20 +187,18 @@ export default class Transfer extends Component {
           [`${prefixCls}-checkbox-checked`]: typeArr.indexOf(item.key) >= 0,
           [`${prefixCls}-checkbox-indeterminate`]: typeArr.indexOf(item.key) < 0 && item.children && checkChildren(item.children, typeArr)
         });
-        return (
-          <div key={item.key}>
-            <div
-              className={`${prefixCls}-con-item`}
-              onClick={() => {
-                this.toggleState(item.key, item._key, type, typeArr.indexOf(item.key) >= 0)
-              }}
-              style={{paddingLeft: level * 23 + 15}}
-            >
-              <span className={itemClass}></span>{item.title}
-            </div>
-            { item.children && this.renderItem(item.children, type, level + 1) }
-          </div>
-        );
+        return <div key={item.key}>
+                <div
+                  className={`${prefixCls}-con-item`}
+                  onClick={() => {
+                    this.toggleState(item.key, item._key, type, typeArr.indexOf(item.key) >= 0)
+                  }}
+                  style={{paddingLeft: level * 23 + 15}}
+                >
+                  <span className={itemClass}></span>{item.title}
+                </div>
+                { item.children && this.renderItem(item.children, type, level + 1) }
+              </div>
       })
     } else if (level === 0) {
       return <div className="null">{notFoundContent}</div>

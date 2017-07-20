@@ -86,7 +86,7 @@ export default class Progress extends Component {
           </div>
           {progressInfo}
         </div>
-      );
+    );
     } else if (type === 'stripe') {
       const stripeOuterStyle = {
         width: currentWidth,
@@ -98,10 +98,10 @@ export default class Progress extends Component {
       };
       progress = (
         <div className={`${prefixCls}-wrapper`}>
-          <div className={`${prefixCls}-outer`} style={stripeOuterStyle}>
-            <div className={`${prefixCls}-inner-stripe`} style={stripeStyle}>
-            </div>
+        <div className={`${prefixCls}-outer`} style={stripeOuterStyle}>
+          <div className={`${prefixCls}-inner-stripe`} style={stripeStyle}>
           </div>
+        </div>
           {progressInfo}
         </div>
       );
@@ -156,15 +156,15 @@ export default class Progress extends Component {
       }
       progress = (
         <div className={`${prefixCls}-wrapper`}>
-          <div className={`${prefixCls}-circle-outer`} style={outerCircleStyle}>
-            <div className={`${prefixCls}-circle-inner`} style={innerCircleStyle}>
-              <div className={`${prefixCls}-circle-percent`} style={percentCircleStyle}>
-                <div className={`${prefixCls}-circle-left`} style={leftCircleStyle}></div>
-                <div className={`${prefixCls}-circle-right`} style={rightCircleStyle}></div>
-              </div>
+        <div className={`${prefixCls}-circle-outer`} style={outerCircleStyle}>
+          <div className={`${prefixCls}-circle-inner`} style={innerCircleStyle}>
+            <div className={`${prefixCls}-circle-percent`} style={percentCircleStyle}>
+            <div className={`${prefixCls}-circle-left`} style={leftCircleStyle}></div>
+            <div className={`${prefixCls}-circle-right`} style={rightCircleStyle}></div>
             </div>
-            <div className={`${prefixCls}-circle-text`} style={textCircleStyle}>{text}</div>
           </div>
+          <div className={`${prefixCls}-circle-text`} style={textCircleStyle}>{text}</div>
+        </div>
         </div>
       );
     }

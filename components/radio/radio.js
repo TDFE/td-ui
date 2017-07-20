@@ -1,8 +1,8 @@
 /**
  * Created by sunxianxiong on 17/5/31.
  */
-
-import React, { Component } from 'react';
+/* eslint-disable no-unused-vars */
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import cn from 'classnames';
 import shallowEqual from 'shallowequal';
@@ -35,14 +35,14 @@ export default class Radio extends Component {
   };
 
   render() {
-    const { props, context } = this;
+    const {props, context} = this;
     const {
       className, style, children, prefixCls, ...others
     } = props;
 
-    const { radioGroup } = context;
+    const {radioGroup} = context;
 
-    const radioPropTypes = { ...others };
+    const radioPropTypes = {...others};
 
     let verticalDirection = false;
 

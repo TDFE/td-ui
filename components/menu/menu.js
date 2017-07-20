@@ -8,8 +8,7 @@ export default class Menu extends React.Component {
   static defaultProps = {
     prefixCls: s.menuPrefix,
     children: '',
-    mode: 'inline',
-    multiple: false
+    mode: 'inline'
   }
 
   static propTypes = {
@@ -20,8 +19,7 @@ export default class Menu extends React.Component {
     onSelect: PropTypes.func,
     defaultOpenKeys: PropTypes.arrayOf(PropTypes.string),
     openKeys: PropTypes.arrayOf(PropTypes.string),
-    onOpenChange: PropTypes.func,
-    multiple: PropTypes.bool
+    onOpenChange: PropTypes.func
   }
 
   constructor(props) {
@@ -54,7 +52,7 @@ export default class Menu extends React.Component {
   }
 
   renderItem = (child, index) => {
-    const { prefixCls, level, mode, multiple } = this.props;
+    const { prefixCls, level, mode } = this.props;
     const { openKeys, selectedKeys, domKeys } = this.state;
     let newChildProps = {
       prefixCls,
@@ -65,8 +63,7 @@ export default class Menu extends React.Component {
       onOpenChange: this.onOpenChange,
       level: level ? (level + 1) : 1,
       eventKey: child.key || `root-${index}`,
-      mode,
-      multiple
+      mode
     }
     return React.cloneElement(child, newChildProps);
   }

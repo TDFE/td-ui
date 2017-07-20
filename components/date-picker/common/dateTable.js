@@ -147,7 +147,7 @@ export default class DateTable extends React.Component {
             onClick={disabled ? undefined : onSelect.bind(null, current)}
             title={current.format('YYYY/MM/DD')}
             className={cls}
-          >
+            >
             <div>
               {current.date()}
             </div>

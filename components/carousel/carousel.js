@@ -307,13 +307,13 @@ class Carousel extends React.Component {
     const current = this.refs['f' + currentId]
     if (axis === 'x') {
       translateXY(movingInFrame, currentId > index ? -this.state.frameWidth : this.state.frameWidth, 0, 0)
-      setTimeout(() => { // 解决不能重置上一张与下一张位置的问题
+      setTimeout(() => {  // 解决不能重置上一张与下一张位置的问题
         translateXY(current, currentId > index ? this.state.frameWidth : -this.state.frameWidth, 0, duration)
         translateXY(movingInFrame, 0, 0, duration)
       }, 20);
     } else if (axis === 'y') {
       translateXY(movingInFrame, 0, currentId > index ? -this.state.frameHeight : this.state.frameHeight, 0)
-      setTimeout(() => { // 解决不能重置上一张与下一张位置的问题
+      setTimeout(() => {  // 解决不能重置上一张与下一张位置的问题
         translateXY(current, 0, currentId > index ? this.state.frameHeight : -this.state.frameHeight, duration)
         translateXY(movingInFrame, 0, 0, duration)
       }, 20);
@@ -342,15 +342,12 @@ class Carousel extends React.Component {
           onClick={this.dotsClick.bind(this)}
           axis={axis} loop={loop} auto={auto} interval={interval} />
         {
-          prevAndNext && (
-            <Buttons
-              index={current}
-              total={frames.length}
-              prevHandler={this.prev}
-              nextHandler={this.next}
-              axis={axis} loop={loop} auto={auto} interval={interval}
-            />
-          )
+          prevAndNext && <Buttons
+                            index={current}
+                            total={frames.length}
+                            prevHandler={this.prev}
+                            nextHandler={this.next}
+                            axis={axis} loop={loop} auto={auto} interval={interval} />
         }
         { this.props.frames && this.props.children }
       </div>
@@ -381,31 +378,31 @@ Carousel.defaultProps = {
 }
 
 function translateXY (el, x, y, duration = 0) {
-  if (!el) return;
+  if (!el) return
 
-  el.style.opacity = '1';
+  el.style.opacity = '1'
 
   // animation
-  el.style.transitionDuration = duration + 'ms';
-  el.style.webkitTransitionDuration = duration + 'ms';
+  el.style.transitionDuration = duration + 'ms'
+  el.style.webkitTransitionDuration = duration + 'ms'
 
-  el.style.transfrom = `translate(${x}px, ${y}px)`;
-  el.style.webkitTransform = `translate(${x}px, ${y}px) translateZ(0)`;
+  el.style.transfrom = `translate(${x}px, ${y}px)`
+  el.style.webkitTransform = `translate(${x}px, ${y}px) translateZ(0)`
 }
 
 function objectAssign (target) {
-  const output = Object(target);
-  for (let index = 1; index < arguments.length; index++) {
-    const source = arguments[index];
+  var output = Object(target)
+  for (var index = 1; index < arguments.length; index++) {
+    var source = arguments[index]
     if (source !== undefined && source !== null) {
-      for (let nextKey in source) {
+      for (var nextKey in source) {
         if (source.hasOwnProperty(nextKey)) {
-          output[nextKey] = source[nextKey];
+          output[nextKey] = source[nextKey]
         }
       }
     }
   }
-  return output;
+  return output
 }
 
-export default Carousel;
+export default Carousel

@@ -3,8 +3,7 @@
  */
 import React from 'react';
 import TimelineItem from './TimelineItem';
-import PropTypes from 'prop-types';
-import cn from 'classnames';
+import cn from 'classNames';
 import s from './style';
 
 export default class Timeline extends React.Component {
@@ -12,14 +11,6 @@ export default class Timeline extends React.Component {
   static defaultProps = {
     prefixCls: s.timelinePrefix
   };
-
-  static propTypes = {
-    prefixCls: PropTypes.string,
-    className: PropTypes.string,
-    /** 指定最后一个幽灵节点是否存在或内容 */
-    pending: React.PropTypes.node,
-    style: PropTypes.object
-  }
 
   render() {
     const {prefixCls, children, pending, className, ...restProps} = this.props;

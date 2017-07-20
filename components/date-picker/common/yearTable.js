@@ -69,7 +69,7 @@ export default class YearTable extends React.Component {
             onClick={disabled ? undefined : onSelect.bind(null, current)}
             title={current.year()}
             className={cls}
-          >
+            >
             <div>
               {current.year()}
             </div>

@@ -1,6 +1,5 @@
 @import "../color/colors.less";
 @import "../iconfont/index.less";
-@import "../base.less";
 
 @td-prefix                    : td;
 @switch-prefix                : ~"@{td-prefix}-switch";
@@ -14,9 +13,8 @@
 @message-prefix               : ~"@{td-prefix}-message";
 @input-number-prefix          : ~"@{td-prefix}-input-number";
 @dialog-prefix                : ~"@{td-prefix}-dialog";
-@confirm-prefix               : ~"@{td-prefix}-confirm";
-@cascader-prefix              : ~"@{td-prefix}-cascader";
-@slider-prefix                : ~"@{td-prefix}-slider";
+@confirm-prefix                : ~"@{td-prefix}-confirm";
+@cascader-prefix                : ~"@{td-prefix}-cascader";
 @timeline-prefix              : ~"@{td-prefix}-timeline";
 @confirm-prefix               : ~"@{td-prefix}-confirm";
 @menu-prefix                  : ~"@{td-prefix}-menu";
@@ -29,18 +27,13 @@
 @layout-prefix                : ~"@{td-prefix}-layout";
 @tabs-prefix                  : ~"@{td-prefix}-tabs";
 @progress-prefix              : ~"@{td-prefix}-progress";
-@tag-prefix                   : ~"@{td-prefix}-tag";
 @form-prefix                  : ~"@{td-prefix}-form";
-@tooltip-prefix               : ~"@{td-prefix}-tooltip";
 @steps-prefix                 : ~"@{td-prefix}-steps";
 @time-picker-prefix           : ~"@{td-prefix}-time-picker";
 @upload-prefix                : ~"@{td-prefix}-upload";
 @date-picker-prefix           : ~"@{td-prefix}-date-picker";
-@range-picker-prefix          : ~"@{td-prefix}-range-picker";
 @transfer-prefix              : ~"@{td-prefix}-transfer";
-@checkbox-prefix              : ~"@{td-prefix}-checkbox";
-@table-prefix                 : ~"@{td-prefix}-table";
-@popover-prefix               : ~"@{td-prefix}-popover";
+@checkbox-prefix                 : ~"@{td-prefix}-checkbox";
 
 :export {
   switchPrefix: @switch-prefix;
@@ -56,7 +49,6 @@
   dialogPrefix: @dialog-prefix;
   confirmPrefix: @confirm-prefix;
   cascaderPrefix: @cascader-prefix;
-  sliderPrefix: @slider-prefix;
   timelinePrefix: @timeline-prefix;
   menuPrefix: @menu-prefix;
   dropdownPrefix: @dropdown-prefix;
@@ -68,9 +60,7 @@
   layoutPrefix: @layout-prefix;
   tabsPrefix: @tabs-prefix;
   progressPrefix: @progress-prefix;
-  tagPrefix: @tag-prefix;
   formPrefix: @form-prefix;
-  tooltipPrefix: @tooltip-prefix;
   stepsPrefix: @steps-prefix;
   timePickerPrefix: @time-picker-prefix;
   uploadPrefix: @upload-prefix;
@@ -78,10 +68,7 @@
   transferPrefix: @transfer-prefix;
   datePickerPanelSize: @date-picker-time-offset * 7;
   datePickerGap: @date-picker-gap;
-  rangePickerPrefix: @range-picker-prefix;
   checkboxPrefix: @checkbox-prefix;
-  tablePrefix: @table-prefix;
-  popoverPrefix: @popover-prefix
 }
 
 // Global
@@ -98,7 +85,7 @@
 @border-radius-sm             : 2px;
 @border-width-base            : 1px;
 @border-color-base            : #ccc;
-@border-color-split           : #eee;
+@border-color-split           : #e9e9e9;
 @border-style-base            : solid;
 
 // Color
@@ -110,9 +97,7 @@
 @disabled-color               : fade(#000, 25%);
 @shadow-color                 : rgba(0, 0, 0, .2);
 @text-color                   : fade(#000, 65%);
-@text-color-secondary         : fade(#000, 43%);
-@heading-color                : fade(#000, 85%);
-@heading-color-dark           : fade(#fff, 97%);
+@text-color-secondary   : fade(#000, 43%);
 
 @primary-1: tint(@primary-5, 80%);
 @primary-2: tint(@primary-5, 60%);
@@ -175,17 +160,6 @@
 @form-item-margin-bottom     : 24px;
 @form-item-trailing-colon    : true;
 
-// Table
-// ---
-@table-header-bg                        : #eee;
-@table-row-hover-bg                     : #f6f6f6;
-@table-row-active-bg                    : #e5e5e5;
-@table-padding-vertical                 : 9px;
-@table-padding-horizontal               : 8px;
-@table-font-color                       : #666;
-@table-border-color                     : #ddd;
-@table-border-radius                    : 0;
-
 // TimePicker
 // ---
 @time-picker-panel-column-width         : 56px;
@@ -202,25 +176,16 @@
 @date-picker-gap-vertial                : 4px;
 @date-picker-panel-width                : @date-picker-cell-size * 7;
 @date-picker-panel-height               : @date-picker-cell-size * 9;
-@date-picker-header-font-color          : @blue-8;
+@date-picker-header-font-color         : @blue-8;
 @date-picker-font-color                 : #666;
 @date-picker-hover-color                : @primary-4;
 @date-picker-select-color               : @primary-5;
 @date-picker-active-color               : @primary-6;
 @date-picker-input-width                : 200px;
 @date-picker-minor-color                : #ccc;
-@date-picker-background-color           : #fff;
+@date-picker-background-color            : #fff;
 @date-picker-disabled-color             : #f7f7f7;
 @date-picker-disabled-border            : #ccc;
-@date-picker-scrollbar-color            : #c1c1c1;
-@date-picker-scrollbar-width            : 8px;
-
-// RangePicker
-@range-picker-time-height               : 36px;
-@range-picker-tool-height               : 40px;
-@range-picker-input-width               : 300px;
-@range-picker-panel-width               : @date-picker-panel-width * 2 + @date-picker-gap-horizontal;
-@range-picker-panel-height              : @date-picker-cell-size * 8 + @range-picker-time-height + @range-picker-tool-height + @date-picker-gap-vertial * 2;
 
 // grid
 @grid-columns                 : 24;
@@ -341,25 +306,6 @@
 @pagination-font-size             : @font-size-base;
 @pagination-font-size-sm          : @font-size-sm;
 
-// Tooltip
-// ---
-//* Tooltip max width
-@tooltip-max-width: 250px;
-//** Tooltip text color
-@tooltip-color: @text-color;//#fff;
-//** Tooltip background color
-@tooltip-bg: @component-background;//rgba(64, 64, 64, .85);
-//** Tooltip arrow width
-@tooltip-arrow-width: 5px;
-//** Tooltip distance with trigger
-@tooltip-distance: @tooltip-arrow-width - 1 + 4;
-@tooltip-arrow-outer-width: (@tooltip-arrow-width + 1);
-//** Tooltip arrow color
-@tooltip-arrow-color: @tooltip-bg;
-@tooltip-title-bg: @background-color-base;
-@tooltip-arrow-outer-color: fadeout(@border-color-base, 30%);
-@box-shadow-base : 0 -1px 6px @shadow-color;
-
 //Tree
 @tree-switcher-width              : 24px;
 @tree-switcher-height             : 24px;
@@ -368,6 +314,8 @@
 @tree-checkbox-color              : @primary-5;
 @tree-checkbox-disabled-color     : @disabled-color;
 @tree-checkbox-disabled-bg        : @disabled-bg;
+@tree-hover-bgColor               : @primary-1;
+@tree-drag-color                  : @primary-5;
 
 //Select
 @select-height-base               : 26px;
@@ -395,6 +343,3 @@
 @step-blue:        @blue-5;
 @step-gray:        #ccc;
 @step-black:        #999;
-
-// menu
-@menu-text-color:        rgba(0,0,0,.65);
