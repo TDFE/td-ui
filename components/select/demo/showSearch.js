@@ -1,7 +1,6 @@
 import React from 'react';
 import Select from '../index';
 const Option = Select.Option;
-
 export default class showSearch extends React.Component {
   constructor(props) {
     super(props);

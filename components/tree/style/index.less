@@ -1,6 +1,7 @@
 @import '../../style/themes/default';
 @prefixCls: ~"@{tree-prefix}";
 .@{prefixCls} {
+  box-sizing: border-box;
   padding: 0;
   margin: 0;
   li{
@@ -15,7 +16,7 @@
       padding-left: @tree-switcher-width / 3 * 2;
     }
     &.drag-over > .@{prefixCls}-content {
-      background-color: yellow;
+      background-color: @tree-drag-color;
     }
     &.drag-over-gap-top > .@{prefixCls}-content, &.drag-over-gap-bottom > .@{prefixCls}-content  {
       position: relative;
@@ -25,7 +26,7 @@
         height: 2px;
         position: absolute;
         left: 0;
-        background-color: yellow;
+        background-color: @tree-drag-color;
       }
     }
     &.drag-over-gap-top > .@{prefixCls}-content {
@@ -63,7 +64,7 @@
           overflow: hidden;
           background-color: #d9d9d9;
           left: @tree-switcher-width / 2;
-          top: 20px;
+          top: 16px;
           position: absolute;
         }
       }
@@ -136,8 +137,8 @@
           cursor: pointer;
           &:after {
             content: '';
-            width: 10px;
-            height: 10px;
+            width: 12px;
+            height: 12px;
             border: 1px solid #ccc;
             display: inline-block;
             vertical-align: middle;
@@ -168,6 +169,10 @@
           width: 12px;
           height: 12px;
           background-color: #ccc;
+        }
+        &:before {
+          content: '';
+          position: absolute;
         }
       }
     }
@@ -205,12 +210,13 @@
     }
     &-checked {
       &:after {
-        width: 3px;
-        height: 6px;
+        width: 5px;
+        height: 8px;
         border-width:0 2px 2px 0;
         transform: rotate(45deg);
         left: 4px;
         top: 1px;
+        box-sizing: border-box;
       }
     }
     &-indeterminate {
@@ -247,18 +253,13 @@
   }
   &-icon {
     &-loading {
-      &:after {
-        width: 8px;
-        height: 8px;
-        content: '';
-        overflow: hidden;
+      .loading {
+        font-size: 12px;
         display: inline-block;
-        border-radius: 4px;
-        border: 1px solid #d9d9d9;
+        animation:circle 1s infinite both;
       }
     }
   }
-
   &-content {
     margin-left: 5px;
     display: inline-block;
@@ -269,10 +270,10 @@
     height: @tree-switcher-height;
     cursor: pointer;
     &:hover {
-      background-color: @primary-color;
+      background-color: @tree-hover-bgColor;
     }
     &.selected {
-      background-color: @primary-color;
+      background-color: @tree-hover-bgColor;
     }
     &.draggable {
       width: calc(100% - (@tree-switcher-width + 15px));
@@ -281,4 +282,9 @@
   &-child {
     padding-left: @tree-switcher-width;
   }
+}
+
+@keyframes circle {
+  0% {transform: rotate(0deg)}
+  100% {transform: rotate(360deg)}
 }

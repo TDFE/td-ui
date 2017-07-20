@@ -1,6 +1,7 @@
 @import '../../style/themes/default';
 @prefixCls: ~'@{select-prefix}';
 .@{prefixCls} {
+  box-sizing: border-box;
   color: @select-color;
   font-size: @select-font-size;
   &-open &-selection, &-focused &-selection, &-selection:active, &-selection:focus {
@@ -11,6 +12,22 @@
   &-oepn &-arrow {
     &:after {
       transform: rotate(135deg);
+    }
+  }
+  &-disabled {
+    color: @disabled-color;
+    background-color: @disabled-bg;
+    cursor: not-allowed;
+    .@{prefixCls}-selection {
+      cursor: not-allowed;
+      &:active, &:focus {
+        border-color: #d9d9d9;
+        outline: 0;
+        box-shadow: none;
+      }
+    }
+    .@{prefixCls}-search-field {
+      cursor: not-allowed;
     }
   }
   &-selection {
