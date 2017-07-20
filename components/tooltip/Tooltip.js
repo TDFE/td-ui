@@ -106,7 +106,7 @@ export default class Tooltip extends React.Component {
   }
 
   getToolTipPos (width, height) {
-    const targetBound = this.refs.base.getBoundingClientRect();
+    const targetBound = this.refs.baseCom.getBoundingClientRect();
     const placementBacks = ['top', 'bottom', 'right', 'left'];
     const tooltipPos = {left: 0, top: 0};
     let placement = placements[this.props.placement],
@@ -132,7 +132,7 @@ export default class Tooltip extends React.Component {
 
   render() {
     const {prefixCls, content, title, trigger, overlayStyle, overlayClassName, visible} = this.props;
-    const mouseProps = {ref: 'base'};
+    const mouseProps = {};
     if (trigger.indexOf('hover') !== -1) {
       mouseProps.onMouseEnter = this.onPopupMouseEnter;
       mouseProps.onMouseLeave = this.onPopupMouseLeave;
@@ -142,12 +142,12 @@ export default class Tooltip extends React.Component {
     }
     const child = React.cloneElement(this.props.children);
     return <div style={overlayStyle} className={prefixCls + '-root ' + overlayClassName}>
-      <div {...mouseProps}>{child}</div>
+      <div {...mouseProps} ref="baseCom">{child}</div>
       {visible || this.state.popVisible ? (
         <Popup
           ref="popup"
           getToolTipPos={this.getToolTipPos}
-          content={content}
+          content={content || title}
           title={title}
           placement={this.state.adjustedPlacement}
           prefixCls={prefixCls}
