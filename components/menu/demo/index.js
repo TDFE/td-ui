@@ -123,7 +123,7 @@ class Demo extends React.Component {
       <Menu
         style={{ width: 240, position: 'absolute', left: 300, top: 200, border: '1px solid #eee' }}
         mode="vertical"
-      s>
+      >
         <SubMenu title={<span><Icon type="search" /><span>Navigation One</span></span>}>
           <ItemGroup title="Item 1">
             <Menu.Item>Option 1</Menu.Item>

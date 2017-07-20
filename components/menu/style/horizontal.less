@@ -2,6 +2,15 @@
 
 .@{menu-prefix}-horizontal {
   border-bottom: 1px solid #e9e9e9;
+  zoom:1;
+  &:after{
+    clear: both;
+    content: " ";
+    display: block;
+    font-size: 0;
+    height: 0;
+    visibility: hidden;
+  }
   &>.@{menu-prefix}{
     &-item, &-submenu{
       float: left;
