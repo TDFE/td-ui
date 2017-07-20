@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import cn from 'classnames';
 import assign from 'object-assign';
 import { browser } from './util';
+import Icon from '../icon';
 const browserUa = typeof window !== 'undefined' ? browser(window.navigator) : '';
 const ieOrEdge = /.*(IE|Edge).+/.test(browserUa);
 
@@ -196,7 +197,9 @@ class TreeNode extends Component {
       }
     }
     const selectHandle = () => {
-      const icon = (props.showIcon || (props.loadData && dataLoading)) ? <span className={cn(iconEleCls)}></span> : '';
+      const icon = (props.showIcon || (props.loadData && dataLoading)) ? <span className={cn(iconEleCls)}>{
+        dataLoading ? <span className='loading'><Icon type='loading' /></span> : null
+      }</span> : null;
       const content = <span className={`${prefixCls}-title`}>{title}</span>;
       return (
         <span {...domProps} ref='selectHandle' title={typeof title === 'string' ? title : ''}>
