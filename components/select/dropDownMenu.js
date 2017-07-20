@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, cloneElement } from 'react';
 import { findDOMNode } from 'react-dom';
 import Menu from '../menu';
 import scrollIntoView from 'dom-scroll-into-view';
@@ -28,7 +28,6 @@ export default class DropdownMenu extends Component {
   componentDidUpdate(prevProps) {
     const props = this.props;
     if (!prevProps.visible && props.visible) {
-      console.log(1);
       this.scrollActiveItemtoView();
     }
     this.lastVisible = props.visible;

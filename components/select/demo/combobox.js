@@ -1,3 +1,4 @@
+/* eslint-disable  */
 import React from 'react';
 import Select from '../index';
 import jsonp from 'fetch-jsonp';
@@ -42,16 +43,17 @@ function fetch(value, callback) {
 export default class Combobox extends React.Component {
   state = {
     data: [],
-    value: ''
+    value: undefined
   }
   handleChange = (value) => {
     this.setState({ value });
+    console.log(value);
     fetch(value, data => this.setState({ data }));
   }
   render() {
     const options = this.state.data.map(d => <Option value={d.value} key={d.value}>{d.text}</Option>);
     return (
-      <Select mode="combobox" showSearch showArrow={false} value={this.state.value} placeholder='请输入' style={{ width: 120 }} size='small' onChange={this.handleChange}>
+      <Select mode="combobox" showSearch showArrow={false} value={this.state.value} placeholder='请输入' style={{ width: 120 }} onChange={this.handleChange}>
          {options}
       </Select>
     )
