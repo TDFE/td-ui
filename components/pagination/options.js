@@ -8,7 +8,7 @@ class Options extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: props.pageSize
+      value: props.pageSize.toString()
     }
   }
   onChange = value => {
