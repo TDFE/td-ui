@@ -48,7 +48,7 @@
         height:100%;
         width: 1px;
         overflow: hidden;
-        background-color: #d9d9d9;
+        background-color: @tree-line-color;
         left: @tree-switcher-width / 2;
         top: 20px;
         position: absolute;
@@ -62,7 +62,7 @@
           height:100%;
           width: 1px;
           overflow: hidden;
-          background-color: #d9d9d9;
+          background-color: @tree-line-color;
           left: @tree-switcher-width / 2;
           top: 16px;
           position: absolute;
@@ -101,7 +101,7 @@
       }
       &-open {
         &:after {
-          border-color: #000 transparent transparent transparent;
+          border-color: @tree-switcher-color transparent transparent transparent;
           margin-left: -3px;
           margin-top: -2px;
         }
@@ -113,7 +113,7 @@
       }
       &-close {
         &:after {
-          border-color: transparent transparent transparent #000;
+          border-color: transparent transparent transparent @tree-switcher-color;
           margin-left: -1.5px;
           margin-top: -4px;
         }
@@ -139,13 +139,13 @@
             content: '';
             width: 12px;
             height: 12px;
-            border: 1px solid #ccc;
+            border: 1px solid @tree-line-color;
             display: inline-block;
             vertical-align: middle;
             text-align: center;
             line-height: 10px;
             font-size: 12px;
-            color: #ccc;
+            color: @tree-line-color;
             background-color: #fff;
             z-index: 2;
           }
@@ -162,23 +162,10 @@
         }
       }
       &-child {
-        &:after {
-          content: '';
-          display: inline-block;
+        .copy {
           vertical-align: middle;
-          width: 12px;
-          height: 12px;
-          background-color: #ccc;
+          font-size: @tree-line-no-child-size;
         }
-        &:before {
-          content: '';
-          position: absolute;
-        }
-      }
-    }
-    &-disabled {
-      &:after {
-
       }
     }
   }
@@ -187,7 +174,7 @@
     width: @tree-checkbox-width;
     height: @tree-checkbox-height;
     cursor: pointer;
-    border: 1px solid #d9d9d9;
+    border: 1px solid @tree-line-color;
     box-sizing: border-box;
     border-radius: 2px;
     background-color: #fff;

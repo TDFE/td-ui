@@ -21,7 +21,7 @@ class Demo extends React.Component {
   render() {
     return (
       <div>
-        <Upload accept='xls' note='abcdabcdabcd' fileList={this.state.fileList} onChange={this.handleChange}/>
+        <Upload multiple note='abcdabcdabcd' fileList={this.state.fileList} onChange={this.handleChange}/>
         <div onClick={this.handleClick}>点击获得fileList</div>
       </div>
     )

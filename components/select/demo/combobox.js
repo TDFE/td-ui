@@ -47,7 +47,6 @@ export default class Combobox extends React.Component {
   }
   handleChange = (value) => {
     this.setState({ value });
-    console.log(value);
     fetch(value, data => this.setState({ data }));
   }
   render() {
