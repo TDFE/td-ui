@@ -11,6 +11,8 @@ import cn from 'classnames';
 import omit from 'lodash/omit';
 import assign from 'object-assign';
 import s from './style';
+import Icon from '../icon';
+
 
 export default class InputNumber extends Component {
   static defaultProps = {
@@ -151,7 +153,7 @@ export default class InputNumber extends Component {
 
   renderInputNumber(children) {
     const props = this.props;
-    const { prefixCls, disabled, focused } = props;
+    const { prefixCls, disabled, focused, icon } = props;
     const classes = cn({
       [prefixCls]: true,
       [props.className]: !!props.className,
@@ -192,14 +194,14 @@ export default class InputNumber extends Component {
             className={`${prefixCls}-handler ${prefixCls}-handler-up ${upDisabledClass}`}
             onClick={(editable && !upDisabledClass) ? this.upfunc.bind(this) : ''}
           >
-            +
+            <Icon type='packup' /> 
           </button>
           <button
             disabled={isDownDisabled}
             className={`${prefixCls}-handler ${prefixCls}-handler-down ${downDisabledClass}`}
             onClick={(editable && !downDisabledClass) ? this.downfunc.bind(this) : ''}
           >
-           -
+           <Icon type='unfold' /> 
           </button>
         </div>
         {children}
