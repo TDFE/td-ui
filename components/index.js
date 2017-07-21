@@ -53,7 +53,7 @@ export { default as Loading } from './loading';
 
 export { default as Menu } from './menu';
 
-export { default as Message } from './message';
+export { default as message } from './message';
 
 export { default as Pagination } from './pagination';
 
@@ -74,6 +74,8 @@ export { default as Switch } from './switch';
 export { default as Table } from './table';
 
 export { default as Tabs } from './tabs';
+
+export { default as Tag } from './tag';
 
 export { default as TimePicker } from './time-picker';
 
