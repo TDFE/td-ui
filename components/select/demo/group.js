@@ -14,7 +14,7 @@ export default class Group extends React.Component {
   }
   render() {
     return (
-      <Select placeholder='请选择' style={{ width: 200 }} showSearch value={this.state.value} onChange={this.onChange}>
+      <Select placeholder='请选择' style={{ width: 200 }} value={this.state.value} onChange={this.onChange}>
          <OptGroup label="Manager">
            <Option value="jack">Jack</Option>
            <Option value="lucy">Lucy</Option>
