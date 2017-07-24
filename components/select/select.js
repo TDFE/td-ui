@@ -295,6 +295,9 @@ export default class Select extends Component {
     this.setState({
       open: true
     });
+    if (this.props.showSearch) {
+      this.refs.input.focus();
+    }
   }
 
   getPlaceholderElement() {
@@ -327,7 +330,7 @@ export default class Select extends Component {
     let { inputValue } = this.state;
     return (
       <div className={`${prefixCls}-search-field-wrap`}>
-        <input className={`${prefixCls}-search-field`} value={inputValue || ''} onChange={this.onInputChange} disabled={this.props.disabled} onFocus={this.onInputFocus}/>
+        <input className={`${prefixCls}-search-field`} ref='input' value={inputValue || ''} onChange={this.onInputChange} disabled={this.props.disabled} onFocus={this.onInputFocus}/>
       </div>
     )
   }
@@ -385,7 +388,14 @@ export default class Select extends Component {
 
   onMenuSelect = (selectedKeys) => {
     const multiple = this.props.mode === 'multiple';
-    if (!multiple && !selectedKeys.length) return;
+    if (!multiple && !selectedKeys.length) {
+      this.setState({
+        open: false,
+        value: this.state.value,
+        inputValue: this.props.showSearch ? this.state.value[0].label : ''
+      })
+      return;
+    };
     let value = this.addLabelToValue(this.props, selectedKeys);
 
     this.setState({
