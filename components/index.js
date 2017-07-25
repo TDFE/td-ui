@@ -67,6 +67,8 @@ export { default as Rate } from './rate';
 
 export { default as Select } from './select';
 
+export { default as Slider } from './slider';
+
 export { default as Steps } from './steps';
 
 export { default as Switch } from './switch';
