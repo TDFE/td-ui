@@ -204,15 +204,16 @@ class Cascader extends Component {
   }
 
   componentWillUnmount() {
-    document.body.removeEventListener('click');
+    document.body.removeEventListener('click', this._handler);
   }
 
   componentDidMount () {
     this.handleComponentUpdate(this.props, true);
-    document.body.addEventListener('click', e => {
+    this._handler = e => {
       if (e.target && (e.target.matches('li.td-cascader-menu-item') || e.target.matches('div.picker-label'))) return;
       this.setState({menuOpen: false});
-    });
+    };
+    document.body.addEventListener('click', this._handler);
   }
 }
 
