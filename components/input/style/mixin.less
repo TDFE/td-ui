@@ -39,7 +39,7 @@
 	position: relative;
 	display: inline-block;
 	padding:0 @input-padding-horizontal;
-	width: @input-width-base;
+	width: 100%;
 	height: @input-height-base;
 	cursor: text;
 	font-size: @font-size-base;
@@ -143,7 +143,7 @@
 .input-affix-wrapper(@inputClass) {
   position: relative;
   display: inline-block;
-  width: 100%;
+  width: auto;
 
   .@{inputClass} {
     z-index: 1;
@@ -182,10 +182,10 @@
   }
 
   .@{inputClass}:not(:first-child) {
-    padding-left: @input-padding-horizontal + @input-affix-width;
+    padding-left: @input-padding-horizontal + 20px;
   }
 
   .@{inputClass}:not(:last-child) {
-    padding-right: @input-padding-horizontal + @input-affix-width;
+    padding-right: @input-padding-horizontal + 20px;
   }
 }

@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import cn from 'classnames';
 import assign from 'object-assign';
+import Icon from '../icon';
 import { browser } from './util';
 const browserUa = typeof window !== 'undefined' ? browser(window.navigator) : '';
 const ieOrEdge = /.*(IE|Edge).+/.test(browserUa);
@@ -109,7 +110,11 @@ class TreeNode extends Component {
       switcherCls[`${prefixCls}-switcher-disabled`] = true;
       return <span className={cn(switcherCls)}></span>;
     }
-    return <span className={cn(switcherCls)} onClick={this.onExpand}></span>;
+    return <span className={cn(switcherCls)} onClick={this.onExpand}>
+      {
+        props.showLine && !props.children ? <Icon type='copy' className='copy' /> : null
+      }
+    </span>;
   }
   renderNoopSwitcher(props) {
     const prefixCls = props.prefixCls;
@@ -156,7 +161,6 @@ class TreeNode extends Component {
         </ul> : null;
       }
     }
-
     return newChildren;
   }
   render() {
@@ -196,7 +200,9 @@ class TreeNode extends Component {
       }
     }
     const selectHandle = () => {
-      const icon = (props.showIcon || (props.loadData && dataLoading)) ? <span className={cn(iconEleCls)}></span> : '';
+      const icon = (props.showIcon || (props.loadData && dataLoading)) ? <span className={cn(iconEleCls)}>{
+        dataLoading ? <span className='loading'><Icon type='loading' /></span> : null
+      }</span> : '';
       const content = <span className={`${prefixCls}-title`}>{title}</span>;
       return (
         <span {...domProps} ref='selectHandle' title={typeof title === 'string' ? title : ''}>

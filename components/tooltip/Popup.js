@@ -49,6 +49,7 @@ export default class Popup extends React.Component {
         action={props.action}
         content={props.content}
         title={props.title}
+        placement={props.placement}
         {...mouseProps}
       >
       </PopupInner>

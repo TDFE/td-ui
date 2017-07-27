@@ -7,26 +7,27 @@ import cn from 'classnames';
 
 export default class PopupInner extends React.Component {
   static defaultProps = {
-    // prefixCls: s.timelinePrefix,
     title: ''
   };
 
   static propTypes = {
     prefixCls: PropTypes.string,
-    content: React.PropTypes.node.isRequired,
+    content: PropTypes.node.isRequired,
     className: PropTypes.string,
-    title: React.PropTypes.node
+    title: PropTypes.node
   }
 
   render() {
-    const {prefixCls, className, content, title, ...restProps} = this.props;
+    const {prefixCls, className, content, title, placement, ...restProps} = this.props;
 
     const popClassName = cn({
-      [`${prefixCls}-popup`]: true
+      [`${prefixCls}-popup`]: true,
+      [`${prefixCls}-placement-${placement}`]: true
     }, className);
 
     return (
       <div {...restProps} className={popClassName}>
+        <div className={`${prefixCls}-arrow`} key="arrow"> </div>
         {title ? <div className={`${prefixCls}-popup-title`}>{title}</div> : ''}
         <div className={`${prefixCls}-popup-content`}>{content}</div>
       </div>

@@ -232,10 +232,10 @@ export default class FormItem extends React.Component {
     const children = React.Children.map(this.props.children, child => {
       if (child && typeof child.type === 'function' && !child.props.size) {
         if (child.type.name === 'FormControl') {
-          return child.type(Object.assign({}, child.props, { size: 'large', form: this.context.form }));
+          return child.type(Object.assign({}, child.props, { size: 'default', form: this.context.form }));
         }
 
-        return React.cloneElement(child, { size: 'large' });
+        return React.cloneElement(child, { size: 'default' });
       }
       if (child && child.type.name === 'FormControl') {
         return child.type(Object.assign({}, child.props, { form: this.context.form }));

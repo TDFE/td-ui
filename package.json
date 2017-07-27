@@ -1,6 +1,6 @@
 {
   "name": "td-ui",
-  "version": "0.0.2",
+  "version": "1.0.2",
   "repository": {
     "type": "git",
     "url": "https://github.com/TDFE/td-ui.git"
@@ -66,7 +66,7 @@
     "rimraf": "^2.6.1",
     "rucksack-css": "^0.9.1",
     "shelljs": "^0.7.7",
-    "tdtool": "^0.0.9",
+    "tdtool": "^0.1.0",
     "tdtool-less": "^0.0.7",
     "tdtool-react": "^0.1.1",
     "through2": "^2.0.3",
@@ -85,8 +85,9 @@
     "moment": "^2.18.1",
     "prop-types": "^15.5.10",
     "rc-animate": "^2.3.6",
+    "rc-menu": "^5.0.10",
     "rc-trigger": "^1.11.2",
-    "react": "^15.5.4",
+    "react": "^15.6.1",
     "react-dom": "^15.5.4",
     "shallowequal": "^1.0.1",
     "warning": "^3.0.0"

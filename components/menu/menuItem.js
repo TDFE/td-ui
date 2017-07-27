@@ -17,9 +17,19 @@ export default class MenuItem extends React.Component {
   }
 
   itemClick = e => {
-    e.nativeEvent.stopImmediatePropagation()
+    e.nativeEvent.stopImmediatePropagation();
     const { eventKey } = this.props;
-    this.props.onSelect([eventKey]);
+    const { selectedKeys, multiple } = this.props;
+    let backSelected = [].concat(selectedKeys);
+    const index = selectedKeys.indexOf(eventKey);
+    if (index >= 0) {
+      backSelected.splice(index, 1);
+    } else if (multiple) {
+      backSelected = backSelected.concat([eventKey]);
+    } else {
+      backSelected = [eventKey]
+    }
+    this.props.onSelect(backSelected);
   }
 
   render() {

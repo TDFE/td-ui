@@ -1,0 +1,96 @@
+@import "../../style/themes/default";
+@import "../../style/mixins/index";
+.wrapper {
+  display: inline-block;
+}
+.@{tag-prefix} {
+  display: inline-block;
+  line-height: 20px;
+  height: 22px;
+  padding: 0 8px;
+  border-radius: @border-radius-base;
+  background: #f7f7f7;
+  color: #666;
+  font-size: @font-size-base;
+  transition: all 0.3s @ease-in-out-circ;
+  opacity: 1;
+  margin-right: 8px;
+  cursor: pointer;
+  white-space: nowrap;
+
+  &:hover {
+    opacity: 0.85;
+  }
+  &,
+  a,
+  a:hover {
+    color: @text-color;
+  }
+  &-text {
+    a:first-child:last-child{
+      display: inline-block;
+      margin: 0 -8px;
+      padding: 0 8px;
+    }
+  }
+
+  .@{icon-prefix}-cross {
+    .iconfont-size-under-12px(10px);
+    cursor: pointer;
+    font-weight: bold;
+    margin-left: 3px;
+    transition: all 0.3s ease;
+    opacity: 0.66;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+  &-has-color {
+    border-color: transparent;
+    &,
+    a,
+    a:hover,
+    @{icon-prefix}-cross,
+    @{icon-prefix}-cross:hover {
+      color: #fff;
+    }
+  }
+  //checkable
+  &-checkable {
+    background-color: transparent;
+    border-color: transparent;
+    &:hover,
+    &:active,
+    &-checked {
+      color:#fff;
+    }
+    &:hover {
+        background-color: @primary-5;
+    }
+    &-checked {
+      background-color: @primary-6;
+    }
+    &:active {
+      background-color: @primary-7;
+    }
+  }
+  @colors: pink, red, yellow, cyan, green, blue, purple;
+  .make-color-classes(@i: length(@colors)) when (@i > 0) {
+    .make-color-classes(@i - 1);
+    @color: extract(@colors, @i);
+    @lightColor: "@{color}-2";
+    @darkColor: "@{color}-6";
+    &-@{color} {
+      color: @@darkColor;
+      background: @@lightColor;
+      border-color: @@lightColor;
+    }
+    &-@{color}-inverse {
+      background: @@darkColor;
+      border-color: @@darkColor;
+      color: #fff;
+    }
+  }
+  .make-color-classes();
+}

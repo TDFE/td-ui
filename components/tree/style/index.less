@@ -1,6 +1,7 @@
 @import '../../style/themes/default';
 @prefixCls: ~"@{tree-prefix}";
 .@{prefixCls} {
+  box-sizing: border-box;
   padding: 0;
   margin: 0;
   li{
@@ -15,7 +16,7 @@
       padding-left: @tree-switcher-width / 3 * 2;
     }
     &.drag-over > .@{prefixCls}-content {
-      background-color: yellow;
+      background-color: @tree-drag-color;
     }
     &.drag-over-gap-top > .@{prefixCls}-content, &.drag-over-gap-bottom > .@{prefixCls}-content  {
       position: relative;
@@ -25,7 +26,7 @@
         height: 2px;
         position: absolute;
         left: 0;
-        background-color: yellow;
+        background-color: @tree-drag-color;
       }
     }
     &.drag-over-gap-top > .@{prefixCls}-content {
@@ -47,7 +48,7 @@
         height:100%;
         width: 1px;
         overflow: hidden;
-        background-color: #d9d9d9;
+        background-color: @tree-line-color;
         left: @tree-switcher-width / 2;
         top: 20px;
         position: absolute;
@@ -61,9 +62,9 @@
           height:100%;
           width: 1px;
           overflow: hidden;
-          background-color: #d9d9d9;
+          background-color: @tree-line-color;
           left: @tree-switcher-width / 2;
-          top: 20px;
+          top: 16px;
           position: absolute;
         }
       }
@@ -100,7 +101,7 @@
       }
       &-open {
         &:after {
-          border-color: #000 transparent transparent transparent;
+          border-color: @tree-switcher-color transparent transparent transparent;
           margin-left: -3px;
           margin-top: -2px;
         }
@@ -112,7 +113,7 @@
       }
       &-close {
         &:after {
-          border-color: transparent transparent transparent #000;
+          border-color: transparent transparent transparent @tree-switcher-color;
           margin-left: -1.5px;
           margin-top: -4px;
         }
@@ -136,15 +137,15 @@
           cursor: pointer;
           &:after {
             content: '';
-            width: 10px;
-            height: 10px;
-            border: 1px solid #ccc;
+            width: 12px;
+            height: 12px;
+            border: 1px solid @tree-line-color;
             display: inline-block;
             vertical-align: middle;
             text-align: center;
             line-height: 10px;
             font-size: 12px;
-            color: #ccc;
+            color: @tree-line-color;
             background-color: #fff;
             z-index: 2;
           }
@@ -161,19 +162,10 @@
         }
       }
       &-child {
-        &:after {
-          content: '';
-          display: inline-block;
+        .copy {
           vertical-align: middle;
-          width: 12px;
-          height: 12px;
-          background-color: #ccc;
+          font-size: @tree-line-no-child-size;
         }
-      }
-    }
-    &-disabled {
-      &:after {
-
       }
     }
   }
@@ -182,7 +174,7 @@
     width: @tree-checkbox-width;
     height: @tree-checkbox-height;
     cursor: pointer;
-    border: 1px solid #d9d9d9;
+    border: 1px solid @tree-line-color;
     box-sizing: border-box;
     border-radius: 2px;
     background-color: #fff;
@@ -205,12 +197,13 @@
     }
     &-checked {
       &:after {
-        width: 3px;
-        height: 6px;
+        width: 5px;
+        height: 8px;
         border-width:0 2px 2px 0;
         transform: rotate(45deg);
         left: 4px;
         top: 1px;
+        box-sizing: border-box;
       }
     }
     &-indeterminate {
@@ -247,18 +240,13 @@
   }
   &-icon {
     &-loading {
-      &:after {
-        width: 8px;
-        height: 8px;
-        content: '';
-        overflow: hidden;
+      .loading {
+        font-size: 12px;
         display: inline-block;
-        border-radius: 4px;
-        border: 1px solid #d9d9d9;
+        animation:circle 1s infinite both;
       }
     }
   }
-
   &-content {
     margin-left: 5px;
     display: inline-block;
@@ -269,10 +257,10 @@
     height: @tree-switcher-height;
     cursor: pointer;
     &:hover {
-      background-color: @primary-color;
+      background-color: @tree-hover-bgColor;
     }
     &.selected {
-      background-color: @primary-color;
+      background-color: @tree-hover-bgColor;
     }
     &.draggable {
       width: calc(100% - (@tree-switcher-width + 15px));
@@ -281,4 +269,9 @@
   &-child {
     padding-left: @tree-switcher-width;
   }
+}
+
+@keyframes circle {
+  0% {transform: rotate(0deg)}
+  100% {transform: rotate(360deg)}
 }

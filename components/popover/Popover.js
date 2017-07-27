@@ -6,7 +6,7 @@ import assign from 'object-assign';
 import Tooltip from '../tooltip';
 import s from './style';
 
-export default class Popover extends React.Component<PopoverProps, any> {
+export default class Popover extends React.Component {
   static defaultProps = {
     prefixCls: s.tooltipPrefix,
     placement: 'top'

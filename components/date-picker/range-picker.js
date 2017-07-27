@@ -178,6 +178,7 @@ export default class RangePicker extends React.Component {
           onChange={this.handleChange}
           open={open}
           onOpenChange={this.handleOpenChange}
+          disabled={disabled}
         >
           {input}
         </Picker>

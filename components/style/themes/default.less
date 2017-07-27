@@ -29,6 +29,7 @@
 @layout-prefix                : ~"@{td-prefix}-layout";
 @tabs-prefix                  : ~"@{td-prefix}-tabs";
 @progress-prefix              : ~"@{td-prefix}-progress";
+@tag-prefix                   : ~"@{td-prefix}-tag";
 @form-prefix                  : ~"@{td-prefix}-form";
 @tooltip-prefix               : ~"@{td-prefix}-tooltip";
 @steps-prefix                 : ~"@{td-prefix}-steps";
@@ -67,6 +68,7 @@
   layoutPrefix: @layout-prefix;
   tabsPrefix: @tabs-prefix;
   progressPrefix: @progress-prefix;
+  tagPrefix: @tag-prefix;
   formPrefix: @form-prefix;
   tooltipPrefix: @tooltip-prefix;
   stepsPrefix: @steps-prefix;
@@ -351,9 +353,11 @@
 @tooltip-arrow-width: 5px;
 //** Tooltip distance with trigger
 @tooltip-distance: @tooltip-arrow-width - 1 + 4;
+@tooltip-arrow-outer-width: (@tooltip-arrow-width + 1);
 //** Tooltip arrow color
 @tooltip-arrow-color: @tooltip-bg;
 @tooltip-title-bg: @background-color-base;
+@tooltip-arrow-outer-color: fadeout(@border-color-base, 30%);
 @box-shadow-base : 0 -1px 6px @shadow-color;
 
 //Tree
@@ -364,6 +368,11 @@
 @tree-checkbox-color              : @primary-5;
 @tree-checkbox-disabled-color     : @disabled-color;
 @tree-checkbox-disabled-bg        : @disabled-bg;
+@tree-hover-bgColor               : @primary-1;
+@tree-drag-color                  : @primary-5;
+@tree-line-no-child-size          : @font-size-sm;
+@tree-line-color                  : #ccc;
+@tree-switcher-color              : #000;
 
 //Select
 @select-height-base               : 26px;
@@ -375,6 +384,8 @@
 @select-font-size                 : @font-size-sm;
 @select-item-hover-color          : #ecf6fd;
 @select-item-selected-color       : rgba(0,0,0,.65);
+@select-disabled-color            : @disabled-color;
+@select-disabled-color-bg         : @disabled-bg;
 
 //Upload
 @upload-height                    : 28px;
@@ -391,3 +402,6 @@
 @step-blue:        @blue-5;
 @step-gray:        #ccc;
 @step-black:        #999;
+
+// menu
+@menu-text-color:        rgba(0,0,0,.65);

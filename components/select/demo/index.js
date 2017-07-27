@@ -1,7 +1,3 @@
-/**
- * Created by Session on 17/5/31.
- */
-/* eslint-disable  */
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Basic from './basic';
@@ -13,12 +9,12 @@ let render = () => {
   function Demo() {
     return (
       <div className="td">
-        {/* <Basic />
+        <Basic />
         <p>我是分隔线我是分隔线我是分隔线我是分隔线我是分隔线</p>
         <ShowSearch />
         <p>我是分隔线我是分隔线我是分隔线我是分隔线我是分隔线</p>
         <Group />
-        <p>我是分隔线我是分隔线我是分隔线我是分隔线我是分隔线</p> */}
+        <p>我是分隔线我是分隔线我是分隔线我是分隔线我是分隔线</p>
         <Combobox />
       </div>
     );
@@ -28,16 +24,16 @@ let render = () => {
 };
 
 try {
-    render();
+  render();
 } catch (e) {
-    console.log(e);
+  console.log(e);
 }
 
 if (module.hot) {
-    module.hot.accept(['../index'], () => {
-        setTimeout(() => {
-            ReactDOM.unmountComponentAtNode(MOUNT_NODE);
-            render();
-        })
+  module.hot.accept(['../index'], () => {
+    setTimeout(() => {
+      ReactDOM.unmountComponentAtNode(MOUNT_NODE);
+      render();
     })
+  })
 }

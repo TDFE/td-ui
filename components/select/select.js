@@ -1,11 +1,10 @@
-
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import cn from 'classnames';
 import s from './style';
-import classes from 'component-classes';
 import SelectTrigger from './selectTrigger';
 import { MenuItem, ItemGroup } from '../menu';
+import { toArray } from './util';
 
 const prefixCls = s.selectPrefix;
 
@@ -15,8 +14,6 @@ const UNSELECTABLE_STYLE = {
   userSelect: 'none',
   WebkitUserSelect: 'none'
 }
-// 暂不考虑mode的情况
-// 考虑mode='combobox'的情况
 export default class Select extends Component {
   static defaultProps = {
     showArrow: true,
@@ -30,9 +27,8 @@ export default class Select extends Component {
     onSearch: noop,
     prefixCls: prefixCls,
     onFocus: noop,
-    filterOption: true,
     onChange: noop,
-    defaultValue: ''
+    defaultValue: undefined
   }
 
   static PropTypes = {
@@ -40,7 +36,9 @@ export default class Select extends Component {
     defaultValue: PropTypes.string,
     onChange: PropTypes.func,
     showSearch: PropTypes.bool,
-    prefixCls: PropTypes.string
+    prefixCls: PropTypes.string,
+    open: PropTypes.bool,
+    filterOption: PropTypes.func
   }
 
   constructor(props) {
@@ -51,63 +49,73 @@ export default class Select extends Component {
     }
     let value = [];
     if ('value' in props) {
-      value = props.value;
+      value = toArray(props.value);
     } else {
-      value = props.defaultValue;
+      value = toArray(props.defaultValue);
     }
+    value = this.addLabelToValue(props, value);
     let inputValue = '';
-    let labelValue = {...this.addLabelValue(value, props)};
-    let selectedKeys = [labelValue.value + ''];
-    if (labelValue.value && props.showSearch) {
-      inputValue = labelValue.label
+    let selectedKeys = value.map(v => v.value);
+    let combobox = props.mode === 'combobox';
+    if (props.showSearch && value.length) {
+      inputValue = value[0].label;
+    }
+    if (combobox) {
+      inputValue = props.value;
     }
     this.state = {
       open,
       inputValue,
-      labelValue,
-      selectedKeys
+      selectedKeys,
+      value
     }
     this.addBodyClickEvent();
   }
-
-  addLabelValue = (value, props) => {
-    let label = value + '';
-    let _value = value + '';
-    const loop = children => {
-      let count = 0;
-      React.Children.forEach(children, child => {
-        if (child.props.isSelectOptGroup) {
-          loop(child.props.children);
-        } else if (child.type.isSelectOption) {
-          let c = child.props.children;
-          if (c.constructor === Array) {
-            c = c.join('');
-          }
-          if (value + '' === child.props.value + '' || value + '' === c + '' && count === 0) {
-            count++;
-            label = c;
-            _value = child.props.value;
-          }
-        }
-      });
+  addLabelToValue = (props, value) => {
+    let _value = value;
+    if (!_value.length) return _value;
+    _value = _value.map(v => ({
+      value: v,
+      label: this.getLabelToProps(props.children, v)
+    }));
+    return _value;
+  }
+  getLabelToProps = (children, value) => {
+    if (value === undefined) {
+      return null;
     }
-    loop(props.children);
-    return {
-      label: label,
-      value: _value
-    };
+    let label = null;
+    React.Children.forEach(children, child => {
+      if (child.props.isSelectOptGroup && !label) {
+        const maybe = this.getLabelToProps(child.props.children, value);
+        if (maybe) {
+          label = maybe;
+        }
+      } else if (child.props.value === value && !label) {
+        let c = child.props.children;
+        if (c.constructor === Array) {
+          c = c.join('');
+        }
+        label = c;
+      }
+    })
+    return label;
   }
 
   componentWillReceiveProps(nextProps) {
     if ('value' in nextProps) {
-      let labelValue = {...this.addLabelValue(nextProps.value, nextProps)};
-      let selectedKeys = [labelValue.value + ''];
+      let value = this.addLabelToValue(nextProps, toArray(nextProps.value));
+      let selectedKeys = value.map(v => v.value);
       let inputValue = '';
-      if (labelValue.value && nextProps.showSearch) {
-        inputValue = labelValue.label
+      let combobox = nextProps.mode === 'combobox';
+      if (nextProps.showSearch && value.length) {
+        inputValue = value[0].label;
+      }
+      if (combobox) {
+        inputValue = nextProps.value;
       }
       this.setState({
-        labelValue,
+        value,
         selectedKeys,
         inputValue
       })
@@ -120,7 +128,7 @@ export default class Select extends Component {
 
   adjustOpenState = () => {
     let open = this.state.open;
-    let combobox = this.props.mode;
+    let combobox = this.props.mode === 'combobox';
     let options = [];
     if (open) {
       options = this.renderFilterOptions(this.props.children);
@@ -166,86 +174,82 @@ export default class Select extends Component {
         sel.push(<MenuItem value={childValue} key={childValue} {...child.props}/>);
       }
     });
-
     return sel;
   }
-
-  defaultFilterFn = () => {}
 
   filterOption = (inputValue, child) => {
     if (!inputValue) {
       return true;
     }
-    // let filterFn = this.props.filterOption;
+    if ('filterOption' in this.props) {
+      if (typeof filterFn === 'function') {
+        return filterFn.call(this, inputValue, child);
+      }
+    } else {
+      return this.defaultFilterFn(inputValue, child);
+    }
+    return true;
+  }
+
+  defaultFilterFn = (inputValue, child) => {
+    let combobox = this.props.mode === 'combobox';
     let c = child.props.children;
     if (c.constructor === Array) {
       c = c.join('');
     }
-    if (c.indexOf(inputValue) > -1 || child.props.value.indexOf(inputValue) > -1) {
-      return true;
-    }
-    // if ('filterOption' in this.props) {
-    //   if (this.props.filterOption === true) {
-    //     if (c.indexOf(inputValue) > -1 || child.props.value.indexOf(inputValue) > -1) {
-    //       return true;
-    //     }
-    //   };
-    // } else {
-    //   if (c.indexOf(inputValue) > -1 || child.props.value.indexOf(inputValue) > -1) {
-    //     return true;
-    //   }
-    // }
-    return false;
+    return c.indexOf(inputValue) > -1 || child.props.value.indexOf(inputValue) > -1 || combobox;
   }
-
-  onArrowClick = () => {}
 
   onInputChange = (e) => {
     e.stopPropagation();
     const value = e.target.value;
+    let combobox = this.props.mode === 'combobox';
     this.setState({
       open: true,
       inputValue: value
     }, () => {
-      if (!value) return;
-      let count = 0;
-      let selectedKeys = [];
-      let labelValue;
-      let oldLabelValue = {...this.state.labelValue};
-      let oldSelectedKeys = [...this.state.selectedKeys];
-      React.Children.forEach(this._options, child => {
-        if (child.type.displayName === 'MenuItem' && count === 0 && child.props.value !== 'NOT_FOUND') {
-          count++;
-          selectedKeys = [child.props.value];
-          labelValue = {
-            value: child.props.value,
-            label: child.props.children
-          }
-        } else if (child.type.displayName === 'ItemGroup' && count === 0) {
-          count++;
-          const c = child.props.children[0];
-          selectedKeys = [c.props.value];
-          labelValue = {
-            value: c.props.value,
-            label: c.props.children
-          }
-        }
-      });
-      this.setState({
-        selectedKeys: selectedKeys.length ? selectedKeys : oldSelectedKeys,
-        labelValue: labelValue || oldLabelValue
-      });
+      // if (!value) return;
+      // let count = 0;
+      // let selectedKeys = [];
+      // let labelValue;
+      // let oldLabelValue = {...this.state.labelValue};
+      // let oldSelectedKeys = [...this.state.selectedKeys];
+      // React.Children.forEach(this._options, child => {
+      //   if (child.type.displayName === 'MenuItem' && count === 0 && child.props.value !== 'NOT_FOUND') {
+      //     count++;
+      //     selectedKeys = [child.props.value];
+      //     labelValue = {
+      //       value: child.props.value,
+      //       label: child.props.children
+      //     }
+      //   } else if (child.type.displayName === 'ItemGroup' && count === 0) {
+      //     count++;
+      //     const c = child.props.children[0];
+      //     selectedKeys = [c.props.value];
+      //     labelValue = {
+      //       value: c.props.value,
+      //       label: c.props.children
+      //     }
+      //   }
+      // });
+      // this.setState({
+      //   selectedKeys: selectedKeys.length ? selectedKeys : oldSelectedKeys,
+      //   labelValue: labelValue || oldLabelValue
+      // });
     })
-    if ('mode' in this.props) {
-      if (this.props.mode) {
-        this.props.onChange(value);
-      }
+    // if ('mode' in this.props) {
+    //   if (this.props.mode) {
+    //     this.props.onChange(value);
+    //   }
+    // }
+    if (combobox) {
+      this.props.onChange(value);
     }
   }
 
   onInputFocus = e => {
     e.stopPropagation();
-    const combobox = this.props.mode;
+    const combobox = this.props.mode === 'combobox';
     if (!combobox) {
       this.setState({
         inputValue: ''
@@ -254,22 +258,23 @@ export default class Select extends Component {
   }
 
   addBodyClickEvent = () => {
+    let combobox = this.props.mode === 'combobox';
     if (!this.bodyEvent) {
       document.addEventListener('click', () => {
-        let { open, labelValue } = this.state;
+        let { open, value } = this.state;
         if (open) {
           this.setState({
             open: false
           });
-          if (this.props.showSearch) {
-            if (labelValue && labelValue.value) {
+          if (this.props.showSearch && !combobox) {
+            if (value.length) {
               this.setState({
-                inputValue: labelValue.label
-              });
+                inputValue: value[0].label
+              })
             } else {
               this.setState({
                 inputValue: ''
-              });
+              })
             }
           }
         }
@@ -290,24 +295,18 @@ export default class Select extends Component {
     this.setState({
       open: true
     });
-  }
-
-  updateFocusClassName = () => {
-    const { refs } = this;
-    if (this._focused) {
-      classes(refs.root).add(`${prefixCls}-focused`);
-    } else {
-      classes(refs.root).remove(`${prefixCls}-focused`);
+    if (this.props.showSearch) {
+      this.refs.input.focus();
     }
   }
 
   getPlaceholderElement() {
-    const { inputValue, labelValue } = this.state;
+    const { inputValue, value } = this.state;
     let hidden = false;
     if (inputValue) {
       hidden = true;
     }
-    if (labelValue && labelValue.value) {
+    if (value.length) {
       hidden = true;
     }
     const placeholder = this.props.placeholder;
@@ -331,19 +330,19 @@ export default class Select extends Component {
     let { inputValue } = this.state;
     return (
       <div className={`${prefixCls}-search-field-wrap`}>
-        <input className={`${prefixCls}-search-field`} value={inputValue} onChange={this.onInputChange} disabled={props.Disabled} onFocus={this.onInputFocus}/>
+        <input className={`${prefixCls}-search-field`} ref='input' value={inputValue || ''} onChange={this.onInputChange} disabled={this.props.disabled} onFocus={this.onInputFocus}/>
       </div>
     )
   }
 
   renderTopControlNode() {
-    const { open, inputValue, labelValue } = this.state;
+    const { open, inputValue, value } = this.state;
     const props = this.props;
     const { showSearch } = props;
     const className = `${prefixCls}-selection-rendered`;
     let innerNode = null;
     let selectedValue = null;
-    if (labelValue && labelValue.value) {
+    if (value.length) {
       let showSelectedValue = false;
       let opacity = 1;
       if (!showSearch) {
@@ -367,7 +366,7 @@ export default class Select extends Component {
           }}
         >
           {
-            labelValue.label
+            value[0].label
           }
         </div>
       )
@@ -387,38 +386,45 @@ export default class Select extends Component {
     )
   }
 
-  onPopupFocus = () => {
-    console.log(1);
-  }
-
   onMenuSelect = (selectedKeys) => {
-    const oldValue = this.state.labelValue.value;
-    const value = selectedKeys[0];
-    let labelValue = {...this.addLabelValue(value, this.props)};
-    this.setState({
-      labelValue,
-      selectedKeys
-    });
-    if (this.props.showSearch) {
+    const multiple = this.props.mode === 'multiple';
+    if (!multiple && !selectedKeys.length) {
       this.setState({
-        inputValue: labelValue.label
+        open: false,
+        value: this.state.value,
+        inputValue: this.props.showSearch ? this.state.value[0].label : ''
+      })
+      return;
+    };
+    let value = this.addLabelToValue(this.props, selectedKeys);
+
+    this.setState({
+      selectedKeys,
+      value
+    });
+    if (this.props.showSearch && !multiple) {
+      this.setState({
+        inputValue: value[0].label
       })
     }
-    if (value !== oldValue) {
-      this.props.onChange(value);
+    this.props.onChange(value.map(v => v.value).join(','));
+    if (!multiple) {
+      this.setState({
+        open: false
+      })
     }
-    if (this.menuItemTimer) {
-      clearTimeout(this.menuItemTimer);
-      this.menuItemTimer = null;
-    }
-    if (!this.menuItemTimer) {
-      this.menuItemTimer = setTimeout(() => {
-        this.setState({
-          open: false
-        });
-        this.updateFocusClassName();
-      }, 100);
-    }
+    // if (this.menuItemTimer) {
+    //   clearTimeout(this.menuItemTimer);
+    //   this.menuItemTimer = null;
+    // }
+    // if (!this.menuItemTimer) {
+    //   this.menuItemTimer = setTimeout(() => {
+    //     this.setState({
+    //       open: false
+    //     });
+    //     this.updateFocusClassName();
+    //   }, 100);
+    // }
   }
 
   render() {
@@ -426,6 +432,7 @@ export default class Select extends Component {
     const { open, inputValue, selectedKeys } = this.state;
     const { allowClear, disabled, className, style, showArrow, mode, size } = props;
     const combobox = mode === 'combobox';
+    const multiple = mode === 'multiple';
     const clear = (<span key='clear' className={`${prefixCls}-selection-clear`}></span>);
     const rootCls = {
       [`${prefixCls}-open`]: open,
@@ -452,11 +459,13 @@ export default class Select extends Component {
         prefixCls={prefixCls}
         onMenuSelect={this.onMenuSelect}
         selectedKeys={selectedKeys}
+        multiple={multiple}
+        disabled={disabled}
       >
         <div ref='root'
           style={style}
           className={cn(className, prefixCls, rootCls)}
-          onClick={this.onOuterClick}
+          onClick={disabled ? noop : this.onOuterClick}
         >
           <div ref='selection'
             className={cn(`${prefixCls}-selection`, {[`${prefixCls}-selection-sm`]: size === 'small', [`${prefixCls}-selection-lg`]: size === 'large'})}

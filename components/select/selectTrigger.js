@@ -34,6 +34,7 @@ export default class SelectTrigger extends Component {
         defaultActiveFirstOption={props.defaultActiveFirstOption}
         dropdownMenuStyle={props.dropdownMenuStyle}
         selectedKeys={props.selectedKeys}
+        multiple={props.multiple}
       />
     )
   }
@@ -55,8 +56,7 @@ export default class SelectTrigger extends Component {
   }
   render() {
     const props = this.props;
-    const { visible, inputValue, mode, options, onPopupFocus, dropdownClassName } = props;
-    const multiple = mode === 'multiple';
+    const { visible, inputValue, options, onPopupFocus, disabled, dropdownClassName, multiple } = props;
     const popupElement = this.getDropdownElement({
       multiple,
       inputValue,
@@ -69,6 +69,12 @@ export default class SelectTrigger extends Component {
       [dropdownClassName]: !!dropdownClassName,
       [`${dropdownPrefixCls}-${multiple ? 'multiple' : 'single'}`]: true
     }
+    let hideAction;
+    if (disabled) {
+      hideAction = [];
+    } else {
+      hideAction = ['click'];
+    }
     return (
       <Trigger ref='trigger'
         popupPlacement='bottomLeft'
@@ -78,6 +84,8 @@ export default class SelectTrigger extends Component {
         prefixCls={dropdownPrefixCls}
         popupClassName={cn(popupClassName)}
         builtinPlacements={BUILT_IN_PLACEMENTS}
+        showAction={disabled ? [] : ['click']}
+        hideAction={hideAction}
       >
         {props.children}
       </Trigger>

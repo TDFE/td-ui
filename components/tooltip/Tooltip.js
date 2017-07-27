@@ -12,8 +12,7 @@ export default class Tooltip extends React.Component {
     super(props);
     this.state = {
       popVisible: false,
-      tooltipLeft: 0,
-      tooltipTop: 0
+      adjustedPlacement: this.props.placement
     };
     this.getToolTipPos = this.getToolTipPos.bind(this);
   }
@@ -38,30 +37,58 @@ export default class Tooltip extends React.Component {
 
   static defaultProps = {
     prefixCls: s.tooltipPrefix,
-    mouseEnterDelay: 0,
+    mouseEnterDelay: 0.1,
     mouseLeaveDelay: 0.1,
     align: {},
     placement: 'right',
     trigger: ['hover'],
+    overlayClassName: '',
     arrowContent: null
   };
 
   onPopupMouseEnter = () => {
-    this.setState({popVisible: true, tooltipLeft: 100});
+    this.delaySetPopupVisible(true, this.props.mouseEnterDelay);
   }
 
   onPopupMouseLeave = () => {
-    this.setState({popVisible: false});
+    this.delaySetPopupVisible(false, this.props.mouseLeaveDelay);
   }
 
   onPopupMouseClick = (e) => {
-    this.setState({popVisible: true});
+    this.delaySetPopupVisible(true, this.props.mouseEnterDelay);
+  }
+
+  setPopVisible = (visible) => {
+    this.setState({popVisible: visible});
+    if (this.props.onVisibleChange) {
+      this.props.onVisibleChange(visible);
+    }
+  }
+
+  delaySetPopupVisible = (visible, delayS) => {
+    const delay = delayS * 1000;
+    this.clearDelayTimer();
+    if (delay) {
+      this.delayTimer = setTimeout(() => {
+        this.setPopVisible(visible);
+        this.clearDelayTimer();
+      }, delay);
+    } else {
+      this.setPopVisible(visible);
+    }
+  }
+
+  clearDelayTimer = () => {
+    if (this.delayTimer) {
+      clearTimeout(this.delayTimer);
+      this.delayTimer = null;
+    }
   }
 
   onDocumentClick = (event) => {
     const target = event.target;
     if (this.state.popVisible && !contains(this.props.prefixCls + '-popup', target)) {
-      this.setState({popVisible: false});
+      this.delaySetPopupVisible(false, this.props.mouseLeaveDelay);
       event.stopPropagation();
       event.preventDefault();
     }
@@ -74,29 +101,37 @@ export default class Tooltip extends React.Component {
   }
 
   componentWillUnmount() {
-    this.removeContainer();
     document.body.removeEventListener('click', this.onDocumentClick)
   }
 
   getToolTipPos (width, height) {
-    const targetBound = this.refs.base.getBoundingClientRect()
-    const placementBacks = [this.props.placement, 'top', 'bottom', 'right', 'left'];
+    const targetBound = this.refs.baseCom.getBoundingClientRect();
+    const placementBacks = ['top', 'bottom', 'right', 'left'];
     const tooltipPos = {left: 0, top: 0};
-    for (let i = 0, len = placementBacks.length; i < len; i++) {
-      let placement = placements[placementBacks[i]];
-      let result = placeTooltip(placement.posTop, placement.posLeft, width, height, targetBound);
-      if (isPlacementValid(result.left, result.top, width, height)) {
-        tooltipPos.left = result.left + placement.offset[0];
-        tooltipPos.top = result.top + placement.offset[1];
-        break;
+    let placement = placements[this.props.placement],
+      result = placeTooltip(placement.posTop, placement.posLeft, width, height, targetBound);
+    tooltipPos.left = result.left + placement.offset[0] + document.body.scrollLeft;
+    tooltipPos.top = result.top + placement.offset[1] + document.body.scrollTop;
+    if (this.props.autoAdjustOverflow) {
+      for (let i = 0, len = placementBacks.length; i < len; i++) {
+        placement = placements[placementBacks[i]];
+        result = placeTooltip(placement.posTop, placement.posLeft, width, height, targetBound);
+        if (isPlacementValid(result.left, result.top, width, height)) {
+          tooltipPos.left = result.left + placement.offset[0] + document.body.scrollLeft;
+          tooltipPos.top = result.top + placement.offset[1] + document.body.scrollTop;
+          if (placementBacks[i] !== this.state.adjustedPlacement) {
+            this.setState({adjustedPlacement: placementBacks[i]});
+          }
+          break;
+        }
       }
     }
     return tooltipPos;
   }
 
   render() {
-    const {prefixCls, content, title, trigger, style} = this.props;
-    const mouseProps = {ref: 'base'};
+    const {prefixCls, content, title, trigger, overlayStyle, overlayClassName, visible} = this.props;
+    const mouseProps = {};
     if (trigger.indexOf('hover') !== -1) {
       mouseProps.onMouseEnter = this.onPopupMouseEnter;
       mouseProps.onMouseLeave = this.onPopupMouseLeave;
@@ -105,14 +140,15 @@ export default class Tooltip extends React.Component {
       mouseProps.onClick = this.onPopupMouseClick;
     }
     const child = React.cloneElement(this.props.children);
-    return <div style={style}  className={prefixCls + '-root'}>
-      <div {...mouseProps}>{child}</div>
-      {this.state.popVisible ? (
+    return <div style={overlayStyle} className={prefixCls + '-root ' + overlayClassName}>
+      <div {...mouseProps} ref="baseCom">{child}</div>
+      {visible || this.state.popVisible ? (
         <Popup
           ref="popup"
           getToolTipPos={this.getToolTipPos}
-          content={content}
-          title={title}
+          content={content || title}
+          title={content ? title : null}
+          placement={this.state.adjustedPlacement}
           prefixCls={prefixCls}
         />
       ) : ''}
