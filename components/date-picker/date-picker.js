@@ -98,6 +98,7 @@ export default class DatePicker extends React.Component {
           prefixCls={`${prefixCls}-container`}
           calendar={calendar}
           onChange={this.handleChange}
+          disabled={disabled}
         >
           {input}
         </Picker>
