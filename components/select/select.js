@@ -57,11 +57,15 @@ export default class Select extends Component {
     let inputValue = '';
     let selectedKeys = value.map(v => v.value);
     let combobox = props.mode === 'combobox';
+    let multiple = props.mode === 'multiple';
     if (props.showSearch && value.length) {
       inputValue = value[0].label;
     }
     if (combobox) {
       inputValue = props.value;
+    }
+    if (multiple) {
+
     }
     this.state = {
       open,
@@ -135,7 +139,7 @@ export default class Select extends Component {
     }
     if (!options.length && !combobox) {
       options = [
-        <MenuItem className='disabeld' value='NOT_FOUND' key='NOT_FOUND'>{this.props.notFoundContent}</MenuItem>
+        <MenuItem className='disabeld' style={{cursor: 'not-allowed'}} value='NOT_FOUND' key='NOT_FOUND'>{this.props.notFoundContent}</MenuItem>
       ]
     }
     this._options = options;
@@ -204,6 +208,7 @@ export default class Select extends Component {
     e.stopPropagation();
     const value = e.target.value;
     let combobox = this.props.mode === 'combobox';
+    let multiple = this.props.mode === 'multiple';
     this.setState({
       open: true,
       inputValue: value
@@ -245,6 +250,11 @@ export default class Select extends Component {
     if (combobox) {
       this.props.onChange(value);
     }
+    if (multiple) {
+      let width = this.refs.mirror.clientWidth + 10;
+      width = width > this.topCtrlNode.clientWidth ? this.topCtrlNode.clientWidth : width;
+      this.refs.input.style.width = width + 'px';
+    }
   }
 
   onInputFocus = e => {
@@ -259,6 +269,7 @@ export default class Select extends Component {
 
   addBodyClickEvent = () => {
     let combobox = this.props.mode === 'combobox';
+    let multiple = this.props.mode === 'multiple';
     if (!this.bodyEvent) {
       document.addEventListener('click', () => {
         let { open, value } = this.state;
@@ -266,8 +277,8 @@ export default class Select extends Component {
           this.setState({
             open: false
           });
-          if (this.props.showSearch && !combobox) {
-            if (value.length) {
+          if (!combobox) {
+            if (value.length && !multiple) {
               this.setState({
                 inputValue: value[0].label
               })
@@ -275,6 +286,7 @@ export default class Select extends Component {
               this.setState({
                 inputValue: ''
               })
+              this.refs.input.style.width = '10px';
             }
           }
         }
@@ -295,7 +307,7 @@ export default class Select extends Component {
     this.setState({
       open: true
     });
-    if (this.props.showSearch) {
+    if (this.refs.input) {
       this.refs.input.focus();
     }
   }
@@ -331,6 +343,7 @@ export default class Select extends Component {
     return (
       <div className={`${prefixCls}-search-field-wrap`}>
         <input className={`${prefixCls}-search-field`} ref='input' value={inputValue || ''} onChange={this.onInputChange} disabled={this.props.disabled} onFocus={this.onInputFocus}/>
+        <span ref='mirror' className={`${prefixCls}-search-mirror`}>{inputValue || ''}</span>
       </div>
     )
   }
@@ -342,6 +355,7 @@ export default class Select extends Component {
     const className = `${prefixCls}-selection-rendered`;
     let innerNode = null;
     let selectedValue = null;
+    let multiple = props.mode === 'multiple';
     if (value.length) {
       let showSelectedValue = false;
       let opacity = 1;
@@ -371,13 +385,37 @@ export default class Select extends Component {
         </div>
       )
     }
-    if (!showSearch) {
-      innerNode = [selectedValue];
-    } else {
-      innerNode = [selectedValue, <div className={`${prefixCls}-search`} key='input'>
-        {this.getInputElement()}
-      </div>];
+    if (multiple) {
+      selectedValue = (
+        <ul key='ul' className={`${prefixCls}-selection-choice-list`}>
+          {
+            value.length ? value.map((item, index) => {
+              return (
+                <li key={index} className={`${prefixCls}-selection-choice`}>
+                  <div className={`${prefixCls}-selection-choice-content`}>{item.label}</div>
+                  <span className={`${prefixCls}-selection-choice-remove`} onClick={e => this.removeChoice(index, e)}>x</span>
+                </li>
+              )
+            }) : null
+          }
+          {
+            value.length ? <li key='input' className={`${prefixCls}-search-inline`}>{this.getInputElement()}</li> : null
+          }
+        </ul>
+      )
     }
+    if (!multiple) {
+      if (!showSearch) {
+        innerNode = [selectedValue];
+      } else {
+        innerNode = [selectedValue, <div className={`${prefixCls}-search`} key='input'>
+          {this.getInputElement()}
+        </div>];
+      }
+    } else {
+      innerNode = [selectedValue];
+    }
+
     return (
       <div ref={node => { this.topCtrlNode = node; }} className={className}>
         {this.getPlaceholderElement()}
@@ -385,7 +423,12 @@ export default class Select extends Component {
       </div>
     )
   }
-
+  removeChoice = (index, e) => {
+    e.nativeEvent.stopImmediatePropagation();
+    const value = this.state.value;
+    value.splice(index, 1);
+    this.setState({value});
+  }
   onMenuSelect = (selectedKeys) => {
     const multiple = this.props.mode === 'multiple';
     if (!multiple && !selectedKeys.length) {
@@ -407,24 +450,11 @@ export default class Select extends Component {
         inputValue: value[0].label
       })
     }
-    this.props.onChange(value.map(v => v.value).join(','));
-    if (!multiple) {
-      this.setState({
-        open: false
-      })
-    }
-    // if (this.menuItemTimer) {
-    //   clearTimeout(this.menuItemTimer);
-    //   this.menuItemTimer = null;
-    // }
-    // if (!this.menuItemTimer) {
-    //   this.menuItemTimer = setTimeout(() => {
-    //     this.setState({
-    //       open: false
-    //     });
-    //     this.updateFocusClassName();
-    //   }, 100);
-    // }
+    this.setState({
+      open: multiple
+    })
+    // this.props.onChange(value.map(v => v.value).join(','));
+    this.props.onChange(selectedKeys);
   }
 
   render() {

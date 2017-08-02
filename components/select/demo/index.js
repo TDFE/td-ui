@@ -4,6 +4,7 @@ import Basic from './basic';
 import ShowSearch from './showSearch';
 import Group from './group';
 import Combobox from './combobox';
+import Multiple from './multiple';
 const MOUNT_NODE = document.getElementById('app');
 let render = () => {
   function Demo() {
@@ -16,6 +17,8 @@ let render = () => {
         <Group />
         <p>我是分隔线我是分隔线我是分隔线我是分隔线我是分隔线</p>
         <Combobox />
+        <p>我是分隔线我是分隔线我是分隔线我是分隔线我是分隔线</p>
+        <Multiple />
       </div>
     );
   }
