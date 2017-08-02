@@ -508,7 +508,7 @@ export default class Select extends Component {
               allowClear ? clear : null
             }
             {
-              !showArrow ? null : <span key='arrow' className={`${prefixCls}-arrow`} onClick={this.onArrowClick}></span>
+              !showArrow || multiple ? null : <span key='arrow' className={`${prefixCls}-arrow`} onClick={this.onArrowClick}></span>
             }
           </div>
         </div>
