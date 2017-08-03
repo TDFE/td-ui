@@ -25,18 +25,18 @@ function babelify(js, dest) {
       beforeEach: 'Begin to compile ',
       colors: true
     }))
-    .pipe(babel({
-      presets: [
-        'es2015-ie',
-        'react',
-        'stage-2',
-      ],
-      plugins: [
-        'transform-decorators-legacy',
-        'transform-class-properties',
-        'transform-runtime'
-      ]
-    }))
+    // .pipe(babel({
+    //   presets: [
+    //     'es2015-ie',
+    //     'react',
+    //     'stage-2',
+    //   ],
+    //   plugins: [
+    //     'transform-decorators-legacy',
+    //     'transform-class-properties',
+    //     'transform-runtime'
+    //   ]
+    // }))
     .pipe(through2.obj(function(file, encoding, next) {
       this.push(file.clone());
       if (file.path.match(/\/style\/index(\.web)?\.js/)) {
