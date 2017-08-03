@@ -1,10 +1,5 @@
 @import "../../style/themes/default.less";
 
-ul, li{
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
 .@{menu-prefix} {
   color: @menu-text-color;
   &-item{
@@ -14,12 +9,6 @@ ul, li{
     padding: 0 16px;
     position: relative;
     cursor: pointer;
-    &:hover, &-selected{
-      color: @primary-color;
-      a{
-        color: @primary-color;
-      }
-    }
     a{
       text-decoration: none;
       display: block;
@@ -34,6 +23,31 @@ ul, li{
         bottom: 0;
         right: 0;
         content: "";
+      }
+    }
+    &:hover, &-selected{
+      color: @primary-color;
+      a{
+        color: @primary-color;
+      }
+    }
+    &-disabled{
+      color: @disabled-color;
+      cursor: not-allowed;
+      background: none;
+      border-color: transparent;
+      a{
+        color: @disabled-color;
+        cursor: not-allowed;
+        &:hover{
+          color: @disabled-color;
+        }
+      }
+      &:hover{
+        color: @disabled-color;
+      }
+      &:after{
+        display: none;
       }
     }
   }

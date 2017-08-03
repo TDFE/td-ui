@@ -18,8 +18,11 @@ export default class MenuItem extends React.Component {
 
   itemClick = e => {
     e.nativeEvent.stopImmediatePropagation();
-    const { eventKey } = this.props;
+    const { eventKey, disabled } = this.props;
     const { selectedKeys, multiple } = this.props;
+    if (disabled) {
+      return
+    }
     let backSelected = [].concat(selectedKeys);
     const index = selectedKeys.indexOf(eventKey);
     if (index >= 0) {
@@ -33,16 +36,20 @@ export default class MenuItem extends React.Component {
   }
 
   render() {
-    const { prefixCls, children, level, selectedKeys, eventKey, mode } = this.props;
+    const { prefixCls, children, level, selectedKeys, eventKey, mode, disabled } = this.props;
     let style = {};
     if (mode === 'inline') {
       style = {
         paddingLeft: level * 24
       }
     }
+    const clsssName = classnames(`${prefixCls}-item`, {
+      [`${prefixCls}-item-selected`]: selectedKeys.indexOf(eventKey) >= 0,
+      [`${prefixCls}-item-disabled`]: disabled
+    });
     return (
       <li
-        className={classnames(`${prefixCls}-item`, {[`${prefixCls}-item-selected`]: selectedKeys.indexOf(eventKey) >= 0})}
+        className={clsssName}
         style={style}
         onClick={this.itemClick}
       >

@@ -98,7 +98,7 @@ class Demo extends React.Component {
           <Icon type="search" />Navigation One
         </Menu.Item>
         <SubMenu key="app" title={<span><Icon type="search" /><span>Navigation Two</span></span>}>
-          <Menu.Item key="5">Option 5</Menu.Item>
+          <Menu.Item key="5" disabled>Option 5</Menu.Item>
           <Menu.Item key="6">Option 6</Menu.Item>
           <SubMenu key="sub3" title="Submenu">
             <Menu.Item key="7">Option 7</Menu.Item>
@@ -115,7 +115,7 @@ class Demo extends React.Component {
             <Menu.Item key="setting:4">Option 4</Menu.Item>
           </ItemGroup>
         </SubMenu>
-        <Menu.Item key="alipay">
+        <Menu.Item key="alipay" disabled>
           <a href="https://ant.design" target="_blank" rel="noopener noreferrer">Navigation Four - Link</a>
         </Menu.Item>
       </Menu>
