@@ -65,7 +65,7 @@ export default class Select extends Component {
       inputValue = props.value;
     }
     if (multiple) {
-
+      inputValue = '';
     }
     this.state = {
       open,
@@ -112,11 +112,15 @@ export default class Select extends Component {
       let selectedKeys = value.map(v => v.value);
       let inputValue = '';
       let combobox = nextProps.mode === 'combobox';
+      let multiple = nextProps.mode === 'multiple';
       if (nextProps.showSearch && value.length) {
         inputValue = value[0].label;
       }
       if (combobox) {
         inputValue = nextProps.value;
+      }
+      if (multiple) {
+        inputValue = '';
       }
       this.setState({
         value,
@@ -144,7 +148,6 @@ export default class Select extends Component {
     }
     this._options = options;
   }
-
   componentWillUpdate(nextProps, nextState) {
     this.props = nextProps;
     this.state = nextState;
@@ -278,7 +281,7 @@ export default class Select extends Component {
             open: false
           });
           if (!combobox) {
-            if (value.length && !multiple) {
+            if (value.length && !multiple && this.props.showSearch) {
               this.setState({
                 inputValue: value[0].label
               })
@@ -286,7 +289,9 @@ export default class Select extends Component {
               this.setState({
                 inputValue: ''
               })
-              this.refs.input.style.width = '10px';
+              if (this.refs.input) {
+                this.refs.input.style.width = '10px';
+              }
             }
           }
         }
@@ -448,6 +453,11 @@ export default class Select extends Component {
     if (this.props.showSearch && !multiple) {
       this.setState({
         inputValue: value[0].label
+      })
+    }
+    if (multiple) {
+      this.setState({
+        inputValue: ''
       })
     }
     this.setState({
