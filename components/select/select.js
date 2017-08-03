@@ -27,7 +27,6 @@ export default class Select extends Component {
     onSearch: noop,
     prefixCls: prefixCls,
     onFocus: noop,
-    onChange: noop,
     defaultValue: undefined
   }
 
@@ -125,7 +124,8 @@ export default class Select extends Component {
       this.setState({
         value,
         selectedKeys,
-        inputValue
+        inputValue,
+        fire: false
       })
     }
   }
@@ -250,7 +250,7 @@ export default class Select extends Component {
     //     this.props.onChange(value);
     //   }
     // }
-    if (combobox) {
+    if (combobox && 'onChange' in this.props) {
       this.props.onChange(value);
     }
     if (multiple) {
@@ -303,6 +303,9 @@ export default class Select extends Component {
   removeBodyClickEvent = () => {
     if (this.bodyEvent) {
       document.removeEventListener('click');
+      this.setState({
+        fire: false
+      })
       this.bodyEvent = false;
     }
   }
@@ -354,7 +357,7 @@ export default class Select extends Component {
   }
 
   renderTopControlNode() {
-    const { open, inputValue, value } = this.state;
+    const { value, open, inputValue } = this.state;
     const props = this.props;
     const { showSearch } = props;
     const className = `${prefixCls}-selection-rendered`;
@@ -436,6 +439,15 @@ export default class Select extends Component {
   }
   onMenuSelect = (selectedKeys) => {
     const multiple = this.props.mode === 'multiple';
+    if ('value' in this.props && !('onChange' in this.props)) {
+      if (!multiple) {
+        this.setState({
+          open: false,
+          inputValue: this.props.showSearch ? this.state.value[0].label : ''
+        })
+      }
+      return;
+    }
     if (!multiple && !selectedKeys.length) {
       this.setState({
         open: false,
@@ -445,7 +457,6 @@ export default class Select extends Component {
       return;
     };
     let value = this.addLabelToValue(this.props, selectedKeys);
-
     this.setState({
       selectedKeys,
       value
@@ -464,7 +475,9 @@ export default class Select extends Component {
       open: multiple
     })
     // this.props.onChange(value.map(v => v.value).join(','));
-    this.props.onChange(selectedKeys);
+    if ('onChange' in this.props) {
+      this.props.onChange(selectedKeys);
+    }
   }
 
   render() {
