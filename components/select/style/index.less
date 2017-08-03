@@ -15,8 +15,8 @@
     }
   }
   &-disabled {
-    color: @disabled-color;
-    background-color: @disabled-bg;
+    color: @select-disabled-color;
+    background-color: @select-disabled-color-bg;
     cursor: not-allowed;
     .@{prefixCls}-selection {
       cursor: not-allowed;
@@ -230,6 +230,14 @@
         color: rgba(0,0,0,.43);
         line-height: 1.5;
         padding: 8px;
+      }
+      &-disabled {
+        background-color: @select-disabled-color-bg;
+        color: @select-disabled-color;
+        &:hover {
+          background-color: @select-disabled-color-bg;
+          color: @select-disabled-color;
+        }
       }
     }
   }
