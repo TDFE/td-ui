@@ -143,7 +143,7 @@ export default class Select extends Component {
     }
     if (!options.length && !combobox) {
       options = [
-        <MenuItem className='disabeld' style={{cursor: 'not-allowed'}} value='NOT_FOUND' key='NOT_FOUND'>{this.props.notFoundContent}</MenuItem>
+        <MenuItem disabled value='NOT_FOUND' key='NOT_FOUND'>{this.props.notFoundContent}</MenuItem>
       ]
     }
     this._options = options;
