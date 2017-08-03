@@ -13,6 +13,7 @@ import warning from 'warning';
 import { FIELD_META_PROP } from './constant';
 import PureRenderMixin from '../util/PureRenderMixin';
 import { Row, Col } from '../grid';
+import FormControl from './formControl';
 import s from './style';
 
 export default class FormItem extends React.Component {
@@ -81,7 +82,7 @@ export default class FormItem extends React.Component {
       if (FIELD_META_PROP in child.props) {
         controls.push(child);
       } else if (child.props.children) {
-        if (child.type.name === 'FormControl') {
+        if (child.type === FormControl) {
           controls = controls.concat(this.getControls(child.type(Object.assign({}, child.props, { form: this.context.form })), recursively));
         } else {
           controls = controls.concat(this.getControls(child.props.children, recursively));
@@ -231,13 +232,13 @@ export default class FormItem extends React.Component {
   renderChildren = () => {
     const children = React.Children.map(this.props.children, child => {
       if (child && typeof child.type === 'function' && !child.props.size) {
-        if (child.type.name === 'FormControl') {
+        if (child.type === FormControl) {
           return child.type(Object.assign({}, child.props, { size: 'default', form: this.context.form }));
         }
 
         return React.cloneElement(child, { size: 'default' });
       }
-      if (child && child.type.name === 'FormControl') {
+      if (child && child.type === FormControl) {
         return child.type(Object.assign({}, child.props, { form: this.context.form }));
       }
       return child;
