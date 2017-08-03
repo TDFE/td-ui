@@ -487,7 +487,7 @@ export default class Select extends Component {
   render() {
     const props = this.props;
     const { open, inputValue, selectedKeys } = this.state;
-    const { allowClear, disabled, className, style, showArrow, mode, size } = props;
+    const { allowClear, disabled, className, style, showArrow, mode, size, prefixCls } = props;
     const combobox = mode === 'combobox';
     const multiple = mode === 'multiple';
     const clear = (<span key='clear' className={`${prefixCls}-selection-clear`}></span>);
