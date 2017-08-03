@@ -66,7 +66,8 @@ export default class Menu extends React.Component {
       level: level ? (level + 1) : 1,
       eventKey: child.key || `root-${index}`,
       mode,
-      multiple
+      multiple,
+      disabled: child.props.disabled || false
     }
     return React.cloneElement(child, newChildProps);
   }

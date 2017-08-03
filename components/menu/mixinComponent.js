@@ -14,7 +14,8 @@ export default class MixinComponent extends React.Component {
       level: level ? (level + this.num) : 1,
       eventKey: child.key || `${eventKey}-${index}`,
       mode,
-      multiple
+      multiple,
+      disabled: child.props.disabled || false
     }
     return React.cloneElement(child, newChildProps);
   }
