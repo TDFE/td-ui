@@ -476,7 +476,11 @@ export default class Select extends Component {
     })
     // this.props.onChange(value.map(v => v.value).join(','));
     if ('onChange' in this.props) {
-      this.props.onChange(selectedKeys);
+      if (multiple) {
+        this.props.onChange(selectedKeys);
+      } else {
+        this.props.onChange(selectedKeys.join(','));
+      }
     }
   }
 
