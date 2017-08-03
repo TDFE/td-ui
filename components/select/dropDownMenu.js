@@ -43,7 +43,7 @@ export default class DropdownMenu extends Component {
   }
   renderMenu() {
     const props = this.props;
-    const { menuItems, prefixCls, onMenuSelect, selectedKeys } = props;
+    const { menuItems, prefixCls, onMenuSelect, selectedKeys, multiple } = props;
     if (menuItems && menuItems.length) {
       const menuProps = {};
       menuProps.onSelect = onMenuSelect;
@@ -74,7 +74,7 @@ export default class DropdownMenu extends Component {
         })
       }
       return (
-        <Menu {...menuProps} ref='menu' selectedKeys={selectedKeys} prefixCls={`${prefixCls}-menu`}>{cloneMenuItems}</Menu>
+        <Menu {...menuProps} multiple={multiple} ref='menu' selectedKeys={selectedKeys} prefixCls={`${prefixCls}-menu`}>{cloneMenuItems}</Menu>
       )
     }
     return null;
