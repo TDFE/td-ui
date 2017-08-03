@@ -476,14 +476,18 @@ export default class Select extends Component {
     })
     // this.props.onChange(value.map(v => v.value).join(','));
     if ('onChange' in this.props) {
-      this.props.onChange(selectedKeys);
+      if (multiple) {
+        this.props.onChange(selectedKeys);
+      } else {
+        this.props.onChange(selectedKeys.join(','));
+      }
     }
   }
 
   render() {
     const props = this.props;
     const { open, inputValue, selectedKeys } = this.state;
-    const { allowClear, disabled, className, style, showArrow, mode, size } = props;
+    const { allowClear, disabled, className, style, showArrow, mode, size, prefixCls } = props;
     const combobox = mode === 'combobox';
     const multiple = mode === 'multiple';
     const clear = (<span key='clear' className={`${prefixCls}-selection-clear`}></span>);
