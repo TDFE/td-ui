@@ -257,7 +257,7 @@ export default class Table extends React.Component {
   }
 
   getExpandedRow(key, content, visible, className, fixed) {
-    const { prefixCls, expandIconAsCell } = this.props;
+    const { prefixCls, expandIconAsCell, onRowMouseEnter, onRowMouseLeave } = this.props;
     let colCount;
     if (fixed === 'left') {
       colCount = this.columnManager.leftLeafColumns().length;
@@ -294,6 +294,8 @@ export default class Table extends React.Component {
         store={this.store}
         expandedRow
         fixed={!!fixed}
+        onRowMouseEnter={onRowMouseEnter}
+        onRowMouseLeave={onRowMouseLeave}
       />
     );
   }
