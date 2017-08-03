@@ -16,11 +16,11 @@ export default class showSearch extends React.Component {
   render() {
     return (
       <Select
-        showSearch
         style={{ width: 200 }}
         placeholder="Select a person"
         onChange={this.handleChange}
         value={this.state.value}
+        showSearch
       >
         <Option value="one">第一</Option>
         <Option value="two">第二</Option>

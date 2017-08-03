@@ -14,10 +14,9 @@ export default class Basic extends React.Component {
     this.setState({value});
   }
   render() {
-    const value = this.state.value;
-    const arr = this.state.arr;
+    const { value, arr } = this.state;
     return (
-      <Select placeholder='请选择' style={{ width: 120 }} value={value} size='small'>
+      <Select placeholder='请选择' style={{ width: 120 }} value={value} size='small' onChange={this.handleChange}>
         {
           arr.map((item, index) => <Option value={item} key={item}>{item}条／页</Option>)
         }
